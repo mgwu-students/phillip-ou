@@ -3,7 +3,7 @@
 //  Rascal
 //
 //  Created by Phillip Ou on 6/28/14.
-//  Copyright (c) 2014 Philip Ou. All rights reserved.
+//  Copyright (c) 2014 Philip Ou. All rights reserved./Users/phillipou/Desktop/Rascal/Rascal/HomeViewController.m
 //
 
 #import <UIKit/UIKit.h>

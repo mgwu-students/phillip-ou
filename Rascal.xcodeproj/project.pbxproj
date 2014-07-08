@@ -7,8 +7,28 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4D1AAABE196472DB00F79C39 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D1AAABD196472DB00F79C39 /* ProfileViewController.m */; };
+		4D27AFF0195FEFB700DB8939 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D27AFEF195FEFB700DB8939 /* Parse.framework */; };
+		4D27AFFB195FEFF400DB8939 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D27AFF1195FEFF400DB8939 /* AudioToolbox.framework */; };
+		4D27AFFC195FEFF400DB8939 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D27AFF2195FEFF400DB8939 /* CFNetwork.framework */; };
+		4D27AFFD195FEFF400DB8939 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D27AFF3195FEFF400DB8939 /* CoreGraphics.framework */; };
+		4D27AFFE195FEFF400DB8939 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D27AFF4195FEFF400DB8939 /* CoreLocation.framework */; };
+		4D27AFFF195FEFF400DB8939 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D27AFF5195FEFF400DB8939 /* libz.dylib */; };
+		4D27B000195FEFF400DB8939 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D27AFF6195FEFF400DB8939 /* MobileCoreServices.framework */; };
+		4D27B001195FEFF400DB8939 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D27AFF7195FEFF400DB8939 /* QuartzCore.framework */; };
+		4D27B002195FEFF400DB8939 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D27AFF8195FEFF400DB8939 /* Security.framework */; };
+		4D27B003195FEFF400DB8939 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D27AFF9195FEFF400DB8939 /* StoreKit.framework */; };
+		4D27B004195FEFF400DB8939 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D27AFFA195FEFF400DB8939 /* SystemConfiguration.framework */; };
+		4D27B00A195FF21000DB8939 /* ParseTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D27B009195FF21000DB8939 /* ParseTableViewController.m */; };
+		4D5C0FF61960698C00770901 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D5C0FF51960698C00770901 /* HomeViewController.m */; };
+		4D5C0FF919606F1700770901 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D5C0FF819606F1700770901 /* LoginViewController.m */; };
+		4D5C0FFC19606F2400770901 /* SignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D5C0FFB19606F2400770901 /* SignUpViewController.m */; };
+		4D81A3E6196C4BBB00D3C1FC /* SaveButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D81A3E5196C4BBB00D3C1FC /* SaveButton.m */; };
+		4DC9BF9F19627C7A00A018D4 /* ParseLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DC9BF9E19627C7A00A018D4 /* ParseLoginViewController.m */; };
+		4DC9BFA219627E5F00A018D4 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DC9BFA019627E5F00A018D4 /* Accounts.framework */; settings = {ATTRIBUTES = (Required, ); }; };
+		4DC9BFA319627E5F00A018D4 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DC9BFA119627E5F00A018D4 /* Social.framework */; settings = {ATTRIBUTES = (Required, ); }; };
+		4DD8B898196287EB0074FFF4 /* CameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DD8B897196287EB0074FFF4 /* CameraViewController.m */; };
 		4DDEABE2195FE8E5009684B8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DDEABE1195FE8E5009684B8 /* Foundation.framework */; };
-		4DDEABE4195FE8E5009684B8 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DDEABE3195FE8E5009684B8 /* CoreGraphics.framework */; };
 		4DDEABE6195FE8E5009684B8 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DDEABE5195FE8E5009684B8 /* UIKit.framework */; };
 		4DDEABEC195FE8E5009684B8 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4DDEABEA195FE8E5009684B8 /* InfoPlist.strings */; };
 		4DDEABEE195FE8E5009684B8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DDEABED195FE8E5009684B8 /* main.m */; };
@@ -19,6 +39,8 @@
 		4DDEABFD195FE8E5009684B8 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DDEABE5195FE8E5009684B8 /* UIKit.framework */; };
 		4DDEAC05195FE8E5009684B8 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4DDEAC03195FE8E5009684B8 /* InfoPlist.strings */; };
 		4DDEAC07195FE8E5009684B8 /* RascalTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DDEAC06195FE8E5009684B8 /* RascalTests.m */; };
+		4DDEAC11195FE8FD009684B8 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4DDEAC10195FE8FD009684B8 /* MainStoryboard.storyboard */; };
+		4DEDADC81962797B0072DEFC /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DEDADC71962797B0072DEFC /* FacebookSDK.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -32,9 +54,37 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4D1AAABC196472DB00F79C39 /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
+		4D1AAABD196472DB00F79C39 /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
+		4D27AFEF195FEFB700DB8939 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
+		4D27AFF1195FEFF400DB8939 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		4D27AFF2195FEFF400DB8939 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		4D27AFF3195FEFF400DB8939 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		4D27AFF4195FEFF400DB8939 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		4D27AFF5195FEFF400DB8939 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		4D27AFF6195FEFF400DB8939 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		4D27AFF7195FEFF400DB8939 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		4D27AFF8195FEFF400DB8939 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		4D27AFF9195FEFF400DB8939 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		4D27AFFA195FEFF400DB8939 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		4D27B008195FF21000DB8939 /* ParseTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ParseTableViewController.h; path = ../ParseTableViewController.h; sourceTree = "<group>"; };
+		4D27B009195FF21000DB8939 /* ParseTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ParseTableViewController.m; path = ../ParseTableViewController.m; sourceTree = "<group>"; };
+		4D5C0FF41960698C00770901 /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
+		4D5C0FF51960698C00770901 /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
+		4D5C0FF719606F1700770901 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		4D5C0FF819606F1700770901 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		4D5C0FFA19606F2400770901 /* SignUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignUpViewController.h; sourceTree = "<group>"; };
+		4D5C0FFB19606F2400770901 /* SignUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignUpViewController.m; sourceTree = "<group>"; };
+		4D81A3E4196C4BBB00D3C1FC /* SaveButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SaveButton.h; path = ../SaveButton.h; sourceTree = "<group>"; };
+		4D81A3E5196C4BBB00D3C1FC /* SaveButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SaveButton.m; path = ../SaveButton.m; sourceTree = "<group>"; };
+		4DC9BF9D19627C7A00A018D4 /* ParseLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParseLoginViewController.h; sourceTree = "<group>"; };
+		4DC9BF9E19627C7A00A018D4 /* ParseLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParseLoginViewController.m; sourceTree = "<group>"; };
+		4DC9BFA019627E5F00A018D4 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
+		4DC9BFA119627E5F00A018D4 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		4DD8B896196287EB0074FFF4 /* CameraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraViewController.h; sourceTree = "<group>"; };
+		4DD8B897196287EB0074FFF4 /* CameraViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraViewController.m; sourceTree = "<group>"; };
 		4DDEABDE195FE8E5009684B8 /* Rascal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Rascal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4DDEABE1195FE8E5009684B8 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		4DDEABE3195FE8E5009684B8 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		4DDEABE5195FE8E5009684B8 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		4DDEABE9195FE8E5009684B8 /* Rascal-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Rascal-Info.plist"; sourceTree = "<group>"; };
 		4DDEABEB195FE8E5009684B8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -48,6 +98,8 @@
 		4DDEAC02195FE8E5009684B8 /* RascalTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "RascalTests-Info.plist"; sourceTree = "<group>"; };
 		4DDEAC04195FE8E5009684B8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		4DDEAC06195FE8E5009684B8 /* RascalTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RascalTests.m; sourceTree = "<group>"; };
+		4DDEAC10195FE8FD009684B8 /* MainStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainStoryboard.storyboard; sourceTree = "<group>"; };
+		4DEDADC71962797B0072DEFC /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = ../../Documents/FacebookSDK/FacebookSDK.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,9 +107,22 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4DDEABE4195FE8E5009684B8 /* CoreGraphics.framework in Frameworks */,
+				4DC9BFA219627E5F00A018D4 /* Accounts.framework in Frameworks */,
+				4DC9BFA319627E5F00A018D4 /* Social.framework in Frameworks */,
+				4D27AFFB195FEFF400DB8939 /* AudioToolbox.framework in Frameworks */,
+				4D27AFFC195FEFF400DB8939 /* CFNetwork.framework in Frameworks */,
+				4D27AFFD195FEFF400DB8939 /* CoreGraphics.framework in Frameworks */,
+				4D27AFFE195FEFF400DB8939 /* CoreLocation.framework in Frameworks */,
+				4D27AFFF195FEFF400DB8939 /* libz.dylib in Frameworks */,
+				4D27B000195FEFF400DB8939 /* MobileCoreServices.framework in Frameworks */,
+				4D27B001195FEFF400DB8939 /* QuartzCore.framework in Frameworks */,
+				4D27B002195FEFF400DB8939 /* Security.framework in Frameworks */,
+				4D27B003195FEFF400DB8939 /* StoreKit.framework in Frameworks */,
+				4D27B004195FEFF400DB8939 /* SystemConfiguration.framework in Frameworks */,
 				4DDEABE6195FE8E5009684B8 /* UIKit.framework in Frameworks */,
+				4D27AFF0195FEFB700DB8939 /* Parse.framework in Frameworks */,
 				4DDEABE2195FE8E5009684B8 /* Foundation.framework in Frameworks */,
+				4DEDADC81962797B0072DEFC /* FacebookSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -96,8 +161,21 @@
 		4DDEABE0195FE8E5009684B8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4DC9BFA019627E5F00A018D4 /* Accounts.framework */,
+				4DC9BFA119627E5F00A018D4 /* Social.framework */,
+				4DEDADC71962797B0072DEFC /* FacebookSDK.framework */,
+				4D27AFF1195FEFF400DB8939 /* AudioToolbox.framework */,
+				4D27AFF2195FEFF400DB8939 /* CFNetwork.framework */,
+				4D27AFF3195FEFF400DB8939 /* CoreGraphics.framework */,
+				4D27AFF4195FEFF400DB8939 /* CoreLocation.framework */,
+				4D27AFF5195FEFF400DB8939 /* libz.dylib */,
+				4D27AFF6195FEFF400DB8939 /* MobileCoreServices.framework */,
+				4D27AFF7195FEFF400DB8939 /* QuartzCore.framework */,
+				4D27AFF8195FEFF400DB8939 /* Security.framework */,
+				4D27AFF9195FEFF400DB8939 /* StoreKit.framework */,
+				4D27AFFA195FEFF400DB8939 /* SystemConfiguration.framework */,
+				4D27AFEF195FEFB700DB8939 /* Parse.framework */,
 				4DDEABE1195FE8E5009684B8 /* Foundation.framework */,
-				4DDEABE3195FE8E5009684B8 /* CoreGraphics.framework */,
 				4DDEABE5195FE8E5009684B8 /* UIKit.framework */,
 				4DDEABFA195FE8E5009684B8 /* XCTest.framework */,
 			);
@@ -107,8 +185,25 @@
 		4DDEABE7195FE8E5009684B8 /* Rascal */ = {
 			isa = PBXGroup;
 			children = (
+				4D81A3E4196C4BBB00D3C1FC /* SaveButton.h */,
+				4D81A3E5196C4BBB00D3C1FC /* SaveButton.m */,
+				4DDEAC10195FE8FD009684B8 /* MainStoryboard.storyboard */,
+				4D1AAABC196472DB00F79C39 /* ProfileViewController.h */,
+				4D1AAABD196472DB00F79C39 /* ProfileViewController.m */,
+				4D5C0FF719606F1700770901 /* LoginViewController.h */,
+				4D5C0FF819606F1700770901 /* LoginViewController.m */,
+				4D5C0FFA19606F2400770901 /* SignUpViewController.h */,
+				4D5C0FFB19606F2400770901 /* SignUpViewController.m */,
+				4D27B008195FF21000DB8939 /* ParseTableViewController.h */,
+				4D27B009195FF21000DB8939 /* ParseTableViewController.m */,
+				4D5C0FF41960698C00770901 /* HomeViewController.h */,
+				4D5C0FF51960698C00770901 /* HomeViewController.m */,
 				4DDEABF0195FE8E5009684B8 /* AppDelegate.h */,
 				4DDEABF1195FE8E5009684B8 /* AppDelegate.m */,
+				4DD8B896196287EB0074FFF4 /* CameraViewController.h */,
+				4DD8B897196287EB0074FFF4 /* CameraViewController.m */,
+				4DC9BF9D19627C7A00A018D4 /* ParseLoginViewController.h */,
+				4DC9BF9E19627C7A00A018D4 /* ParseLoginViewController.m */,
 				4DDEABF3195FE8E5009684B8 /* Images.xcassets */,
 				4DDEABE8195FE8E5009684B8 /* Supporting Files */,
 			);
@@ -219,6 +314,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4DDEAC11195FE8FD009684B8 /* MainStoryboard.storyboard in Resources */,
 				4DDEABEC195FE8E5009684B8 /* InfoPlist.strings in Resources */,
 				4DDEABF4195FE8E5009684B8 /* Images.xcassets in Resources */,
 			);
@@ -239,8 +335,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4D81A3E6196C4BBB00D3C1FC /* SaveButton.m in Sources */,
 				4DDEABF2195FE8E5009684B8 /* AppDelegate.m in Sources */,
+				4D1AAABE196472DB00F79C39 /* ProfileViewController.m in Sources */,
+				4DD8B898196287EB0074FFF4 /* CameraViewController.m in Sources */,
 				4DDEABEE195FE8E5009684B8 /* main.m in Sources */,
+				4D5C0FFC19606F2400770901 /* SignUpViewController.m in Sources */,
+				4D27B00A195FF21000DB8939 /* ParseTableViewController.m in Sources */,
+				4D5C0FF61960698C00770901 /* HomeViewController.m in Sources */,
+				4DC9BF9F19627C7A00A018D4 /* ParseLoginViewController.m in Sources */,
+				4D5C0FF919606F1700770901 /* LoginViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -357,9 +461,17 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/phillipou/Downloads,
+					"$(PROJECT_DIR)/Rascal",
+					"$(PROJECT_DIR)",
+					/Users/phillipou/Documents/FacebookSDK,
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Rascal/Rascal-Prefix.pch";
 				INFOPLIST_FILE = "Rascal/Rascal-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -370,9 +482,17 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/phillipou/Downloads,
+					"$(PROJECT_DIR)/Rascal",
+					"$(PROJECT_DIR)",
+					/Users/phillipou/Documents/FacebookSDK,
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Rascal/Rascal-Prefix.pch";
 				INFOPLIST_FILE = "Rascal/Rascal-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -437,6 +557,7 @@
 				4DDEAC0C195FE8E5009684B8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		4DDEAC0D195FE8E5009684B8 /* Build configuration list for PBXNativeTarget "RascalTests" */ = {
 			isa = XCConfigurationList;
@@ -445,6 +566,7 @@
 				4DDEAC0F195FE8E5009684B8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
