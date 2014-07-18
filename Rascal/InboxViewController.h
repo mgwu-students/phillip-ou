@@ -7,7 +7,22 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <Parse/Parse.h>
+#import "ImageViewController.h"
+@interface InboxViewController : PFQueryTableViewController
+@property(nonatomic, strong) NSArray *messages;
+@property (nonatomic, strong) PFObject *selectedMessage;
+@property(nonatomic, strong) NSArray *bounties;
+@property(nonatomic, strong) NSArray *posts;
 
-@interface InboxViewController : UITableViewController
 
+@property (nonatomic, retain) NSMutableDictionary *sections;
+@property (nonatomic, retain) NSMutableDictionary *sectionFileType;
+
+@property (strong, nonatomic) IBOutlet PFImageView *profileImageView;
+
+@property (strong, nonatomic) IBOutlet UILabel *userNameLabel;
+@property (strong, nonatomic) IBOutlet UILabel *pointsLabel;
+
+-(IBAction) logout: (id)sender;
 @end

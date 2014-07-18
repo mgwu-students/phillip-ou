@@ -7,113 +7,257 @@
 //
 
 #import "PostCameraViewController.h"
+#import "Parse/Parse.h"
+#import <MobileCoreServices/MobileCoreServices.h>
+#import "CameraViewController.h"
+#import "InboxViewController.h"
+#import <time.h>
+
 
 @interface PostCameraViewController ()
 
 @end
-
+//NSString *objectIdString;
 @implementation PostCameraViewController
 
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
+@synthesize photoJustPosted;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.friendsRelation = [[PFUser currentUser] objectForKey:@"friendsRelation"];
+    self.recipients = [[NSMutableArray alloc] init];
     
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
+
     
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
+    
+   
+    
+    
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    PFQuery *query = [self.friendsRelation query];
+    [query orderByAscending:@"username"];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (error) {
+            NSLog(@"Error %@ %@", error, [error userInfo]);
+        }
+        else {
+            self.friends = objects;
+            [self.tableView reloadData];
+        }
+    }];
+    
+
+    
+    
+   
+   
+ 
+}
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
 }
 
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-#warning Potentially incomplete method implementation.
     // Return the number of sections.
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
     // Return the number of rows in the section.
-    return 0;
+    return [self.friends count];
 }
 
-/*
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
     
-    // Configure the cell...
+    static NSString *CellIdentifier = @"Cell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    
+    
+   PFUser *user = [self.friends objectAtIndex:indexPath.row];
+    cell.textLabel.text = user.username;
+    
+    
+    //if the user is in the array of people we want to send to have them checked
+    if ([self.recipients containsObject:user.objectId]) {
+        cell.accessoryType = UITableViewCellAccessoryCheckmark;
+    }
+    else { //if they're not, then don't have them checked off
+        cell.accessoryType = UITableViewCellAccessoryNone;
+    }
     
     return cell;
 }
-*/
-
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
+-(void) addTaggedUser:(id)sender{
+    
+    
 }
-*/
 
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
+- (IBAction)tagButton:(id)sender {
+    
+    NSLog(@"Tag");
+    
+    UIButton *button = (UIButton *)sender;
+    UITableViewCell *cell = (UITableViewCell*)[button superview];
+    NSLog(@"%@",cell.textLabel);
+    
 }
-*/
 
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
+#pragma mark - Table view delegate
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
+    [self.tableView deselectRowAtIndexPath:indexPath animated:NO];
+    
+        
+    UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
+    
+   PFUser *user = [self.friends objectAtIndex:indexPath.row];
+    PFUser *currentUser = [PFUser currentUser];
+    
+   
+    
+    
+    if (cell.accessoryType == UITableViewCellAccessoryNone) {
+        NSLog(@"Add");
+        cell.accessoryType = UITableViewCellAccessoryCheckmark;
+        cell.highlighted=NO;
+        if(![user.objectId isEqualToString:currentUser.objectId]){
+            [self.recipients addObject:user.objectId];
+        
+        }
+        
+        
+        
+    }
+    else {
+        NSLog(@"Remove");
+        cell.accessoryType = UITableViewCellAccessoryNone;
+        [self.recipients removeObject:user.objectId];
+    }
+    
+    NSLog(@"%@", self.recipients); //log list of recipients
 }
-*/
 
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
+- (void) addOpenInService: (UILongPressGestureRecognizer *) objRecognizer
 {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
+    NSLog(@"Long Tap");
 }
-*/
 
-/*
-#pragma mark - Navigation
+#pragma mark - Image Picker Controller delegate
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+    //[self.tabBarController dismissViewControllerAnimated:NO completion:nil];
+    [self.tabBarController setSelectedIndex:0];
 }
-*/
 
+
+#pragma mark - IBActions
+
+- (IBAction)cancel:(id)sender {
+    [self reset];
+    //[self.tabBarController dismissModalViewControllerAnimated:YES];
+ 
+    [self.tabBarController setSelectedIndex:0];
+}
+
+- (IBAction)send:(id)sender {
+            [self uploadMessage];
+        [self reset];
+    [self.tabBarController dismissViewControllerAnimated:NO completion:nil];
+        //[self.tabBarController setSelectedIndex:0];
+     //self.tabBarController.hidesBottomBarWhenPushed = NO;
+   // }
+}
+
+#pragma mark - Helper methods
+
+- (void)uploadMessage {
+    //NSLog(@"final list %@",self.recipients);
+    
+    PFUser *currentUser = [PFUser currentUser];
+    
+    //the more users sent to the more points you get.
+    NSNumber *userPoints = currentUser[@"Points"];
+    int points = [userPoints integerValue];
+    int length = [self.recipients count];
+    userPoints = [NSNumber numberWithInteger:points+length];
+    [currentUser setObject: userPoints forKey: @"Points"];
+    [currentUser saveInBackground];
+    
+    PFObject *message = [PFObject objectWithClassName:@"Messages"];
+    NSArray *recipients = [NSArray arrayWithArray:self.recipients]; //need to convert from mutableArray to array to send into parse
+    message[@"caption"] = self.caption;
+    message[@"whoTook"] = currentUser;
+    message[@"file"] = self.file;
+    message[@"fileType"] = @"image";
+    message[@"recipientIds"]=recipients;
+    message[@"senderId"]=currentUser.objectId;
+    message[@"senderName"] =currentUser.username;
+        /*[message setObject:self.recipients forKey:@"recipientIds"];
+        [message setObject:currentUser.objectId forKey:@"senderId"];
+        [message setObject:currentUser.username forKey:@"senderName"];*/
+    [message saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+            if(!error){
+                [self reset];
+                
+                //NSLog(@"god this work");
+            }
+          /*  if (error) {
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"An error occurred!"
+                                                                    message:@"Please try sending your message again."
+                                                                   delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                [alertView show];
+            }
+            else {
+                // Everything was successful!
+                [self reset];
+                [self.tabBarController setSelectedIndex:0];
+                
+            }
+            }];*/
+            
+            
+        }];
+
+
+    
+    
+    
+    
+    
+}
+
+
+- (void)reset {
+    self.image = nil;
+    self.videoFilePath = nil;
+    self.file = nil;
+    self.caption = nil;
+    self.photoObjectId=nil;
+    self.chosenImageView = nil;
+    self.imagePicker = nil;
+    [self.recipients removeAllObjects];
+    [self performSegueWithIdentifier:@"backToTab" sender:self];
+    //[self.tabBarController dismissViewControllerAnimated:NO completion:nil];
+    //[self.tabBarController setSelectedIndex:0];
+    
+}
+-(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    if ([segue.identifier isEqualToString:@"backToTab"]) {
+        [segue.destinationViewController setHidesBottomBarWhenPushed:YES];
+        InboxViewController *inboxViewController = (InboxViewController *)segue.destinationViewController;
+}
+
+}
 @end

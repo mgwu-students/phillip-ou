@@ -7,7 +7,22 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <Parse/Parse.h>
 
 @interface FriendsViewController : UITableViewController
+
+@property (nonatomic, strong) PFRelation *friendsRelation;
+@property (nonatomic, strong) NSArray *friends;
+@property (nonatomic, strong) NSMutableArray *targettedFriends;
+@property (nonatomic, strong) PFUser *currentUser;
+@property (nonatomic, strong) PFUser *user;
+@property (nonatomic, strong) NSMutableArray *recipientsOfBounties;
+@property (nonatomic, strong) NSNumber *points;
+@property(nonatomic, strong) NSMutableArray *allFriends;
+@property (nonatomic, assign) int clickCount;
+@property (nonatomic,assign) int bountyCost;
+
+
+
 
 @end

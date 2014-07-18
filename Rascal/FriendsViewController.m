@@ -6,114 +6,261 @@
 //  Copyright (c) 2014 Philip Ou. All rights reserved.
 //
 
-#import "FriendsViewController.h"
+//////bounties are being sent without recipients some times.
 
+#import "FriendsViewController.h"
+#import "EditFriendsViewController.h"
 @interface FriendsViewController ()
 
 @end
 
 @implementation FriendsViewController
 
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
+
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.bountyCost = 10;
+    self.recipientsOfBounties = [[NSMutableArray alloc] init];
+    self.allFriends = [[NSMutableArray alloc] init];
+    self.friends = [[NSArray alloc]init];
+    FBSession.activeSession = [[FBSession alloc] initWithPermissions:[NSArray arrayWithObjects:@"user_friends", nil]];
     
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
+    FBRequest* friendsRequest = [FBRequest requestForMyFriends];
+    [friendsRequest startWithCompletionHandler: ^(FBRequestConnection *connection,
+                                                  NSDictionary* result,
+                                                  NSError *error) {
+        NSArray* friends = [result objectForKey:@"data"];
+        NSLog(@"Found: %i friends", friends.count);
+        for (NSDictionary<FBGraphUser>* friend in friends) {
+            NSLog(@"I have a friend named %@ with id %@", friend.name, friend.id);
+        }
+    }];
     
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+   
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+
+    
+
+    
+    
+   
+
+-(void) viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    PFUser *currentUser = [PFUser currentUser];
+    self.points = currentUser[@"Points"];
+    NSLog(@"Points:%@",self.points);
+    [self.recipientsOfBounties removeAllObjects];
+    self.clickCount = 0;
+    self.friendsRelation = [[PFUser currentUser] objectForKey:@"friendsRelation"];
+    PFQuery *query = [self.friendsRelation query]; //create query of our friends
+    [query orderByAscending:@"username"];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (error){
+            NSLog(@"Error %@ %@", error,[error userInfo]);
+        }
+        else{
+            self.friends=objects;   //self.friends array = objects array returned in findObjectsinBackgroundwithblock
+            for(PFUser *friends in self.friends){
+                [self.allFriends addObject:friends.objectId];
+                
+            }
+            [self.tableView reloadData];
+        }
+    }];
+
 }
 
+-(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    if([segue.identifier isEqualToString:@"showEditFriends"]){
+        EditFriendsViewController *viewController = (EditFriendsViewController *)segue.destinationViewController;
+        viewController.friends = [NSMutableArray arrayWithArray: self.friends];
+    }
+}
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-#warning Potentially incomplete method implementation.
+
     // Return the number of sections.
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
+
     // Return the number of rows in the section.
-    return 0;
+    return [self.friends count];
 }
 
-/*
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
+    static NSString *CellIdentifier = @"Cell";
     
-    // Configure the cell...
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    //refresh each time table loads so there are no check marks
+    if (cell.accessoryType == UITableViewCellAccessoryCheckmark) {
+        cell.accessoryType = UITableViewCellAccessoryNone;
+    }
+    PFUser *user = [self.friends objectAtIndex:indexPath.row];
+    cell.textLabel.text = user.username;
     
     return cell;
 }
-*/
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
+
+-(void) tableView: (UITableView *) tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    if(self.clickCount==0){
+        [self.tableView deselectRowAtIndexPath:indexPath animated:NO];
+        UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    
+        if(cell.accessoryType==UITableViewCellAccessoryNone){
+            cell.accessoryType = UITableViewCellAccessoryCheckmark; //put check mark
+            self.user = [self.friends objectAtIndex: indexPath.row];
+            NSLog(@"bounty on %@",self.user.objectId);
+            
+            [self.recipientsOfBounties addObject:self.user.objectId];
+            [self.allFriends addObject:self.user.objectId];
+         
+            cell.accessoryType = UITableViewCellAccessoryCheckmark;
+            self.clickCount = 1;
+            
+            
+        }
+
+        
+        
+    }
+    else{
+        [self.tableView deselectRowAtIndexPath:indexPath animated:NO];
+        UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+        self.user = [self.friends objectAtIndex: indexPath.row];
+        if(cell.accessoryType==UITableViewCellAccessoryCheckmark ){
+            //1. remove check mark
+            cell.accessoryType = UITableViewCellAccessoryNone;
+            //2. remove from the array of friends
+            [self.recipientsOfBounties removeObject: self.user.objectId];
+            self.clickCount=0;
+        
+    }
+   
+
+  
+   
+    }
+    NSLog(@"Click Count:%d",self.clickCount);
+    NSLog(@"RecipientsofBounties:%@",self.recipientsOfBounties);
+    NSLog(@"%@",self.user.username);
 }
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
+-(BOOL) isFriend:(PFUser *)user{
+    for(PFUser *friend in self.friends){
+        if([friend.objectId isEqualToString:user.objectId]){ //found friend
+            return YES;
+        }
+    }
+    return NO;
+    
 }
-*/
+#pragma mark - TO DO
+- (void)uploadMessage {
+    if([self.points doubleValue] < [@10.0f doubleValue]){
+        //if users don't have enough points, don't let them set bounties
+        
+        
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"You Don't Have Enough Points"
+                                                            message:@"Send More Photos!"
+                                                           delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        NSLog(@"you actually have %@",self.points);
+        [alertView show];
+        [self reset];
+    }
+    
+    else{
+        if ([self.recipientsOfBounties count] !=0){
+    PFUser *currentUser = [PFUser currentUser];
+    PFObject *bounty = [PFObject objectWithClassName:@"Messages"];
+    PFObject *bountyNotice = [PFObject objectWithClassName:@"Messages"];
+    
+    //self.allFriends addObjectsFromArray:currentUser[@"]
+    PFACL *readAccess = [[PFACL alloc]init];
+    //PFACL *readAccess2 = [[PFACL alloc]init];
+    [readAccess setReadAccess:YES forUserId:self.user.objectId];
+    //[readAccess2 setReadAccess:NO forUserId:self.user.objectId];
+    [bounty setObject:@"bounty" forKey:@"fileType"];
+    [bounty setObject:self.recipientsOfBounties forKey:@"recipientIds"];
+    [bounty setACL: readAccess];
+    [bounty setObject:[[PFUser currentUser] objectId] forKey:@"senderId"];
+            UIAlertView *bountyAlert = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"You Have Set Bounty on %@!",self.user.username]
+                                                                  message:@"Good Work."
+                                                                 delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            [bountyAlert show];
 
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
+    [bounty setObject:currentUser.username forKey:@"senderName"];
+    [bounty saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        if (error) {
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"An error occurred!"
+                                                                message:@"Please try sending your message again."
+                                                               delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            [alertView show];
+        
+    }
+    }];
+    [self.allFriends removeObject:self.user.objectId]; //so guy receiving bounty won't get duplicate notification
+        [self.allFriends removeObject: currentUser.objectId]; //so current user doesn't get notifications (might have crash if current user isn't in the array but we'll see)
+    self.friends = [NSArray arrayWithArray: self.allFriends];
+    NSLog(@"Receiving Bounty Notice: %@",self.friends);
+    [bountyNotice setObject:@"bountyNotice" forKey:@"fileType"];
+    //[bountyNotice setACL: readAccess2];
+    [bountyNotice setObject:self.friends forKey:@"recipientIds"];//notification goes to all friends
+    [bountyNotice setObject:self.user.username forKey:@"recipientUsername"];
+    [bountyNotice setObject:currentUser.username forKey:@"senderName"];
+        [bountyNotice saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+            if (error) {
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"An error occurred!"
+                                                                    message:@"Please try sending your message again."
+                                                                   delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                [alertView show];
+            }
+        
+        }];
+    
+        [self reset];}
+    }
+    NSLog (@"No Bounties Set");
+    }
+    
+    
+    ///PUT PUSH NOTIFICATION FOR ALL CURRENT USERS FRIENDS
+
+-(void) reset{
+    PFUser *currentUser = [PFUser currentUser];
+    [self.recipientsOfBounties removeAllObjects];
+    self.points=currentUser[@"Points"];
+    [self.allFriends removeAllObjects];
+    
+    
+    
+    
 }
-*/
 
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
+- (IBAction)setBounty:(id)sender {
+    PFUser *currentUser = [PFUser currentUser];
+        [self uploadMessage];
+        int points = [self.points intValue];
+    if ([self.points doubleValue] >[@10.0f doubleValue]){
+        self.points = [NSNumber numberWithInt:points-self.bountyCost];
+        [currentUser setObject: self.points forKey:@"Points" ];
+        [currentUser saveInBackground];}
+        NSLog(@"%@",self.points);
+        [self.tabBarController setSelectedIndex:0];
+    
 }
-*/
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+
 
 @end

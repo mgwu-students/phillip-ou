@@ -7,13 +7,21 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <Foundation/Foundation.h>
-#import <MapKit/MapKit.h>
 #import <Parse/Parse.h>
 
-@interface CameraViewController : UIViewController <UIImagePickerControllerDelegate,UINavigationControllerDelegate,MKAnnotation>
-@property (nonatomic, readonly) CLLocationCoordinate2D coordinate;
-- (id)initWithCoordinate:(CLLocationCoordinate2D)coordinate andTitle:(NSString *)title andSubtitle:(NSString *)subtitle;
-- (void)setTitleAndSubtitleOutsideDistance:(BOOL)outside;
-- (id)initWithPFObject:(PFObject *)object;
+#import <UIKit/UIKit.h>
+
+
+@interface CameraViewController : UIViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+
+
+
+@property (retain,nonatomic) NSString *objectIdString;
+@property (nonatomic,strong) PFObject *message;
+@property (nonatomic, strong) PFObject *mostRecentObject;
+
+@property (weak, nonatomic) IBOutlet UITextField *titleTextField;
+
+
 @end
+

@@ -41,6 +41,11 @@
 	<true/>
 	<key>UIMainStoryboardFile</key>
 	<string>MainStoryboard</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Raleway-Thin.otf</string>
+		<string>Raleway-Medium.otf</string>
+	</array>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>

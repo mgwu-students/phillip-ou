@@ -9,5 +9,13 @@
 #import "HomeViewController.h"
 
 @interface ProfileViewController : HomeViewController
+@property (weak, nonatomic) IBOutlet UILabel *pointsLabel;
+@property (weak, nonatomic) IBOutlet UILabel *userNameLabel;
+@property (nonatomic, strong) PFUser *currentUser;
+
+
+@property (strong, nonatomic) IBOutlet UILabel *titleLabel;
+
+
 
 @end

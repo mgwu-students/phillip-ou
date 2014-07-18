@@ -14,36 +14,82 @@
 
 @implementation ImageViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-}
+    PFFile *imageFile = [self.message objectForKey: @"file"];
+    
+    NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:imageFile.url]];
+    
+   
+    self.imageView.image = [UIImage imageWithData:imageData];
+    
 
-- (void)didReceiveMemoryWarning
+}
+-(void) viewDidAppear:(BOOL)animated{
+    
+    
+    
+    //who sent it?
+    NSString *senderName = [self.message objectForKey:@"senderName"];
+    NSString *caption = [self.message objectForKey:@"caption"];
+    
+    self.senderLabel.text=[NSString stringWithFormat:@"-%@",senderName];
+    self.captionLabel.text = caption;
+    self.captionLabel.numberOfLines = 1;
+    self.captionLabel.minimumFontSize =10.;
+    self.captionLabel.adjustsFontSizeToFitWidth = YES;
+    
+    int numberOfLikes = [self.message[@"listOfLikers"] count];
+    
+    self.numberOfLikesLabel.text =[NSString stringWithFormat:@"%d",numberOfLikes];
+    
+}
+-(IBAction)ButtonReleased:(id)sender
 {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    self.likeButton.selected=YES;
+    /*[self.likeButton setBackgroundImage:[UIImage imageNamed:@"ImageWhenReleased.png"] forState:UIControlStateNormal];*/
 }
 
-/*
-#pragma mark - Navigation
+- (IBAction)Like:(id)sender {
+    NSLog(@"Like Button Pressed");
+    PFUser *currentUser  =[PFUser currentUser];
+    [self ButtonReleased:self];
+    self.listOfLikers = [NSMutableArray array];
+   // NSString *user = [self.message objectForKey:@"senderName"];
+   
+    //ask benji whyit keeps adding users of hte same username
+    //also ask why label doesn't update instantaneously
+    if(![self.message[@"listOfLikers"] containsObject: currentUser.username]){
+        [self.message addObject:currentUser.username forKey:@"listOfLikers"];
+        NSNumber *numberOfLikes = [self.message objectForKey:@"numberOfLikes"];
+        int numlikes = [numberOfLikes integerValue];
+        numberOfLikes = [NSNumber numberWithInteger: numlikes+1];
+        [self.message setObject:numberOfLikes forKey:@"numberOfLikes"];
+        
+      
+        
+            
+    
+    
+        
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    }
+    
+    
+    [self.message saveEventually:^(BOOL succeeded, NSError *error) {
+        if(error){
+            NSLog(@"fuck");
+        }
+    }];
+   
+   
 }
-*/
+
+
+
+
+
 
 @end

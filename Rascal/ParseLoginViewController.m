@@ -26,7 +26,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+	// Do any additional setup after loading the view.
+    //self.logInView.backgroundColor = BLUE_COLOR;
+    self.logInView.logo = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo"]];
+    [self.logInView.facebookButton setTitle:@"Login with Facebook" forState:UIControlStateNormal];
 }
 
 - (void)didReceiveMemoryWarning
@@ -35,15 +38,16 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)viewDidLayoutSubviews {
+    [super viewDidLayoutSubviews];
+    self.logInView.facebookButton.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 20);
+    
+    CGRect frame = self.logInView.logo.frame;
+    frame.origin.y = 150;
+    self.logInView.logo.frame = frame;
+    frame = self.logInView.facebookButton.frame;
+    frame.origin.y = 300;
+    self.logInView.facebookButton.frame = frame;
 }
-*/
 
 @end

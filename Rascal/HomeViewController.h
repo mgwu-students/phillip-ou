@@ -7,12 +7,15 @@
 //
 
 #import <Parse/Parse.h>
-#import "SaveButton.h"
+#import "FollowButton.h"
+
+@interface HomeViewController : PFQueryTableViewController <FollowButtonDelegate>
+@property (nonatomic, weak) id <FollowButtonDelegate> delegate;
 
 
-@interface HomeViewController : PFQueryTableViewController <CLLocationManagerDelegate,SaveButtonDelegate>
 
-//@property (nonatomic, strong) CLLocationManager *locationManager;
-@property (nonatomic, retain) CLLocationManager *locationManager;
-+ (void)geoPointForCurrentLocationInBackground:(void ( ^ ) ( PFGeoPoint *geoPoint , NSError *error ))geoPointHandler;
+
+
+
+
 @end

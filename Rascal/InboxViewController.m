@@ -6,7 +6,11 @@
 //  Copyright (c) 2014 Philip Ou. All rights reserved.
 //
 
+
+
 #import "InboxViewController.h"
+#import "ImageViewController.h"
+#import "CameraViewController.h"
 
 @interface InboxViewController ()
 
@@ -14,106 +18,425 @@
 
 @implementation InboxViewController
 
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
+-(id) initWithCoder:(NSCoder *)aCoder{
+    self = [super initWithCoder:aCoder];
     if (self) {
-        // Custom initialization
+        // Customize the table
+        self.parseClassName = @"Messages";
+        
+        
+        // Whether the built-in pull-to-refresh is enabled
+       // self.pullToRefreshEnabled = YES;
+        
+        // Whether the built-in pagination is enabled
+        self.paginationEnabled = YES;
+        
+        self.objectsPerPage = 30;
+        
+        // The number of objects to show per page
+        
     }
+    //NSLog(@"%@",self.objects);
     return self;
 }
-
+-(void) objectsDidLoad: (NSError *)error{
+    [super objectsDidLoad: error];
+    NSLog(@"%@",self.objects);
+    
+    [self.sections removeAllObjects];
+    [self.sectionFileType removeAllObjects];
+    
+    
+    NSInteger section = 0;
+    NSInteger rowIndex = 0;
+    
+    for (PFObject *object in self.objects){
+        // NSLog(@"%@",self.sections);
+        NSString *fileType = [object objectForKey:@"fileType"];
+        
+        NSMutableArray *objectsInSection = [self.sections objectForKey: fileType];
+        
+        
+        
+        //all objects of a particular file type go in that section ^
+        
+        if (!objectsInSection){
+            objectsInSection = [NSMutableArray array];
+            //this is the first time we see this sportType
+            
+            //increment section index
+            [self.sectionFileType setObject:fileType forKey: [NSNumber numberWithInt: section++]]; //{0 : fileType, 1: fileType}
+            
+            // NSLog(@"%@", [self.sectionFileType objectForKey:0]);
+            //check which sports type belongs to section 0
+            //use section number to get
+        }
+        
+        
+        [objectsInSection addObject: [NSNumber numberWithInt: rowIndex++]]; //[0,1,2];
+        //NSLog(@"filetypeeee:%@",objectsInSection);
+        [self.sections setObject: objectsInSection forKey:fileType];
+        
+        NSLog(@"%@",self.sections);
+        //{fileType:[0,1,2], fileType:[0,1]} <--row
+        
+    }
+    
+    //NSLog(@"%@",self.sections);
+}
+#pragma mark - header font
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
+   
     
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+
+    [[UINavigationBar appearance] setTitleTextAttributes: [NSDictionary dictionaryWithObjectsAndKeys:
+                                                           [UIFont fontWithName:@"Raleway-Thin" size:25.0], NSFontAttributeName, nil]];
+    
+    
+    self.sectionFileType = [[NSMutableDictionary alloc] init];
+    self.sections = [[NSMutableDictionary alloc]init];
+    self.tableView.allowsMultipleSelectionDuringEditing = NO;
+    
+    PFUser *currentUser = [PFUser currentUser];
+    PFFile *profilePicture = [currentUser objectForKey:@"profilePicture"];
+    
+    self.profileImageView.layer.masksToBounds = YES;
+    self.profileImageView.layer.cornerRadius = 20;
+    
+    self.profileImageView.file = profilePicture;
+    [self.profileImageView loadInBackground];
+    
+    self.userNameLabel.text = currentUser.username;
+    
+    
+    
+    
+   
+    
+    
+    if (currentUser) {
+        NSLog(@"Current user: %@", currentUser.username);
+    }
+    else {
+       // [self performSegueWithIdentifier:@"showLogin" sender:self];
+    }
+}
+-(void) viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    PFUser *currentUser = [PFUser currentUser];
+    self.pointsLabel.text = [NSString stringWithFormat:@"Points: %@", currentUser[@"Points"]];
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (PFObject *)objectAtIndexPath:(NSIndexPath *)indexPath {
+    NSString *fileType = [self fileTypeForSection:indexPath.section];
+    //NSLog(@"files:%@",fileType);
+    
+    NSArray *rowIndecesInSection = [self.sections objectForKey:fileType];
+    
+    NSNumber *rowIndex = [rowIndecesInSection objectAtIndex:indexPath.row];
+    return [self.objects objectAtIndex:[rowIndex intValue]];
 }
+//load up messages sent to you
+
+- (PFQuery *)queryForTable {
+    PFQuery *query = [PFQuery queryWithClassName:self.parseClassName];
+    PFUser *currentUser = [PFUser currentUser];
+   
+    if(currentUser !=nil){
+        [query whereKey:@"recipientIds" containsAllObjectsInArray:@[currentUser.objectId]];
+        [query whereKey:@"fileType" containedIn:@[@"image",@"bountyNotice"]];
+        
+        [query orderByAscending:@"fileType"];
+        [query addDescendingOrder:@"createdAt"];
+    
+    // If Pull To Refresh is enabled, query against the network by default.
+    if (self.pullToRefreshEnabled) {
+        query.cachePolicy = kPFCachePolicyNetworkOnly;
+    }
+    
+    // If no objects are loaded in memory, we look to the cache first to fill the table
+    // and then subsequently do a query against the network.
+    if (self.objects.count == 0) {
+        query.cachePolicy = kPFCachePolicyCacheThenNetwork;
+    }
+    
+   
+   
+  
+    }
+    return query;
+}/*
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    //create temporary query that we'll search
+    PFQuery *query = [PFQuery queryWithClassName:@"Messages"];
+    
+    PFUser *currentUser = [PFUser currentUser];
+    if(currentUser !=nil){
+        [query whereKey:@"recipientIds" containsAllObjectsInArray:@[currentUser.objectId]]; //only show things you've sent to others
+        //don't show things you've sent that wasn't to you^
+    }
+        [query orderByDescending:@"createdAt"];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (error) {
+            NSLog(@"Error: %@ %@", error, [error userInfo]);
+        }
+        else{
+            self.messages=objects;
+            NSLog(@"Retrieved %d",[self.messages count]);
+            [self.tableView reloadData];
+           
+            
+        }
+        
+    }];
+    NSLog(@"%@",self.objects);
+  
+}*/
+
+-(NSString *) fileTypeForSection: (NSInteger) section{
+    
+    return [self.sectionFileType objectForKey: [NSNumber numberWithInt: section]];
+}
+
 
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-#warning Potentially incomplete method implementation.
     // Return the number of sections.
-    return 0;
+    
+    return self.sections.allKeys.count;
+    
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
+    
+    NSString *fileType = [self fileTypeForSection:section];
+    //NSLog(@"section:%d",section);
+    NSArray *rowIndecesInSection = [self.sections objectForKey:fileType];
     // Return the number of rows in the section.
-    return 0;
+    //NSLog(@"using %@:",rowIndecesInSection);
+    return rowIndecesInSection.count;
+    
 }
 
-/*
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
+-(NSString *)tableView:(UITableView*)tableView titleForHeaderInSection:(NSInteger)section{
+    NSString *fileType = [self fileTypeForSection:section];
+    if([fileType isEqualToString:@"bountyNotice"]){
+        return @"Active Bounties";
+    }
     
-    // Configure the cell...
+    else{
+        return @"Photos";
+    }
+    //return fileType;
+}
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+
+{   //NSLog(@"This is being called");
+    static NSString *CellIdentifier = @"Cell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    
+    
+    PFUser *currentUser = [PFUser currentUser];
+    if (indexPath.section == self.objects.count) { //if we're at the end (the last section)
+        UITableViewCell *cell = [self tableView:tableView cellForNextPageAtIndexPath:indexPath]; //get that cell(LoadMoreCell)
+        return cell;
+    }
+    //NSLog(@"%@",self.objects);
+    //NSLog(@"%@",self.sections);
+   // NSLog(@"%@",self.sectionFileType);
+    //get row number independent of section
+    NSInteger rowNumber = 0;
+    
+    for (NSInteger i = 0; i < indexPath.section; i++) {
+        rowNumber += [self tableView:tableView numberOfRowsInSection:i];
+    }
+    
+    rowNumber += indexPath.row;
+    PFObject *message = [self.objects objectAtIndex:rowNumber];
+    
+        //NSLog(@"%@",message);
+    //PFObject *message = [self.objects objectForKey:[NSNumber numberWithInteger:indexPath.row ]];
+    
+    //cell.textLabel.text = [NSString stringWithFormat:@"FileType:%@",message[@"fileType"]];
+    
+    
+    //cell.imageView.image = [UIImage imageNamed:@"image.png"];
+    
+     NSString *fileType = [message objectForKey:@"fileType"];
+     NSArray *listOfRecipients = [message objectForKey:@"recipientIds"];
+    
+     //if message is an image
+     if ([fileType isEqualToString:@"image"]) {
+     //PUT IN IMAGE ICON HERE LATER TO SIGNIFY IT'S AN IMAGE
+     //cell.imageView.image = [UIImage imageNamed:@"icon_image"];
+     cell.textLabel.text= [NSString stringWithFormat:@"%@ sent you a photo",[message objectForKey:@"senderName"]];}
+     
+     
+     if([fileType isEqualToString: @"bounty"] &&[listOfRecipients containsObject:currentUser.objectId]) {
+     cell.textLabel.text= [NSString stringWithFormat:@"%@ set a Bounty on you!",[message objectForKey:@"senderName"]];
+     //for videos
+     //cell.imageView.image = [UIImage imageNamed:@"icon_video"];
+     }
+     if([fileType isEqualToString:@"bountyNotice"]&&[listOfRecipients containsObject:currentUser.objectId]){
+     
+     cell.textLabel.text= [NSString stringWithFormat:@"%@ set a Bounty on %@",[message objectForKey:@"senderName"],[message objectForKey: @"recipientUsername"]];
+     }
+    
+    
+    
     
     return cell;
-}
-*/
-
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+}- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Return NO if you do not want the specified item to be editable.
+    // Return YES - we will be able to delete all rows
     return YES;
 }
-*/
 
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
+    //add code here for when you hit delete
+    NSLog(@"Delete");
+        NSInteger rowNumber = 0;
+        
+        for (NSInteger i = 0; i < indexPath.section; i++) {
+            rowNumber += [self tableView:tableView numberOfRowsInSection:i];
+        }
+        
+        rowNumber += indexPath.row;
+    self.selectedMessage = [self.objects objectAtIndex:rowNumber];
+        NSString *fileType = self.selectedMessage[@"fileType"];
+        
+        
+     
+       
+        NSLog (@"%@",self.selectedMessage);
+        NSMutableArray *deleteArray = [NSMutableArray arrayWithArray:self.selectedMessage[@"recipientIds"]] ;
+        
+        [deleteArray removeObject:[[PFUser currentUser] objectId] ];
+        NSArray *updateArray =[self.sections objectForKey:fileType];
+        NSMutableArray *newArray = [NSMutableArray arrayWithArray:updateArray];
+        [newArray removeObjectAtIndex:indexPath.row];
+        updateArray = [NSArray arrayWithArray: newArray];
+        [self.sections removeObjectForKey:fileType];
+        [self.sections setObject:updateArray forKey:fileType];
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        NSLog (@"%@",self.selectedMessage);
+   
+        
+        [deleteArray removeObject:[[PFUser currentUser] objectId] ];
+        NSLog(@"RecipientIds:%@",deleteArray);
+        NSArray *arrayUpdate = [NSArray arrayWithArray:deleteArray];
+        [self.selectedMessage setObject:arrayUpdate forKey:@"recipientIds"];
+    [self.selectedMessage saveInBackground];
+    [self.tableView reloadData];
+    [self viewDidLoad];
+        
+        
+    }
 }
-*/
+#pragma mark - Table view delegate
 
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    PFUser *currentUser = [PFUser currentUser];
+    NSInteger rowNumber = 0;
+    
+    for (NSInteger i = 0; i < indexPath.section; i++) {
+        rowNumber += [self tableView:tableView numberOfRowsInSection:i];
+    }
+    
+    rowNumber += indexPath.row;
+    self.selectedMessage = [self.objects objectAtIndex:rowNumber];
+    //self.selectedMessage = [self.messages objectAtIndex:indexPath.row];
+    NSString *fileType = [self.selectedMessage objectForKey:@"fileType"];
+    NSLog(@"%@ is filetype",fileType);
+    
+    if([fileType isEqualToString:@"image"]) {
+        [self performSegueWithIdentifier:@"showImage" sender:self];
+        NSLog(@"load image");}
+    if([fileType isEqualToString:@"bountyNotice"]){
+        NSLog(@"show camera");
+        [self.tabBarController setSelectedIndex:2];
+    }
+       else{NSLog(@"error come on dude");}
+    //if the image we clicked on was an image go to image view controller through showImage segue
+    /*if (
+    }
+     else{
+    
+    else {
+        
+    }*/
+    
+    // Delete it!
+    /*NSMutableArray *recipientIds = [NSMutableArray arrayWithArray:[self.selectedMessage objectForKey:@"recipientIds"]];
+    NSLog(@"Recipients: %@", recipientIds);
+    
+    if ([recipientIds count] == 1) {
+        // Last recipient - delete!
+     
+    }
+    else {
+        // Remove the recipient and save
+        [recipientIds removeObject:[[PFUser currentUser] objectId]];
+        [self.selectedMessage setObject:recipientIds forKey:@"recipientIds"];
+        [self.selectedMessage saveInBackground];
+    }*/
+    
 }
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
+- (IBAction)logout:(id)sender {
+   
+    [PFFacebookUtils unlinkUser:[PFUser currentUser]];
+    [PFUser logOut];
+    if([PFUser currentUser]){
+        NSLog(@"You haven't logged out");
+    }
+    //[self performSegueWithIdentifier:@"showLogin" sender:self];
+    
 }
-*/
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+   /* if ([segue.identifier isEqualToString:@"showLogin"]) {
+        [segue.destinationViewController setHidesBottomBarWhenPushed:YES];
+    }*/
+    /*else*/ if ([segue.identifier isEqualToString:@"showImage"]) {
+        [segue.destinationViewController setHidesBottomBarWhenPushed:YES];
+        ImageViewController *imageViewController = (ImageViewController *)segue.destinationViewController;
+        imageViewController.message = self.selectedMessage;
+    }
+   }
+- (IBAction)setBounties:(id)sender {
+    [self.tabBarController setSelectedIndex:4];
 }
-*/
+
+- (IBAction)profileButton:(id)sender {
+    [self.tabBarController setSelectedIndex:3];
+}
+
+- (IBAction)topButton:(id)sender {
+    [self.tabBarController setSelectedIndex:1];
+}
+
+
+
+
 
 @end
+
