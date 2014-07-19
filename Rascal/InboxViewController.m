@@ -87,7 +87,9 @@
 #pragma mark - header font
 - (void)viewDidLoad
 {
+    
     [super viewDidLoad];
+    
     
    
     
@@ -126,8 +128,9 @@
 }
 -(void) viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    self.tabBarController.tabBar.hidden = YES; //!!!this hides the tab bar!!!
     PFUser *currentUser = [PFUser currentUser];
-    self.pointsLabel.text = [NSString stringWithFormat:@"Points: %@", currentUser[@"Points"]];
+    self.pointsLabel.text = [NSString stringWithFormat:@"Income: %@", currentUser[@"Points"]];
 }
 
 - (PFObject *)objectAtIndexPath:(NSIndexPath *)indexPath {
@@ -275,18 +278,20 @@
      //if message is an image
      if ([fileType isEqualToString:@"image"]) {
      //PUT IN IMAGE ICON HERE LATER TO SIGNIFY IT'S AN IMAGE
-     //cell.imageView.image = [UIImage imageNamed:@"icon_image"];
-     cell.textLabel.text= [NSString stringWithFormat:@"%@ sent you a photo",[message objectForKey:@"senderName"]];}
+     cell.imageView.image = [UIImage imageNamed:@"image"];
+     cell.textLabel.text= [NSString stringWithFormat:@"%@ ",[message objectForKey:@"senderName"]];}
      
      
      if([fileType isEqualToString: @"bounty"] &&[listOfRecipients containsObject:currentUser.objectId]) {
      cell.textLabel.text= [NSString stringWithFormat:@"%@ set a Bounty on you!",[message objectForKey:@"senderName"]];
-     //for videos
-     //cell.imageView.image = [UIImage imageNamed:@"icon_video"];
+     
+   
      }
      if([fileType isEqualToString:@"bountyNotice"]&&[listOfRecipients containsObject:currentUser.objectId]){
-     
-     cell.textLabel.text= [NSString stringWithFormat:@"%@ set a Bounty on %@",[message objectForKey:@"senderName"],[message objectForKey: @"recipientUsername"]];
+     cell.textLabel.text = [NSString stringWithFormat:@"Bounty on %@", [message objectForKey:@"recipientUsername"]];
+         
+     //cell.textLabel.text= [NSString stringWithFormat:@"%@ ----> %@",[message objectForKey:@"senderName"],[message objectForKey: @"recipientUsername"]];
+     cell.imageView.image = [UIImage imageNamed:@"spam-2"];
      }
     
     
@@ -373,18 +378,19 @@
         NSLog(@"load image");}
     if([fileType isEqualToString:@"bountyNotice"]){
         NSLog(@"show camera");
+        NSString *bountyMessage = [NSString stringWithFormat:@"Bounty set by %@", self.selectedMessage[@"senderName"]];
+        
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:bountyMessage
+                                                            message:@"Will You Participate?"
+                                                           delegate:self cancelButtonTitle:@"Yes" otherButtonTitles:@"No",nil];
+        [alertView show];
+        
+        
+        
         [self.tabBarController setSelectedIndex:2];
     }
        else{NSLog(@"error come on dude");}
-    //if the image we clicked on was an image go to image view controller through showImage segue
-    /*if (
-    }
-     else{
-    
-    else {
-        
-    }*/
-    
+ 
     // Delete it!
     /*NSMutableArray *recipientIds = [NSMutableArray arrayWithArray:[self.selectedMessage objectForKey:@"recipientIds"]];
     NSLog(@"Recipients: %@", recipientIds);

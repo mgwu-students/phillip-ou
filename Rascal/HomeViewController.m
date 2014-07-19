@@ -223,6 +223,9 @@
 }
 
 
+- (IBAction)back:(id)sender {
+    [self.tabBarController setSelectedIndex:0];
+}
 
 
 

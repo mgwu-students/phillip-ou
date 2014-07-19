@@ -184,7 +184,7 @@
 
 - (void)uploadMessage {
     //NSLog(@"final list %@",self.recipients);
-    
+    if([self.recipients count]!=0) {
     PFUser *currentUser = [PFUser currentUser];
     
     //the more users sent to the more points you get.
@@ -231,7 +231,14 @@
         }];
 
 
-    
+    }
+    else{
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"You Didn't Select Anyone!"
+                                                            message:@"Please Select People To Send To."
+                                                           delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alertView show];
+        
+    }
     
     
     

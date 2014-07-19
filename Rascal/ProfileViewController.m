@@ -72,7 +72,7 @@
     [super viewWillAppear:animated];
     PFUser *currentUser = [PFUser currentUser];
     NSNumber *points = currentUser[@"Points"];
-    self.pointsLabel.text = [NSString stringWithFormat: @"%@",points];
+    self.pointsLabel.text = [NSString stringWithFormat: @"Income: %@",points];
     self.userNameLabel.text = currentUser.username;
     
     if(currentUser){
@@ -210,22 +210,7 @@
 
 
 - (PFQuery *)queryForTable {
-    //if user isn't signed in, don't initialize the query;  !!!!!!!!!!
-    
-    //!!!!! we don't have fb installed yet so this method can't be used just yet
-    
-    //profile view will crash if this is not commented out
-    
-    //need if statement to sign in, but page won't load
-    
-    //when not commented out, logging out and signing works without crashing. but home and profile won't load
-    //when commented out, home and profile load but cannot sign in once logged out.
-    
-    
-    
-    /*if (![PFUser currentUser] || ![PFFacebookUtils isLinkedWithUser:[PFUser currentUser]]) {
-        return nil;
-    }*/
+  
     PFUser *currentUser = [PFUser currentUser];
     PFQuery *query = [PFQuery queryWithClassName:self.parseClassName];
     [query whereKey:@"senderId" equalTo:currentUser.objectId];
@@ -241,75 +226,11 @@
 
 
 
-//this is called when followbutton is tapped on homescreen
-/*-(void) FollowButton:(FollowButton *)button didTapWithSectionIndex:(NSInteger)index{
- PFObject *photo = [self.objects objectAtIndex:index];
- PFUser *user = photo[@"whoTook"];   //user of the photo we're looking at at homeview
- 
- //recall follow button had follow and unfollow state
- if(!button.selected){
- [self savePhoto: photo];
- 
- 
- }
- else{
- [self unSave:photo];
- }
- [self.tableView reloadData]; //when we click the follow button we activate either follow user or unfollow user
- //this will instantly update the page accordingly
- 
- }
- 
- 
- //FOLLOW METHOD AND UNFOLLOW METHODS BELOW
- 
- -(void) savePhoto: (PFObject*) photo{
- //only if the person he wants to follow isn't himself
- 
- if(![self.savedPhotosArray containsObject:photo.objectId]){
- [self.savedPhotosArray addObject:photo.objectId]; //add the guy's objectId to our followerArray
- PFUser *user = [photo objectForKey:@"whoTook"];
- PFObject *followActivity = [PFObject objectWithClassName: @"Activity"]; //initialize Activity class and add followActivity into it
- //create keys and values for followActivity object in Activity class
- followActivity[@"fromUser"] = [PFUser currentUser]; //follow activity from current user
- followActivity[@"toUser"] = user; //directed towards user (user that posted photo)
- followActivity[@"type"]= @"follow"; //type of activity = follow
- followActivity[@"savedPhotos"] = photo.objectId;
- [followActivity saveEventually];
- }
- else{
- NSLog(@"Already In Array");
- }
- }
- 
- -(void) unSave: (PFObject*) photo{
- [self.savedPhotosArray removeObject: photo.objectId];//remove objectID when we unfollow from following array
- //PFUser *user = [photo objectForKey:@"whoTook"];
- NSLog(@"Trying ot Delete Photo");
- NSLog(@"%@",self.savedPhotosArray);
- //[self.followingArray delete: photo.objectId];
- //PFObject *object = [PFObject objectWithoutDataWithClassName:@"Activity"
- // objectId:photo.objectId];
- //[object deleteEventually];
- 
- 
- //retrieve follower information
- /*PFQuery *query = [PFQuery queryWithClassName:@"Activity"];
- [query whereKey:@"fromUser" equalTo: [PFUser currentUser]];
- [query whereKey:@"toUser" equalTo: user];
- [query whereKey:@"type" equalTo:@"follow"];
- //delete followActivity from array followActivities (array of followActivity)
- [query findObjectsInBackgroundWithBlock:^(NSArray *followActivities, NSError *error){
- if (!error){
- for(PFObject *followActivity in followActivities){
- [followActivity deleteEventually];
- }
- }
- }];
+
  
  
  
- }*/
+ 
 - (IBAction)logout:(id)sender {
     [PFUser logOut];
     
@@ -319,6 +240,9 @@
     
 }
 
+- (IBAction)back:(id)sender {
+    [self.tabBarController setSelectedIndex:0];
+}
 
 
 
