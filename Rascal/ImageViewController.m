@@ -20,10 +20,15 @@
     [super viewDidLoad];
     PFFile *imageFile = [self.message objectForKey: @"file"];
     
+    
     NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:imageFile.url]];
     
    
     self.imageView.image = [UIImage imageWithData:imageData];
+    
+    
+    [self.message setObject:@"Yes" forKey:@"read"];
+    [self.message saveInBackground];
     
 
 }
@@ -35,7 +40,7 @@
     NSString *senderName = [self.message objectForKey:@"senderName"];
     NSString *caption = [self.message objectForKey:@"caption"];
     
-    self.senderLabel.text=[NSString stringWithFormat:@"-%@",senderName];
+    self.senderLabel.text=[NSString stringWithFormat:@"by %@",senderName];
     self.captionLabel.text = caption;
     self.captionLabel.numberOfLines = 1;
     self.captionLabel.minimumFontSize =10.;
@@ -44,6 +49,8 @@
     int numberOfLikes = [self.message[@"listOfLikers"] count];
     
     self.numberOfLikesLabel.text =[NSString stringWithFormat:@"%d",numberOfLikes];
+    if([self.message[@"listOfLikers"] containsObject: [[PFUser currentUser]username]]){
+        self.likeButton.selected = YES;}
     
 }
 -(IBAction)ButtonReleased:(id)sender
@@ -68,14 +75,9 @@
         numberOfLikes = [NSNumber numberWithInteger: numlikes+1];
         [self.message setObject:numberOfLikes forKey:@"numberOfLikes"];
         
-      
-        
-            
-    
-    
-        
 
     }
+    
     
     
     [self.message saveEventually:^(BOOL succeeded, NSError *error) {

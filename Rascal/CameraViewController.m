@@ -38,6 +38,14 @@
     self.view.frame = [[UIScreen mainScreen] bounds];
     [super viewDidLoad];
      self.capturedImages = [[NSMutableArray alloc] init];
+    
+    self.senderId = [self.message objectForKey:@"senderId"];
+    self.targetId = [self.message objectForKey:@"victimId"];
+    [self.message setObject:@"Yes" forKey: @"read"];
+    
+    [self.message saveEventually];
+    
+    NSLog(@"%@ , %@", self.senderId, self.targetId);
    
     self.tabBarController.tabBar.hidden = YES;
    /* if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
@@ -218,6 +226,10 @@
         b.file = file;
         b.caption = [self.titleTextField text];
         b.chosenImageView = self.chosenImageView;
+        b.targetId = self.targetId;
+        b.senderId = self.senderId;
+        
+        
         
         
         /*

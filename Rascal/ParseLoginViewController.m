@@ -27,8 +27,8 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    //self.logInView.backgroundColor = BLUE_COLOR;
-    self.logInView.logo = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo"]];
+    //self.logInView.backgroundColor = [UIColor blueColor];
+        self.logInView.logo = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo"]];
     [self.logInView.facebookButton setTitle:@"Login with Facebook" forState:UIControlStateNormal];
 }
 

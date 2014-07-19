@@ -33,6 +33,11 @@
 @property (nonatomic, copy) CameraViewController *photoJustPosted;
 @property (nonatomic, strong) NSString *photoObjectId;
 
+@property (nonatomic, strong) PFObject *message;
+
+@property (nonatomic, strong) NSString *targetId;
+@property (nonatomic, strong) NSString *senderId;
+
 
 
 - (IBAction)cancel:(id)sender;

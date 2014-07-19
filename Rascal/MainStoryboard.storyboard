@@ -61,26 +61,37 @@
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="54"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H72-Td-tmy">
-                                            <rect key="frame" x="67" y="29" width="187" height="21"/>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H72-Td-tmy">
+                                            <rect key="frame" x="20" y="29" width="187" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" name="SinhalaSangamMN" family="Sinhala Sangam MN" pointSize="17"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="3" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dUN-Fy-B9T">
-                                            <rect key="frame" x="20" y="10" width="289" height="16"/>
+                                            <rect key="frame" x="20" y="0.0" width="289" height="34"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" name="SnellRoundhand" family="Snell Roundhand" pointSize="20"/>
+                                            <fontDescription key="fontDescription" name="SnellRoundhand-Bold" family="Snell Roundhand" pointSize="20"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="4" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gjv-Dw-Emk">
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="4" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="1000" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gjv-Dw-Emk">
                                             <rect key="frame" x="273" y="29" width="42" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <button opaque="NO" tag="5" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gZ3-5v-d3n">
+                                            <rect key="frame" x="243" y="28" width="22" height="22"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" image="heart-empty.png">
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <state key="selected" image="heart-full.png"/>
+                                            <connections>
+                                                <action selector="like:" destination="fkO-dj-8A4" eventType="touchUpInside" id="Vc7-ge-rCF"/>
+                                            </connections>
+                                        </button>
                                     </subviews>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -173,15 +184,15 @@
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="48"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QDO-fT-57W">
-                                            <rect key="frame" x="126" y="27" width="170" height="21"/>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QDO-fT-57W">
+                                            <rect key="frame" x="24" y="27" width="170" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" name="SinhalaSangamMN" family="Sinhala Sangam MN" pointSize="17"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="3" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sOJ-0y-gzS">
-                                            <rect key="frame" x="24" y="2" width="272" height="35"/>
+                                            <rect key="frame" x="24" y="2" width="272" height="32"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" name="SnellRoundhand-Bold" family="Snell Roundhand" pointSize="20"/>
                                             <nil key="highlightedColor"/>
@@ -503,7 +514,7 @@
             </objects>
             <point key="canvasLocation" x="161" y="102"/>
         </scene>
-        <!--Post Camera View Controller - Recipients-->
+        <!--Post Camera View Controller - audience-->
         <scene sceneID="blk-Ol-nec">
             <objects>
                 <tableViewController id="jvJ-yj-T8N" customClass="PostCameraViewController" sceneMemberID="viewController">
@@ -513,7 +524,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell multipleTouchEnabled="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" id="q73-JR-LmC">
-                                <rect key="frame" x="0.0" y="86" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="22" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="q73-JR-LmC" id="lga-Vb-FBj">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
@@ -526,7 +537,7 @@
                             <outlet property="delegate" destination="jvJ-yj-T8N" id="cod-Cp-g2B"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Recipients" id="Cea-FO-jBc">
+                    <navigationItem key="navigationItem" title="audience" id="Cea-FO-jBc">
                         <barButtonItem key="leftBarButtonItem" title="Cancel" id="qvM-up-cYs">
                             <connections>
                                 <action selector="cancel:" destination="jvJ-yj-T8N" id="oWf-5d-NVC"/>
@@ -695,7 +706,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="rascal" id="fGQ-pb-c50">
-                        <barButtonItem key="leftBarButtonItem" image="user-2-smaller.png" id="fca-Zg-g2X">
+                        <barButtonItem key="leftBarButtonItem" image="intersect.png" id="fca-Zg-g2X">
                             <color key="tintColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
                                 <action selector="profileButton:" destination="bic-8Q-ySq" id="hTt-P5-UAh"/>
@@ -713,11 +724,12 @@
                         <outlet property="profileImageView" destination="4mS-61-e2R" id="cXC-nP-HyC"/>
                         <outlet property="userNameLabel" destination="Flb-OG-N3F" id="fE9-P8-w1W"/>
                         <segue destination="sXQ-PQ-ZQV" kind="push" identifier="showImage" id="ZjF-Qq-crE"/>
+                        <segue destination="ZGc-Qi-isY" kind="push" identifier="transferBountyData" id="2Hz-h7-dr2"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hue-Ys-HZ3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="156" y="2259"/>
+            <point key="canvasLocation" x="776" y="351"/>
         </scene>
         <!--Navigation Controller - News-->
         <scene sceneID="S9b-3o-Ohq">
@@ -799,7 +811,7 @@
             </objects>
             <point key="canvasLocation" x="583" y="886"/>
         </scene>
-        <!--Image View Controller-->
+        <!--Image View Controller - art-->
         <scene sceneID="ceP-HQ-mFL">
             <objects>
                 <viewController id="sXQ-PQ-ZQV" customClass="ImageViewController" sceneMemberID="viewController">
@@ -816,25 +828,25 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6zN-hD-s4J">
-                                <rect key="frame" x="208" y="87" width="280" height="21"/>
+                                <rect key="frame" x="20" y="92" width="280" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="SinhalaSangamMN" family="Sinhala Sangam MN" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" reversesTitleShadowWhenHighlighted="YES" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ErU-Jk-DEK">
-                                <rect key="frame" x="0.0" y="518" width="46" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ErU-Jk-DEK">
+                                <rect key="frame" x="7" y="522" width="43" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Like">
+                                <state key="normal" image="heart-empty.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <state key="selected" title="Liked"/>
+                                <state key="selected" title="Liked" image="heart-full.png"/>
                                 <connections>
                                     <action selector="Like:" destination="sXQ-PQ-ZQV" eventType="touchUpInside" id="Xm7-F4-jpz"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="raY-YV-p68">
-                                <rect key="frame" x="70" y="522" width="42" height="21"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="1000" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="raY-YV-p68">
+                                <rect key="frame" x="51" y="523" width="42" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -843,13 +855,13 @@
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dnj-zk-a9d">
                                 <rect key="frame" x="20" y="68" width="292" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="SnellRoundhand" family="Snell Roundhand" pointSize="20"/>
+                                <fontDescription key="fontDescription" name="SnellRoundhand-Bold" family="Snell Roundhand" pointSize="20"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="JO1-9Q-m9t"/>
+                    <navigationItem key="navigationItem" title="art" id="JO1-9Q-m9t"/>
                     <connections>
                         <outlet property="captionLabel" destination="Dnj-zk-a9d" id="Uwe-gm-nFT"/>
                         <outlet property="imageView" destination="fcp-zW-Tei" id="NOv-2h-vyg"/>
@@ -867,6 +879,9 @@
         <image name="address-book-smaller.png" width="16" height="16"/>
         <image name="arrow-right.png" width="32" height="32"/>
         <image name="camera-2.png" width="32" height="32"/>
+        <image name="heart-empty.png" width="16" height="16"/>
+        <image name="heart-full.png" width="16" height="16"/>
+        <image name="intersect.png" width="16" height="16"/>
         <image name="list-small.png" width="16" height="16"/>
         <image name="marquee.png" width="32" height="32"/>
         <image name="out.png" width="16" height="16"/>
@@ -881,7 +896,7 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="qOS-xp-C2S"/>
-        <segue reference="HjJ-5S-O1W"/>
+        <segue reference="OIA-4e-jch"/>
+        <segue reference="XM4-aG-9Q0"/>
     </inferredMetricsTieBreakers>
 </document>

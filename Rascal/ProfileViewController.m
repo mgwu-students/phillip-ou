@@ -125,14 +125,14 @@
     
     PFUser *currentUser = [PFUser currentUser];
     PFObject *photo = [self.objects objectAtIndex:section];
-    NSString *userId = [photo objectForKey:@"senderName"];
+    NSString *userName = [photo objectForKey:@"senderName"];
     
     UILabel *titleLabel = (UILabel *) [sectionHeaderView viewWithTag:3];
     UILabel *numberOfLikesLabel = (UILabel *) [sectionHeaderView viewWithTag:4];
     NSString *caption = [photo objectForKey:@"caption"];
     
     titleLabel.text=caption;
-    senderLabel.text = [NSString stringWithFormat: @"-%@",userId];
+    senderLabel.text = [NSString stringWithFormat: @"by %@",userName];
    
     NSInteger *numberOfLikes = [photo[@"listOfLikers"] count];
     numberOfLikesLabel.text = [NSString stringWithFormat: @"%d",numberOfLikes];

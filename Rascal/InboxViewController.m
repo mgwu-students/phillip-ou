@@ -246,11 +246,30 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
     
+    UIImage *icon = [UIImage imageNamed: @"image"];
+    UIImage *icon2 = [UIImage imageNamed:@"camera-2-smaller"];
+    
+    UIButton *photoUnread = [[UIButton alloc] initWithFrame: CGRectMake(0, 0, 16, 16)];
+    
+    UIButton *bountyLogo = [[UIButton alloc] initWithFrame: CGRectMake(0, 0, 16, 16)];
+
+    
+    [UIButton buttonWithType: UIButtonTypeCustom];
+    [photoUnread setBackgroundImage:icon forState:UIControlStateNormal];
+     photoUnread.backgroundColor = [UIColor clearColor];
+    
+    [bountyLogo setBackgroundImage:icon2 forState:UIControlStateNormal];
+     bountyLogo.backgroundColor = [UIColor clearColor];
+    
+    
+    
+    
     PFUser *currentUser = [PFUser currentUser];
     if (indexPath.section == self.objects.count) { //if we're at the end (the last section)
         UITableViewCell *cell = [self tableView:tableView cellForNextPageAtIndexPath:indexPath]; //get that cell(LoadMoreCell)
         return cell;
     }
+    
     //NSLog(@"%@",self.objects);
     //NSLog(@"%@",self.sections);
    // NSLog(@"%@",self.sectionFileType);
@@ -270,17 +289,30 @@
     //cell.textLabel.text = [NSString stringWithFormat:@"FileType:%@",message[@"fileType"]];
     
     
-    //cell.imageView.image = [UIImage imageNamed:@"image.png"];
+    
     
      NSString *fileType = [message objectForKey:@"fileType"];
      NSArray *listOfRecipients = [message objectForKey:@"recipientIds"];
+     NSString* read = [message objectForKey:@"read"];     //determine if cell is read
     
      //if message is an image
      if ([fileType isEqualToString:@"image"]) {
      //PUT IN IMAGE ICON HERE LATER TO SIGNIFY IT'S AN IMAGE
-     cell.imageView.image = [UIImage imageNamed:@"image"];
-     cell.textLabel.text= [NSString stringWithFormat:@"%@ ",[message objectForKey:@"senderName"]];}
+         //cell.imageView.image = [UIImage imageNamed:@"image"];
+         cell.textLabel.text= [NSString stringWithFormat:@"%@ ",[message objectForKey:@"senderName"]];
+         cell.imageView.image = [UIImage imageNamed:@"image"];
+         
+         //for read messages
+         if([read isEqualToString:@"Yes"]){
+             //cell.accessoryView= photoUnread;
+             cell.imageView.image = [UIImage imageNamed:@"marquee-smaller"];
+         }
+         
+
      
+     
+     }
+    
      
      if([fileType isEqualToString: @"bounty"] &&[listOfRecipients containsObject:currentUser.objectId]) {
      cell.textLabel.text= [NSString stringWithFormat:@"%@ set a Bounty on you!",[message objectForKey:@"senderName"]];
@@ -289,15 +321,23 @@
      }
      if([fileType isEqualToString:@"bountyNotice"]&&[listOfRecipients containsObject:currentUser.objectId]){
      cell.textLabel.text = [NSString stringWithFormat:@"Bounty on %@", [message objectForKey:@"recipientUsername"]];
-         
      //cell.textLabel.text= [NSString stringWithFormat:@"%@ ----> %@",[message objectForKey:@"senderName"],[message objectForKey: @"recipientUsername"]];
      cell.imageView.image = [UIImage imageNamed:@"spam-2"];
+         //if bounty is unread
+         if(![read isEqualToString:@"Yes"]){
+             cell.accessoryView = bountyLogo;
+             
+         }
+         
+        
      }
     
     
     
     
     return cell;
+    
+    
 }- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // Return YES - we will be able to delete all rows
@@ -363,6 +403,8 @@
     PFUser *currentUser = [PFUser currentUser];
     NSInteger rowNumber = 0;
     
+    
+    
     for (NSInteger i = 0; i < indexPath.section; i++) {
         rowNumber += [self tableView:tableView numberOfRowsInSection:i];
     }
@@ -381,13 +423,13 @@
         NSString *bountyMessage = [NSString stringWithFormat:@"Bounty set by %@", self.selectedMessage[@"senderName"]];
         
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:bountyMessage
-                                                            message:@"Will You Participate?"
-                                                           delegate:self cancelButtonTitle:@"Yes" otherButtonTitles:@"No",nil];
+                                                            message:@"You Will Be Rewarded For This Photo"
+                                                           delegate:self cancelButtonTitle:@"Yes" otherButtonTitles:nil];
         [alertView show];
         
+        [self performSegueWithIdentifier:@"transferBountyData" sender:self];
         
-        
-        [self.tabBarController setSelectedIndex:2];
+        //[self.tabBarController setSelectedIndex:2];
     }
        else{NSLog(@"error come on dude");}
  
@@ -425,9 +467,18 @@
     /*else*/ if ([segue.identifier isEqualToString:@"showImage"]) {
         [segue.destinationViewController setHidesBottomBarWhenPushed:YES];
         ImageViewController *imageViewController = (ImageViewController *)segue.destinationViewController;
-        imageViewController.message = self.selectedMessage;
+        imageViewController.message = self.selectedMessage;}
+        //passing variables to cameraViewController (sender & recipient of bounties)
+        
+        else{
+            NSLog(@"Passing to Camera");
+            [segue.destinationViewController setHidesBottomBarWhenPushed:NO];
+            CameraViewController *cameraViewController = (CameraViewController *)segue.destinationViewController;
+            cameraViewController.message = self.selectedMessage;
+            
+        }
     }
-   }
+
 - (IBAction)setBounties:(id)sender {
     [self.tabBarController setSelectedIndex:4];
 }

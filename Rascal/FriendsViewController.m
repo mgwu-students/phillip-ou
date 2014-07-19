@@ -194,6 +194,7 @@
     [bounty setObject:self.recipientsOfBounties forKey:@"recipientIds"];
     [bounty setACL: readAccess];
     [bounty setObject:[[PFUser currentUser] objectId] forKey:@"senderId"];
+    
             UIAlertView *bountyAlert = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"You Have Set Bounty on %@!",self.user.username]
                                                                   message:@"Good Work."
                                                                  delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
@@ -218,6 +219,8 @@
     [bountyNotice setObject:self.friends forKey:@"recipientIds"];//notification goes to all friends
     [bountyNotice setObject:self.user.username forKey:@"recipientUsername"];
     [bountyNotice setObject:currentUser.username forKey:@"senderName"];
+    [bountyNotice setObject:[[PFUser currentUser] objectId] forKey:@"senderId"];
+    [bountyNotice setObject: self.user.objectId forKey: @"victimId"];
         [bountyNotice saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
             if (error) {
                 UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"An error occurred!"

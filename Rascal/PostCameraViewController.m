@@ -26,6 +26,10 @@
     [super viewDidLoad];
     self.friendsRelation = [[PFUser currentUser] objectForKey:@"friendsRelation"];
     self.recipients = [[NSMutableArray alloc] init];
+   
+    //have sender of bounty and victim of bounty be checked automatically
+    
+    [self.recipients addObjectsFromArray:@[self.senderId,self.targetId]];
     
 
     
@@ -204,6 +208,7 @@
     message[@"recipientIds"]=recipients;
     message[@"senderId"]=currentUser.objectId;
     message[@"senderName"] =currentUser.username;
+    
         /*[message setObject:self.recipients forKey:@"recipientIds"];
         [message setObject:currentUser.objectId forKey:@"senderId"];
         [message setObject:currentUser.username forKey:@"senderName"];*/

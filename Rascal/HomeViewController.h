@@ -12,6 +12,8 @@
 @interface HomeViewController : PFQueryTableViewController <FollowButtonDelegate>
 @property (nonatomic, weak) id <FollowButtonDelegate> delegate;
 
+@property (nonatomic, strong) PFObject *message;
+
 
 
 

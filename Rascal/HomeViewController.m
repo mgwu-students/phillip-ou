@@ -106,8 +106,8 @@
      //UILabel *senderLabel = (UILabel *)[sectionHeaderView viewWithTag:2];
     
     
-    PFObject *photo = [self.objects objectAtIndex:section];
-    NSString *username = [photo objectForKey:@"senderName"];
+    self.message = [self.objects objectAtIndex:section];
+    NSString *username = [self.message objectForKey:@"senderName"];
     //PFUser *user = [photo objectForKey:@"whoTook"];
     //PFFile *profilePictureFile= [user objectForKey:@"profilePicture"];
 //PFImageView *profileImageView = (PFImageView*) [sectionHeaderView viewWithTag:6];
@@ -120,15 +120,19 @@
     UILabel *userNameLabel = (UILabel *) [sectionHeaderView viewWithTag: 2];
     UILabel *titleLabel = (UILabel *) [sectionHeaderView viewWithTag:3];
     UILabel *numberOfLikesLabel = (UILabel *) [sectionHeaderView viewWithTag:4];
-    NSString *caption = [photo objectForKey:@"caption"];
+    NSString *caption = [self.message objectForKey:@"caption"];
+    
+    UIButton *likeButton = (UIButton *) [sectionHeaderView viewWithTag:4];;
     
     titleLabel.text=caption;
     userNameLabel.text = [NSString stringWithFormat:@"by %@",username];
-    NSInteger *numberOfLikes = [photo[@"listOfLikers"] count];
+    NSInteger *numberOfLikes = [self.message[@"listOfLikers"] count];
     numberOfLikesLabel.text = [NSString stringWithFormat: @"%d",numberOfLikes];
     
     
     sectionHeaderView.backgroundColor = [UIColor whiteColor];
+    
+   
     
        return sectionHeaderView;
 }
@@ -227,6 +231,40 @@
     [self.tabBarController setSelectedIndex:0];
 }
 
+- (IBAction)like:(id)sender {
+    NSLog(@"Like Button Pressed");
+    PFUser *currentUser  =[PFUser currentUser];
+    //[self ButtonReleased:self];
+    //NSMutableArray *listOfLikers = [NSMutableArray array];
+    // NSString *user = [self.message objectForKey:@"senderName"];
+    
+    //ask benji whyit keeps adding users of hte same username
+    //also ask why label doesn't update instantaneously
+    if(![self.message[@"listOfLikers"] containsObject: currentUser.username]){
+        [self.message addObject:currentUser.username forKey:@"listOfLikers"];
+        NSNumber *numberOfLikes = [self.message objectForKey:@"numberOfLikes"];
+        int numlikes = [numberOfLikes integerValue];
+        numberOfLikes = [NSNumber numberWithInteger: numlikes+1];
+        [self.message setObject:numberOfLikes forKey:@"numberOfLikes"];
+        
+        
+        
+        
+        
+        
+        
+        
+    }
+    
+    
+    [self.message saveEventually:^(BOOL succeeded, NSError *error) {
+        if(error){
+            NSLog(@"fuck");
+        }
+    }];
+    
+    
+}
 
 
 

@@ -22,6 +22,9 @@
 
 @property (weak, nonatomic) IBOutlet UITextField *titleTextField;
 
+@property (nonatomic, strong) NSString *targetId;
+@property (nonatomic, strong) NSString *senderId;
+
 
 @end
 

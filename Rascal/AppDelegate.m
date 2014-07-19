@@ -37,6 +37,7 @@
         
         [self presentLoginControllerAnimated: NO];
     }*/
+    [PFFacebookUtils initializeFacebook];
     if(![PFUser currentUser] && ![PFFacebookUtils isLinkedWithUser:[PFUser currentUser]]){
         [self presentLoginControllerAnimated:NO];
     }
