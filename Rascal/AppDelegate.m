@@ -51,7 +51,11 @@
     ParseLoginViewController *loginViewController = [[ParseLoginViewController alloc] init];
     loginViewController.delegate = self;
     
-    [loginViewController setFields:PFLogInFieldsFacebook];    [self.window.rootViewController presentViewController:loginViewController animated:animated completion:nil];
+    //[loginViewController setFields:PFLogInFieldsDefault]; //this is for testing
+    
+    [loginViewController setFields:PFLogInFieldsFacebook];
+    
+    [self.window.rootViewController presentViewController:loginViewController animated:animated completion:nil];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application

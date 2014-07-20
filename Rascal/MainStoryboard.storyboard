@@ -524,7 +524,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell multipleTouchEnabled="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" id="q73-JR-LmC">
-                                <rect key="frame" x="0.0" y="22" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="86" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="q73-JR-LmC" id="lga-Vb-FBj">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
@@ -669,7 +669,7 @@
                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bOs-hT-8iD">
                                     <rect key="frame" x="6" y="78" width="294" height="30"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <state key="normal" title="Set Bounties">
+                                    <state key="normal" title="Set Bounty">
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
                                     <connections>
@@ -837,10 +837,10 @@
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ErU-Jk-DEK">
                                 <rect key="frame" x="7" y="522" width="43" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="heart-empty.png">
+                                <state key="normal" image="smiley-non.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <state key="selected" title="Liked" image="heart-full.png"/>
+                                <state key="selected" title="Liked" image="smiley.png"/>
                                 <connections>
                                     <action selector="Like:" destination="sXQ-PQ-ZQV" eventType="touchUpInside" id="Xm7-F4-jpz"/>
                                 </connections>
@@ -885,6 +885,8 @@
         <image name="list-small.png" width="16" height="16"/>
         <image name="marquee.png" width="32" height="32"/>
         <image name="out.png" width="16" height="16"/>
+        <image name="smiley-non.png" width="16" height="16"/>
+        <image name="smiley.png" width="16" height="16"/>
         <image name="star-2-smaller.png" width="16" height="16"/>
         <image name="swatches.png" width="32" height="32"/>
         <image name="user-2-smaller.png" width="16" height="16"/>
@@ -897,6 +899,6 @@
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="OIA-4e-jch"/>
-        <segue reference="XM4-aG-9Q0"/>
+        <segue reference="2Hz-h7-dr2"/>
     </inferredMetricsTieBreakers>
 </document>

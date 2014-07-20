@@ -41,6 +41,11 @@
 }
 -(void) objectsDidLoad: (NSError *)error{
     [super objectsDidLoad: error];
+    if(![PFUser currentUser] && ![PFFacebookUtils isLinkedWithUser:[PFUser currentUser]]){
+        NSLog(@"ByPass");
+    }
+    else{
+       
     NSLog(@"%@",self.objects);
     
     [self.sections removeAllObjects];
@@ -84,6 +89,7 @@
     
     //NSLog(@"%@",self.sections);
 }
+}
 #pragma mark - header font
 - (void)viewDidLoad
 {
@@ -101,17 +107,8 @@
     self.sectionFileType = [[NSMutableDictionary alloc] init];
     self.sections = [[NSMutableDictionary alloc]init];
     self.tableView.allowsMultipleSelectionDuringEditing = NO;
-    
     PFUser *currentUser = [PFUser currentUser];
-    PFFile *profilePicture = [currentUser objectForKey:@"profilePicture"];
     
-    self.profileImageView.layer.masksToBounds = YES;
-    self.profileImageView.layer.cornerRadius = 20;
-    
-    self.profileImageView.file = profilePicture;
-    [self.profileImageView loadInBackground];
-    
-    self.userNameLabel.text = currentUser.username;
     
     
     
@@ -131,6 +128,20 @@
     self.tabBarController.tabBar.hidden = YES; //!!!this hides the tab bar!!!
     PFUser *currentUser = [PFUser currentUser];
     self.pointsLabel.text = [NSString stringWithFormat:@"Income: %@", currentUser[@"Points"]];
+    if([currentUser[@"Points"] doubleValue] <1){
+        [currentUser setObject: [NSNumber numberWithInt:20] forKey:@"Points"];
+        [currentUser save];
+    }
+    //PFUser *currentUser = [PFUser currentUser];
+    PFFile *profilePicture = [currentUser objectForKey:@"profilePicture"];
+    
+    self.profileImageView.layer.masksToBounds = YES;
+    self.profileImageView.layer.cornerRadius = 20;
+    
+    self.profileImageView.file = profilePicture;
+    [self.profileImageView loadInBackground];
+    
+    self.userNameLabel.text = currentUser.username;
 }
 
 - (PFObject *)objectAtIndexPath:(NSIndexPath *)indexPath {
@@ -378,10 +389,6 @@
         
         
         
-        
-        
-        
-        
         NSLog (@"%@",self.selectedMessage);
    
         
@@ -389,7 +396,7 @@
         NSLog(@"RecipientIds:%@",deleteArray);
         NSArray *arrayUpdate = [NSArray arrayWithArray:deleteArray];
         [self.selectedMessage setObject:arrayUpdate forKey:@"recipientIds"];
-    [self.selectedMessage saveInBackground];
+        [self.selectedMessage save]; //ensures array gets updated before there is index error after delete
     [self.tableView reloadData];
     [self viewDidLoad];
         

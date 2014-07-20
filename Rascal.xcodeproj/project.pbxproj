@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4D0B7E7E197B5951008E79B9 /* smiley-non.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D0B7E7C197B5951008E79B9 /* smiley-non.png */; };
+		4D0B7E7F197B5951008E79B9 /* smiley.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D0B7E7D197B5951008E79B9 /* smiley.png */; };
 		4D0C83E5197A2CCF00535637 /* heart-empty.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D0C83E4197A2CCF00535637 /* heart-empty.png */; };
 		4D0C83E7197A2CD700535637 /* heart-full.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D0C83E6197A2CD700535637 /* heart-full.png */; };
 		4D1AAABE196472DB00F79C39 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D1AAABD196472DB00F79C39 /* ProfileViewController.m */; };
@@ -88,6 +90,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4D0B7E7C197B5951008E79B9 /* smiley-non.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "smiley-non.png"; sourceTree = "<group>"; };
+		4D0B7E7D197B5951008E79B9 /* smiley.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = smiley.png; sourceTree = "<group>"; };
 		4D0C83E4197A2CCF00535637 /* heart-empty.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "heart-empty.png"; sourceTree = "<group>"; };
 		4D0C83E6197A2CD700535637 /* heart-full.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "heart-full.png"; sourceTree = "<group>"; };
 		4D1AAABC196472DB00F79C39 /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
@@ -243,6 +247,8 @@
 				4D8C6E321978808F0058593D /* arrow-right.png */,
 				4DB6BE431979DB2E00D3A50F /* user-4-add.png */,
 				4DB6BE451979DF5E00D3A50F /* image.png */,
+				4D0B7E7C197B5951008E79B9 /* smiley-non.png */,
+				4D0B7E7D197B5951008E79B9 /* smiley.png */,
 				4DB6BE471979DFE000D3A50F /* spam-2.png */,
 			);
 			name = Art;
@@ -449,6 +455,7 @@
 				4D90A808197AD131003DB1B3 /* asterisk.png in Resources */,
 				4D8C6E4119788C910058593D /* list-small.png in Resources */,
 				4D8C6E2719787ED00058593D /* address-book.png in Resources */,
+				4D0B7E7E197B5951008E79B9 /* smiley-non.png in Resources */,
 				4D90A806197AD128003DB1B3 /* arrow-down.png in Resources */,
 				4D8C6E31197880480058593D /* swatches.png in Resources */,
 				4D8C6E3B19788B910058593D /* star-2-smaller.png in Resources */,
@@ -461,6 +468,7 @@
 				4D8C6E2B19787EE50058593D /* menu-2.png in Resources */,
 				4D8C6E2319787E120058593D /* users.png in Resources */,
 				4D8C6E3519788AF60058593D /* camera-2-smaller.png in Resources */,
+				4D0B7E7F197B5951008E79B9 /* smiley.png in Resources */,
 				4DDEABF4195FE8E5009684B8 /* Images.xcassets in Resources */,
 				4D0C83E5197A2CCF00535637 /* heart-empty.png in Resources */,
 				4D8C6E3919788B750058593D /* users-smaller.png in Resources */,

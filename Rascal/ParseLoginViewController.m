@@ -28,8 +28,9 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     //self.logInView.backgroundColor = [UIColor blueColor];
-        self.logInView.logo = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo"]];
-    [self.logInView.facebookButton setTitle:@"Login with Facebook" forState:UIControlStateNormal];
+     //[self setFields: PFLogInFieldsTwitter | PFLogInFieldsFacebook | PFLogInFieldsDismissButton];
+    self.logInView.logo = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo"]];
+   [self.logInView.facebookButton setTitle:@"Login with Facebook" forState:UIControlStateNormal];
 }
 
 - (void)didReceiveMemoryWarning
