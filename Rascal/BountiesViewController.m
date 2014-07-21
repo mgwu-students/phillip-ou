@@ -20,6 +20,7 @@
 {
     [super viewDidLoad];
     self.bountyCost = 10;
+    self.bountyValue = 10;
     self.recipientsOfBounties = [[NSMutableArray alloc] init];
     self.allFriends = [[NSMutableArray alloc] init];
     self.friends = [[NSArray alloc]init];
@@ -219,6 +220,10 @@
             [bountyNotice setObject:currentUser.username forKey:@"senderName"];
             [bountyNotice setObject:[[PFUser currentUser] objectId] forKey:@"senderId"];
             [bountyNotice setObject: self.user.objectId forKey: @"victimId"];
+            
+            
+            [bountyNotice setObject: [NSNumber numberWithInt:self.bountyValue] forKey:@"bountyValue"];
+            
             [bountyNotice saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
                 if (error) {
                     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"An error occurred!"

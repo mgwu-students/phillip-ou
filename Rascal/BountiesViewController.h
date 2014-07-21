@@ -20,6 +20,7 @@
 @property(nonatomic, strong) NSMutableArray *allFriends;
 @property (nonatomic, assign) int clickCount;
 @property (nonatomic,assign) int bountyCost;
+@property (nonatomic,assign) int bountyValue;
 
 
 

@@ -200,7 +200,13 @@
     [currentUser saveInBackground];
     
     PFObject *message = [PFObject objectWithClassName:@"Messages"];
-    NSArray *recipients = [NSArray arrayWithArray:self.recipients]; //need to convert from mutableArray to array to send into parse
+    NSArray *recipients = [NSArray arrayWithArray:self.recipients];
+        //need to convert from mutableArray to array to send into parse
+    NSString *payForId = self.selectedMessage[@"senderId"]; //sender of bounty
+    NSNumber *payAmount = self.selectedMessage[@"bountyValue"];
+        
+        
+    
     message[@"caption"] = self.caption;
     message[@"whoTook"] = currentUser;
     message[@"file"] = self.file;
@@ -208,7 +214,8 @@
     message[@"recipientIds"]=recipients;
     message[@"senderId"]=currentUser.objectId;
     message[@"senderName"] =currentUser.username;
-        
+    [message setObject:payForId forKey:@"payForId"]; //have bounty sender have his investment returned
+    [message setObject:payAmount forKey:@"payAmount"];
         
         //delete current user from recipientId's array
         //so that once you upload the picture bounty is gone.

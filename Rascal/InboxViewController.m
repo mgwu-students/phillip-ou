@@ -229,10 +229,14 @@
     
     UIImage *icon = [UIImage imageNamed: @"image"];
     UIImage *icon2 = [UIImage imageNamed:@"camera-2-smaller"];
+    UIImage *icon3 = [UIImage imageNamed:@"database"];
     
     UIButton *photoUnread = [[UIButton alloc] initWithFrame: CGRectMake(0, 0, 16, 16)];
     
     UIButton *bountyLogo = [[UIButton alloc] initWithFrame: CGRectMake(0, 0, 16, 16)];
+    
+    
+    UIButton *moneyLogo = [[UIButton alloc] initWithFrame: CGRectMake(0, 0, 16, 16)];
 
     
     [UIButton buttonWithType: UIButtonTypeCustom];
@@ -241,6 +245,10 @@
     
     [bountyLogo setBackgroundImage:icon2 forState:UIControlStateNormal];
      bountyLogo.backgroundColor = [UIColor clearColor];
+    
+    [moneyLogo setBackgroundImage:icon3 forState:UIControlStateNormal];
+    moneyLogo.backgroundColor = [UIColor clearColor];
+    
     
     
     
@@ -289,7 +297,11 @@
              cell.imageView.image = [UIImage imageNamed:@"marquee-smaller"];
          }
          
-
+         //show this is a return of his investment
+         
+         if([message[@"payForId"] isEqualToString:currentUser.objectId]){
+             cell.accessoryView = moneyLogo;
+         }
      
      
      }
@@ -389,7 +401,20 @@
     NSLog(@"%@ is filetype",fileType);
     
     if([fileType isEqualToString:@"image"]) {
+        
+        //if this photo is a reply a bounty set by this user give him his points (give back his investment)
+        if([self.selectedMessage[@"payForId"] isEqualToString:currentUser.objectId]&&![self.selectedMessage[@"read"] isEqualToString:@"Yes"]){
+            int earned = [self.selectedMessage[@"payAmount"] intValue];
+            int currentPoints = [currentUser[@"Points"] intValue];
+            NSNumber *points = [NSNumber numberWithInt: earned+currentPoints];
+            [currentUser setObject:points forKey:@"Points"];
+            NSLog(@"Points earned");
+         [currentUser saveInBackground];}
         [self performSegueWithIdentifier:@"showImage" sender:self];
+        
+        
+            
+        
         NSLog(@"load image");}
     if([fileType isEqualToString:@"bountyNotice"]){
         NSLog(@"show camera");
