@@ -26,6 +26,7 @@
 @property (nonatomic, strong) NSString *file;
 @property (nonatomic, strong) NSString *caption;
 @property (nonatomic, strong )UIImageView *chosenImageView;
+@property (nonatomic, strong) PFObject *selectedMessage;
 
 
 

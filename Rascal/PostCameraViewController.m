@@ -208,6 +208,20 @@
     message[@"recipientIds"]=recipients;
     message[@"senderId"]=currentUser.objectId;
     message[@"senderName"] =currentUser.username;
+        
+        
+        //delete current user from recipientId's array
+        //so that once you upload the picture bounty is gone.
+        
+        NSMutableArray *deleteArray = [NSMutableArray arrayWithArray:self.selectedMessage[@"recipientIds"]] ;
+
+        [deleteArray removeObject:[[PFUser currentUser] objectId] ];
+        [deleteArray removeObject:[[PFUser currentUser] objectId] ];
+        NSLog(@"RecipientIds:%@",deleteArray);
+        NSArray *arrayUpdate = [NSArray arrayWithArray:deleteArray];
+        [self.selectedMessage setObject:arrayUpdate forKey:@"recipientIds"];
+        [self.selectedMessage saveInBackground];
+
     
         /*[message setObject:self.recipients forKey:@"recipientIds"];
         [message setObject:currentUser.objectId forKey:@"senderId"];
@@ -218,26 +232,15 @@
                 
                 //NSLog(@"god this work");
             }
-          /*  if (error) {
-                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"An error occurred!"
-                                                                    message:@"Please try sending your message again."
-                                                                   delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
-                [alertView show];
-            }
-            else {
-                // Everything was successful!
-                [self reset];
-                [self.tabBarController setSelectedIndex:0];
-                
-            }
-            }];*/
+        
             
             
         }];
 
 
     }
-    else{
+    
+        else{
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"You Didn't Select Anyone!"
                                                             message:@"Please Select People To Send To."
                                                            delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];

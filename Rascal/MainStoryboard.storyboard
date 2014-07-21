@@ -22,6 +22,7 @@
                         <segue destination="2a2-87-NWt" kind="relationship" relationship="viewControllers" id="CY6-kO-aI9"/>
                         <segue destination="jgG-2l-MyG" kind="relationship" relationship="viewControllers" id="y0k-Ve-EDv"/>
                         <segue destination="5cY-zO-4jK" kind="relationship" relationship="viewControllers" id="hpP-lx-Bxg"/>
+                        <segue destination="bGK-3m-rVJ" kind="relationship" relationship="viewControllers" id="qve-Bl-UBx"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="L3o-f9-hwh" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -585,26 +586,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <view key="tableHeaderView" contentMode="scaleToFill" id="PGV-8F-IRB">
-                            <rect key="frame" x="0.0" y="64" width="320" height="44"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3MO-og-5mq">
-                                    <rect key="frame" x="82" y="7" width="157" height="30"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <state key="normal" title="Set Bounty">
-                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                    </state>
-                                    <connections>
-                                        <action selector="setBounty:" destination="qTd-4n-Dn2" eventType="touchUpInside" id="x15-y0-bwV"/>
-                                    </connections>
-                                </button>
-                            </subviews>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                        </view>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" id="cSe-kb-xS0">
-                                <rect key="frame" x="0.0" y="130" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="86" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="cSe-kb-xS0" id="zeh-Ro-Cfy">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
@@ -624,7 +608,7 @@
                                 <action selector="back:" destination="qTd-4n-Dn2" id="MDO-Zc-s5b"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Edit" id="yhz-1w-aCT">
+                        <barButtonItem key="rightBarButtonItem" image="user-4-add.png" id="yhz-1w-aCT">
                             <connections>
                                 <segue destination="ai8-vm-Le4" kind="push" identifier="showEditFriends" id="4iu-bA-bvF"/>
                             </connections>
@@ -684,7 +668,7 @@
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
                                     <connections>
-                                        <action selector="setBounties:" destination="bic-8Q-ySq" eventType="touchUpInside" id="Y9P-RW-ufk"/>
+                                        <action selector="editFriends:" destination="bic-8Q-ySq" eventType="touchUpInside" id="JMv-DH-FbX"/>
                                     </connections>
                                 </button>
                             </subviews>
@@ -745,7 +729,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="781-oQ-NqG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-456" y="2296"/>
+            <point key="canvasLocation" x="-461" y="3036"/>
         </scene>
         <!--Edit Friends View Controller - Edit Friends-->
         <scene sceneID="TpH-aP-Nii">
@@ -755,9 +739,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <searchBar key="tableHeaderView" contentMode="redraw" id="82S-bo-wSi">
+                            <rect key="frame" x="0.0" y="64" width="320" height="44"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <textInputTraits key="textInputTraits"/>
+                            <connections>
+                                <outlet property="delegate" destination="ai8-vm-Le4" id="9Dv-CP-EfN"/>
+                            </connections>
+                        </searchBar>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" id="ihD-VI-68t">
-                                <rect key="frame" x="0.0" y="86" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="130" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ihD-VI-68t" id="MO4-Ud-d0n">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
@@ -771,8 +763,20 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Edit Friends" id="kBE-06-XsP"/>
+                    <connections>
+                        <outlet property="searchDisplayController" destination="WVr-mu-S65" id="vKo-Bv-PzF"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bmb-UV-PYd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <searchDisplayController id="WVr-mu-S65">
+                    <connections>
+                        <outlet property="delegate" destination="ai8-vm-Le4" id="o0l-1M-0Em"/>
+                        <outlet property="searchBar" destination="82S-bo-wSi" id="hvY-Se-Ge0"/>
+                        <outlet property="searchContentsController" destination="ai8-vm-Le4" id="vhf-cE-7pT"/>
+                        <outlet property="searchResultsDataSource" destination="ai8-vm-Le4" id="JfL-dM-FGE"/>
+                        <outlet property="searchResultsDelegate" destination="ai8-vm-Le4" id="rck-KD-qH2"/>
+                    </connections>
+                </searchDisplayController>
             </objects>
             <point key="canvasLocation" x="996" y="1628"/>
         </scene>
@@ -873,6 +877,76 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="v2l-fb-DkF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="760" y="2401"/>
+        </scene>
+        <!--Bounties View Controller - bounties-->
+        <scene sceneID="UKk-Uv-t1P">
+            <objects>
+                <tableViewController id="VsJ-vs-yCg" customClass="BountiesViewController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="jIh-So-AUI">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <view key="tableHeaderView" contentMode="scaleToFill" id="yvf-8P-kqz">
+                            <rect key="frame" x="0.0" y="64" width="320" height="40"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nQg-xE-3Ph">
+                                    <rect key="frame" x="82" y="5" width="157" height="30"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <state key="normal" title="Set Bounty">
+                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="setBounty:" destination="VsJ-vs-yCg" eventType="touchUpInside" id="XVo-Mj-MI7"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        </view>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" id="A5s-Qv-hfI">
+                                <rect key="frame" x="0.0" y="126" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="A5s-Qv-hfI" id="FAP-tD-88N">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="VsJ-vs-yCg" id="D7t-Bq-A6c"/>
+                            <outlet property="delegate" destination="VsJ-vs-yCg" id="e2H-es-Afe"/>
+                        </connections>
+                    </tableView>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title="bounties" id="cVv-ql-Xmq">
+                        <barButtonItem key="leftBarButtonItem" image="out.png" id="5BX-YL-1mz">
+                            <connections>
+                                <action selector="back:" destination="VsJ-vs-yCg" id="e6U-Mf-jdb"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="baO-Jd-ekX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="166" y="2308"/>
+        </scene>
+        <!--Navigation Controller - Bounties-->
+        <scene sceneID="IjN-4e-45v">
+            <objects>
+                <navigationController definesPresentationContext="YES" id="bGK-3m-rVJ" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Bounties" image="address-book-smaller.png" id="B8Y-kl-kSk"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="4Gn-D3-cS4">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="VsJ-vs-yCg" kind="relationship" relationship="rootViewController" id="l2z-iN-f8v"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="epU-3y-nq9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-478" y="2290"/>
         </scene>
     </scenes>
     <resources>

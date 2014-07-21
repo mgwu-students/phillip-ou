@@ -1,16 +1,15 @@
 //
-//  FriendsViewController.h
+//  BountiesViewController.h
 //  Rascal
 //
-//  Created by Phillip Ou on 7/8/14.
+//  Created by Phillip Ou on 7/20/14.
 //  Copyright (c) 2014 Philip Ou. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 #import <Parse/Parse.h>
 
-@interface FriendsViewController : UITableViewController
-
+@interface BountiesViewController : UITableViewController
 @property (nonatomic, strong) PFRelation *friendsRelation;
 @property (nonatomic, strong) NSArray *friends;
 @property (nonatomic, strong) NSMutableArray *targettedFriends;
@@ -27,6 +26,5 @@
 
 
 
-
-
 @end
+

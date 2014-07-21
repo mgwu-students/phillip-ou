@@ -20,7 +20,9 @@
 
 - (void)viewDidLoad
 {
-        
+    self.searchResults = [NSMutableArray arrayWithCapacity:[self.allUsers count]];
+     self.allUsernames = [[NSMutableArray alloc]init];
+    self.userDict = [[NSMutableDictionary alloc]init];
     
     
     PFQuery *query = [PFUser query];//get query of all users in this app
@@ -32,8 +34,15 @@
         }
         else{
             self.allUsers = objects;
+            for (PFObject *obj in self.allUsers) {
+                // access the username key of the PFObject and add it to the array we created.
+                [self.allUsernames addObject:[obj objectForKey:@"username"]];
+                [self.userDict setObject:obj forKey:[obj objectForKey:@"username"]];
+                
+                }
             [self.tableView reloadData];
         }
+        NSLog(@"%@", self.userDict);
     }];
     self.currentUser = [PFUser currentUser];
     
@@ -53,16 +62,27 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-
+    if (tableView == self.searchDisplayController.searchResultsTableView) {
+       
+        return [self.searchResults count];}
     // Return the number of rows in the section.
     return [self.allUsers count]; //number of rows = number of users
 }
 
 -(UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    
     
     PFUser *user = [self.allUsers objectAtIndex:indexPath.row];
+    
+    if (tableView == self.searchDisplayController.searchResultsTableView) {
+          NSLog(@"is this being called?");
+       NSString *username= [self.searchResults objectAtIndex:indexPath.row];
+        cell.textLabel.text = username;
+        //cell = [self.userDict objectForKey:username];
+        }
+    else{
     cell.textLabel.text = user.username;
     
     //if user is a friend then have a check mark
@@ -71,6 +91,7 @@
     }
     else{
         cell.accessoryType= UITableViewCellAccessoryNone;
+    }
     }
     return cell;
 }
@@ -89,18 +110,60 @@
 -(void) tableView: (UITableView *) tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 
 {
+    if (tableView == self.searchDisplayController.searchResultsTableView) {
+        
+        
+        UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+        NSString *username = cell.textLabel.text;
+        
+        //cell.accessoryType = UITableViewCellAccessoryCheckmark; //put check mark
+        //PFUser *user = [self.allUsers objectAtIndex: indexPath.row];
+        PFUser *user = [self.userDict objectForKey:username];
+        PFRelation *friendsRelation = [self.currentUser relationForKey: @"friendsRelation"];//adding friends
+        NSLog(@"%@",user.username);
+        
+        if([self.friends containsObject:user.username]){
+            
+            //1. remove check mark
+            cell.accessoryType = UITableViewCellAccessoryCheckmark;
+            //2. remove from the array of friends
+            for (PFUser *friend in self.friends){
+                if([friend.objectId isEqualToString:user.objectId]){
+                    [self.friends removeObject:friend];
+                    
+                }
+                //3. remove from the backend
+                [friendsRelation removeObject:user];
+                
+            }
+            
+        }
+        ///else add them
+        
+        
+        else{
+            cell.accessoryType = UITableViewCellAccessoryCheckmark; //add checkmark
+            [self.friends addObject:user];
+            
+            [friendsRelation addObject: user ];
+            
+        }
+    }
+else{
     [self.tableView deselectRowAtIndexPath:indexPath animated:NO];
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     //cell.accessoryType = UITableViewCellAccessoryCheckmark; //put check mark
     PFUser *user = [self.allUsers objectAtIndex: indexPath.row];
     PFRelation *friendsRelation = [self.currentUser relationForKey: @"friendsRelation"];//adding friends
     
+    
+   
     //if user tapped is a friend remove them
     if([self isFriend:user]){
         //1. remove check mark
         cell.accessoryType = UITableViewCellAccessoryNone;
         //2. remove from the array of friends
-        for (PFUser *friend in self.friends){
+        for (PFUser *friend in[self.friends copy] ){
             if([friend.objectId isEqualToString:user.objectId]){
                 [self.friends removeObject:friend];
                 
@@ -121,7 +184,18 @@
         [friendsRelation addObject: user ];
         
     }
-    
+        }
+    /*[self.currentUser saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        {
+            if(error){
+                NSLog(@"Error %@ %@, error", [error userInfo]);
+            }
+        }
+    }];
+   
+        
+        
+    }*/
     [self.currentUser saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         {
             if(error){
@@ -129,9 +203,28 @@
             }
         }
     }];
+    [self.tableView reloadData];
+
+    
+    
+    
     
 }
 
+- (void)filterContentForSearchText:(NSString*)searchText scope:(NSString*)scope
+{[self.searchResults removeAllObjects];
+    NSPredicate *resultPredicate = [NSPredicate predicateWithFormat:@"SELF contains[c] %@", searchText];
+    self.searchResults = [NSMutableArray arrayWithArray: [self.allUsernames filteredArrayUsingPredicate:resultPredicate]];
+    
+    NSLog(@"%@",self.searchResults);
+}
+
+-(BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString
+{
+    [self filterContentForSearchText:searchString scope:[[self.searchDisplayController.searchBar scopeButtonTitles] objectAtIndex:[self.searchDisplayController.searchBar selectedScopeButtonIndex]]];
+    
+    return YES;
+}
 
 /*
 // Override to support conditional editing of the table view.

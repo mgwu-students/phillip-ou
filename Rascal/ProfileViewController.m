@@ -52,6 +52,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+   
     
     PFUser *currentUser = [PFUser currentUser];
     PFFile *profilePicture = [currentUser objectForKey:@"profilePicture"];
@@ -79,6 +80,7 @@
     PFQuery *query = [PFQuery queryWithClassName:@"Messages"];
     [query whereKey:@"senderName" equalTo:[[PFUser currentUser]username]];
     [query whereKey:@"fileType" equalTo:@"image"];
+    
     [query findObjectsInBackgroundWithBlock:^(NSArray *songs, NSError *error) {
         if (error){
             NSLog (@"can't retrieve....");
@@ -123,7 +125,7 @@
     UITableViewCell *sectionHeaderView = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     UILabel *senderLabel = (UILabel *)[sectionHeaderView viewWithTag:2];
     
-    PFUser *currentUser = [PFUser currentUser];
+   // PFUser *currentUser = [PFUser currentUser];
     PFObject *photo = [self.objects objectAtIndex:section];
     NSString *userName = [photo objectForKey:@"senderName"];
     
@@ -136,6 +138,8 @@
    
     NSInteger *numberOfLikes = [photo[@"listOfLikers"] count];
     numberOfLikesLabel.text = [NSString stringWithFormat: @"%d",numberOfLikes];
+    
+  
     
     //get user profile picture and displayUILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 30, 250, 15)];
     

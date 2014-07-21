@@ -228,6 +228,7 @@
         b.chosenImageView = self.chosenImageView;
         b.targetId = self.targetId;
         b.senderId = self.senderId;
+        b.selectedMessage = self.message;
         
         
         

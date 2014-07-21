@@ -96,14 +96,8 @@
     
     [super viewDidLoad];
     
-    
-   
-    
-
     [[UINavigationBar appearance] setTitleTextAttributes: [NSDictionary dictionaryWithObjectsAndKeys:
                                                            [UIFont fontWithName:@"Raleway-Thin" size:25.0], NSFontAttributeName, nil]];
-    
-    
     self.sectionFileType = [[NSMutableDictionary alloc] init];
     self.sections = [[NSMutableDictionary alloc]init];
     self.tableView.allowsMultipleSelectionDuringEditing = NO;
@@ -128,7 +122,10 @@
     self.tabBarController.tabBar.hidden = YES; //!!!this hides the tab bar!!!
     PFUser *currentUser = [PFUser currentUser];
     self.pointsLabel.text = [NSString stringWithFormat:@"Income: %@", currentUser[@"Points"]];
-    if([currentUser[@"Points"] doubleValue] <1){
+    
+    //ensures new users have points to start off with
+    if(![currentUser objectForKey:@"Points"]){
+       
         [currentUser setObject: [NSNumber numberWithInt:20] forKey:@"Points"];
         [currentUser save];
     }
@@ -182,34 +179,7 @@
   
     }
     return query;
-}/*
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    //create temporary query that we'll search
-    PFQuery *query = [PFQuery queryWithClassName:@"Messages"];
-    
-    PFUser *currentUser = [PFUser currentUser];
-    if(currentUser !=nil){
-        [query whereKey:@"recipientIds" containsAllObjectsInArray:@[currentUser.objectId]]; //only show things you've sent to others
-        //don't show things you've sent that wasn't to you^
-    }
-        [query orderByDescending:@"createdAt"];
-    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-        if (error) {
-            NSLog(@"Error: %@ %@", error, [error userInfo]);
-        }
-        else{
-            self.messages=objects;
-            NSLog(@"Retrieved %d",[self.messages count]);
-            [self.tableView reloadData];
-           
-            
-        }
-        
-    }];
-    NSLog(@"%@",self.objects);
-  
-}*/
+}
 
 -(NSString *) fileTypeForSection: (NSInteger) section{
     
@@ -372,7 +342,7 @@
         
         
      
-       
+       //delete form sections
         NSLog (@"%@",self.selectedMessage);
         NSMutableArray *deleteArray = [NSMutableArray arrayWithArray:self.selectedMessage[@"recipientIds"]] ;
         
@@ -385,12 +355,8 @@
         [self.sections setObject:updateArray forKey:fileType];
         
         
-        
-        
-        
-        
         NSLog (@"%@",self.selectedMessage);
-   
+   //delete from array
         
         [deleteArray removeObject:[[PFUser currentUser] objectId] ];
         NSLog(@"RecipientIds:%@",deleteArray);
@@ -434,7 +400,12 @@
                                                            delegate:self cancelButtonTitle:@"Yes" otherButtonTitles:nil];
         [alertView show];
         
+               
+        
+        
         [self performSegueWithIdentifier:@"transferBountyData" sender:self];
+        
+        
         
         //[self.tabBarController setSelectedIndex:2];
     }
@@ -487,7 +458,7 @@
     }
 
 - (IBAction)setBounties:(id)sender {
-    [self.tabBarController setSelectedIndex:4];
+    [self.tabBarController setSelectedIndex:5];
 }
 
 - (IBAction)profileButton:(id)sender {
@@ -499,6 +470,9 @@
 }
 
 
+- (IBAction)editFriends:(id)sender {
+    [self.tabBarController setSelectedIndex:4];
+}
 
 
 
