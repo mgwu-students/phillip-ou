@@ -20,6 +20,7 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *numberOfLikesLabel;
 
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *toolBarLabel;
 
 - (IBAction)Like:(id)sender;
 

@@ -26,8 +26,7 @@
         
         
         // Whether the built-in pull-to-refresh is enabled
-       // self.pullToRefreshEnabled = YES;
-        
+       self.pullToRefreshEnabled = YES;
         // Whether the built-in pagination is enabled
         self.paginationEnabled = YES;
         
@@ -46,10 +45,10 @@
     }
     else{
        
-    NSLog(@"%@",self.objects);
-    
-    [self.sections removeAllObjects];
-    [self.sectionFileType removeAllObjects];
+    NSLog(@"call1");
+        
+       [self.sections removeAllObjects];
+       [self.sectionFileType removeAllObjects];
     
     
     NSInteger section = 0;
@@ -82,19 +81,19 @@
         //NSLog(@"filetypeeee:%@",objectsInSection);
         [self.sections setObject: objectsInSection forKey:fileType];
         
-        NSLog(@"%@",self.sections);
+        //NSLog(@"%@",self.sections);
         //{fileType:[0,1,2], fileType:[0,1]} <--row
         
     }
     
     //NSLog(@"%@",self.sections);
 }
+   
 }
 #pragma mark - header font
 - (void)viewDidLoad
 {
-    
-    [super viewDidLoad];
+    [self loadObjects];
     
     [[UINavigationBar appearance] setTitleTextAttributes: [NSDictionary dictionaryWithObjectsAndKeys:
                                                            [UIFont fontWithName:@"Raleway-Thin" size:25.0], NSFontAttributeName, nil]];
@@ -107,30 +106,36 @@
     
     
     
-   
+    
     
     
     if (currentUser) {
         NSLog(@"Current user: %@", currentUser.username);
     }
     else {
-       // [self performSegueWithIdentifier:@"showLogin" sender:self];
+        // [self performSegueWithIdentifier:@"showLogin" sender:self];
     }
-}
--(void) viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
+    
     self.tabBarController.tabBar.hidden = YES; //!!!this hides the tab bar!!!
-    PFUser *currentUser = [PFUser currentUser];
-    self.pointsLabel.text = [NSString stringWithFormat:@"Income: %@", currentUser[@"Points"]];
+    //PFUser *currentUser = [PFUser currentUser];
+   
     
     //ensures new users have points to start off with
     if(![currentUser objectForKey:@"Points"]){
-       
+        
         [currentUser setObject: [NSNumber numberWithInt:20] forKey:@"Points"];
         [currentUser save];
     }
-    //PFUser *currentUser = [PFUser currentUser];
+
+    
+    [super viewDidLoad];
+    }
+-(void) viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    //[self.tableView reloadData];
+    PFUser *currentUser = [PFUser currentUser];
     PFFile *profilePicture = [currentUser objectForKey:@"profilePicture"];
+     self.pointsLabel.text = [NSString stringWithFormat:@"Income: %@", currentUser[@"Points"]];
     
     self.profileImageView.layer.masksToBounds = YES;
     self.profileImageView.layer.cornerRadius = 20;
@@ -142,6 +147,8 @@
 }
 
 - (PFObject *)objectAtIndexPath:(NSIndexPath *)indexPath {
+   
+    
     NSString *fileType = [self fileTypeForSection:indexPath.section];
     //NSLog(@"files:%@",fileType);
     
@@ -203,9 +210,10 @@
     NSString *fileType = [self fileTypeForSection:section];
     //NSLog(@"section:%d",section);
     NSArray *rowIndecesInSection = [self.sections objectForKey:fileType];
+   
     // Return the number of rows in the section.
     //NSLog(@"using %@:",rowIndecesInSection);
-    return rowIndecesInSection.count;
+    return rowIndecesInSection.count; //this is some times too much
     
 }
 
@@ -270,6 +278,10 @@
     }
     
     rowNumber += indexPath.row;
+    if(self.objects==nil){
+        NSLog(@"waiting");
+    }
+ 
     PFObject *message = [self.objects objectAtIndex:rowNumber];
     
         //NSLog(@"%@",message);
@@ -282,7 +294,7 @@
     
      NSString *fileType = [message objectForKey:@"fileType"];
      NSArray *listOfRecipients = [message objectForKey:@"recipientIds"];
-     NSString* read = [message objectForKey:@"read"];     //determine if cell is read
+    // NSString* read = [message objectForKey:@"read"];     //determine if cell is read
     
      //if message is an image
      if ([fileType isEqualToString:@"image"]) {
@@ -292,15 +304,18 @@
          cell.imageView.image = [UIImage imageNamed:@"image"];
          
          //for read messages
-         if([read isEqualToString:@"Yes"]){
-             //cell.accessoryView= photoUnread;
+        
+         if([[message objectForKey:@"readUsers"] containsObject:currentUser.objectId]){
              cell.imageView.image = [UIImage imageNamed:@"marquee-smaller"];
          }
-         
          //show this is a return of his investment
          
          if([message[@"payForId"] isEqualToString:currentUser.objectId]){
+             if([message[@"fileType"] isEqualToString:@"image"]){
+                 if(![message[@"readUsers"] containsObject:currentUser.objectId]){
              cell.accessoryView = moneyLogo;
+                 }
+             }
          }
      
      
@@ -312,18 +327,21 @@
      
    
      }
-     if([fileType isEqualToString:@"bountyNotice"]&&[listOfRecipients containsObject:currentUser.objectId]){
-     cell.textLabel.text = [NSString stringWithFormat:@"Bounty on %@", [message objectForKey:@"recipientUsername"]];
-     //cell.textLabel.text= [NSString stringWithFormat:@"%@ ----> %@",[message objectForKey:@"senderName"],[message objectForKey: @"recipientUsername"]];
-     cell.imageView.image = [UIImage imageNamed:@"spam-2"];
+    if([fileType isEqualToString:@"bountyNotice"]){
+        if([listOfRecipients containsObject:currentUser.objectId]){
+    
+            cell.textLabel.text = [NSString stringWithFormat:@"Bounty on %@", [message objectForKey:@"recipientUsername"]];
+            
+            cell.imageView.image = [UIImage imageNamed:@"spam-2"];
          //if bounty is unread
-         if(![read isEqualToString:@"Yes"]){
-             cell.accessoryView = bountyLogo;
-             
-         }
          
+            if(![message[@"readUsers"] containsObject:currentUser.objectId ]){
+                cell.accessoryView=bountyLogo;
+         }
+        }
         
-     }
+        
+    }
     
     
     
@@ -376,7 +394,6 @@
         [self.selectedMessage setObject:arrayUpdate forKey:@"recipientIds"];
         [self.selectedMessage save]; //ensures array gets updated before there is index error after delete
     [self.tableView reloadData];
-    [self viewDidLoad];
         
         
     }
@@ -397,44 +414,63 @@
     rowNumber += indexPath.row;
     self.selectedMessage = [self.objects objectAtIndex:rowNumber];
     //self.selectedMessage = [self.messages objectAtIndex:indexPath.row];
-    NSString *fileType = [self.selectedMessage objectForKey:@"fileType"];
-    NSLog(@"%@ is filetype",fileType);
     
+    NSString *fileType = [self.selectedMessage objectForKey:@"fileType"];
+    //NSLog(@"%@ is filetype",fileType);
+    NSLog(@"ROW NUMBER:%d",rowNumber);
     if([fileType isEqualToString:@"image"]) {
         
-        //if this photo is a reply a bounty set by this user give him his points (give back his investment)
-        if([self.selectedMessage[@"payForId"] isEqualToString:currentUser.objectId]&&![self.selectedMessage[@"read"] isEqualToString:@"Yes"]){
+        
+        //if this photo is a reply to a bounty set by this user give him his points (give back his investment)
+        
+        
+    if([self.selectedMessage[@"payForId"] isEqualToString:currentUser.objectId])
+        {if(![self.selectedMessage[@"readUsers"] containsObject:currentUser.objectId]){
             int earned = [self.selectedMessage[@"payAmount"] intValue];
             int currentPoints = [currentUser[@"Points"] intValue];
             NSNumber *points = [NSNumber numberWithInt: earned+currentPoints];
             [currentUser setObject:points forKey:@"Points"];
             NSLog(@"Points earned");
-         [currentUser saveInBackground];}
-        [self performSegueWithIdentifier:@"showImage" sender:self];
+            [currentUser saveInBackground];
+            [self.selectedMessage saveInBackground];
+            
+        }
+        
+        
+        
+       
         
         
             
         
-        NSLog(@"load image");}
+       
+            [self.tableView reloadData];}
+         [self performSegueWithIdentifier:@"showImage" sender:self];
+    }
+  
+     
     if([fileType isEqualToString:@"bountyNotice"]){
-        NSLog(@"show camera");
-        NSString *bountyMessage = [NSString stringWithFormat:@"Bounty set by %@", self.selectedMessage[@"senderName"]];
+            NSLog(@"show camera");
+        if(![self.selectedMessage[@"readUsers"] containsObject:currentUser.objectId]){
+            NSString *bountyMessage = [NSString stringWithFormat:@"Bounty set by %@", self.selectedMessage[@"senderName"]];
+                           UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:bountyMessage
+                                                                    message:@"You Will Be Rewarded For This Photo"
+                                                                   delegate:self cancelButtonTitle:@"Yes" otherButtonTitles:nil];
+                [alertView show];
         
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:bountyMessage
-                                                            message:@"You Will Be Rewarded For This Photo"
-                                                           delegate:self cancelButtonTitle:@"Yes" otherButtonTitles:nil];
-        [alertView show];
-        
-               
+        }
+    
         
         
         [self performSegueWithIdentifier:@"transferBountyData" sender:self];
         
+        }
         
         
         //[self.tabBarController setSelectedIndex:2];
     }
-       else{NSLog(@"error come on dude");}
+
+    
  
     // Delete it!
     /*NSMutableArray *recipientIds = [NSMutableArray arrayWithArray:[self.selectedMessage objectForKey:@"recipientIds"]];
@@ -450,8 +486,64 @@
         [self.selectedMessage setObject:recipientIds forKey:@"recipientIds"];
         [self.selectedMessage saveInBackground];
     }*/
+
+//Customize header view section
+
+
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 18)];
+    /// Create custom view to display section header...
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, tableView.frame.size.width, 18)];
     
+   
+    [label setFont:[UIFont boldSystemFontOfSize:12]];
+    //NSString *string =[self.messages objectAtIndex:section];
+    if (section==0){
+        NSString *string = @"active bounties";
+        [label setText:string];
+        [label setTextColor: [UIColor whiteColor] ];
+        [label setFont:[UIFont fontWithName:@"Raleway-Medium" size:15]];
+        [view addSubview:label];
+        [view setBackgroundColor:[UIColor colorWithRed:190.0/255.0 green:190.0/255.0 blue:190.0/255.0 alpha:1.0]]; //your background color...
+        return view;}
+
+    else{
+        NSString  *string = @"photos";
+        [label setText:string];
+        [label setTextColor: [UIColor whiteColor] ];
+        [label setFont:[UIFont fontWithName:@"Raleway-Medium" size:15]];
+        [view addSubview:label];
+        [view setBackgroundColor:[UIColor colorWithRed:190.0/255.0 green:190.0/255.0 blue:190.0/255.0 alpha:1.0]]; //your background color...
+        
+        //button
+        UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+        [button setFrame:CGRectMake(0, 30.0, 325.0, 30.0)]; //(x,y,width,height)
+        button.tag = section;
+        [button setTitle: @"Your Photos" forState:UIControlStateNormal];
+        button.hidden = NO;
+        [button setBackgroundColor:[UIColor colorWithRed:9.0/255.0 green:92.0/255.0 blue:255.0/255.0 alpha:1.0]];
+        [button addTarget:self action:@selector(profileButton:) forControlEvents:UIControlEventTouchDown];
+        [view addSubview:button];
+        
+        
+        
+        return view;
+
+        }
+    // Section header is in 0th index...
+   }
+
+//heights of section headers
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    if(section == 0){
+        return 30.f;}
+    return 60.f;
 }
+
+
+
 - (IBAction)logout:(id)sender {
    
     [PFFacebookUtils unlinkUser:[PFUser currentUser]];
@@ -464,22 +556,21 @@
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-   /* if ([segue.identifier isEqualToString:@"showLogin"]) {
-        [segue.destinationViewController setHidesBottomBarWhenPushed:YES];
-    }*/
-    /*else*/ if ([segue.identifier isEqualToString:@"showImage"]) {
-        [segue.destinationViewController setHidesBottomBarWhenPushed:YES];
-        ImageViewController *imageViewController = (ImageViewController *)segue.destinationViewController;
-        imageViewController.message = self.selectedMessage;}
-        //passing variables to cameraViewController (sender & recipient of bounties)
-        
-        else{
+    
+    if([segue.identifier isEqualToString:@"transferBountyData"]){
             NSLog(@"Passing to Camera");
             [segue.destinationViewController setHidesBottomBarWhenPushed:NO];
             CameraViewController *cameraViewController = (CameraViewController *)segue.destinationViewController;
             cameraViewController.message = self.selectedMessage;
+           
             
         }
+    else {
+        [segue.destinationViewController setHidesBottomBarWhenPushed:NO];
+        ImageViewController *imageViewController = (ImageViewController *)segue.destinationViewController;
+        imageViewController.message = self.selectedMessage;}
+    //passing variables to cameraViewController (sender & recipient of bounties)
+
     }
 
 - (IBAction)setBounties:(id)sender {

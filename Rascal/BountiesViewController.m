@@ -19,27 +19,16 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.bountyCost = 10;
-    self.bountyValue = 10;
+    PFUser *currentUser = [PFUser currentUser];
+   // self.bountyCost = 10;
+    //self.bountyValue = 10;
+    
+    self.slider.minimumValue = 5;
+    self.slider.maximumValue = [currentUser[@"Points"] intValue];
     self.recipientsOfBounties = [[NSMutableArray alloc] init];
     self.allFriends = [[NSMutableArray alloc] init];
     self.friends = [[NSArray alloc]init];
-    FBSession.activeSession = [[FBSession alloc] initWithPermissions:[NSArray arrayWithObjects:@"user_friends", nil]];
-    
-    FBRequest* friendsRequest = [FBRequest requestForMyFriends];
-    [friendsRequest startWithCompletionHandler: ^(FBRequestConnection *connection,
-                                                  NSDictionary* result,
-                                                  NSError *error) {
-        NSArray* friends = [result objectForKey:@"data"];
-        NSLog(@"Found: %i friends", friends.count);
-        for (NSDictionary<FBGraphUser>* friend in friends) {
-            NSLog(@"I have a friend named %@ with id %@", friend.name, friend.id);
-        }
-    }];
-    
-    
 }
-
 
 
 
@@ -166,7 +155,7 @@
 }
 #pragma mark - TO DO
 - (void)uploadMessage {
-    if([self.points doubleValue] < [@10.0f doubleValue]){
+    if([self.points doubleValue] < [@1.0f doubleValue]){
         //if users don't have enough points, don't let them set bounties
         
         
@@ -257,7 +246,7 @@
     PFUser *currentUser = [PFUser currentUser];
     [self uploadMessage];
     int points = [self.points intValue];
-    if ([self.points doubleValue] >[@10.0f doubleValue]){
+    if ([self.points intValue] >=self.bountyCost){
         self.points = [NSNumber numberWithInt:points-self.bountyCost];
         [currentUser setObject: self.points forKey:@"Points" ];
         [currentUser saveInBackground];}
@@ -268,6 +257,23 @@
 - (IBAction)back:(id)sender {
     [self.tabBarController setSelectedIndex:0];
 }
+
+
+
+- (IBAction)sliderButton:(id)sender {
+    
+    NSInteger val = lround(self.slider.value);
+    self.costLabel.text = [NSString stringWithFormat:@"Cost: %ld",val];
+    self.bountyCost = val;
+    
+    self.returnAmountLabel.text = [NSString stringWithFormat:@"Return/user: %ld", val/5];
+    
+    self.bountyValue = val/5;
+    
+    
+}
+
+
 
 
 @end

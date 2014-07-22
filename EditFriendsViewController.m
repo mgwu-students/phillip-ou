@@ -9,8 +9,14 @@
 #import "EditFriendsViewController.h"
 #import <Parse/Parse.h>
 #import<AddressBook/AddressBook.h>
+#import <MessageUI/MessageUI.h>
 
 @interface EditFriendsViewController ()
+{
+    
+    __block NSArray *FBfriends;
+    __block NSMutableArray *mArray;
+}
 
 @end
 
@@ -65,6 +71,8 @@
     if (tableView == self.searchDisplayController.searchResultsTableView) {
        
         return [self.searchResults count];}
+    
+    
     // Return the number of rows in the section.
     return [self.allUsers count]; //number of rows = number of users
 }
@@ -77,7 +85,7 @@
     PFUser *user = [self.allUsers objectAtIndex:indexPath.row];
     
     if (tableView == self.searchDisplayController.searchResultsTableView) {
-          NSLog(@"is this being called?");
+        
        NSString *username= [self.searchResults objectAtIndex:indexPath.row];
         cell.textLabel.text = username;
         //cell = [self.userDict objectForKey:username];
@@ -224,6 +232,27 @@ else{
     [self filterContentForSearchText:searchString scope:[[self.searchDisplayController.searchBar scopeButtonTitles] objectAtIndex:[self.searchDisplayController.searchBar selectedScopeButtonIndex]]];
     
     return YES;
+}
+
+- (IBAction)sendSMS:(id)sender {
+    MFMessageComposeViewController *textComposer = [[MFMessageComposeViewController alloc] init];
+    textComposer.messageComposeDelegate = self;
+    //[textComposer setMessageComposeDelegate:self];
+    //if there is a thing to send texts
+    if([MFMessageComposeViewController  canSendText]){
+        [textComposer setRecipients:[NSArray arrayWithObjects:nil]];
+        [textComposer setBody:@"App Link Here"];
+        //send to iMessage
+        [self presentViewController:textComposer animated:YES completion:nil];
+        
+    }
+    else{
+        NSLog(@"unable to load iMessage");
+    }
+}
+//dismiss sms view controller when we're done with it.
+- (void)messageComposeViewController:(MFMessageComposeViewController *)controller didFinishWithResult:(MessageComposeResult)result{
+    [controller dismissModalViewControllerAnimated:YES];
 }
 
 /*

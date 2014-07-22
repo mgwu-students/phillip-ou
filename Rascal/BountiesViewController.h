@@ -23,8 +23,11 @@
 @property (nonatomic,assign) int bountyValue;
 
 
+@property (strong, nonatomic) IBOutlet UISlider *slider;
 
+@property (strong, nonatomic) IBOutlet UILabel *costLabel;
 
+@property (strong, nonatomic) IBOutlet UILabel *returnAmountLabel;
 
 
 @end

@@ -101,20 +101,9 @@
     
     return cell;
 }
--(void) addTaggedUser:(id)sender{
-    
-    
-}
 
-- (IBAction)tagButton:(id)sender {
-    
-    NSLog(@"Tag");
-    
-    UIButton *button = (UIButton *)sender;
-    UITableViewCell *cell = (UITableViewCell*)[button superview];
-    NSLog(@"%@",cell.textLabel);
-    
-}
+
+
 
 #pragma mark - Table view delegate
 
@@ -153,10 +142,7 @@
     NSLog(@"%@", self.recipients); //log list of recipients
 }
 
-- (void) addOpenInService: (UILongPressGestureRecognizer *) objRecognizer
-{
-    NSLog(@"Long Tap");
-}
+
 
 #pragma mark - Image Picker Controller delegate
 
@@ -192,12 +178,7 @@
     PFUser *currentUser = [PFUser currentUser];
     
     //the more users sent to the more points you get.
-    NSNumber *userPoints = currentUser[@"Points"];
-    int points = [userPoints integerValue];
-    int length = [self.recipients count];
-    userPoints = [NSNumber numberWithInteger:points+length];
-    [currentUser setObject: userPoints forKey: @"Points"];
-    [currentUser saveInBackground];
+    
     
     PFObject *message = [PFObject objectWithClassName:@"Messages"];
     NSArray *recipients = [NSArray arrayWithArray:self.recipients];
@@ -214,12 +195,20 @@
     message[@"recipientIds"]=recipients;
     message[@"senderId"]=currentUser.objectId;
     message[@"senderName"] =currentUser.username;
+//if this is his first time using this bounty
     [message setObject:payForId forKey:@"payForId"]; //have bounty sender have his investment returned
     [message setObject:payAmount forKey:@"payAmount"];
+    NSNumber *userPoints = currentUser[@"Points"];
+    int points = [userPoints integerValue];
+    int length = [self.recipients count];
+    userPoints = [NSNumber numberWithInteger:points+length];
+    [currentUser setObject: userPoints forKey: @"Points"];
+    [currentUser saveInBackground];
+
         
         //delete current user from recipientId's array
         //so that once you upload the picture bounty is gone.
-        
+       /*
         NSMutableArray *deleteArray = [NSMutableArray arrayWithArray:self.selectedMessage[@"recipientIds"]] ;
 
         [deleteArray removeObject:[[PFUser currentUser] objectId] ];
@@ -227,25 +216,23 @@
         NSLog(@"RecipientIds:%@",deleteArray);
         NSArray *arrayUpdate = [NSArray arrayWithArray:deleteArray];
         [self.selectedMessage setObject:arrayUpdate forKey:@"recipientIds"];
-        [self.selectedMessage saveInBackground];
+        [self.selectedMessage saveInBackground];*/
 
     
         /*[message setObject:self.recipients forKey:@"recipientIds"];
         [message setObject:currentUser.objectId forKey:@"senderId"];
         [message setObject:currentUser.username forKey:@"senderName"];*/
-    [message saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+       [message saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
             if(!error){
                 [self reset];
                 
                 //NSLog(@"god this work");
             }
-        
-            
+    
             
         }];
 
-
-    }
+          }
     
         else{
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"You Didn't Select Anyone!"

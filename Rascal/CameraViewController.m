@@ -35,6 +35,7 @@
 
 - (void)viewDidLoad
 {
+    PFUser *currentUser = [PFUser currentUser];
     self.view.frame = [[UIScreen mainScreen] bounds];
     [super viewDidLoad];
      self.capturedImages = [[NSMutableArray alloc] init];
@@ -42,7 +43,12 @@
     self.senderId = [self.message objectForKey:@"senderId"];
     self.targetId = [self.message objectForKey:@"victimId"];
     [self.message setObject:@"Yes" forKey: @"read"];
+    if(![self.message[@"readUsers"] containsObject: currentUser.objectId]){
+        NSMutableArray *readUsersArray = [NSMutableArray arrayWithArray:self.message[@"readUsers"]];
+        [readUsersArray addObject:currentUser.objectId];
+        [self.message  setObject:[NSArray arrayWithArray:readUsersArray]forKey:@"readUsers"];
     
+        }
     [self.message saveEventually];
     
     NSLog(@"%@ , %@", self.senderId, self.targetId);
@@ -198,9 +204,15 @@
 - (IBAction)share:(id)sender {
     NSLog(@"Next");
     //self.testObject = @"boo";
-    [self performSegueWithIdentifier: @"transition" sender: self];
+   
     if (self.chosenImageView.image) {
+        [self performSegueWithIdentifier: @"transition" sender: self];
         NSLog(@"segueperformed");
+        
+    }
+    else{
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Error" message:@"Please Take a Photo" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [alert show];
         
     }
     NSLog(@"%@",[self.titleTextField text]);
@@ -216,7 +228,7 @@
     if ([[segue identifier] isEqualToString:@"transition"]) {
         PostCameraViewController *b = segue.destinationViewController;
         
-        NSData *imageData = UIImageJPEGRepresentation(self.chosenImageView.image, 0.65f); //reduce image size
+        NSData *imageData = UIImageJPEGRepresentation(self.chosenImageView.image, 0.05f); //reduce image file size
         
         PFFile *file = [PFFile fileWithName:@"image.png" data:imageData];
         // PFUser *currentUser = [PFUser currentUser];

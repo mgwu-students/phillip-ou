@@ -18,6 +18,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    PFUser *currentUser = [PFUser currentUser];
     PFFile *imageFile = [self.message objectForKey: @"file"];
     
     
@@ -27,8 +28,14 @@
     self.imageView.image = [UIImage imageWithData:imageData];
     
     
-    [self.message setObject:@"Yes" forKey:@"read"];
-    [self.message saveInBackground];
+   
+    if(![self.message[@"readUsers"] containsObject: currentUser.objectId]){
+        NSMutableArray *readUsersArray = [NSMutableArray arrayWithArray:self.message[@"readUsers"]];
+        [readUsersArray addObject:currentUser.objectId];
+        [self.message  setObject:[NSArray arrayWithArray:readUsersArray]forKey:@"readUsers"];
+       
+    }
+     [self.message saveInBackground];
     
 
 }
@@ -37,6 +44,7 @@
     
     
     //who sent it?
+   
     NSString *senderName = [self.message objectForKey:@"senderName"];
     NSString *caption = [self.message objectForKey:@"caption"];
     
@@ -47,6 +55,9 @@
     self.captionLabel.adjustsFontSizeToFitWidth = YES;
     
     int numberOfLikes = [self.message[@"listOfLikers"] count];
+    
+    [self.toolBarLabel setTitle: [NSString stringWithFormat: @"%d",numberOfLikes]];
+    
     
     self.numberOfLikesLabel.text =[NSString stringWithFormat:@"%d",numberOfLikes];
     if([self.message[@"listOfLikers"] containsObject: [[PFUser currentUser]username]]){
