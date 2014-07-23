@@ -173,6 +173,10 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     PFImageView *photo = (PFImageView *)[cell viewWithTag:1];
     photo.file = object[@"file"]; //save photo.file in key image
+    //handles landscape
+    int orientation = photo.image.imageOrientation;
+    if(orientation ==0 || orientation ==1){
+        photo.contentMode = UIViewContentModeScaleAspectFit;}
     [photo loadInBackground]; //load photo
     
 

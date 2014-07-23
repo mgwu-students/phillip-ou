@@ -30,14 +30,6 @@
     //have sender of bounty and victim of bounty be checked automatically
     
     [self.recipients addObjectsFromArray:@[self.senderId,self.targetId]];
-    
-
-    
-    
-    
-   
-    
-    
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -177,7 +169,7 @@
     if([self.recipients count]!=0) {
     PFUser *currentUser = [PFUser currentUser];
     
-    //the more users sent to the more points you get.
+    //the more users sent to, the more points you get.
     
     
     PFObject *message = [PFObject objectWithClassName:@"Messages"];
@@ -185,6 +177,17 @@
         //need to convert from mutableArray to array to send into parse
     NSString *payForId = self.selectedMessage[@"senderId"]; //sender of bounty
     NSNumber *payAmount = self.selectedMessage[@"bountyValue"];
+    
+        [message setObject:payForId forKey:@"payForId"]; //have bounty sender have his investment returned
+        [message setObject:payAmount forKey:@"payAmount"];
+       
+        
+    
+                for(PFUser *friends in self.friends){
+                    [self.allFriends addObject:friends.objectId];
+                    
+                }
+
         
         
     
@@ -195,20 +198,31 @@
     message[@"recipientIds"]=recipients;
     message[@"senderId"]=currentUser.objectId;
     message[@"senderName"] =currentUser.username;
+   // message[@"friendsofUser"] = self.allFriends;
 //if this is his first time using this bounty
-    [message setObject:payForId forKey:@"payForId"]; //have bounty sender have his investment returned
-    [message setObject:payAmount forKey:@"payAmount"];
+    
+    
     NSNumber *userPoints = currentUser[@"Points"];
     int points = [userPoints integerValue];
     int length = [self.recipients count];
     userPoints = [NSNumber numberWithInteger:points+length];
     [currentUser setObject: userPoints forKey: @"Points"];
     [currentUser saveInBackground];
+        [self.selectedMessage setObject:@"Yes" forKey: @"read"];
+        if(![self.selectedMessage[@"readUsers"] containsObject: currentUser.objectId]){
+            NSMutableArray *readUsersArray = [NSMutableArray arrayWithArray:self.selectedMessage[@"readUsers"]];
+            [readUsersArray addObject:currentUser.objectId];
+            [self.selectedMessage  setObject:[NSArray arrayWithArray:readUsersArray]forKey:@"readUsers"];
+            
+        }
+        [self.selectedMessage saveInBackground];
+
 
         
         //delete current user from recipientId's array
         //so that once you upload the picture bounty is gone.
-       /*
+        if(![self.selectedMessage[@"placeholder"] isEqualToString:@"placeholder"]){
+       
         NSMutableArray *deleteArray = [NSMutableArray arrayWithArray:self.selectedMessage[@"recipientIds"]] ;
 
         [deleteArray removeObject:[[PFUser currentUser] objectId] ];
@@ -216,7 +230,8 @@
         NSLog(@"RecipientIds:%@",deleteArray);
         NSArray *arrayUpdate = [NSArray arrayWithArray:deleteArray];
         [self.selectedMessage setObject:arrayUpdate forKey:@"recipientIds"];
-        [self.selectedMessage saveInBackground];*/
+            [self.selectedMessage saveInBackground];
+        }
 
     
         /*[message setObject:self.recipients forKey:@"recipientIds"];

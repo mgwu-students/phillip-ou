@@ -12,11 +12,7 @@
 #import <MessageUI/MessageUI.h>
 
 @interface EditFriendsViewController ()
-{
-    
-    __block NSArray *FBfriends;
-    __block NSMutableArray *mArray;
-}
+
 
 @end
 
@@ -91,6 +87,7 @@
         //cell = [self.userDict objectForKey:username];
         }
     else{
+        cell.hidden=YES;
     cell.textLabel.text = user.username;
     
     //if user is a friend then have a check mark
@@ -127,7 +124,11 @@
         //cell.accessoryType = UITableViewCellAccessoryCheckmark; //put check mark
         //PFUser *user = [self.allUsers objectAtIndex: indexPath.row];
         PFUser *user = [self.userDict objectForKey:username];
+        PFUser *currentUser = [PFUser currentUser];
         PFRelation *friendsRelation = [self.currentUser relationForKey: @"friendsRelation"];//adding friends
+        
+      
+        
         NSLog(@"%@",user.username);
         
         if([self.friends containsObject:user.username]){
@@ -150,16 +151,35 @@
         
         
         else{
+            
             cell.accessoryType = UITableViewCellAccessoryCheckmark; //add checkmark
             [self.friends addObject:user];
+            NSLog(@"running?");
+            PFObject *friendRequest = [PFObject objectWithClassName:@"FriendRequest"];
+            [friendRequest setObject:currentUser forKey:@"requestFrom"];
+            [friendRequest setObject: user forKey:@"requestTo"];
+            [friendRequest setObject:@"Pending" forKey:@"status"];
+            [friendRequest save];
+            
             
             [friendsRelation addObject: user ];
             
+            
+            
         }
+        [self.currentUser saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+            {
+                if(error){
+                    NSLog(@"Error %@ %@, error", [error userInfo]);
+                }
+            }
+        }];
+        [self.tableView reloadData];
     }
 else{
     [self.tableView deselectRowAtIndexPath:indexPath animated:NO];
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    
     //cell.accessoryType = UITableViewCellAccessoryCheckmark; //put check mark
     PFUser *user = [self.allUsers objectAtIndex: indexPath.row];
     PFRelation *friendsRelation = [self.currentUser relationForKey: @"friendsRelation"];//adding friends
@@ -186,10 +206,22 @@ else{
     
 
     else{
+        PFUser *currentUser = [PFUser currentUser];
         cell.accessoryType = UITableViewCellAccessoryCheckmark; //add checkmark
         [self.friends addObject:user];
+        NSLog(@"running?");
+        
+        /*PFObject *friendRequest = [PFObject objectWithClassName:@"FriendRequest"];
+        [friendRequest setObject:currentUser forKey:@"requestFrom"];
+        [friendRequest setObject: user forKey:@"requestTo"];
+        [friendRequest setObject:user.username forKey:@"requestToName"];
+        [friendRequest setObject:currentUser.username forKey:@"requestFromName"];
+        
+        [friendRequest setObject:@"Pending" forKey:@"status"];
+        [friendRequest saveInBackground];*/
         
         [friendsRelation addObject: user ];
+       
         
     }
         }

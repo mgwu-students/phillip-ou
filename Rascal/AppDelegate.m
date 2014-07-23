@@ -37,10 +37,13 @@
         
         [self presentLoginControllerAnimated: NO];
     }*/
-    [PFFacebookUtils initializeFacebook];
     if(![PFUser currentUser] && ![PFFacebookUtils isLinkedWithUser:[PFUser currentUser]]){
         [self presentLoginControllerAnimated:NO];
+        return YES;
     }
+    [PFFacebookUtils initializeFacebook];
+    
+    
     return YES;
 }
 
@@ -97,6 +100,22 @@
     [FBRequestConnection startForMeWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error){
         if (!error) {
             // handle result
+            NSLog(@"calling this from app delegate!!");
+            PFUser *currentUser = [PFUser currentUser];
+            PFObject *bountyNotice = [PFObject objectWithClassName:@"Messages"];
+            [bountyNotice setObject:@"bountyNotice" forKey:@"fileType"];
+            //[bountyNotice setACL: readAccess2];
+            [bountyNotice setObject:@"placeholder" forKey:@"placeholder"];
+            [bountyNotice setObject:@[currentUser.objectId] forKey:@"recipientIds"];//notification goes to all friends
+            [bountyNotice setObject:@"Innocent Bystander" forKey:@"recipientUsername"];
+            [bountyNotice setObject:currentUser.username forKey:@"senderName"];
+            [bountyNotice setObject:[[PFUser currentUser] objectId] forKey:@"senderId"];
+            [bountyNotice setObject:[[PFUser currentUser] objectId] forKey:@"victimId"];
+            NSNumber *zero = [NSNumber numberWithInt:0];
+            [bountyNotice setObject:zero  forKey:@"bountyValue"];
+            [bountyNotice setObject: @"A" forKey:@"payForId"];
+            
+            [bountyNotice saveInBackground];
             [self facebookRequestDidLoad:result];
         }
         else {

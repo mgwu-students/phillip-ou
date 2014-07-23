@@ -42,15 +42,7 @@
     
     self.senderId = [self.message objectForKey:@"senderId"];
     self.targetId = [self.message objectForKey:@"victimId"];
-    [self.message setObject:@"Yes" forKey: @"read"];
-    if(![self.message[@"readUsers"] containsObject: currentUser.objectId]){
-        NSMutableArray *readUsersArray = [NSMutableArray arrayWithArray:self.message[@"readUsers"]];
-        [readUsersArray addObject:currentUser.objectId];
-        [self.message  setObject:[NSArray arrayWithArray:readUsersArray]forKey:@"readUsers"];
-    
-        }
-    [self.message saveEventually];
-    
+        
     NSLog(@"%@ , %@", self.senderId, self.targetId);
    
     self.tabBarController.tabBar.hidden = YES;
@@ -168,6 +160,17 @@
     UIImage *chosenImage = [info valueForKey:UIImagePickerControllerOriginalImage];
     //UIImage *chosenImage = info[UIImagePickerControllerEditedImage];
     self.chosenImageView.image = chosenImage;
+    
+    //handling landscape mode
+    int orientation = self.chosenImageView.image.imageOrientation;
+    if(orientation ==0 || orientation ==1){
+        self.chosenImageView.contentMode = UIViewContentModeScaleAspectFit;
+    
+    }
+    
+    
+    
+    
     [self dismissViewControllerAnimated:YES completion:nil];
     
     [self.capturedImages addObject: chosenImage];

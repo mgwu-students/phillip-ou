@@ -26,6 +26,10 @@
     
    
     self.imageView.image = [UIImage imageWithData:imageData];
+    //handles landscape
+    int orientation = self.imageView.image.imageOrientation;
+    if(orientation ==0 || orientation ==1){
+        self.imageView.contentMode = UIViewContentModeScaleAspectFit;}
     
     
    
@@ -39,7 +43,7 @@
     
 
 }
--(void) viewDidAppear:(BOOL)animated{
+-(void) viewWillAppear:(BOOL)animated{
     
     
     

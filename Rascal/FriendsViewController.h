@@ -12,7 +12,7 @@
 @interface FriendsViewController : UITableViewController
 
 @property (nonatomic, strong) PFRelation *friendsRelation;
-@property (nonatomic, strong) NSArray *friends;
+@property (nonatomic, strong) NSMutableArray *friends;
 @property (nonatomic, strong) NSMutableArray *targettedFriends;
 @property (nonatomic, strong) PFUser *currentUser;
 @property (nonatomic, strong) PFUser *user;

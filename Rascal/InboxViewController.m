@@ -30,7 +30,7 @@
         // Whether the built-in pagination is enabled
         self.paginationEnabled = YES;
         
-        self.objectsPerPage = 30;
+        self.objectsPerPage = 50;
         
         // The number of objects to show per page
         
@@ -46,6 +46,8 @@
     else{
        
     NSLog(@"call1");
+        
+
         
        [self.sections removeAllObjects];
        [self.sectionFileType removeAllObjects];
@@ -92,15 +94,39 @@
 }
 #pragma mark - header font
 - (void)viewDidLoad
+
 {
+    NSLog(@"%@",self.count);
+    /*if([self.count intValue]!=1){
+        NSLog(@"calling this!!");
+        PFUser *currentUser = [PFUser currentUser];
+        PFObject *bountyNotice = [PFObject objectWithClassName:@"Messages"];
+        [bountyNotice setObject:@"bountyNotice" forKey:@"fileType"];
+        //[bountyNotice setACL: readAccess2];
+        [bountyNotice setObject:@"placeholder" forKey:@"placeholder"];
+        [bountyNotice setObject:@[currentUser.objectId] forKey:@"recipientIds"];//notification goes to all friends
+        [bountyNotice setObject:@"Innocent Bystander" forKey:@"recipientUsername"];
+        [bountyNotice setObject:currentUser.username forKey:@"senderName"];
+        [bountyNotice setObject:[[PFUser currentUser] objectId] forKey:@"senderId"];
+        [bountyNotice setObject:[[PFUser currentUser] objectId] forKey:@"victimId"];
+        NSNumber *zero = [NSNumber numberWithInt:0];
+        [bountyNotice setObject:zero  forKey:@"bountyValue"];
+        [bountyNotice setObject: @"A" forKey:@"payForId"];
+        
+        [bountyNotice saveInBackground];
+        self.count=[NSNumber numberWithInt:2];}*/
+     
     [self loadObjects];
     
     [[UINavigationBar appearance] setTitleTextAttributes: [NSDictionary dictionaryWithObjectsAndKeys:
                                                            [UIFont fontWithName:@"Raleway-Thin" size:25.0], NSFontAttributeName, nil]];
+    
     self.sectionFileType = [[NSMutableDictionary alloc] init];
     self.sections = [[NSMutableDictionary alloc]init];
     self.tableView.allowsMultipleSelectionDuringEditing = NO;
     PFUser *currentUser = [PFUser currentUser];
+    
+    [self.tableView insertRowsAtIndexPaths: 0 withRowAnimation:NO];
     
     
     
@@ -210,15 +236,16 @@
     NSString *fileType = [self fileTypeForSection:section];
     //NSLog(@"section:%d",section);
     NSArray *rowIndecesInSection = [self.sections objectForKey:fileType];
-   
     // Return the number of rows in the section.
     //NSLog(@"using %@:",rowIndecesInSection);
+   
     return rowIndecesInSection.count; //this is some times too much
     
 }
 
 -(NSString *)tableView:(UITableView*)tableView titleForHeaderInSection:(NSInteger)section{
     NSString *fileType = [self fileTypeForSection:section];
+   
     if([fileType isEqualToString:@"bountyNotice"]){
         return @"Active Bounties";
     }
@@ -228,16 +255,22 @@
     }
     //return fileType;
 }
+static int rowNumber;
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 
 {   //NSLog(@"This is being called");
     static NSString *CellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+   /* UITableViewCell *customCell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:0];
+    customCell.textLabel.text = @"test";
+    if ([self.sectionFileType[@"bountyNotice"] count] ==0){
+        return customCell;}*/
     
     
     UIImage *icon = [UIImage imageNamed: @"image"];
     UIImage *icon2 = [UIImage imageNamed:@"camera-2-smaller"];
     UIImage *icon3 = [UIImage imageNamed:@"database"];
+    UIImage *icon4 = [UIImage imageNamed:@"tick"];
     
     UIButton *photoUnread = [[UIButton alloc] initWithFrame: CGRectMake(0, 0, 16, 16)];
     
@@ -245,6 +278,9 @@
     
     
     UIButton *moneyLogo = [[UIButton alloc] initWithFrame: CGRectMake(0, 0, 16, 16)];
+    
+    UIButton *checkedOff = [[UIButton alloc] initWithFrame: CGRectMake(0, 0, 16, 16)];
+
 
     
     [UIButton buttonWithType: UIButtonTypeCustom];
@@ -256,6 +292,9 @@
     
     [moneyLogo setBackgroundImage:icon3 forState:UIControlStateNormal];
     moneyLogo.backgroundColor = [UIColor clearColor];
+    
+    [checkedOff setBackgroundImage:icon4 forState:UIControlStateNormal];
+    checkedOff.backgroundColor = [UIColor clearColor];
     
     
     
@@ -271,7 +310,7 @@
     //NSLog(@"%@",self.sections);
    // NSLog(@"%@",self.sectionFileType);
     //get row number independent of section
-    NSInteger rowNumber = 0;
+    rowNumber = 0;
     
     for (NSInteger i = 0; i < indexPath.section; i++) {
         rowNumber += [self tableView:tableView numberOfRowsInSection:i];
@@ -281,7 +320,9 @@
     if(self.objects==nil){
         NSLog(@"waiting");
     }
- 
+    
+   
+   
     PFObject *message = [self.objects objectAtIndex:rowNumber];
     
         //NSLog(@"%@",message);
@@ -332,14 +373,15 @@
     
             cell.textLabel.text = [NSString stringWithFormat:@"Bounty on %@", [message objectForKey:@"recipientUsername"]];
             
-            cell.imageView.image = [UIImage imageNamed:@"spam-2"];
+            cell.imageView.image = [UIImage imageNamed:@"user-3"];
+            cell.accessoryView=bountyLogo;
          //if bounty is unread
          
             if(![message[@"readUsers"] containsObject:currentUser.objectId ]){
+                cell.imageView.image = [UIImage imageNamed:@"user-3"];
                 cell.accessoryView=bountyLogo;
          }
         }
-        
         
     }
     
@@ -349,10 +391,16 @@
     return cell;
     
     
-}- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+}
+
+//allows right swiping
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // Return YES - we will be able to delete all rows
-    return YES;
+    if(indexPath.section==1){
+        return YES;
+    }
+    return NO;
 }
 
 
@@ -371,7 +419,7 @@
         NSString *fileType = self.selectedMessage[@"fileType"];
         
         
-     
+        
        //delete form sections
         NSLog (@"%@",self.selectedMessage);
         NSMutableArray *deleteArray = [NSMutableArray arrayWithArray:self.selectedMessage[@"recipientIds"]] ;
@@ -392,11 +440,14 @@
         NSLog(@"RecipientIds:%@",deleteArray);
         NSArray *arrayUpdate = [NSArray arrayWithArray:deleteArray];
         [self.selectedMessage setObject:arrayUpdate forKey:@"recipientIds"];
-        [self.selectedMessage save]; //ensures array gets updated before there is index error after delete
+        [self.selectedMessage saveInBackground]; //ensures array gets updated before there is index error after delete
+        }
+        
+        
     [self.tableView reloadData];
         
         
-    }
+    
 }
 #pragma mark - Table view delegate
 
@@ -405,7 +456,7 @@
     PFUser *currentUser = [PFUser currentUser];
     NSInteger rowNumber = 0;
     
-    
+    self.count = [NSNumber numberWithInt:0];
     
     for (NSInteger i = 0; i < indexPath.section; i++) {
         rowNumber += [self tableView:tableView numberOfRowsInSection:i];
@@ -451,18 +502,22 @@
      
     if([fileType isEqualToString:@"bountyNotice"]){
             NSLog(@"show camera");
-        if(![self.selectedMessage[@"readUsers"] containsObject:currentUser.objectId]){
+        //if(![self.selectedMessage[@"readUsers"] containsObject:currentUser.objectId]){
             NSString *bountyMessage = [NSString stringWithFormat:@"Bounty set by %@", self.selectedMessage[@"senderName"]];
                            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:bountyMessage
                                                                     message:@"You Will Be Rewarded For This Photo"
                                                                    delegate:self cancelButtonTitle:@"Yes" otherButtonTitles:nil];
                 [alertView show];
+            [self performSegueWithIdentifier:@"transferBountyData" sender:self];
         
-        }
+       // }
+       // else{
+      //      NSLog(@"You've done this bounty already");
+      //  }
     
         
         
-        [self performSegueWithIdentifier:@"transferBountyData" sender:self];
+        
         
         }
         
@@ -499,17 +554,17 @@
    
     [label setFont:[UIFont boldSystemFontOfSize:12]];
     //NSString *string =[self.messages objectAtIndex:section];
-    if (section==0){
+    if (section==0 &&[self.sectionFileType count]!=1){
         NSString *string = @"active bounties";
         [label setText:string];
         [label setTextColor: [UIColor whiteColor] ];
         [label setFont:[UIFont fontWithName:@"Raleway-Medium" size:15]];
         [view addSubview:label];
         [view setBackgroundColor:[UIColor colorWithRed:190.0/255.0 green:190.0/255.0 blue:190.0/255.0 alpha:1.0]]; //your background color...
-        return view;}
+            return view;}
 
     else{
-        NSString  *string = @"photos";
+        NSString  *string = @"completed bounties";
         [label setText:string];
         [label setTextColor: [UIColor whiteColor] ];
         [label setFont:[UIFont fontWithName:@"Raleway-Medium" size:15]];
@@ -520,10 +575,12 @@
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
         [button setFrame:CGRectMake(0, 30.0, 325.0, 30.0)]; //(x,y,width,height)
         button.tag = section;
-        [button setTitle: @"Your Photos" forState:UIControlStateNormal];
+        [button setTitle: @"See Highlights" forState:UIControlStateNormal];
+        [button setTitleColor:[UIColor colorWithRed:9.0/255 green:92.0/255 blue:1 alpha:1] forState:UIControlStateNormal];
+        [button setFont:[UIFont fontWithName:@"Raleway-Medium" size:15]];
         button.hidden = NO;
-        [button setBackgroundColor:[UIColor colorWithRed:9.0/255.0 green:92.0/255.0 blue:255.0/255.0 alpha:1.0]];
-        [button addTarget:self action:@selector(profileButton:) forControlEvents:UIControlEventTouchDown];
+        [button setBackgroundColor:[UIColor colorWithRed:255/255.0 green:255/255.0 blue:255.0/255.0 alpha:1.0]];
+        [button addTarget:self action:@selector(topButton:) forControlEvents:UIControlEventTouchDown];
         [view addSubview:button];
         
         

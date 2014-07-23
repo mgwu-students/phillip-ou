@@ -45,6 +45,8 @@
     self.clickCount = 0;
     self.friendsRelation = [[PFUser currentUser] objectForKey:@"friendsRelation"];
     PFQuery *query = [self.friendsRelation query]; //create query of our friends
+    
+    //PFQuery *friendRequestQuery = [PFQuery queryWithClassName:@"FriendRequest"];
     [query orderByAscending:@"username"];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (error){
@@ -84,6 +86,32 @@
     return [self.friends count];
 }
 
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    // Return YES - we will be able to delete all rows
+    return YES;
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    PFUser *currentUser = [PFUser currentUser];
+    PFUser *user = [self.friends objectAtIndex: indexPath.row];
+    PFRelation *friendsRelation = [currentUser relationForKey: @"friendsRelation"];//adding friends
+    for (PFUser *friend in[self.friends copy] ){
+        if([friend.objectId isEqualToString:user.objectId]){
+            [friendsRelation removeObject:user];
+            [self.friends removeObject:friend];
+            NSLog(@"Remove %@",user.username);
+            
+            [currentUser saveInBackground];
+            
+        }
+        //3. remove from the backend
+        
+
+    }
+        [self.tableView reloadData];
+
+}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -112,7 +140,7 @@
     return cell;
 }
 
-
+/*
 -(void) tableView: (UITableView *) tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if(self.clickCount==0){
         [self.tableView deselectRowAtIndexPath:indexPath animated:NO];
@@ -155,7 +183,8 @@
     NSLog(@"Click Count:%d",self.clickCount);
     NSLog(@"RecipientsofBounties:%@",self.recipientsOfBounties);
     NSLog(@"%@",self.user.username);
-}
+}*/
+/*
 -(BOOL) isFriend:(PFUser *)user{
     for(PFUser *friend in self.friends){
         if([friend.objectId isEqualToString:user.objectId]){ //found friend
@@ -164,7 +193,8 @@
     }
     return NO;
     
-}
+}*/
+/*
 #pragma mark - TO DO
 - (void)uploadMessage {
     if([self.points doubleValue] < [@10.0f doubleValue]){
@@ -238,7 +268,7 @@
     
     
     ///PUT PUSH NOTIFICATION FOR ALL CURRENT USERS FRIENDS
-
+*/
 -(void) reset{
     PFUser *currentUser = [PFUser currentUser];
     [self.recipientsOfBounties removeAllObjects];
@@ -248,7 +278,7 @@
     
     
     
-}
+}/*
 
 - (IBAction)setBounty:(id)sender {
     PFUser *currentUser = [PFUser currentUser];
@@ -262,6 +292,7 @@
         [self.tabBarController setSelectedIndex:0];
     
 }
+  */
 - (IBAction)back:(id)sender {
     [self.tabBarController setSelectedIndex:0];
 }

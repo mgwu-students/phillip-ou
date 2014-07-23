@@ -523,7 +523,7 @@
                                 </items>
                             </toolbar>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2fh-2L-BU0">
-                                <rect key="frame" x="-5" y="111" width="325" height="413"/>
+                                <rect key="frame" x="0.0" y="111" width="320" height="413"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Title" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8Nu-Mg-FNw">
@@ -576,7 +576,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aje-OL-QIp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="161" y="102"/>
+            <point key="canvasLocation" x="467" y="74"/>
         </scene>
         <!--Post Camera View Controller - audience-->
         <scene sceneID="blk-Ol-nec">
@@ -641,7 +641,7 @@
             </objects>
             <point key="canvasLocation" x="-461" y="913"/>
         </scene>
-        <!--Friends View Controller - colleagues-->
+        <!--Friends View Controller - friends-->
         <scene sceneID="Evg-3s-YRH">
             <objects>
                 <tableViewController id="qTd-4n-Dn2" customClass="FriendsViewController" sceneMemberID="viewController">
@@ -665,7 +665,7 @@
                         </connections>
                     </tableView>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" title="colleagues" id="Q1u-03-USW">
+                    <navigationItem key="navigationItem" title="friends" id="Q1u-03-USW">
                         <barButtonItem key="leftBarButtonItem" image="out.png" id="iUi-eM-40v">
                             <connections>
                                 <action selector="back:" destination="qTd-4n-Dn2" id="MDO-Zc-s5b"/>
@@ -681,7 +681,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HTg-eV-TfJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="172" y="1612"/>
+            <point key="canvasLocation" x="392" y="1576"/>
         </scene>
         <!--Inbox View Controller - rascal-->
         <scene sceneID="J2Q-xC-hgY">
@@ -714,7 +714,7 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bOs-hT-8iD">
-                                    <rect key="frame" x="6" y="78" width="294" height="30"/>
+                                    <rect key="frame" x="0.0" y="74" width="315" height="30"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <state key="normal" title="Set Bounty">
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -724,7 +724,7 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RW4-73-xaD">
-                                    <rect key="frame" x="244" y="9" width="71" height="26"/>
+                                    <rect key="frame" x="267" y="8" width="25" height="27"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <state key="normal" image="intersect.png">
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -734,9 +734,9 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Chr-QS-uZg">
-                                    <rect key="frame" x="259" y="40" width="40" height="32"/>
+                                    <rect key="frame" x="267" y="40" width="25" height="25"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <state key="normal" image="star-2-smaller.png">
+                                    <state key="normal" image="star-2.png">
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
                                     <connections>
@@ -772,9 +772,9 @@
                     <navigationItem key="navigationItem" title="rascal" id="fGQ-pb-c50">
                         <barButtonItem key="rightBarButtonItem" style="plain" id="yVo-62-lFa">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="0Ih-fy-u3u">
-                                <rect key="frame" x="258" y="7" width="46" height="30"/>
+                                <rect key="frame" x="284" y="12" width="20" height="20"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="user-4-add.png">
+                                <state key="normal" image="users.png">
                                     <color key="titleColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -795,7 +795,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hue-Ys-HZ3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="744" y="547"/>
+            <point key="canvasLocation" x="702" y="823"/>
         </scene>
         <!--Navigation Controller - News-->
         <scene sceneID="S9b-3o-Ohq">
@@ -813,7 +813,7 @@
             </objects>
             <point key="canvasLocation" x="-461" y="3036"/>
         </scene>
-        <!--Edit Friends View Controller - add friends-->
+        <!--Edit Friends View Controller - search friends-->
         <scene sceneID="TpH-aP-Nii">
             <objects>
                 <tableViewController id="ai8-vm-Le4" customClass="EditFriendsViewController" sceneMemberID="viewController">
@@ -849,7 +849,7 @@
                             <outlet property="delegate" destination="ai8-vm-Le4" id="K45-1O-jkh"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="add friends" id="kBE-06-XsP">
+                    <navigationItem key="navigationItem" title="search friends" id="kBE-06-XsP">
                         <barButtonItem key="rightBarButtonItem" style="plain" id="5hG-mk-4dG">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="bkP-vD-6dB">
                                 <rect key="frame" x="233" y="5" width="71" height="33"/>
@@ -895,7 +895,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RGr-Bh-ivn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-456" y="1612"/>
+            <point key="canvasLocation" x="-78" y="1628"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="7rq-fg-Iq6">
@@ -982,7 +982,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="v2l-fb-DkF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="760" y="2401"/>
+            <point key="canvasLocation" x="1288" y="739"/>
         </scene>
         <!--Bounties View Controller - bounties-->
         <scene sceneID="UKk-Uv-t1P">
@@ -1091,9 +1091,11 @@
         <image name="marquee.png" width="32" height="32"/>
         <image name="out.png" width="16" height="16"/>
         <image name="star-2-smaller.png" width="16" height="16"/>
+        <image name="star-2.png" width="32" height="32"/>
         <image name="swatches.png" width="32" height="32"/>
         <image name="user-2-smaller.png" width="16" height="16"/>
         <image name="user-4-add.png" width="16" height="16"/>
+        <image name="users.png" width="32" height="32"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

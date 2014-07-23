@@ -100,8 +100,11 @@
     return cell;
 }
 
-
+/*
 -(void) tableView: (UITableView *) tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    
+    
     if(self.clickCount==0){
         [self.tableView deselectRowAtIndexPath:indexPath animated:NO];
         UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
@@ -143,6 +146,28 @@
     NSLog(@"Click Count:%d",self.clickCount);
     NSLog(@"RecipientsofBounties:%@",self.recipientsOfBounties);
     NSLog(@"%@",self.user.username);
+}*/
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath   *)indexPath
+
+{
+    [tableView cellForRowAtIndexPath:indexPath].accessoryType = UITableViewCellAccessoryCheckmark;
+    [tableView cellForRowAtIndexPath:indexPath].selected=NO;
+    self.user = [self.friends objectAtIndex: indexPath.row];
+    NSLog(@"bounty on %@",self.user.objectId);
+    
+    
+    [self.recipientsOfBounties addObject:self.user.objectId];
+    [self.allFriends addObject:self.user.objectId];
+    NSLog(@"RecipientsofBounties:%@",self.recipientsOfBounties);
+    NSLog(@"%@",self.user.username);
+    
+    
+}
+
+-(void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView cellForRowAtIndexPath:indexPath].accessoryType = UITableViewCellAccessoryNone;
 }
 -(BOOL) isFriend:(PFUser *)user{
     for(PFUser *friend in self.friends){
@@ -177,17 +202,18 @@
             PFACL *readAccess = [[PFACL alloc]init];
             //PFACL *readAccess2 = [[PFACL alloc]init];
             [readAccess setReadAccess:YES forUserId:self.user.objectId];
-            //[readAccess2 setReadAccess:NO forUserId:self.user.objectId];
-            [bounty setObject:@"bounty" forKey:@"fileType"];
-            [bounty setObject:self.recipientsOfBounties forKey:@"recipientIds"];
-            [bounty setACL: readAccess];
-            [bounty setObject:[[PFUser currentUser] objectId] forKey:@"senderId"];
-            
             UIAlertView *bountyAlert = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"You Have Set Bounty on %@!",self.user.username]
                                                                   message:@"Good Work."
                                                                  delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
             [bountyAlert show];
+
+            //[readAccess2 setReadAccess:NO forUserId:self.user.objectId];
+         /*   [bounty setObject:@"bounty" forKey:@"fileType"];
+            [bounty setObject:self.recipientsOfBounties forKey:@"recipientIds"];
+            [bounty setACL: readAccess];
+            [bounty setObject:[[PFUser currentUser] objectId] forKey:@"senderId"];
             
+          
             [bounty setObject:currentUser.username forKey:@"senderName"];
             [bounty saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
                 if (error) {
@@ -197,7 +223,7 @@
                     [alertView show];
                     
                 }
-            }];
+            }];*/
             [self.allFriends removeObject:self.user.objectId]; //so guy receiving bounty won't get duplicate notification
             [self.allFriends removeObject: currentUser.objectId]; //so current user doesn't get notifications (might have crash if current user isn't in the array but we'll see)
             self.friends = [NSArray arrayWithArray: self.allFriends];

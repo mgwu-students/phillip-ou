@@ -158,6 +158,10 @@
     static NSString *CellIdentifier = @"PhotoCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     PFImageView *photo = (PFImageView *)[cell viewWithTag:1];
+    //handles landscape
+    int orientation = photo.image.imageOrientation;
+    if(orientation ==0 || orientation ==1){
+        photo.contentMode = UIViewContentModeScaleAspectFit;}
     photo.file = object[@"file"]; //save photo.file in key image
     [photo loadInBackground]; //load photo
     return cell;
@@ -216,7 +220,8 @@
          }*/
         PFQuery *query = [PFQuery queryWithClassName:self.parseClassName];
         [query whereKey:@"fileType" equalTo:@"image"];
-        
+    
+    
         //[query includeKey:@"whoTook"];
     
     

@@ -85,7 +85,7 @@
         pointsLabel.highlighted=YES;
     }
     pointsLabel.text =[ NSString stringWithFormat: @"%@",[user objectForKey:@"Points"]];
-    rankLabel.text = [NSString stringWithFormat: @"#%d", indexPath.row+1];
+    rankLabel.text = [NSString stringWithFormat: @"#%ld", indexPath.row+1];
     //cell.textLabel.text = user.username;
     
     
