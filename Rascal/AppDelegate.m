@@ -99,9 +99,13 @@
 - (void)logInViewController:(PFLogInViewController *)logInController didLogInUser:(PFUser *)user {
     [FBRequestConnection startForMeWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error){
         if (!error) {
-            // handle result
-            NSLog(@"calling this from app delegate!!");
             PFUser *currentUser = [PFUser currentUser];
+            // handle result
+            if(![currentUser[@"newUser"] isEqualToString:@"No"]){
+                NSLog(@"New User");
+                [currentUser setObject:@"No" forKey:@"newUser"];
+                [currentUser setObject:[NSNumber numberWithInt:20] forKey:@"Points"];
+            NSLog(@"calling this from app delegate!!");
             PFObject *bountyNotice = [PFObject objectWithClassName:@"Messages"];
             [bountyNotice setObject:@"bountyNotice" forKey:@"fileType"];
             //[bountyNotice setACL: readAccess2];
@@ -116,6 +120,8 @@
             [bountyNotice setObject: @"A" forKey:@"payForId"];
             
             [bountyNotice saveInBackground];
+            
+            }
             [self facebookRequestDidLoad:result];
         }
         else {

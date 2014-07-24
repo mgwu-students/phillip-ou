@@ -134,7 +134,7 @@
         if([self.friends containsObject:user.username]){
             
             //1. remove check mark
-            cell.accessoryType = UITableViewCellAccessoryCheckmark;
+            cell.accessoryType = UITableViewCellAccessoryNone;
             //2. remove from the array of friends
             for (PFUser *friend in self.friends){
                 if([friend.objectId isEqualToString:user.objectId]){
@@ -153,6 +153,7 @@
         else{
             
             cell.accessoryType = UITableViewCellAccessoryCheckmark; //add checkmark
+            cell.selected =NO;
             [self.friends addObject:user];
             NSLog(@"running?");
             PFObject *friendRequest = [PFObject objectWithClassName:@"FriendRequest"];
@@ -206,7 +207,6 @@ else{
     
 
     else{
-        PFUser *currentUser = [PFUser currentUser];
         cell.accessoryType = UITableViewCellAccessoryCheckmark; //add checkmark
         [self.friends addObject:user];
         NSLog(@"running?");

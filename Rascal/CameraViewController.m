@@ -39,7 +39,6 @@
     self.view.frame = [[UIScreen mainScreen] bounds];
     [super viewDidLoad];
      self.capturedImages = [[NSMutableArray alloc] init];
-    
     self.senderId = [self.message objectForKey:@"senderId"];
     self.targetId = [self.message objectForKey:@"victimId"];
         

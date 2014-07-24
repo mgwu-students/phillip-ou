@@ -124,7 +124,7 @@
     self.sectionFileType = [[NSMutableDictionary alloc] init];
     self.sections = [[NSMutableDictionary alloc]init];
     self.tableView.allowsMultipleSelectionDuringEditing = NO;
-    PFUser *currentUser = [PFUser currentUser];
+    
     
     [self.tableView insertRowsAtIndexPaths: 0 withRowAnimation:NO];
     
@@ -135,31 +135,29 @@
     
     
     
-    if (currentUser) {
-        NSLog(@"Current user: %@", currentUser.username);
-    }
-    else {
-        // [self performSegueWithIdentifier:@"showLogin" sender:self];
-    }
+   
     
     self.tabBarController.tabBar.hidden = YES; //!!!this hides the tab bar!!!
     //PFUser *currentUser = [PFUser currentUser];
    
     
     //ensures new users have points to start off with
-    if(![currentUser objectForKey:@"Points"]){
+    /*if(![currentUser objectForKey:@"Points"]){
         
         [currentUser setObject: [NSNumber numberWithInt:20] forKey:@"Points"];
         [currentUser save];
-    }
+    }*/
 
     
     [super viewDidLoad];
     }
 -(void) viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    //[self.tableView reloadData];
+    
     PFUser *currentUser = [PFUser currentUser];
+   
+    //[self.tableView reloadData];
+    //PFUser *currentUser = [PFUser currentUser];
     PFFile *profilePicture = [currentUser objectForKey:@"profilePicture"];
      self.pointsLabel.text = [NSString stringWithFormat:@"Income: %@", currentUser[@"Points"]];
     
@@ -265,6 +263,8 @@ static int rowNumber;
     customCell.textLabel.text = @"test";
     if ([self.sectionFileType[@"bountyNotice"] count] ==0){
         return customCell;}*/
+    cell.textLabel.adjustsFontSizeToFitWidth=YES;
+    
     
     
     UIImage *icon = [UIImage imageNamed: @"image"];
@@ -554,7 +554,7 @@ static int rowNumber;
    
     [label setFont:[UIFont boldSystemFontOfSize:12]];
     //NSString *string =[self.messages objectAtIndex:section];
-    if (section==0 &&[self.sectionFileType count]!=1){
+    if (section==0 ){
         NSString *string = @"active bounties";
         [label setText:string];
         [label setTextColor: [UIColor whiteColor] ];

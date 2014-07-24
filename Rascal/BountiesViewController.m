@@ -20,11 +20,9 @@
 {
     [super viewDidLoad];
     PFUser *currentUser = [PFUser currentUser];
-   // self.bountyCost = 10;
-    //self.bountyValue = 10;
+    self.bountyCost = 5;
+    self.bountyValue = 1;
     
-    self.slider.minimumValue = 5;
-    self.slider.maximumValue = [currentUser[@"Points"] intValue];
     self.recipientsOfBounties = [[NSMutableArray alloc] init];
     self.allFriends = [[NSMutableArray alloc] init];
     self.friends = [[NSArray alloc]init];
@@ -180,7 +178,7 @@
 }
 #pragma mark - TO DO
 - (void)uploadMessage {
-    if([self.points doubleValue] < [@1.0f doubleValue]){
+    if([self.points doubleValue] < [@5.0f doubleValue]){
         //if users don't have enough points, don't let them set bounties
         
         
@@ -235,8 +233,6 @@
             [bountyNotice setObject:currentUser.username forKey:@"senderName"];
             [bountyNotice setObject:[[PFUser currentUser] objectId] forKey:@"senderId"];
             [bountyNotice setObject: self.user.objectId forKey: @"victimId"];
-            
-            
             [bountyNotice setObject: [NSNumber numberWithInt:self.bountyValue] forKey:@"bountyValue"];
             
             [bountyNotice saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
@@ -286,18 +282,7 @@
 
 
 
-- (IBAction)sliderButton:(id)sender {
-    
-    NSInteger val = lround(self.slider.value);
-    self.costLabel.text = [NSString stringWithFormat:@"Cost: %ld",val];
-    self.bountyCost = val;
-    
-    self.returnAmountLabel.text = [NSString stringWithFormat:@"Return/user: %ld", val/5];
-    
-    self.bountyValue = val/5;
-    
-    
-}
+
 
 
 

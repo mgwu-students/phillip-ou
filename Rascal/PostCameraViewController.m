@@ -28,10 +28,8 @@
     self.recipients = [[NSMutableArray alloc] init];
    
     //have sender of bounty and victim of bounty be checked automatically
-    
     [self.recipients addObjectsFromArray:@[self.senderId,self.targetId]];
 }
-
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
@@ -147,6 +145,7 @@
 #pragma mark - IBActions
 
 - (IBAction)cancel:(id)sender {
+    
     [self reset];
     //[self.tabBarController dismissModalViewControllerAnimated:YES];
  
@@ -273,15 +272,22 @@
     self.imagePicker = nil;
     [self.recipients removeAllObjects];
     [self performSegueWithIdentifier:@"backToTab" sender:self];
+    
     //[self.tabBarController dismissViewControllerAnimated:NO completion:nil];
     //[self.tabBarController setSelectedIndex:0];
     
 }
 -(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     if ([segue.identifier isEqualToString:@"backToTab"]) {
+        NSLog(@"Being Called");
+        //[self.tabBarController setSelectedIndex:0];
+        
         [segue.destinationViewController setHidesBottomBarWhenPushed:YES];
-        InboxViewController *inboxViewController = (InboxViewController *)segue.destinationViewController;
-}
+       /* CameraViewController *cameraViewController = (CameraViewController *)segue.destinationViewController;
+        self.selectedMessage = cameraViewController.message;
+        self.senderId=cameraViewController.senderId;
+        self.targetId=cameraViewController.targetId;*/
+    }
 
 }
 @end
