@@ -14,6 +14,7 @@
 #import "PostCameraViewController.h"
 @interface CameraViewController ()
 @property (nonatomic, strong) UIImagePickerController *imagePicker;
+@property (nonatomic, retain) UIView *cameraOverlayView;
 
 @property (weak, nonatomic) IBOutlet UIImageView *chosenImageView;
 @property (nonatomic) NSMutableArray *capturedImages;
@@ -35,6 +36,9 @@
 
 - (void)viewDidLoad
 {
+
+    self.view.tintColor = [UIColor colorWithRed:41.0/255.0 green:166.0/255.0 blue:121.0/255.0 alpha:1.0];
+    
     PFUser *currentUser = [PFUser currentUser];
     self.view.frame = [[UIScreen mainScreen] bounds];
     [super viewDidLoad];
@@ -116,7 +120,10 @@
         /*
          The user wants to use the camera interface. Set up our custom overlay view for the camera.
          */
+       
+        
         imagePickerController.showsCameraControls =YES;
+        //imagePickerController.cameraOverlayView = self.overlayView;
         
         /*
          Load the overlay view from the OverlayView nib file. Self is the File's Owner for the nib file, so the overlayView outlet is set to the main view in the nib. Pass that view to the image picker controller to use as its overlay view, and set self's reference to the view to nil.

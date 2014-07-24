@@ -97,6 +97,7 @@
 
 {
     NSLog(@"%@",self.count);
+    self.bountyButton.selected=NO;
     /*if([self.count intValue]!=1){
         NSLog(@"calling this!!");
         PFUser *currentUser = [PFUser currentUser];
@@ -166,6 +167,8 @@
     
     self.profileImageView.file = profilePicture;
     [self.profileImageView loadInBackground];
+    
+    self.userNameLabel.adjustsFontSizeToFitWidth=YES;
     
     self.userNameLabel.text = currentUser.username;
 }
@@ -263,12 +266,13 @@ static int rowNumber;
     customCell.textLabel.text = @"test";
     if ([self.sectionFileType[@"bountyNotice"] count] ==0){
         return customCell;}*/
+   
     cell.textLabel.adjustsFontSizeToFitWidth=YES;
     
     
     
-    UIImage *icon = [UIImage imageNamed: @"image"];
-    UIImage *icon2 = [UIImage imageNamed:@"camera-2-smaller"];
+    UIImage *icon = [UIImage imageNamed: @"image-bigger"];
+    UIImage *icon2 = [UIImage imageNamed:@"camera-2"];
     UIImage *icon3 = [UIImage imageNamed:@"database"];
     UIImage *icon4 = [UIImage imageNamed:@"tick"];
     
@@ -330,24 +334,33 @@ static int rowNumber;
     
     //cell.textLabel.text = [NSString stringWithFormat:@"FileType:%@",message[@"fileType"]];
     
-    
-    
-    
+    cell.accessoryType=UITableViewCellAccessoryNone;
+    [cell.textLabel setFont:[UIFont fontWithName:@"Raleway-Medium" size:14]];
      NSString *fileType = [message objectForKey:@"fileType"];
      NSArray *listOfRecipients = [message objectForKey:@"recipientIds"];
     // NSString* read = [message objectForKey:@"read"];     //determine if cell is read
-    
+    if([fileType isEqualToString:@"bountyNotice"]){
+        //if([listOfRecipients containsObject:currentUser.objectId]){
+        cell.imageView.image = [UIImage imageNamed:@"user-3-big"];
+        
+        cell.accessoryView=bountyLogo;
+        cell.textLabel.text = [[NSString stringWithFormat:@"%@", [message objectForKey:@"recipientUsername"]] lowercaseString];
+        }
      //if message is an image
-     if ([fileType isEqualToString:@"image"]) {
+     //if ([fileType isEqualToString:@"image"]) {
+    else{
      //PUT IN IMAGE ICON HERE LATER TO SIGNIFY IT'S AN IMAGE
          //cell.imageView.image = [UIImage imageNamed:@"image"];
-         cell.textLabel.text= [NSString stringWithFormat:@"%@ ",[message objectForKey:@"senderName"]];
-         cell.imageView.image = [UIImage imageNamed:@"image"];
+         cell.textLabel.text= [NSString stringWithFormat:@"%@ ",[[message objectForKey:@"senderName"]lowercaseString]];
+         cell.imageView.image = [UIImage imageNamed:@"image-big"];
          
          //for read messages
         
          if([[message objectForKey:@"readUsers"] containsObject:currentUser.objectId]){
-             cell.imageView.image = [UIImage imageNamed:@"marquee-smaller"];
+             UIImage *marquee =[UIImage imageNamed:@"marquee"];
+             
+             cell.imageView.image =marquee;
+             
          }
          //show this is a return of his investment
          
@@ -362,29 +375,22 @@ static int rowNumber;
      
      }
     
-     
-     if([fileType isEqualToString: @"bounty"] &&[listOfRecipients containsObject:currentUser.objectId]) {
+    
+    /* if([fileType isEqualToString: @"bounty"] &&[listOfRecipients containsObject:currentUser.objectId]) {
      cell.textLabel.text= [NSString stringWithFormat:@"%@ set a Bounty on you!",[message objectForKey:@"senderName"]];
      
    
      }
-    if([fileType isEqualToString:@"bountyNotice"]){
-        if([listOfRecipients containsObject:currentUser.objectId]){
     
-            cell.textLabel.text = [NSString stringWithFormat:@"Bounty on %@", [message objectForKey:@"recipientUsername"]];
+                    
             
-            cell.imageView.image = [UIImage imageNamed:@"user-3"];
+            cell.imageView.image = [UIImage imageNamed:@"user-3-big"];
             cell.accessoryView=bountyLogo;
-         //if bounty is unread
          
-            if(![message[@"readUsers"] containsObject:currentUser.objectId ]){
-                cell.imageView.image = [UIImage imageNamed:@"user-3"];
-                cell.accessoryView=bountyLogo;
-         }
-        }
+        }*/
         
-    }
     
+   
     
     
     
@@ -396,16 +402,20 @@ static int rowNumber;
 //allows right swiping
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Return YES - we will be able to delete all rows
-    if(indexPath.section==1){
-        return YES;
-    }
-    return NO;
+  
+    //prevents you from deleting last row
+    //innocent by standers
+    NSMutableArray *bountyNoticeArray =[self.sections objectForKey:@"bountyNotice"];
+    
+    if(indexPath.row==[bountyNoticeArray count]-1){
+        return NO;}
+    return YES;
 }
 
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
+        
     //add code here for when you hit delete
     NSLog(@"Delete");
         NSInteger rowNumber = 0;
@@ -442,8 +452,8 @@ static int rowNumber;
         [self.selectedMessage setObject:arrayUpdate forKey:@"recipientIds"];
         [self.selectedMessage saveInBackground]; //ensures array gets updated before there is index error after delete
         }
-        
-        
+    
+    
     [self.tableView reloadData];
         
         
@@ -558,9 +568,11 @@ static int rowNumber;
         NSString *string = @"active bounties";
         [label setText:string];
         [label setTextColor: [UIColor whiteColor] ];
+        
         [label setFont:[UIFont fontWithName:@"Raleway-Medium" size:15]];
         [view addSubview:label];
-        [view setBackgroundColor:[UIColor colorWithRed:190.0/255.0 green:190.0/255.0 blue:190.0/255.0 alpha:1.0]]; //your background color...
+        [view setAlpha: 0.9];
+        [view setBackgroundColor:[UIColor colorWithRed:41.0/255.0 green:166.0/255.0 blue:121.0/255.0 alpha:1.0]]; //your background color...
             return view;}
 
     else{
@@ -569,17 +581,20 @@ static int rowNumber;
         [label setTextColor: [UIColor whiteColor] ];
         [label setFont:[UIFont fontWithName:@"Raleway-Medium" size:15]];
         [view addSubview:label];
-        [view setBackgroundColor:[UIColor colorWithRed:190.0/255.0 green:190.0/255.0 blue:190.0/255.0 alpha:1.0]]; //your background color...
+        [view setAlpha: 0.9];
+        [view setBackgroundColor:[UIColor colorWithRed:51/255.0 green:70/255.0 blue:192/255.0 alpha:1.0]]; //your background color...
         
         //button
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-        [button setFrame:CGRectMake(0, 30.0, 325.0, 30.0)]; //(x,y,width,height)
+        [button setFrame:CGRectMake(0, 30.0, 330, 40.0)]; //(x,y,width,height)
         button.tag = section;
         [button setTitle: @"See Highlights" forState:UIControlStateNormal];
-        [button setTitleColor:[UIColor colorWithRed:9.0/255 green:92.0/255 blue:1 alpha:1] forState:UIControlStateNormal];
-        [button setFont:[UIFont fontWithName:@"Raleway-Medium" size:15]];
+        [button setTitleColor:[UIColor colorWithRed:51/255.0 green:70/255.0 blue:192/255.0 alpha:1.0] forState:UIControlStateNormal];
+        [button setFont:[UIFont fontWithName:@"TrebuchetMS-Bold" size:18]];
+        [[button layer] setBorderWidth:2.0f];
+        [[button layer] setBorderColor:[UIColor colorWithRed:51/255.0 green:70/255.0 blue:192/255.0 alpha:1.0].CGColor];
         button.hidden = NO;
-        [button setBackgroundColor:[UIColor colorWithRed:255/255.0 green:255/255.0 blue:255.0/255.0 alpha:1.0]];
+        [button setBackgroundColor:[UIColor whiteColor]];
         [button addTarget:self action:@selector(topButton:) forControlEvents:UIControlEventTouchDown];
         [view addSubview:button];
         
@@ -596,7 +611,7 @@ static int rowNumber;
 {
     if(section == 0){
         return 30.f;}
-    return 60.f;
+    return 70.f;
 }
 
 
@@ -631,6 +646,7 @@ static int rowNumber;
     }
 
 - (IBAction)setBounties:(id)sender {
+    //self.bountyButton.selected = YES;
     [self.tabBarController setSelectedIndex:5];
 }
 

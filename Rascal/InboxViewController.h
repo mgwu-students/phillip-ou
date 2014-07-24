@@ -15,6 +15,7 @@
 @property(nonatomic, strong) NSArray *bounties;
 @property(nonatomic, strong) NSArray *posts;
 
+@property (strong, nonatomic) IBOutlet UIButton *bountyButton;
 
 @property (nonatomic, retain) NSMutableDictionary *sections;
 @property (nonatomic, retain) NSMutableDictionary *sectionFileType;

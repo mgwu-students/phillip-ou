@@ -123,7 +123,8 @@
         cell.accessoryType = UITableViewCellAccessoryNone;
     }
     PFUser *user = [self.friends objectAtIndex:indexPath.row];
-    cell.textLabel.text = user.username;
+    cell.textLabel.text = user.username.lowercaseString;
+    [cell.textLabel setFont:[UIFont fontWithName:@"Raleway-Medium" size:14]];
     
     
     //profile picture..might slow down game.

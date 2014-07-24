@@ -112,11 +112,10 @@
             [bountyNotice setObject:@"placeholder" forKey:@"placeholder"];
             [bountyNotice setObject:@[currentUser.objectId] forKey:@"recipientIds"];//notification goes to all friends
             [bountyNotice setObject:@"Innocent Bystander" forKey:@"recipientUsername"];
-            [bountyNotice setObject:currentUser.username forKey:@"senderName"];
+            [bountyNotice setObject:@"Anonymous" forKey:@"senderName"];
             [bountyNotice setObject:[[PFUser currentUser] objectId] forKey:@"senderId"];
             [bountyNotice setObject:[[PFUser currentUser] objectId] forKey:@"victimId"];
-            NSNumber *zero = [NSNumber numberWithInt:0];
-            [bountyNotice setObject:zero  forKey:@"bountyValue"];
+            [bountyNotice setObject:[NSNumber numberWithInt:0] forKey:@"bountyValue"];
             [bountyNotice setObject: @"A" forKey:@"payForId"];
             
             [bountyNotice saveInBackground];

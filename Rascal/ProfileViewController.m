@@ -74,6 +74,7 @@
     PFUser *currentUser = [PFUser currentUser];
     NSNumber *points = currentUser[@"Points"];
     self.pointsLabel.text = [NSString stringWithFormat: @"Income: %@",points];
+    self.userNameLabel.adjustsFontSizeToFitWidth=YES;
     self.userNameLabel.text = currentUser.username;
     
     if(currentUser){
@@ -165,9 +166,12 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath object:(PFObject *)object {
+   
+    
     if (indexPath.section == self.objects.count) { //if we're at the end (the last section)
-        UITableViewCell *cell = [self tableView:tableView cellForNextPageAtIndexPath:indexPath]; //get that cell(LoadMoreCell)
-        return cell;
+        [self loadNextPage];
+        /*UITableViewCell *cell = [self tableView:tableView cellForNextPageAtIndexPath:indexPath]; //get that cell(LoadMoreCell)
+        return cell;*/
     }
     static NSString *CellIdentifier = @"PhotoCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];

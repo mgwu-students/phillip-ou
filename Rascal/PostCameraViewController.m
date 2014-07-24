@@ -26,9 +26,10 @@
     [super viewDidLoad];
     self.friendsRelation = [[PFUser currentUser] objectForKey:@"friendsRelation"];
     self.recipients = [[NSMutableArray alloc] init];
-   
+    if (self.senderId !=nil){
+        NSLog(@"not empty");
     //have sender of bounty and victim of bounty be checked automatically
-    [self.recipients addObjectsFromArray:@[self.senderId,self.targetId]];
+        [self.recipients addObjectsFromArray:@[self.senderId,self.targetId]];}
 }
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
@@ -271,7 +272,8 @@
     self.chosenImageView = nil;
     self.imagePicker = nil;
     [self.recipients removeAllObjects];
-    [self performSegueWithIdentifier:@"backToTab" sender:self];
+    [self.tabBarController setSelectedIndex:2];
+    //[self performSegueWithIdentifier:@"backToTab" sender:self];
     
     //[self.tabBarController dismissViewControllerAnimated:NO completion:nil];
     //[self.tabBarController setSelectedIndex:0];

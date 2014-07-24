@@ -19,6 +19,7 @@
 @property (retain,nonatomic) NSString *objectIdString;
 @property (nonatomic,strong) PFObject *message;
 @property (nonatomic, strong) PFObject *mostRecentObject;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *cameraButton;
 
 @property (weak, nonatomic) IBOutlet UITextField *titleTextField;
 
