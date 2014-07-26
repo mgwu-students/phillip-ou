@@ -44,8 +44,12 @@
         NSLog(@"ByPass");
     }
     else{
+        PFUser *currentUser = [PFUser currentUser];
+        
        
     NSLog(@"call1");
+        
+        NSLog(@"%@",[currentUser objectForKey:@"friendsList"]);
         
 
         
@@ -96,8 +100,16 @@
 - (void)viewDidLoad
 
 {
+    PFUser *currentUser = [PFUser currentUser];
+    /*if(![currentUser[@"newUser"] isEqualToString:@"No"]){*/
+        [self.tabBarController setSelectedIndex:6];
+    
+    //else{
     NSLog(@"%@",self.count);
-    self.bountyButton.selected=NO;
+    //self.bountyButton.selected=NO;
+   
+    
+    
     /*if([self.count intValue]!=1){
         NSLog(@"calling this!!");
         PFUser *currentUser = [PFUser currentUser];
@@ -150,27 +162,36 @@
     }*/
 
     
-    [super viewDidLoad];
+        [super viewDidLoad];
     }
 -(void) viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
     PFUser *currentUser = [PFUser currentUser];
+    
+    NSString *profilePictureID = [currentUser objectForKeyedSubscript:@"facebookId"];
+    NSString *url = [[NSString alloc] initWithFormat:@"https://graph.facebook.com/%@/picture",profilePictureID];
+    UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:url]]];
    
     //[self.tableView reloadData];
     //PFUser *currentUser = [PFUser currentUser];
-    PFFile *profilePicture = [currentUser objectForKey:@"profilePicture"];
-     self.pointsLabel.text = [NSString stringWithFormat:@"Income: %@", currentUser[@"Points"]];
+    /*PFFile *profilePicture = [currentUser objectForKey:@"profilePicture"];*/
+     self.pointsLabel.text = [NSString stringWithFormat:@"Credits: %@", currentUser[@"Points"]];
     
     self.profileImageView.layer.masksToBounds = YES;
     self.profileImageView.layer.cornerRadius = 20;
     
-    self.profileImageView.file = profilePicture;
-    [self.profileImageView loadInBackground];
+    //self.profileImageView.file = profilePicture;
+    //[self.profileImageView loadInBackground];
+    
+    self.profileImageView.image= image;
+    
     
     self.userNameLabel.adjustsFontSizeToFitWidth=YES;
     
     self.userNameLabel.text = currentUser.username;
+    
+
 }
 
 - (PFObject *)objectAtIndexPath:(NSIndexPath *)indexPath {
@@ -189,10 +210,15 @@
 - (PFQuery *)queryForTable {
     PFQuery *query = [PFQuery queryWithClassName:self.parseClassName];
     PFUser *currentUser = [PFUser currentUser];
-   
-    if(currentUser !=nil){
+    PFRelation *friends = [currentUser relationForKey:@"friendsRelation"];
+        if(currentUser !=nil){
+            NSArray *array = [currentUser objectForKey:@"friendsList"];
+            self.friendsList=[NSMutableArray arrayWithArray:array];
+            NSLog(@"%@",self.friendsList);
         [query whereKey:@"recipientIds" containsAllObjectsInArray:@[currentUser.objectId]];
         [query whereKey:@"fileType" containedIn:@[@"image",@"bountyNotice"]];
+        [query whereKey:@"senderId" containedIn:self.friendsList];
+        
         
         [query orderByAscending:@"fileType"];
         [query addDescendingOrder:@"createdAt"];
@@ -328,6 +354,14 @@ static int rowNumber;
    
    
     PFObject *message = [self.objects objectAtIndex:rowNumber];
+    PFRelation *relation = [currentUser relationforKey:@"friendsRelation"];
+    self.allFriends = [[NSArray alloc]init];
+    
+    [[relation query] findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        self.allFriends = objects;
+    }];
+   
+   
     
         //NSLog(@"%@",message);
     //PFObject *message = [self.objects objectForKey:[NSNumber numberWithInteger:indexPath.row ]];
@@ -403,12 +437,12 @@ static int rowNumber;
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
   
-    //prevents you from deleting last row
+    //prevents you from deleting last row of sections array
     //innocent by standers
     NSMutableArray *bountyNoticeArray =[self.sections objectForKey:@"bountyNotice"];
-    
+    if(indexPath.section==0){
     if(indexPath.row==[bountyNoticeArray count]-1){
-        return NO;}
+        return NO;}}
     return YES;
 }
 
@@ -512,12 +546,24 @@ static int rowNumber;
      
     if([fileType isEqualToString:@"bountyNotice"]){
             NSLog(@"show camera");
+        NSString *bountyMessage = [NSString stringWithFormat:@"Bounty set by %@", self.selectedMessage[@"senderName"]];
+
+        if([self.selectedMessage[@"placeholder"] isEqualToString:@"placeholder"]){
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Bounty Set by a Higher Power"
+                                                                message:@"Go Embarass Some Peasants"
+                                                               delegate:self cancelButtonTitle:@"Yes" otherButtonTitles:nil];
+            [alertView show];
+
+        }
         //if(![self.selectedMessage[@"readUsers"] containsObject:currentUser.objectId]){
-            NSString *bountyMessage = [NSString stringWithFormat:@"Bounty set by %@", self.selectedMessage[@"senderName"]];
-                           UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:bountyMessage
+        else{
+            
+            //message before taking photo
+                                     /* UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:bountyMessage
                                                                     message:@"You Will Be Rewarded For This Photo"
                                                                    delegate:self cancelButtonTitle:@"Yes" otherButtonTitles:nil];
-                [alertView show];
+            [alertView show];*/}
+        
             [self performSegueWithIdentifier:@"transferBountyData" sender:self];
         
        // }
@@ -529,13 +575,14 @@ static int rowNumber;
         
         
         
-        }
+        
         
         
         //[self.tabBarController setSelectedIndex:2];
     }
+}
 
-    
+
  
     // Delete it!
     /*NSMutableArray *recipientIds = [NSMutableArray arrayWithArray:[self.selectedMessage objectForKey:@"recipientIds"]];
@@ -589,7 +636,7 @@ static int rowNumber;
         [button setFrame:CGRectMake(0, 30.0, 330, 40.0)]; //(x,y,width,height)
         button.tag = section;
         [button setTitle: @"See Highlights" forState:UIControlStateNormal];
-        [button setTitleColor:[UIColor colorWithRed:51/255.0 green:70/255.0 blue:192/255.0 alpha:1.0] forState:UIControlStateNormal];
+        [button setTitleColor:[UIColor colorWithRed:225/255.0 green:150/255.0 blue:42/255.0 alpha:1.0] forState:UIControlStateNormal];
         [button setFont:[UIFont fontWithName:@"TrebuchetMS-Bold" size:18]];
         [[button layer] setBorderWidth:2.0f];
         [[button layer] setBorderColor:[UIColor colorWithRed:51/255.0 green:70/255.0 blue:192/255.0 alpha:1.0].CGColor];
@@ -647,6 +694,9 @@ static int rowNumber;
 
 - (IBAction)setBounties:(id)sender {
     //self.bountyButton.selected = YES;
+   // self.view.backgroundColor = [UIColor blackColor];
+    
+    
     [self.tabBarController setSelectedIndex:5];
 }
 

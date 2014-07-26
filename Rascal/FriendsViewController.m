@@ -21,6 +21,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self.navigationController.navigationBar setHidden:NO];
     self.bountyCost = 10;
     self.recipientsOfBounties = [[NSMutableArray alloc] init];
     self.allFriends = [[NSMutableArray alloc] init];
@@ -28,11 +29,6 @@
     
    
 }
-
-
-    
-
-    
     
    
 
@@ -44,6 +40,8 @@
     [self.recipientsOfBounties removeAllObjects];
     self.clickCount = 0;
     self.friendsRelation = [[PFUser currentUser] objectForKey:@"friendsRelation"];
+    self.friendsList = [currentUser objectForKey:@"friendsList"];
+    NSLog(@"Friends:%@",self.friendsList);
     PFQuery *query = [self.friendsRelation query]; //create query of our friends
     
     //PFQuery *friendRequestQuery = [PFQuery queryWithClassName:@"FriendRequest"];
@@ -96,10 +94,18 @@
     PFUser *currentUser = [PFUser currentUser];
     PFUser *user = [self.friends objectAtIndex: indexPath.row];
     PFRelation *friendsRelation = [currentUser relationForKey: @"friendsRelation"];//adding friends
+    NSMutableArray *updateArray = self.friendsList;
     for (PFUser *friend in[self.friends copy] ){
         if([friend.objectId isEqualToString:user.objectId]){
             [friendsRelation removeObject:user];
             [self.friends removeObject:friend];
+            [currentUser setObject:self.friends forKey:@"friendsList"];
+            
+            if(![friend.objectId isEqualToString: currentUser.objectId]){
+                NSLog(@"deleting");
+                [self.friendsList removeObject:friend.objectId];}
+            NSArray *array = [NSArray arrayWithArray:self.friendsList];
+            [currentUser setObject:array forKey:@"friendsList" ];
             NSLog(@"Remove %@",user.username);
             
             [currentUser saveInBackground];

@@ -11,6 +11,7 @@
 #import <FacebookSDK/FacebookSDK.h>
 #import "LoginViewController.h"
 #import "ParseLoginViewController.h"
+#import "TutorialViewController.h"
 
 @implementation AppDelegate
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -44,6 +45,7 @@
     [PFFacebookUtils initializeFacebook];
     
     
+    
     return YES;
 }
 
@@ -60,6 +62,7 @@
     
     [self.window.rootViewController presentViewController:loginViewController animated:animated completion:nil];
 }
+
 
 - (void)applicationWillResignActive:(UIApplication *)application
 {
@@ -97,6 +100,8 @@
 }
 
 - (void)logInViewController:(PFLogInViewController *)logInController didLogInUser:(PFUser *)user {
+    
+    
     [FBRequestConnection startForMeWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error){
         if (!error) {
             PFUser *currentUser = [PFUser currentUser];
@@ -117,8 +122,25 @@
             [bountyNotice setObject:[[PFUser currentUser] objectId] forKey:@"victimId"];
             [bountyNotice setObject:[NSNumber numberWithInt:0] forKey:@"bountyValue"];
             [bountyNotice setObject: @"A" forKey:@"payForId"];
+             //add anonymous to friendsList (list of friends ids);
             
-            [bountyNotice saveInBackground];
+            [bountyNotice saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                if(!error){
+                    NSLog(@"saving array");
+                    [currentUser setObject:@[currentUser.objectId] forKey:@"friendsList"]; //add yourself to frends list so you can see yourself as victim Id. also for innocent bystander
+                    [currentUser saveInBackground];
+                    
+                 
+                    
+                    
+                 
+                   
+                }
+            }];
+            
+                
+           
+           
             
             }
             [self facebookRequestDidLoad:result];
@@ -128,6 +150,8 @@
         }
     }];
 }
+
+
 
 - (void)logInViewController:(PFLogInViewController *)logInController didFailToLogInWithError:(NSError *)error {
     // show error and log out
@@ -188,6 +212,8 @@
                     }
                     else {
                         [self.window.rootViewController dismissViewControllerAnimated:YES completion:nil];
+                        
+                        
                     }
                 }];
             }

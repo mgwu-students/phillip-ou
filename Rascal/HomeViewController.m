@@ -38,7 +38,7 @@
         self.parseClassName = @"Messages";
         self.pullToRefreshEnabled = YES;
         self.paginationEnabled = YES; //allows scrolling down to load more pages
-        self.objectsPerPage = 3;
+        self.objectsPerPage = 10;
     }
     return self;
 }
@@ -73,7 +73,7 @@
     // Retrieve the top songs by sales
     //[query orderByDescending:@"listOfLikers"];
     
-    // Limit to retrieving ten songs
+    
     query.limit = 25;
     
    
@@ -105,6 +105,7 @@
     UITableViewCell *sectionHeaderView = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
      //UILabel *senderLabel = (UILabel *)[sectionHeaderView viewWithTag:2];
     
+   
     
     self.message = [self.objects objectAtIndex:section];
     NSString *username = [self.message objectForKey:@"senderName"];
@@ -125,6 +126,7 @@
     UIButton *likeButton = (UIButton *) [sectionHeaderView viewWithTag:4];;
     
     titleLabel.text=caption;
+    titleLabel.textColor=[UIColor colorWithRed:179/255.0 green:135/255.0 blue:27/255.0 alpha:1.0];
     userNameLabel.text = [NSString stringWithFormat:@"by %@",username];
     NSInteger *numberOfLikes = [self.message[@"listOfLikers"] count];
     numberOfLikesLabel.text = [NSString stringWithFormat: @"%d",numberOfLikes];
@@ -152,13 +154,23 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath object:(PFObject *)object {
     if (indexPath.section == self.objects.count) { //if we're at the end (the last section)
+        //loads next page while presenting a blank buffer cell
+        UITableViewCell *cell = [self tableView:tableView cellForNextPageAtIndexPath:indexPath];
         [self loadNextPage];
+        return cell;
        /* UITableViewCell *cell = [self tableView:tableView cellForNextPageAtIndexPath:indexPath]; //get that cell(LoadMoreCell)
         return cell;*/
     }
     static NSString *CellIdentifier = @"PhotoCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     PFImageView *photo = (PFImageView *)[cell viewWithTag:1];
+    
+    //create border/frame around picture
+    /*cell.layer.borderWidth = 3.0;
+    UIColor *frameColor =[UIColor colorWithRed:179/255.0 green:135/255.0 blue:27/255.0 alpha:1.0];
+    cell.layer.borderColor = frameColor.CGColor;*/
+    
+    
     //handles landscape
     int orientation = photo.image.imageOrientation;
     if(orientation ==0 || orientation ==1){
@@ -219,8 +231,12 @@
    /* if (![PFUser currentUser] || ![PFFacebookUtils isLinkedWithUser:[PFUser currentUser]]) {
          return nil;
          }*/
+    PFUser *currentUser = [PFUser currentUser];
         PFQuery *query = [PFQuery queryWithClassName:self.parseClassName];
         [query whereKey:@"fileType" equalTo:@"image"];
+    
+    //top photos only from your friends
+    [query whereKey:@"senderId" containedIn:currentUser[@"friendsList"]];
     
     
         //[query includeKey:@"whoTook"];

@@ -18,6 +18,7 @@
 
 - (void)viewDidLoad
 {
+    [self.navigationController.navigationBar setHidden:NO];
     [super viewDidLoad];
     PFUser *currentUser = [PFUser currentUser];
     self.bountyCost = 5;
@@ -93,7 +94,9 @@
         cell.accessoryType = UITableViewCellAccessoryNone;
     }
     PFUser *user = [self.friends objectAtIndex:indexPath.row];
-    cell.textLabel.text = user.username;
+    cell.textLabel.text = user.username.lowercaseString;
+    [cell.textLabel setFont:[UIFont fontWithName:@"Raleway-Medium" size:14]];
+   
     
     return cell;
 }
@@ -178,19 +181,11 @@
 }
 #pragma mark - TO DO
 - (void)uploadMessage {
-    if([self.points doubleValue] < [@5.0f doubleValue]){
-        //if users don't have enough points, don't let them set bounties
-        
-        
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"You Don't Have Enough Points"
-                                                            message:@"Send More Photos!"
-                                                           delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
-        NSLog(@"you actually have %@",self.points);
-        [alertView show];
-        [self reset];
-    }
+   
     
-    else{
+    
+    
+    
         if ([self.recipientsOfBounties count] !=0){
             PFUser *currentUser = [PFUser currentUser];
             PFObject *bounty = [PFObject objectWithClassName:@"Messages"];
@@ -200,8 +195,8 @@
             PFACL *readAccess = [[PFACL alloc]init];
             //PFACL *readAccess2 = [[PFACL alloc]init];
             [readAccess setReadAccess:YES forUserId:self.user.objectId];
-            UIAlertView *bountyAlert = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"You Have Set Bounty on %@!",self.user.username]
-                                                                  message:@"Good Work."
+            UIAlertView *bountyAlert = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"You Have Set a Bounty on %@!",self.user.username]
+                                                                  message:@"Now We Wait"
                                                                  delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
             [bountyAlert show];
 
@@ -246,7 +241,8 @@
             }];
             
             [self reset];}
-    }
+        
+    
     NSLog (@"No Bounties Set");
 }
 
@@ -266,14 +262,37 @@
 
 - (IBAction)setBounty:(id)sender {
     PFUser *currentUser = [PFUser currentUser];
-    [self uploadMessage];
+    
     int points = [self.points intValue];
     if ([self.points intValue] >=self.bountyCost){
-        self.points = [NSNumber numberWithInt:points-self.bountyCost];
-        [currentUser setObject: self.points forKey:@"Points" ];
-        [currentUser saveInBackground];}
+        if ([self.recipientsOfBounties count] !=0){
+            [self uploadMessage];
+            self.points = [NSNumber numberWithInt:points-self.bountyCost];
+            [currentUser setObject: self.points forKey:@"Points" ];
+            [currentUser saveInBackground];
+        [self.tabBarController setSelectedIndex:0];}
+        
+            else{
+                UIAlertView *warning = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"You didn't pick a user"]
+                                                                  message:@"Please select one"
+                                                                 delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                [warning show];
+            }
+    }
+    if([self.points doubleValue] < [@5.0f doubleValue]){
+        //if users don't have enough points, don't let them set bounties
+        
+        
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"You Don't Have Enough Points"
+                                                            message:@"Send More Photos!"
+                                                           delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        NSLog(@"you actually have %@",self.points);
+        [alertView show];
+        [self reset];
+        [self.tabBarController setSelectedIndex:0];
+    }
     NSLog(@"%@",self.points);
-    [self.tabBarController setSelectedIndex:0];
+    
     
 }
 - (IBAction)back:(id)sender {

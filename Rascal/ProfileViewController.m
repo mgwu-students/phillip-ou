@@ -73,7 +73,7 @@
     [super viewWillAppear:animated];
     PFUser *currentUser = [PFUser currentUser];
     NSNumber *points = currentUser[@"Points"];
-    self.pointsLabel.text = [NSString stringWithFormat: @"Income: %@",points];
+    self.pointsLabel.text = [NSString stringWithFormat: @"Credits: %@",points];
     self.userNameLabel.adjustsFontSizeToFitWidth=YES;
     self.userNameLabel.text = currentUser.username;
     
@@ -137,7 +137,7 @@
     titleLabel.text=caption;
     senderLabel.text = [NSString stringWithFormat: @"by %@",userName];
    
-    NSInteger *numberOfLikes = [photo[@"listOfLikers"] count];
+    int numberOfLikes = [[photo objectForKey:@"numberOfLikes"] intValue];
     numberOfLikesLabel.text = [NSString stringWithFormat: @"%d",numberOfLikes];
     
   
@@ -169,7 +169,9 @@
    
     
     if (indexPath.section == self.objects.count) { //if we're at the end (the last section)
+        UITableViewCell *cell = [self tableView:tableView cellForNextPageAtIndexPath:indexPath];
         [self loadNextPage];
+        return cell;
         /*UITableViewCell *cell = [self tableView:tableView cellForNextPageAtIndexPath:indexPath]; //get that cell(LoadMoreCell)
         return cell;*/
     }

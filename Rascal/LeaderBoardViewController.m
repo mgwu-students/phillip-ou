@@ -77,7 +77,9 @@
     UILabel *rankLabel = (UILabel*) [cell viewWithTag:3];
     
     PFUser *user = [self.friends objectAtIndex:indexPath.row];
-    nameLabel.text = user.username;
+    nameLabel.text = user.username.lowercaseString;
+    nameLabel.adjustsFontSizeToFitWidth=YES;
+    [nameLabel setFont:[UIFont fontWithName:@"Raleway-Medium" size:14]];
     //highlight current user
     if([user.username isEqualToString:currentUser.username]){
         nameLabel.highlighted = YES;
@@ -85,7 +87,21 @@
         pointsLabel.highlighted=YES;
     }
     pointsLabel.text =[ NSString stringWithFormat: @"%@",[user objectForKey:@"Points"]];
+    [pointsLabel setFont:[UIFont fontWithName:@"Raleway-Medium" size:14]];
     rankLabel.text = [NSString stringWithFormat: @"#%ld", indexPath.row+1];
+    [rankLabel setFont:[UIFont fontWithName:@"Raleway-Medium" size:14]];
+    
+    //profile picture..might slow down game.
+    
+    NSString *profilePictureID = [user objectForKeyedSubscript:@"facebookId"];
+    NSString *url = [[NSString alloc] initWithFormat:@"https://graph.facebook.com/%@/picture",profilePictureID];
+    UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:url]]];
+    
+    cell.imageView.image = image;
+    
+    [cell.imageView setFrame:CGRectMake(0, 0, 5, 5)];
+    [cell addSubview:cell.imageView];
+    //cell.imageView.frame = CGRectMake(50.0, 0, 5, 5);
     //cell.textLabel.text = user.username;
     
     

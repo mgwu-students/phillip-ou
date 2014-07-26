@@ -23,9 +23,9 @@
 - (void)viewDidLoad
 {
     self.searchResults = [NSMutableArray arrayWithCapacity:[self.allUsers count]];
-     self.allUsernames = [[NSMutableArray alloc]init];
+    self.allUsernames = [[NSMutableArray alloc]init];
     self.userDict = [[NSMutableDictionary alloc]init];
-    
+    self.friendsList = [[PFUser currentUser] objectForKey:@"friendsList"];
     
     PFQuery *query = [PFUser query];//get query of all users in this app
     [super viewDidLoad];
@@ -41,7 +41,7 @@
                 [self.allUsernames addObject:[obj objectForKey:@"username"]];
                 [self.userDict setObject:obj forKey:[obj objectForKey:@"username"]];
                 
-                }
+            }
             [self.tableView reloadData];
         }
         NSLog(@"%@", self.userDict);
@@ -57,7 +57,7 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-
+    
     // Return the number of sections.
     return 1;
 }
@@ -65,7 +65,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if (tableView == self.searchDisplayController.searchResultsTableView) {
-       
+        
         return [self.searchResults count];}
     
     
@@ -78,25 +78,37 @@
     UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
     
+    //slows down search a lot getting profile picture
+    
     PFUser *user = [self.allUsers objectAtIndex:indexPath.row];
     
     if (tableView == self.searchDisplayController.searchResultsTableView) {
         
-       NSString *username= [self.searchResults objectAtIndex:indexPath.row];
+        
+        NSString *username= [self.searchResults objectAtIndex:indexPath.row];
         cell.textLabel.text = username;
+        PFUser *user = [self.userDict objectForKey:username];
+        
+        NSString *profilePictureID = [user objectForKeyedSubscript:@"facebookId"];
+        NSString *url = [[NSString alloc] initWithFormat:@"https://graph.facebook.com/%@/picture",profilePictureID];
+        
+        UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:url]]];
+        
+        cell.imageView.image = image;
+        cell.imageView.frame = CGRectMake(0, 0, 5, 5);
         //cell = [self.userDict objectForKey:username];
-        }
+    }
     else{
         cell.hidden=YES;
-    cell.textLabel.text = user.username;
-    
-    //if user is a friend then have a check mark
-    if([self isFriend:user]){
-        cell.accessoryType = UITableViewCellAccessoryCheckmark;
-    }
-    else{
-        cell.accessoryType= UITableViewCellAccessoryNone;
-    }
+        cell.textLabel.text = user.username;
+        
+        //if user is a friend then have a check mark
+        if([self isFriend:user]){
+            cell.accessoryType = UITableViewCellAccessoryCheckmark;
+        }
+        else{
+            cell.accessoryType= UITableViewCellAccessoryNone;
+        }
     }
     return cell;
 }
@@ -109,7 +121,7 @@
     }
     return NO;
     
-       }
+}
 
 
 -(void) tableView: (UITableView *) tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -127,7 +139,7 @@
         PFUser *currentUser = [PFUser currentUser];
         PFRelation *friendsRelation = [self.currentUser relationForKey: @"friendsRelation"];//adding friends
         
-      
+        
         
         NSLog(@"%@",user.username);
         
@@ -137,6 +149,75 @@
             cell.accessoryType = UITableViewCellAccessoryNone;
             //2. remove from the array of friends
             for (PFUser *friend in self.friends){
+                if([friend.objectId isEqualToString:user.objectId]){
+                    [self.friends removeObject:friend];
+                    [self.friendsList removeObject:friend.objectId];
+                    
+                }
+                //3. remove from the backend
+                
+                
+                
+                
+                [friendsRelation removeObject:user];
+                
+            }
+            
+        }
+        ///else add them
+        
+        
+        else{
+            NSLog(@"Here's this list: %@",self.friendsList);
+            NSMutableArray *updateArray = [NSMutableArray arrayWithArray:self.friendsList];
+            NSLog(@"Testing this: %@", user.objectId);
+            
+            cell.accessoryType = UITableViewCellAccessoryCheckmark; //add checkmark
+            cell.selected =NO;
+            [self.friends addObject:user];
+            [updateArray addObject:user.objectId];
+           self.friendsList=updateArray;
+            if(![self.friendsList containsObject:user.objectId]){
+                NSLog(@"adding");
+                
+            }
+            
+            NSLog(@"running?");
+            /*PFObject *friendRequest = [PFObject objectWithClassName:@"FriendRequest"];
+             [friendRequest setObject:currentUser forKey:@"requestFrom"];
+             [friendRequest setObject: user forKey:@"requestTo"];
+             [friendRequest setObject:@"Pending" forKey:@"status"];
+             [friendRequest save];*/
+            
+            
+            [friendsRelation addObject: user ];
+            
+            
+            
+        }
+        NSArray *arrayUpdate = [NSArray arrayWithArray:self.friendsList];
+        NSLog(@"saving this list:%@",arrayUpdate);
+        [self.currentUser setObject:arrayUpdate forKey:@"friendsList"];
+        
+        [self.currentUser saveInBackground];
+        [self.tableView reloadData];
+    }
+    else{
+        [self.tableView deselectRowAtIndexPath:indexPath animated:NO];
+        UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+        
+        //cell.accessoryType = UITableViewCellAccessoryCheckmark; //put check mark
+        PFUser *user = [self.allUsers objectAtIndex: indexPath.row];
+        PFRelation *friendsRelation = [self.currentUser relationForKey: @"friendsRelation"];//adding friends
+        
+        
+        
+        //if user tapped is a friend remove them
+        if([self isFriend:user]){
+            //1. remove check mark
+            cell.accessoryType = UITableViewCellAccessoryNone;
+            //2. remove from the array of friends
+            for (PFUser *friend in[self.friends copy] ){
                 if([friend.objectId isEqualToString:user.objectId]){
                     [self.friends removeObject:friend];
                     
@@ -151,92 +232,35 @@
         
         
         else{
-            
             cell.accessoryType = UITableViewCellAccessoryCheckmark; //add checkmark
-            cell.selected =NO;
             [self.friends addObject:user];
             NSLog(@"running?");
-            PFObject *friendRequest = [PFObject objectWithClassName:@"FriendRequest"];
-            [friendRequest setObject:currentUser forKey:@"requestFrom"];
-            [friendRequest setObject: user forKey:@"requestTo"];
-            [friendRequest setObject:@"Pending" forKey:@"status"];
-            [friendRequest save];
             
+            /*PFObject *friendRequest = [PFObject objectWithClassName:@"FriendRequest"];
+             [friendRequest setObject:currentUser forKey:@"requestFrom"];
+             [friendRequest setObject: user forKey:@"requestTo"];
+             [friendRequest setObject:user.username forKey:@"requestToName"];
+             [friendRequest setObject:currentUser.username forKey:@"requestFromName"];
+             
+             [friendRequest setObject:@"Pending" forKey:@"status"];
+             [friendRequest saveInBackground];*/
             
             [friendsRelation addObject: user ];
             
             
-            
         }
-        
-        [self.currentUser saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-            {
-                if(error){
-                    NSLog(@"Error %@ %@, error", [error userInfo]);
-                }
-            }
-        }];
-        [self.tableView reloadData];
     }
-else{
-    [self.tableView deselectRowAtIndexPath:indexPath animated:NO];
-    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-    
-    //cell.accessoryType = UITableViewCellAccessoryCheckmark; //put check mark
-    PFUser *user = [self.allUsers objectAtIndex: indexPath.row];
-    PFRelation *friendsRelation = [self.currentUser relationForKey: @"friendsRelation"];//adding friends
-    
-    
-   
-    //if user tapped is a friend remove them
-    if([self isFriend:user]){
-        //1. remove check mark
-        cell.accessoryType = UITableViewCellAccessoryNone;
-        //2. remove from the array of friends
-        for (PFUser *friend in[self.friends copy] ){
-            if([friend.objectId isEqualToString:user.objectId]){
-                [self.friends removeObject:friend];
-                
-            }
-        //3. remove from the backend
-        [friendsRelation removeObject:user];
-            
-        }
-        
-    }
-    ///else add them
-    
-
-    else{
-        cell.accessoryType = UITableViewCellAccessoryCheckmark; //add checkmark
-        [self.friends addObject:user];
-        NSLog(@"running?");
-        
-        /*PFObject *friendRequest = [PFObject objectWithClassName:@"FriendRequest"];
-        [friendRequest setObject:currentUser forKey:@"requestFrom"];
-        [friendRequest setObject: user forKey:@"requestTo"];
-        [friendRequest setObject:user.username forKey:@"requestToName"];
-        [friendRequest setObject:currentUser.username forKey:@"requestFromName"];
-        
-        [friendRequest setObject:@"Pending" forKey:@"status"];
-        [friendRequest saveInBackground];*/
-        
-        [friendsRelation addObject: user ];
-       
-        
-    }
-        }
     /*[self.currentUser saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-        {
-            if(error){
-                NSLog(@"Error %@ %@, error", [error userInfo]);
-            }
-        }
-    }];
-   
-        
-        
-    }*/
+     {
+     if(error){
+     NSLog(@"Error %@ %@, error", [error userInfo]);
+     }
+     }
+     }];
+     
+     
+     
+     }*/
     [self.currentUser saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         {
             if(error){
@@ -245,7 +269,7 @@ else{
         }
     }];
     [self.tableView reloadData];
-
+    
     
     
     
@@ -254,7 +278,7 @@ else{
 
 - (void)filterContentForSearchText:(NSString*)searchText scope:(NSString*)scope
 {[self.searchResults removeAllObjects];
-    NSPredicate *resultPredicate = [NSPredicate predicateWithFormat:@"SELF contains[c] %@", searchText];
+    NSPredicate *resultPredicate = [NSPredicate predicateWithFormat:@"SELF BEGINSWITH[c] %@", searchText];
     self.searchResults = [NSMutableArray arrayWithArray: [self.allUsernames filteredArrayUsingPredicate:resultPredicate]];
     
     NSLog(@"%@",self.searchResults);
@@ -289,52 +313,52 @@ else{
 }
 
 /*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
+ // Override to support conditional editing of the table view.
+ - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+ {
+ // Return NO if you do not want the specified item to be editable.
+ return YES;
+ }
+ */
 
 /*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
+ // Override to support editing the table view.
+ - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+ {
+ if (editingStyle == UITableViewCellEditingStyleDelete) {
+ // Delete the row from the data source
+ [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+ } else if (editingStyle == UITableViewCellEditingStyleInsert) {
+ // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+ }
+ }
+ */
 
 /*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
+ // Override to support rearranging the table view.
+ - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
+ {
+ }
+ */
 
 /*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
+ // Override to support conditional rearranging of the table view.
+ - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
+ {
+ // Return NO if you do not want the item to be re-orderable.
+ return YES;
+ }
+ */
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+ {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end

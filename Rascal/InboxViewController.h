@@ -15,7 +15,6 @@
 @property(nonatomic, strong) NSArray *bounties;
 @property(nonatomic, strong) NSArray *posts;
 
-@property (strong, nonatomic) IBOutlet UIButton *bountyButton;
 
 @property (nonatomic, retain) NSMutableDictionary *sections;
 @property (nonatomic, retain) NSMutableDictionary *sectionFileType;
@@ -25,6 +24,10 @@
 @property (strong, nonatomic) IBOutlet UILabel *userNameLabel;
 @property (strong, nonatomic) IBOutlet UILabel *pointsLabel;
 @property (nonatomic) NSNumber *count;
+@property (strong, nonatomic) NSArray *allFriends;
+@property (strong, nonatomic) NSMutableArray* friendsList;
+
+@property (strong, nonatomic) IBOutlet UIButton *bountyButton;
 
 -(IBAction) logout: (id)sender;
 @end

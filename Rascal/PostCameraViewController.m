@@ -29,7 +29,8 @@
     if (self.senderId !=nil){
         NSLog(@"not empty");
     //have sender of bounty and victim of bounty be checked automatically
-        [self.recipients addObjectsFromArray:@[self.senderId,self.targetId]];}
+        if (![self.senderId isEqualToString: [PFUser currentUser].objectId]){
+            [self.recipients addObjectsFromArray:@[self.senderId,self.targetId]];}}
 }
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
@@ -156,7 +157,43 @@
 - (IBAction)send:(id)sender {
             [self uploadMessage];
         [self reset];
+    NSString *message1 = @"The essence of all beautiful art, all great art, is gratitude.";
+    NSString *author1 = @"Friedrich Nietzsche";
+    
+    NSString *message2=@"An artist is not paid for his labor but for his vision.";
+    NSString *author2 = @"James Whistler";
+    NSString *message3 = @"Every artist was first an amateur";
+    NSString *author3 = @"Ralph Waldo Emerson";
+    NSString *message4 = @"You don't take a photograph, you make it";
+    NSString *author4 = @"Ansel Adams";
+    NSString *message5 = @"A picture is a poem without words";
+    NSString *author5 = @"Horace";
+    NSString *message6 = @"Art is not a thing, it is a way";
+    NSString *author6 = @"Elbert Hubbard";
+    NSString *message7 = @"Art is man's expression of his joy in labor";
+    NSString *author7 = @"Henry Kissinger";
+    NSString *message8 =@"In art the best is good enough.";
+    NSString *author8 = @"Goethe";
+    NSString *message9 = @"Creativity takes courage";
+    NSString *author9 = @"Henry Matisse";
+    NSString *message10 = @"We don't make mistakes, just happy little accidents";
+    NSString *author10 = @"Bob Ross";
+    NSString *message11 = @"The principles of true art is not to portray, but to evoke";
+    NSString *author11 = @"Jerzy Kosinski";
+    
+    NSArray *quotes = @[message1,message2,message3,message4,message5,message6,message7,message8,message9,message10,message11];
+    NSArray *author =@[author1,author2,author3,author4,author5,author6,author7,author8,author9,author10,author11];
+    
+    int r = arc4random() %10;
+    
+    UIAlertView *photoMessage = [[UIAlertView alloc] initWithTitle:[quotes objectAtIndex:r]//[NSString stringWithFormat:@"You Have Set a Bounty on %@!",self.user.username]
+                                                          message:[NSString stringWithFormat:@"-%@",[author objectAtIndex:r]]
+                                                         delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [photoMessage show];
+
+    
     [self.tabBarController dismissViewControllerAnimated:NO completion:nil];
+    
         //[self.tabBarController setSelectedIndex:0];
      //self.tabBarController.hidesBottomBarWhenPushed = NO;
    // }
@@ -272,8 +309,8 @@
     self.chosenImageView = nil;
     self.imagePicker = nil;
     [self.recipients removeAllObjects];
-    [self.tabBarController setSelectedIndex:2];
-    //[self performSegueWithIdentifier:@"backToTab" sender:self];
+    [self.tabBarController setSelectedIndex:0];
+    [self performSegueWithIdentifier:@"backToTab" sender:self];
     
     //[self.tabBarController dismissViewControllerAnimated:NO completion:nil];
     //[self.tabBarController setSelectedIndex:0];

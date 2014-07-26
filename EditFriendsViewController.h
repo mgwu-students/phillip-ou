@@ -15,8 +15,10 @@
 @property (nonatomic, strong) NSMutableDictionary *userDict;
 @property (nonatomic, strong) NSMutableArray *searchResults;
 @property (nonatomic, strong) PFUser *currentUser;
-@property (nonatomic, strong) NSMutableArray *friends; //array of friends we can edit 
+@property (nonatomic, strong) NSMutableArray *friends; //array of friends we can edit
+@property (nonatomic, strong) NSMutableArray *friendsList;
 -(BOOL) isFriend:(PFUser*) user;
 
+@property (strong, nonatomic) IBOutlet UISearchBar *searchBar;
 
 @end
