@@ -37,6 +37,7 @@
 
 -(void) viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    self.bountyButton.selected=NO;
     PFUser *currentUser = [PFUser currentUser];
     self.points = currentUser[@"Points"];
     NSLog(@"Points:%@",self.points);
@@ -262,6 +263,7 @@
 
 - (IBAction)setBounty:(id)sender {
     PFUser *currentUser = [PFUser currentUser];
+    self.bountyButton.selected=YES;
     
     int points = [self.points intValue];
     if ([self.points intValue] >=self.bountyCost){

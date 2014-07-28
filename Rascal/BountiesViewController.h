@@ -22,6 +22,7 @@
 @property (nonatomic,assign) int bountyCost;
 @property (nonatomic,assign) int bountyValue;
 
+@property (strong, nonatomic) IBOutlet UIButton *bountyButton;
 
 @property (strong, nonatomic) IBOutlet UISlider *slider;
 

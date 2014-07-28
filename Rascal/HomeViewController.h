@@ -9,8 +9,8 @@
 #import <Parse/Parse.h>
 #import "FollowButton.h"
 
-@interface HomeViewController : PFQueryTableViewController <FollowButtonDelegate>
-@property (nonatomic, weak) id <FollowButtonDelegate> delegate;
+@interface HomeViewController : PFQueryTableViewController
+
 
 @property (nonatomic, strong) PFObject *message;
 

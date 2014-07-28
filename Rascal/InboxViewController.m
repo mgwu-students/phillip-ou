@@ -100,13 +100,13 @@
 - (void)viewDidLoad
 
 {
-    PFUser *currentUser = [PFUser currentUser];
+    //PFUser *currentUser = [PFUser currentUser];
     /*if(![currentUser[@"newUser"] isEqualToString:@"No"]){*/
         [self.tabBarController setSelectedIndex:6];
     
     //else{
     NSLog(@"%@",self.count);
-    //self.bountyButton.selected=NO;
+   
    
     
     
@@ -129,7 +129,7 @@
         [bountyNotice saveInBackground];
         self.count=[NSNumber numberWithInt:2];}*/
      
-    [self loadObjects];
+    //[self loadObjects];
     
     [[UINavigationBar appearance] setTitleTextAttributes: [NSDictionary dictionaryWithObjectsAndKeys:
                                                            [UIFont fontWithName:@"Raleway-Thin" size:25.0], NSFontAttributeName, nil]];
@@ -166,6 +166,7 @@
     }
 -(void) viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+     self.bountyButton.selected=NO;
     
     PFUser *currentUser = [PFUser currentUser];
     
@@ -191,6 +192,7 @@
     
     self.userNameLabel.text = currentUser.username;
     
+    [self loadObjects];
 
 }
 
@@ -695,7 +697,7 @@ static int rowNumber;
 - (IBAction)setBounties:(id)sender {
     //self.bountyButton.selected = YES;
    // self.view.backgroundColor = [UIColor blackColor];
-    
+    self.bountyButton.selected =YES;
     
     [self.tabBarController setSelectedIndex:5];
 }

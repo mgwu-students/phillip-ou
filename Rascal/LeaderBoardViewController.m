@@ -88,7 +88,7 @@
     }
     pointsLabel.text =[ NSString stringWithFormat: @"%@",[user objectForKey:@"Points"]];
     [pointsLabel setFont:[UIFont fontWithName:@"Raleway-Medium" size:14]];
-    rankLabel.text = [NSString stringWithFormat: @"#%ld", indexPath.row+1];
+    rankLabel.text = [NSString stringWithFormat: @"#%d", indexPath.row+1];
     [rankLabel setFont:[UIFont fontWithName:@"Raleway-Medium" size:14]];
     
     //profile picture..might slow down game.

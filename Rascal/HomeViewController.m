@@ -123,12 +123,12 @@
     UILabel *numberOfLikesLabel = (UILabel *) [sectionHeaderView viewWithTag:4];
     NSString *caption = [self.message objectForKey:@"caption"];
     
-    UIButton *likeButton = (UIButton *) [sectionHeaderView viewWithTag:4];;
+    //UIButton *likeButton = (UIButton *) [sectionHeaderView viewWithTag:4];;
     
     titleLabel.text=caption;
     titleLabel.textColor=[UIColor colorWithRed:179/255.0 green:135/255.0 blue:27/255.0 alpha:1.0];
     userNameLabel.text = [NSString stringWithFormat:@"by %@",username];
-    NSInteger *numberOfLikes = [self.message[@"listOfLikers"] count];
+    int numberOfLikes = [self.message[@"listOfLikers"] count];
     numberOfLikesLabel.text = [NSString stringWithFormat: @"%d",numberOfLikes];
     
     

@@ -136,7 +136,6 @@
         //cell.accessoryType = UITableViewCellAccessoryCheckmark; //put check mark
         //PFUser *user = [self.allUsers objectAtIndex: indexPath.row];
         PFUser *user = [self.userDict objectForKey:username];
-        PFUser *currentUser = [PFUser currentUser];
         PFRelation *friendsRelation = [self.currentUser relationForKey: @"friendsRelation"];//adding friends
         
         

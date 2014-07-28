@@ -6,7 +6,9 @@
 //  Copyright (c) 2014 Philip Ou. All rights reserved.
 //
 
+
 #import "TutorialViewController.h"
+#import "InboxViewController.h"
 
 @interface TutorialViewController ()
 
@@ -26,16 +28,22 @@
 - (void)viewDidLoad
 
 {
+    self.doneButton.hidden=YES;
      [self.navigationController.navigationBar setHidden:YES];
-    self.label.text = @"where you are rewarded for embarassing your loved ones";
+    self.label.text = @"the app where you are rewarded for embarassing your loved ones";
     [self.label setFont:[UIFont fontWithName:@"Raleway-Thin" size:15.0]];
     [self.titleLabel setFont:[UIFont fontWithName:@"Raleway-Medium" size:18]];
-    [self.imageView setUserInteractionEnabled:YES];
+   // [self.imageView setUserInteractionEnabled:YES];
+    [self.view setUserInteractionEnabled:YES];
+    self.imageView.contentMode=UIViewContentModeScaleAspectFit;
+    
+    
     
     UISwipeGestureRecognizer *swipeLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(postBountyButton:)];
     
     [swipeLeft setDirection:UISwipeGestureRecognizerDirectionLeft];
-    [self.imageView addGestureRecognizer:swipeLeft];
+   // [self.imageView addGestureRecognizer:swipeLeft];
+    [self.view addGestureRecognizer:swipeLeft];
     
     
     [super viewDidLoad];
@@ -60,16 +68,44 @@
 */
 - (IBAction)done:(id)sender {
     [self.tabBarController setSelectedIndex:0];
+    [self.doneButton.titleLabel setFont:[UIFont fontWithName:@"Raleway-Medium" size:18]];
+}
+- (IBAction)firstPage:(id)sender {
+    self.titleLabel.text=@"welcome to rascal";
+    self.label.text = @"where you are rewarded for embarassing your loved ones";
+    [self.label setFont:[UIFont fontWithName:@"Raleway-Thin" size:15.0]];
+    [self.titleLabel setFont:[UIFont fontWithName:@"Raleway-Medium" size:18]];
+    // [self.imageView setUserInteractionEnabled:YES];
+    [self.view setUserInteractionEnabled:YES];
+    
+    UISwipeGestureRecognizer *swipeLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(postBountyButton:)];
+    
+    [swipeLeft setDirection:UISwipeGestureRecognizerDirectionLeft];
+    // [self.imageView addGestureRecognizer:swipeLeft];
+    [self.view addGestureRecognizer:swipeLeft];
+    self.pageController.currentPage=0;
+    
+    //!!! BLANK FOR NOW
+    self.imageView.image=nil;
+    
+    
 }
 - (IBAction)postBountyButton:(id)sender {
     UIImage *tutorial1 = [UIImage imageNamed:@"tutorial1"];
     self.titleLabel.text=@"Posting Bounties";
     self.imageView.image = tutorial1;
-    self.label.text=@"spend 5 credits to tell your friends to take a funny photo of someone. returns 1 credit when a friend responds!";
+    self.label.text=@"tell your friends to take a funny photo of someone! costs 5 credits but returns 1 when a friend responds.";
     
     UISwipeGestureRecognizer *swipeLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(activeBountiesButton:)];
+    UISwipeGestureRecognizer *swipeRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(firstPage:)];
     [swipeLeft setDirection:UISwipeGestureRecognizerDirectionLeft];
-    [self.imageView addGestureRecognizer:swipeLeft];
+    [swipeRight setDirection:UISwipeGestureRecognizerDirectionRight];
+   // [self.imageView addGestureRecognizer:swipeLeft];
+    [self.view addGestureRecognizer:swipeLeft];
+    [self.view addGestureRecognizer:swipeRight];
+    
+    self.pageController.currentPage = 1;
+    
     
     
    
@@ -84,8 +120,12 @@
     [swipeLeft setDirection:UISwipeGestureRecognizerDirectionLeft];
     UISwipeGestureRecognizer *swipeRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(postBountyButton:)];
     [swipeRight setDirection:UISwipeGestureRecognizerDirectionRight];
-    [self.imageView addGestureRecognizer:swipeLeft];
-    [self.imageView addGestureRecognizer:swipeRight];
+    //[self.imageView addGestureRecognizer:swipeLeft];
+   // [self.imageView addGestureRecognizer:swipeRight];
+    
+    [self.view addGestureRecognizer:swipeLeft];
+    [self.view addGestureRecognizer:swipeRight];
+     self.pageController.currentPage = 2;
 }
 - (IBAction)completedBountiesButton:(id)sender {
     self.titleLabel.text = @"Seeing Photos";
@@ -95,7 +135,11 @@
     UISwipeGestureRecognizer *swipeRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(activeBountiesButton:)];
     [swipeRight setDirection:UISwipeGestureRecognizerDirectionRight];
     
-    [self.imageView addGestureRecognizer:swipeRight];
+   // [self.imageView addGestureRecognizer:swipeRight];
+   
+    [self.view addGestureRecognizer:swipeRight];
+     self.pageController.currentPage = 3;
+    self.doneButton.hidden=NO;
 }
 
 @end

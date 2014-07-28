@@ -39,7 +39,7 @@
 
     self.view.tintColor = [UIColor colorWithRed:41.0/255.0 green:166.0/255.0 blue:121.0/255.0 alpha:1.0];
     
-    PFUser *currentUser = [PFUser currentUser];
+   
     self.view.frame = [[UIScreen mainScreen] bounds];
     [super viewDidLoad];
      self.capturedImages = [[NSMutableArray alloc] init];

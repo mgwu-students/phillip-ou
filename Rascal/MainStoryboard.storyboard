@@ -760,13 +760,17 @@
                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bOs-hT-8iD">
+                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bOs-hT-8iD">
                                     <rect key="frame" x="9" y="79" width="304" height="40"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <color key="backgroundColor" red="0.96078431369999995" green="0.47058823529999999" blue="0.47058823529999999" alpha="1" colorSpace="calibratedRGB"/>
                                     <fontDescription key="fontDescription" name="TrebuchetMS-Bold" family="Trebuchet MS" pointSize="18"/>
+                                    <color key="tintColor" red="0.96078431369999995" green="0.47058823529999999" blue="0.47058823529999999" alpha="1" colorSpace="calibratedRGB"/>
                                     <state key="normal" title="Post Bounty">
                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                    <state key="selected">
+                                        <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
                                     <connections>
                                         <action selector="setBounties:" destination="bic-8Q-ySq" eventType="touchUpInside" id="SQg-J8-Sql"/>
@@ -1045,9 +1049,13 @@
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <color key="backgroundColor" red="0.96078431369999995" green="0.47058823529999999" blue="0.47058823529999999" alpha="1" colorSpace="calibratedRGB"/>
                                     <fontDescription key="fontDescription" name="TrebuchetMS-Bold" family="Trebuchet MS" pointSize="18"/>
+                                    <color key="tintColor" red="0.96078431369999995" green="0.47058823529999999" blue="0.47058823529999999" alpha="1" colorSpace="calibratedRGB"/>
                                     <state key="normal" title="Set Bounty">
                                         <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                    <state key="selected">
+                                        <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
                                     <connections>
                                         <action selector="setBounty:" destination="VsJ-vs-yCg" eventType="touchUpInside" id="XVo-Mj-MI7"/>
@@ -1107,6 +1115,9 @@
                         </barButtonItem>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="bountyButton" destination="nQg-xE-3Ph" id="oDO-Td-XN5"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="baO-Jd-ekX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1153,35 +1164,42 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gU6-LE-WqF">
-                                <rect key="frame" x="-1" y="366" width="332" height="157"/>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SZJ-Yp-wxI">
+                                <rect key="frame" x="137" y="469" width="35" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SZJ-Yp-wxI">
-                                        <rect key="frame" x="275" y="118" width="37" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" title="Done">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="done:" destination="KG2-ek-WUK" eventType="touchUpInside" id="DGC-ay-U7S"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                            </view>
+                                <color key="tintColor" red="0.96078431369999995" green="0.47058823529999999" blue="0.47058823529999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="done">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="done:" destination="KG2-ek-WUK" eventType="touchUpInside" id="DGC-ay-U7S"/>
+                                </connections>
+                            </button>
+                            <pageControl opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="4" translatesAutoresizingMaskIntoConstraints="NO" id="KfC-NZ-hci">
+                                <rect key="frame" x="52" y="424" width="205" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="pageIndicatorTintColor" red="0.61748471469999999" green="0.61748471469999999" blue="0.61748471469999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="currentPageIndicatorTintColor" red="0.96078431369999995" green="0.47058823529999999" blue="0.47058823529999999" alpha="1" colorSpace="calibratedRGB"/>
+                            </pageControl>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bTf-me-mMC">
-                                <rect key="frame" x="12" y="206" width="297" height="135"/>
+                                <rect key="frame" x="11" y="182" width="297" height="120"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="SZJ-Yp-wxI" firstAttribute="top" secondItem="KfC-NZ-hci" secondAttribute="bottom" constant="8" id="PHh-tt-f6P"/>
+                            <constraint firstItem="M0X-Tc-Yin" firstAttribute="top" secondItem="SZJ-Yp-wxI" secondAttribute="bottom" constant="20" id="dOn-0E-7d2"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="wxT-IX-iO9"/>
                     <connections>
+                        <outlet property="doneButton" destination="SZJ-Yp-wxI" id="Q7B-NE-wOj"/>
                         <outlet property="imageView" destination="bTf-me-mMC" id="xnI-Vn-JSm"/>
                         <outlet property="label" destination="9sV-yl-23l" id="k8t-Uu-GNZ"/>
+                        <outlet property="pageController" destination="KfC-NZ-hci" id="bk5-e7-Dyp"/>
                         <outlet property="titleLabel" destination="yhf-4d-Fqj" id="4ea-GY-4G7"/>
+                        <outlet property="view" destination="R2M-Y9-VBo" id="dH9-Gw-hgk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="imU-ZC-VfJ" userLabel="First Responder" sceneMemberID="firstResponder"/>

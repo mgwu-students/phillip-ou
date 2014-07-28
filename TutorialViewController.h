@@ -12,5 +12,8 @@
 @property (strong, nonatomic) IBOutlet UILabel *label;
 @property (strong, nonatomic) IBOutlet UILabel *titleLabel;
 @property (strong, nonatomic) IBOutlet UIImageView *imageView;
+@property (strong, nonatomic) IBOutlet UIView *view;
+@property (strong, nonatomic) IBOutlet UIButton *doneButton;
+@property (strong, nonatomic) IBOutlet UIPageControl *pageController;
 
 @end
