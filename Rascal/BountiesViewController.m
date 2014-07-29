@@ -266,7 +266,20 @@
     self.bountyButton.selected=YES;
     
     int points = [self.points intValue];
-    if ([self.points intValue] >=self.bountyCost){
+    if([self.points intValue] < self.bountyCost){
+        //if users don't have enough points, don't let them set bounties
+        
+        
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"You Don't Have Enough Points"
+                                                            message:@"Send More Photos!"
+                                                           delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        NSLog(@"you actually have %@",self.points);
+        [alertView show];
+        [self reset];
+        [self.tabBarController setSelectedIndex:0];
+    }
+   // if ([self.points intValue] >=self.bountyCost){
+    else{
         if ([self.recipientsOfBounties count] !=0){
             [self uploadMessage];
             self.points = [NSNumber numberWithInt:points-self.bountyCost];
@@ -281,18 +294,9 @@
                 [warning show];
             }
     }
-    if([self.points doubleValue] < [@5.0f doubleValue]){
-        //if users don't have enough points, don't let them set bounties
-        
-        
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"You Don't Have Enough Points"
-                                                            message:@"Send More Photos!"
-                                                           delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
-        NSLog(@"you actually have %@",self.points);
-        [alertView show];
-        [self reset];
-        [self.tabBarController setSelectedIndex:0];
-    }
+    
+    
+    
     NSLog(@"%@",self.points);
     
     

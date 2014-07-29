@@ -30,8 +30,9 @@
 {
     self.doneButton.hidden=YES;
      [self.navigationController.navigationBar setHidden:YES];
-    self.label.text = @"the app where you are rewarded for embarassing your loved ones";
-    [self.label setFont:[UIFont fontWithName:@"Raleway-Thin" size:15.0]];
+    
+    self.label.text = @"The app where you are rewarded for embarassing your loved ones";
+    [self.label setFont:[UIFont fontWithName:@"Raleway-Medium" size:15.0]];
     [self.titleLabel setFont:[UIFont fontWithName:@"Raleway-Medium" size:18]];
    // [self.imageView setUserInteractionEnabled:YES];
     [self.view setUserInteractionEnabled:YES];
@@ -72,8 +73,8 @@
 }
 - (IBAction)firstPage:(id)sender {
     self.titleLabel.text=@"welcome to rascal";
-    self.label.text = @"where you are rewarded for embarassing your loved ones";
-    [self.label setFont:[UIFont fontWithName:@"Raleway-Thin" size:15.0]];
+    self.label.text = @"The app where you are rewarded for embarassing your loved ones";
+    
     [self.titleLabel setFont:[UIFont fontWithName:@"Raleway-Medium" size:18]];
     // [self.imageView setUserInteractionEnabled:YES];
     [self.view setUserInteractionEnabled:YES];
@@ -87,6 +88,7 @@
     
     //!!! BLANK FOR NOW
     self.imageView.image=nil;
+   
     
     
 }
@@ -94,7 +96,7 @@
     UIImage *tutorial1 = [UIImage imageNamed:@"tutorial1"];
     self.titleLabel.text=@"Posting Bounties";
     self.imageView.image = tutorial1;
-    self.label.text=@"tell your friends to take a funny photo of someone! costs 5 credits but returns 1 when a friend responds.";
+    self.label.text=@"Tell your friends to take a funny photo of someone! Costs 5 credits but returns 1 when a friend responds.";
     
     UISwipeGestureRecognizer *swipeLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(activeBountiesButton:)];
     UISwipeGestureRecognizer *swipeRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(firstPage:)];
@@ -114,7 +116,7 @@
     self.titleLabel.text = @"Sharing Photos";
     UIImage *tutorial2 = [UIImage imageNamed:@"tutorial2"];
     self.imageView.image = tutorial2;
-    self.label.text=@"click to take a funny photo of them and add to your porfolio. the more people you send to, the more credits you get!";
+    self.label.text=@"Tap to take a photo of them. The more people you send to, the more credits you get!";
     
     UISwipeGestureRecognizer *swipeLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(completedBountiesButton:)];
     [swipeLeft setDirection:UISwipeGestureRecognizerDirectionLeft];
@@ -131,7 +133,7 @@
     self.titleLabel.text = @"Seeing Photos";
     UIImage *tutorial3 = [UIImage imageNamed:@"tutorial3"];
     self.imageView.image = tutorial3;
-    self.label.text=@"these are funny photos people want to share with you. click to have a good laugh. the best ones are in the highlights(haha!)";
+    self.label.text=@"These are funny photos people want to share with you. The best ones are in the highlights!";
     UISwipeGestureRecognizer *swipeRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(activeBountiesButton:)];
     [swipeRight setDirection:UISwipeGestureRecognizerDirectionRight];
     

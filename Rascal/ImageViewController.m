@@ -27,6 +27,7 @@
    
     self.imageView.image = [UIImage imageWithData:imageData];
     
+    
     UIColor *borderColor = [UIColor whiteColor];
     [self.imageView.layer setBorderColor:borderColor.CGColor];
     [self.imageView.layer setBorderWidth:3.0];

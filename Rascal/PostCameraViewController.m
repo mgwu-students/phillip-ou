@@ -180,11 +180,14 @@
     NSString *author10 = @"Bob Ross";
     NSString *message11 = @"The principles of true art is not to portray, but to evoke";
     NSString *author11 = @"Jerzy Kosinski";
+    NSString *message12= @"This world is but a canvas to our imagination";
+    NSString *author12 = @"Ralph Waldo Emerson";
     
-    NSArray *quotes = @[message1,message2,message3,message4,message5,message6,message7,message8,message9,message10,message11];
-    NSArray *author =@[author1,author2,author3,author4,author5,author6,author7,author8,author9,author10,author11];
     
-    int r = arc4random() %10;
+    NSArray *quotes = @[message1,message2,message3,message4,message5,message6,message7,message8,message9,message10,message11,message12];
+    NSArray *author =@[author1,author2,author3,author4,author5,author6,author7,author8,author9,author10,author11,author12];
+    
+    int r = arc4random() %11;
     
     UIAlertView *photoMessage = [[UIAlertView alloc] initWithTitle:[quotes objectAtIndex:r]//[NSString stringWithFormat:@"You Have Set a Bounty on %@!",self.user.username]
                                                           message:[NSString stringWithFormat:@"-%@",[author objectAtIndex:r]]

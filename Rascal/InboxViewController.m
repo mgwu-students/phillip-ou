@@ -297,6 +297,8 @@ static int rowNumber;
    
     cell.textLabel.adjustsFontSizeToFitWidth=YES;
     
+    cell.accessoryType=UITableViewCellAccessoryNone;
+    
     
     
     UIImage *icon = [UIImage imageNamed: @"image-bigger"];
@@ -370,7 +372,7 @@ static int rowNumber;
     
     //cell.textLabel.text = [NSString stringWithFormat:@"FileType:%@",message[@"fileType"]];
     
-    cell.accessoryType=UITableViewCellAccessoryNone;
+    
     [cell.textLabel setFont:[UIFont fontWithName:@"Raleway-Medium" size:14]];
      NSString *fileType = [message objectForKey:@"fileType"];
      NSArray *listOfRecipients = [message objectForKey:@"recipientIds"];
@@ -382,9 +384,10 @@ static int rowNumber;
         cell.accessoryView=bountyLogo;
         cell.textLabel.text = [[NSString stringWithFormat:@"%@", [message objectForKey:@"recipientUsername"]] lowercaseString];
         }
+    
      //if message is an image
-     //if ([fileType isEqualToString:@"image"]) {
-    else{
+     if ([fileType isEqualToString:@"image"]) {
+         
      //PUT IN IMAGE ICON HERE LATER TO SIGNIFY IT'S AN IMAGE
          //cell.imageView.image = [UIImage imageNamed:@"image"];
          cell.textLabel.text= [NSString stringWithFormat:@"%@ ",[[message objectForKey:@"senderName"]lowercaseString]];
@@ -394,7 +397,7 @@ static int rowNumber;
         
          if([[message objectForKey:@"readUsers"] containsObject:currentUser.objectId]){
              UIImage *marquee =[UIImage imageNamed:@"marquee"];
-             
+             cell.accessoryType =UITableViewCellAccessoryNone;
              cell.imageView.image =marquee;
              
          }
@@ -403,13 +406,18 @@ static int rowNumber;
          if([message[@"payForId"] isEqualToString:currentUser.objectId]){
              if([message[@"fileType"] isEqualToString:@"image"]){
                  if(![message[@"readUsers"] containsObject:currentUser.objectId]){
-             cell.accessoryView = moneyLogo;
+                     cell.accessoryView = moneyLogo;
+                     cell.accessoryType =UITableViewCellAccessoryNone;
                  }
              }
          }
-     
-     
      }
+    else{
+        cell.accessoryType =UITableViewCellAccessoryNone;
+         }
+     
+     
+    
     
     
     /* if([fileType isEqualToString: @"bounty"] &&[listOfRecipients containsObject:currentUser.objectId]) {
@@ -485,12 +493,18 @@ static int rowNumber;
         [deleteArray removeObject:[[PFUser currentUser] objectId] ];
         NSLog(@"RecipientIds:%@",deleteArray);
         NSArray *arrayUpdate = [NSArray arrayWithArray:deleteArray];
+        [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
+                              withRowAnimation:UITableViewRowAnimationFade];
         [self.selectedMessage setObject:arrayUpdate forKey:@"recipientIds"];
         [self.selectedMessage saveInBackground]; //ensures array gets updated before there is index error after delete
-        }
+        
+        [self.tableView reloadData];
+    }
+    
+    //animate disappearing cell
+  
     
     
-    [self.tableView reloadData];
         
         
     
@@ -515,9 +529,10 @@ static int rowNumber;
     NSString *fileType = [self.selectedMessage objectForKey:@"fileType"];
     //NSLog(@"%@ is filetype",fileType);
     NSLog(@"ROW NUMBER:%d",rowNumber);
+    NSLog(@"it is:%@",fileType);
     if([fileType isEqualToString:@"image"]) {
         
-        
+       
         //if this photo is a reply to a bounty set by this user give him his points (give back his investment)
         
         

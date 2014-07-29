@@ -9,7 +9,7 @@
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleIdentifier</key>
-	<string>PhillipOu.${PRODUCT_NAME:rfc1034identifier}</string>
+	<string>PhillipOu.Rascal</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -39,13 +39,13 @@
 	<string>Rascal</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
-	<key>UIMainStoryboardFile</key>
-	<string>MainStoryboard</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Raleway-Thin.otf</string>
 		<string>Raleway-Medium.otf</string>
 	</array>
+	<key>UIMainStoryboardFile</key>
+	<string>MainStoryboard</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>

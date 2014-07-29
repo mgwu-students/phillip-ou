@@ -20,6 +20,14 @@
     [Parse setApplicationId:@"yKPQyCref89CL3WLX8umBba2YEqanTcuNVVTQ8GA"
                   clientKey:@"CHT2hRkuerq5JOId4DpgvdEVYrgaDmYV68AlVri9"];
     [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
+    
+    //for push notifications
+    [application registerForRemoteNotificationTypes:
+     UIRemoteNotificationTypeBadge |
+     UIRemoteNotificationTypeAlert |
+     UIRemoteNotificationTypeSound];
+    
+    
     self.window.autoresizesSubviews=YES;
     //self.window.backgroundColor=[UIColor blueColor];
    
@@ -48,6 +56,56 @@
     
     return YES;
 }
+
+- (void)applicationDidBecomeActive:(UIApplication *)application
+{
+    [FBAppCall handleDidBecomeActiveWithSession:[PFFacebookUtils session]];
+    PFUser *currentUser = [PFUser currentUser];
+    if (currentUser) {
+        //save the installation
+        NSLog(@"calling this now!!");
+        PFInstallation *currentInstallation = [PFInstallation currentInstallation];
+        //get current user id
+        currentInstallation[@"installationUser"] = [[PFUser currentUser]objectId];
+        // here we add a column to the installation table and store the current user’s ID
+        // this way we can target specific users later
+        
+        // while we’re at it, this is a good place to reset our app’s badge count
+        // you have to do this locally as well as on the parse server by updating
+        // the PFInstallation object
+        if (currentInstallation.badge != 0) {
+            currentInstallation.badge = 0;
+            [currentInstallation saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                if (error) {
+                    // Handle error here with an alert…
+                }
+                else {
+                    // only update locally if the remote update succeeded so they always match
+                    [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
+                    NSLog(@"updated badge");
+                }
+            }];
+        }
+    } else {
+        
+        [PFUser logOut];
+        // show the signup screen here....
+    }
+}
+- (void)application:(UIApplication *)application
+didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
+{
+    // Store the deviceToken in the current Installation and save it to Parse.
+    PFInstallation *currentInstallation = [PFInstallation currentInstallation];
+    [currentInstallation setDeviceTokenFromData:deviceToken];
+    [currentInstallation saveInBackground];
+}
+
+- (void)application:(UIApplication *)application
+didReceiveRemoteNotification:(NSDictionary *)userInfo {
+    [PFPush handlePush:userInfo];
+}
+
 
 - (void)presentLoginControllerAnimated:(BOOL)animated {
     //UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
@@ -95,9 +153,7 @@
                         withSession:[PFFacebookUtils session]];
 }
 
-- (void)applicationDidBecomeActive:(UIApplication *)application {
-    [FBAppCall handleDidBecomeActiveWithSession:[PFFacebookUtils session]];
-}
+
 
 - (void)logInViewController:(PFLogInViewController *)logInController didLogInUser:(PFUser *)user {
     

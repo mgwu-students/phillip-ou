@@ -217,6 +217,7 @@
 		4DEAE2FB197F7C11004229DC /* star-2b.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "star-2b.png"; path = "../../Batch-master/PNG/32x32/star-2b.png"; sourceTree = "<group>"; };
 		4DEAE2FD197F7C30004229DC /* outb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = outb.png; path = "../../Batch-master/PNG/32x32/outb.png"; sourceTree = "<group>"; };
 		4DEDADC71962797B0072DEFC /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = ../../Documents/FacebookSDK/FacebookSDK.framework; sourceTree = "<group>"; };
+		4DF312F91987142800A015E2 /* Rascal.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Rascal.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -357,6 +358,7 @@
 		4DDEABE7195FE8E5009684B8 /* Rascal */ = {
 			isa = PBXGroup;
 			children = (
+				4DF312F91987142800A015E2 /* Rascal.entitlements */,
 				4DDEAC10195FE8FD009684B8 /* MainStoryboard.storyboard */,
 				4D80FF9919840C0B0050DAC3 /* TutorialViewController.h */,
 				4D80FF9A19840C0B0050DAC3 /* TutorialViewController.m */,
@@ -476,6 +478,14 @@
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "Philip Ou";
 				TargetAttributes = {
+					4DDEABDD195FE8E5009684B8 = {
+						DevelopmentTeam = F6J9Z7FPQB;
+						SystemCapabilities = {
+							com.apple.Keychain = {
+								enabled = 1;
+							};
+						};
+					};
 					4DDEABF8195FE8E5009684B8 = {
 						TestTargetID = 4DDEABDD195FE8E5009684B8;
 					};
@@ -645,7 +655,8 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Phillip Ou (32W95BGL48)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Phillip Ou (32W95BGL48)";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -683,7 +694,8 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Phillip Ou (32W95BGL48)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Phillip Ou (32W95BGL48)";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -704,6 +716,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = Rascal/Rascal.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Phillip Ou (32W95BGL48)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Phillip Ou (32W95BGL48)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/phillipou/Downloads,
@@ -716,7 +731,7 @@
 				INFOPLIST_FILE = "Rascal/Rascal-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "D0190417-620E-479A-82FE-5BF5C154209A";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -726,6 +741,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = Rascal/Rascal.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Phillip Ou (32W95BGL48)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Phillip Ou (32W95BGL48)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/phillipou/Downloads,
@@ -738,7 +756,7 @@
 				INFOPLIST_FILE = "Rascal/Rascal-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "D0190417-620E-479A-82FE-5BF5C154209A";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

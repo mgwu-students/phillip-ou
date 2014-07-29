@@ -45,6 +45,9 @@
      self.capturedImages = [[NSMutableArray alloc] init];
     self.senderId = [self.message objectForKey:@"senderId"];
     self.targetId = [self.message objectForKey:@"victimId"];
+    
+   
+   
         
     NSLog(@"%@ , %@", self.senderId, self.targetId);
    
@@ -144,6 +147,7 @@
     self.imagePicker = [[UIImagePickerController alloc]init];
     self.imagePicker.delegate = self;
     self.imagePicker.allowsEditing = NO;
+    
     /*
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]){
         self.imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
@@ -168,6 +172,7 @@
     self.chosenImageView.image = chosenImage;
     
     //handling landscape mode
+    
     int orientation = self.chosenImageView.image.imageOrientation;
     if(orientation ==0 || orientation ==1){
         self.chosenImageView.contentMode = UIViewContentModeScaleAspectFit;
