@@ -206,6 +206,7 @@
                 PFQuery *pushQuery = [PFInstallation query];
                 [pushQuery whereKey:@"installationUser" containsString:user.objectId];
                 
+                
                 // Send push notification to our query
                 PFPush *push = [[PFPush alloc] init];
                 [push setQuery:pushQuery];

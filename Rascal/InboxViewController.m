@@ -71,6 +71,8 @@
         
         NSMutableArray *objectsInSection = [self.sections objectForKey: fileType];
         
+        NSLog(@"sections:%@",self.sections);
+        
         
         
         //all objects of a particular file type go in that section ^
@@ -111,14 +113,14 @@
 }
 #pragma mark - header font
 - (void)viewDidLoad
-
 {
+    NSLog(@"viewdidload is happening");
     //PFUser *currentUser = [PFUser currentUser];
     /*if(![currentUser[@"newUser"] isEqualToString:@"No"]){*/
         [self.tabBarController setSelectedIndex:6];
     
     //else{
-    NSLog(@"%@",self.count);
+    //NSLog(@"%@",self.count);
    
    
     
@@ -178,6 +180,7 @@
         [super viewDidLoad];
     }
 -(void) viewWillAppear:(BOOL)animated{
+    NSLog(@"view will appear");
     
     if (![self connected]) {
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"There is no network connection" message:@"" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
@@ -235,6 +238,7 @@
 //load up messages sent to you
 
 - (PFQuery *)queryForTable {
+    NSLog(@"QUERYING!");
     PFQuery *query = [PFQuery queryWithClassName:self.parseClassName];
     PFUser *currentUser = [PFUser currentUser];
     PFRelation *friends = [currentUser relationForKey:@"friendsRelation"];
@@ -265,6 +269,7 @@
    
   
     }
+    
     return query;
 }
 
@@ -292,7 +297,7 @@
     NSArray *rowIndecesInSection = [self.sections objectForKey:fileType];
     // Return the number of rows in the section.
     //NSLog(@"using %@:",rowIndecesInSection);
-   
+   NSLog(@"%@",self.sections);
     return rowIndecesInSection.count; //this is some times too much
     
 }
@@ -312,14 +317,16 @@
 static int rowNumber;
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 
-{   //NSLog(@"This is being called");
+{
+    NSLog(@"This is being called");
+    //[self loadObjects];
     static NSString *CellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
    /* UITableViewCell *customCell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:0];
     customCell.textLabel.text = @"test";
     if ([self.sectionFileType[@"bountyNotice"] count] ==0){
         return customCell;}*/
-   
+    //NSLog(@"IndexPath %@",indexPath);
     cell.textLabel.adjustsFontSizeToFitWidth=YES;
     
     cell.accessoryType=UITableViewCellAccessoryNone;
@@ -370,20 +377,23 @@ static int rowNumber;
    // NSLog(@"%@",self.sectionFileType);
     //get row number independent of section
     rowNumber = 0;
+  
+    
     
     for (NSInteger i = 0; i < indexPath.section; i++) {
         rowNumber += [self tableView:tableView numberOfRowsInSection:i];
+          NSLog(@"NUM %d", [self tableView:tableView numberOfRowsInSection:i] );
     }
-    
     rowNumber += indexPath.row;
+    NSLog(@"number of rows %d",rowNumber);
+    
     if(self.objects==nil){
         NSLog(@"waiting");
     }
     
    
-   
-    PFObject *message = [self.objects objectAtIndex:rowNumber];
-    PFRelation *relation = [currentUser relationforKey:@"friendsRelation"];
+    @try{
+        PFObject *message = [self.objects objectAtIndex:rowNumber];    PFRelation *relation = [currentUser relationforKey:@"friendsRelation"];
     self.allFriends = [[NSArray alloc]init];
     
     [[relation query] findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
@@ -460,16 +470,27 @@ static int rowNumber;
         
     
    
+    }
+    
+    @catch(NSException *exception){
+        NSLog(@"caught error");
+        [self loadObjects];
+    }
+    @finally {
+        NSLog(@"Cleaning up");
+        
+    }
     
     
-    
-    return cell;
-    
-    
+        return cell;
+
+
+
+
 }
 
 //allows right swiping
-#pragma mark -WILL CHANGE TO REUTN YES AFTER UPDATE
+
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
   
@@ -479,8 +500,8 @@ static int rowNumber;
     if(indexPath.section==0){
     if(indexPath.row==[bountyNoticeArray count]-1){
         return NO;}}
-    //return YES;      // <--- change this to yes in next update
-    return NO;
+    return YES;      // <--- change this to yes in next update
+    //return NO;
 }
 
 #pragma mark end
@@ -499,35 +520,40 @@ static int rowNumber;
     self.selectedMessage = [self.objects objectAtIndex:rowNumber];
         NSString *fileType = self.selectedMessage[@"fileType"];
         
-        
-        
+        NSLog(@"Old: %@", self.sections);
+         //NSLog (@"%@",self.selectedMessage);
        //delete form sections
-        NSLog (@"%@",self.selectedMessage);
-        NSMutableArray *deleteArray = [NSMutableArray arrayWithArray:self.selectedMessage[@"recipientIds"]] ;
-        
-        [deleteArray removeObject:[[PFUser currentUser] objectId] ];
         NSArray *updateArray =[self.sections objectForKey:fileType];
         NSMutableArray *newArray = [NSMutableArray arrayWithArray:updateArray];
         [newArray removeObjectAtIndex:indexPath.row];
-        updateArray = [NSArray arrayWithArray: newArray];
+        NSLog(@"New Array :%@", newArray);
         [self.sections removeObjectForKey:fileType];
-        [self.sections setObject:updateArray forKey:fileType];
+        [self.sections setObject:newArray forKey:fileType];
+        
+              // [deleteArray removeObject:[[PFUser currentUser] objectId] ];
+        
+        //updateArray = [NSArray arrayWithArray: newArray];
+        NSLog(@"New Dict: %@", self.sections);
+        //[tableView deleteRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath] withRowAnimation:UITableViewRowAnimationFade];
         
         
-        NSLog (@"%@",self.selectedMessage);
+        
+       // NSLog (@"%@",self.selectedMessage);
    //delete from array
+        NSMutableArray *deleteArray = [NSMutableArray arrayWithArray:self.selectedMessage[@"recipientIds"]] ;
         
+
         [deleteArray removeObject:[[PFUser currentUser] objectId] ];
-        NSLog(@"RecipientIds:%@",deleteArray);
+        //NSLog(@"RecipientIds:%@",deleteArray);
         NSArray *arrayUpdate = [NSArray arrayWithArray:deleteArray];
-        [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
-                              withRowAnimation:UITableViewRowAnimationFade];
+       /* [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
+                              withRowAnimation:UITableViewRowAnimationFade];*/
         [self.selectedMessage setObject:arrayUpdate forKey:@"recipientIds"];
-        [self.selectedMessage saveInBackground]; //ensures array gets updated before there is index error after delete
+        [self.selectedMessage save]; //ensures array gets updated before there is index error after delete
         
       
-        
-        [tableView reloadData];
+        [self queryForTable];
+        [self loadObjects]; // life saver. updates after change in query
     }
     
     //animate disappearing cell
@@ -538,6 +564,7 @@ static int rowNumber;
         
     
 }
+
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -545,7 +572,7 @@ static int rowNumber;
     PFUser *currentUser = [PFUser currentUser];
     NSInteger rowNumber = 0;
     
-    self.count = [NSNumber numberWithInt:0];
+   // self.count = [NSNumber numberWithInt:0];
     
     for (NSInteger i = 0; i < indexPath.section; i++) {
         rowNumber += [self tableView:tableView numberOfRowsInSection:i];

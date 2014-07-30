@@ -22,6 +22,7 @@
 @property (nonatomic, strong) NSMutableArray *friendsList;
 @property (nonatomic, assign) int clickCount;
 @property (nonatomic,assign) int bountyCost;
+@property (nonatomic, assign) int indexRow;
 
 
 @property (strong, nonatomic) IBOutlet UISegmentedControl *segmentController;

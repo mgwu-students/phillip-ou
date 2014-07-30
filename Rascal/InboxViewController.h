@@ -27,7 +27,7 @@
 
 @property (strong, nonatomic) IBOutlet UILabel *userNameLabel;
 @property (strong, nonatomic) IBOutlet UILabel *pointsLabel;
-@property (nonatomic) NSNumber *count;
+@property int loadcount;
 @property (strong, nonatomic) NSArray *allFriends;
 @property (strong, nonatomic) NSMutableArray* friendsList;
 

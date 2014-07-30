@@ -61,10 +61,11 @@
    // PFQuery *friendsQuery = [PFUser query];
    // [friendsQuery whereKey:@"objectId" containedIn: currentUser[@"friendsList"]];
     //PFQuery *query = [PFQuery orQueryWithSubqueries:@[requestsQuery,friendsQuery]];
-    
+    NSLog(@"List:%@",self.friendsList);
     PFQuery *query = [PFQuery queryWithClassName:@"FriendRequest"];
     [query whereKey:@"status" containsString:@"Pending"];
     [query whereKey:@"requestTo" containedIn:@[currentUser.objectId]];
+    [query whereKey:@"requestFrom" notContainedIn:self.friendsList];
     
     //PFQuery *query = [self.friendsRelation query]; //create query of our friends
     
@@ -77,7 +78,8 @@
         else{
             self.friendRequests=objects;   //self.friendRequests = array of friendRequest objects
             for(PFUser *friends in self.friendRequests){
-                [self.allFriends addObject:friends.objectId];
+                if(![self.allFriends containsObject:friends.objectId]){
+                    [self.allFriends addObject:friends.objectId];}
                 
             }
             [self.tableView reloadData];
@@ -114,13 +116,13 @@
     PFObject *requestObject = [self.friendRequests objectAtIndex: indexPath.row];
     [requestObject setObject:@"Denied" forKey:@"status"];
     
-    [requestObject saveInBackground];
+    [requestObject save];
   /*  [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
                      withRowAnimation:UITableViewRowAnimationFade];*/
     
         //3. remove from the backend
         
-        
+    
     
     [self.tableView reloadData];
     
@@ -179,6 +181,7 @@
     PFObject *requestObject = [self.friendRequests objectAtIndex:indexPath.row];
     PFUser *user =requestObject[@"requestFromObject"];
     if(![self.friendsList containsObject:user.objectId]){
+        NSLog(@"userId:%@",user.objectId);
         [self.friendsList addObject:user.objectId];
         cell.accessoryView = approveImage;
         NSArray *array = [NSArray arrayWithArray:self.friendsList];

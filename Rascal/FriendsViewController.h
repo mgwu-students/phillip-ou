@@ -26,7 +26,7 @@
 
 @property (strong, nonatomic) IBOutlet UISegmentedControl *segmentController;
 @property int section;
-
+@property int test;
 
 
 
