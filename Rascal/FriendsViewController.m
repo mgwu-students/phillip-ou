@@ -10,6 +10,7 @@
 
 #import "FriendsViewController.h"
 #import "EditFriendsViewController.h"
+#import "Reachability.h"
 @interface FriendsViewController ()
 
 @end
@@ -21,19 +22,37 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    
+    
     [self.navigationController.navigationBar setHidden:NO];
     self.bountyCost = 10;
     self.recipientsOfBounties = [[NSMutableArray alloc] init];
     self.allFriends = [[NSMutableArray alloc] init];
     self.friends = [[NSArray alloc]init];
+   
     
    
 }
     
-   
+- (BOOL)connected{
+    Reachability *reachability = [Reachability reachabilityForInternetConnection];
+    NetworkStatus networkStatus = [reachability currentReachabilityStatus];
+    return networkStatus != NotReachable;
+}
 
 -(void) viewWillAppear:(BOOL)animated{
+    
+    if (![self connected]) {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"There is no network connection" message:@"" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [alertView show];
+    } else {
+        // connected, do some internet stuff
+    }
+   
     [super viewWillAppear:animated];
+    
+   
     PFUser *currentUser = [PFUser currentUser];
     self.points = currentUser[@"Points"];
     NSLog(@"Points:%@",self.points);
@@ -42,7 +61,20 @@
     self.friendsRelation = [[PFUser currentUser] objectForKey:@"friendsRelation"];
     self.friendsList = [currentUser objectForKey:@"friendsList"];
     NSLog(@"Friends:%@",self.friendsList);
-    PFQuery *query = [self.friendsRelation query]; //create query of our friends
+    
+    PFQuery *requestsQuery = [PFQuery queryWithClassName:@"FriendRequest"];
+    [requestsQuery whereKey:@"status" containsString:@"Pending"];
+    [requestsQuery whereKey:@"requestTo" containsAllObjectsInArray:@[currentUser.objectId]];
+    
+    
+    
+    //PFQuery *friendsQuery = [self.friendsRelation query];
+    PFQuery *friendsQuery = [PFUser query];
+    [friendsQuery whereKey:@"objectId" containedIn: currentUser[@"friendsList"]];
+    //PFQuery *query = [PFQuery orQueryWithSubqueries:@[requestsQuery,friendsQuery]];
+    
+    
+   PFQuery *query = [self.friendsRelation query]; //create query of our friends
     
     //PFQuery *friendRequestQuery = [PFQuery queryWithClassName:@"FriendRequest"];
     [query orderByAscending:@"username"];
@@ -100,9 +132,8 @@
             [friendsRelation removeObject:user];
             [self.friends removeObject:friend];
             [currentUser setObject:self.friends forKey:@"friendsList"];
-            
             if(![friend.objectId isEqualToString: currentUser.objectId]){
-                NSLog(@"deleting");
+                NSLog(@"deleting:%@",friend.objectId);
                 [self.friendsList removeObject:friend.objectId];}
             NSArray *array = [NSArray arrayWithArray:self.friendsList];
             [currentUser setObject:array forKey:@"friendsList" ];
@@ -123,14 +154,17 @@
 {
     static NSString *CellIdentifier = @"Cell";
     
+    
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     //refresh each time table loads so there are no check marks
     if (cell.accessoryType == UITableViewCellAccessoryCheckmark) {
         cell.accessoryType = UITableViewCellAccessoryNone;
     }
+    
     PFUser *user = [self.friends objectAtIndex:indexPath.row];
     cell.textLabel.text = user.username.lowercaseString;
     [cell.textLabel setFont:[UIFont fontWithName:@"Raleway-Medium" size:14]];
+    
     
     
     //profile picture..might slow down game.
@@ -304,6 +338,18 @@
     [self.tabBarController setSelectedIndex:0];
 }
 
+- (IBAction)segmentButton:(id)sender {
+    if(self.segmentController.selectedSegmentIndex==0){
+        self.section=0;
+    }
+    else{
+        NSLog(@"calling this!!!!");
+        self.segmentController.selectedSegmentIndex=0;
+        
+       
+    }
+    
+}
 
 
 

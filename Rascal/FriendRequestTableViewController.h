@@ -1,18 +1,18 @@
 //
-//  FriendsViewController.h
+//  FriendRequestTableViewController.h
 //  Rascal
 //
-//  Created by Phillip Ou on 7/8/14.
+//  Created by Phillip Ou on 7/29/14.
 //  Copyright (c) 2014 Philip Ou. All rights reserved.
 //
-
-#import <UIKit/UIKit.h>
 #import <Parse/Parse.h>
+#import <UIKit/UIKit.h>
 
-@interface FriendsViewController : UITableViewController
+@interface FriendRequestTableViewController : UITableViewController
 
 @property (nonatomic, strong) PFRelation *friendsRelation;
-@property (nonatomic, strong) NSMutableArray *friends;
+@property (nonatomic, strong) NSMutableArray *friendRequests;
+@property (nonatomic, strong) NSArray *friendsToDisplay;
 @property (nonatomic, strong) NSMutableArray *targettedFriends;
 @property (nonatomic, strong) PFUser *currentUser;
 @property (nonatomic, strong) PFUser *user;

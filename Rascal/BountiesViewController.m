@@ -44,6 +44,7 @@
     [self.recipientsOfBounties removeAllObjects];
     self.clickCount = 0;
     self.friendsRelation = [[PFUser currentUser] objectForKey:@"friendsRelation"];
+    
     PFQuery *query = [self.friendsRelation query]; //create query of our friends
     [query orderByAscending:@"username"];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
@@ -153,6 +154,8 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath   *)indexPath
 
 {
+    
+    
     [tableView cellForRowAtIndexPath:indexPath].accessoryType = UITableViewCellAccessoryCheckmark;
     [tableView cellForRowAtIndexPath:indexPath].selected=NO;
     self.user = [self.friends objectAtIndex: indexPath.row];
@@ -196,6 +199,46 @@
             PFACL *readAccess = [[PFACL alloc]init];
             //PFACL *readAccess2 = [[PFACL alloc]init];
             [readAccess setReadAccess:YES forUserId:self.user.objectId];
+            
+            
+            PFQuery *pushQuery = [PFInstallation query];
+            NSMutableArray *friendsListMinusVictim = [NSMutableArray arrayWithArray:self.allFriends];
+            //create this array so that the victim doesn't get two push notifications when bounty is set on him.
+            [friendsListMinusVictim removeObject: self.user.objectId];
+            [pushQuery whereKey:@"installationUser" containedIn:friendsListMinusVictim]; //allFriends is array of user ids
+            
+            // Send push notification to our query
+            PFPush *push = [[PFPush alloc] init];
+            [push setQuery:pushQuery];
+            [push setMessage:[NSString stringWithFormat:@"%@ set a bounty on %@!", currentUser.username,self.user.username]];
+            
+            
+            [push sendPushInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                if(!error)
+                {
+                    NSLog(@"Push notification sent!");
+                }
+            }];
+            
+            
+            PFQuery *pushQuery2 = [PFInstallation query];
+            [pushQuery2 whereKey:@"installationUser" containsString:self.user.objectId]; //allFriends is array of user ids
+            
+            // Send push notification to our query
+            PFPush *push2 = [[PFPush alloc] init];
+            [push2 setQuery:pushQuery2];
+            [push2 setMessage:[NSString stringWithFormat:@"%@ set a bounty on you!", currentUser.username]];
+            
+            
+            [push2 sendPushInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                if(!error)
+                {
+                    NSLog(@"Push2 notification sent!");
+                }
+            }];
+
+            
+            
             UIAlertView *bountyAlert = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"You Have Set a Bounty on %@!",self.user.username]
                                                                   message:@"Now We Wait"
                                                                  delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];

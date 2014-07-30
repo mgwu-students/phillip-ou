@@ -81,6 +81,8 @@
     
    PFUser *user = [self.friends objectAtIndex:indexPath.row];
     cell.textLabel.text = user.username;
+    cell.textLabel.text = user.username.lowercaseString;
+    [cell.textLabel setFont:[UIFont fontWithName:@"Raleway-Medium" size:14]];
     
     
     //if the user is in the array of people we want to send to have them checked
@@ -261,6 +263,7 @@
         
         //delete current user from recipientId's array
         //so that once you upload the picture bounty is gone.
+        // as long as it's not the placeholder (innocent bystander) which uses the user's own id
         if(![self.selectedMessage[@"placeholder"] isEqualToString:@"placeholder"]){
        
         NSMutableArray *deleteArray = [NSMutableArray arrayWithArray:self.selectedMessage[@"recipientIds"]] ;
@@ -279,6 +282,27 @@
         [message setObject:currentUser.username forKey:@"senderName"];*/
        [message saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
             if(!error){
+                
+                //PUSH NOTIFICATION FOR PHOTO
+                
+                PFQuery *pushQuery = [PFInstallation query];
+                [pushQuery whereKey:@"installationUser" containedIn:recipients];
+                
+                // Send push notification to our query
+                PFPush *push = [[PFPush alloc] init];
+                [push setQuery:pushQuery];
+                [push setMessage:[NSString stringWithFormat:@"%@ sent you a photo!", currentUser.username]];
+                
+                
+                [push sendPushInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                    if(!error)
+                    {
+                        NSLog(@"Push notification sent!");
+                    }
+                }];
+            
+                
+                
                 [self reset];
                 
                 //NSLog(@"god this work");

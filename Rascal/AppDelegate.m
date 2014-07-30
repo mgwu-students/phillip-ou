@@ -165,6 +165,7 @@ didReceiveRemoteNotification:(NSDictionary *)userInfo {
             if(![currentUser[@"newUser"] isEqualToString:@"No"]){
                 NSLog(@"New User");
                 [currentUser setObject:@"No" forKey:@"newUser"];
+                
                 [currentUser setObject:[NSNumber numberWithInt:20] forKey:@"Points"];
             NSLog(@"calling this from app delegate!!");
             PFObject *bountyNotice = [PFObject objectWithClassName:@"Messages"];
@@ -215,7 +216,7 @@ didReceiveRemoteNotification:(NSDictionary *)userInfo {
 }
 
 - (void)showErrorAndLogout {
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Login failed" message:@"Please try again" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Login failed" message:@"It appears you do not have a network connection. Please Try again" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
     [alertView show];
     [PFUser logOut];
 }
@@ -224,10 +225,12 @@ didReceiveRemoteNotification:(NSDictionary *)userInfo {
     PFUser *user = [PFUser currentUser];
     if (user) {
         // update current user with facebook name and id
+        //NSLog(@"YOLO");
         NSString *facebookName = result[@"name"];
         user.username = facebookName;
         NSString *facebookId = result[@"id"];
         user[@"facebookId"]=facebookId;
+        //user[@"userObject"]=user;
         
         // download user profile picture from facebook
         NSURL *profilePictureURL = [NSURL URLWithString:[NSString stringWithFormat:@"http://graph.facebook.com/%@/picture?type=square",facebookId]];

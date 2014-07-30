@@ -11,6 +11,7 @@
 #import "AppDelegate.h"
 #import "LoginViewController.h"
 #import <UIKit/UIKit.h>
+#import "Reachability.h"
 
 @interface ProfileViewController ()
 @property (weak, nonatomic) IBOutlet PFImageView *profileImageView;
@@ -36,6 +37,11 @@
     return self;
 }
 
+- (BOOL)connected{
+    Reachability *reachability = [Reachability reachabilityForInternetConnection];
+    NetworkStatus networkStatus = [reachability currentReachabilityStatus];
+    return networkStatus != NotReachable;
+}
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
     self = [super initWithCoder:aDecoder];
@@ -70,6 +76,13 @@
 
 
 - (void)viewWillAppear:(BOOL)animated {
+    if (![self connected]) {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"There is no network connection" message:@"" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [alertView show];
+    } else {
+        // connected, do some internet stuff
+    }
+    
     [super viewWillAppear:animated];
     PFUser *currentUser = [PFUser currentUser];
     NSNumber *points = currentUser[@"Points"];

@@ -39,7 +39,10 @@
             for (PFObject *obj in self.allUsers) {
                 // access the username key of the PFObject and add it to the array we created.
                 [self.allUsernames addObject:[obj objectForKey:@"username"]];
-                [self.userDict setObject:obj forKey:[obj objectForKey:@"username"]];
+                NSCharacterSet *charactersToRemove = [[NSCharacterSet alphanumericCharacterSet] invertedSet];
+                NSString *trimmedReplacement = [[obj[@"username"] componentsSeparatedByCharactersInSet:charactersToRemove] componentsJoinedByString:@""];
+                [self.userDict setObject:obj forKey:trimmedReplacement];
+                
                 
             }
             [self.tableView reloadData];
@@ -87,7 +90,11 @@
         
         NSString *username= [self.searchResults objectAtIndex:indexPath.row];
         cell.textLabel.text = username;
-        PFUser *user = [self.userDict objectForKey:username];
+        [cell.textLabel setFont:[UIFont fontWithName:@"Raleway-Medium" size:14]];
+        NSCharacterSet *charactersToRemove = [[NSCharacterSet alphanumericCharacterSet] invertedSet];
+        NSString *trimmedReplacement = [[username componentsSeparatedByCharactersInSet:charactersToRemove] componentsJoinedByString:@""];
+
+        PFUser *user = [self.userDict objectForKey:trimmedReplacement];
         
         NSString *profilePictureID = [user objectForKeyedSubscript:@"facebookId"];
         NSString *url = [[NSString alloc] initWithFormat:@"https://graph.facebook.com/%@/picture",profilePictureID];
@@ -132,15 +139,19 @@
         
         UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
         NSString *username = cell.textLabel.text;
+        NSCharacterSet *charactersToRemove = [[NSCharacterSet alphanumericCharacterSet] invertedSet];
+        NSString *trimmedReplacement = [[username componentsSeparatedByCharactersInSet:charactersToRemove] componentsJoinedByString:@""];
+
         
         //cell.accessoryType = UITableViewCellAccessoryCheckmark; //put check mark
         //PFUser *user = [self.allUsers objectAtIndex: indexPath.row];
-        PFUser *user = [self.userDict objectForKey:username];
+        
+        PFUser *user = [self.userDict objectForKey:trimmedReplacement];
         PFRelation *friendsRelation = [self.currentUser relationForKey: @"friendsRelation"];//adding friends
         
         
         
-        NSLog(@"%@",user.username);
+        NSLog(@"Id:%@",trimmedReplacement);
         
         if([self.friends containsObject:user.username]){
             
@@ -169,24 +180,49 @@
         else{
             NSLog(@"Here's this list: %@",self.friendsList);
             NSMutableArray *updateArray = [NSMutableArray arrayWithArray:self.friendsList];
+            NSLog(@"above:%@",user);
             NSLog(@"Testing this: %@", user.objectId);
+            PFUser *currentUser = [PFUser currentUser];
             
             cell.accessoryType = UITableViewCellAccessoryCheckmark; //add checkmark
             cell.selected =NO;
-            [self.friends addObject:user];
-            [updateArray addObject:user.objectId];
+            
            self.friendsList=updateArray;
             if(![self.friendsList containsObject:user.objectId]){
                 NSLog(@"adding");
+                [self.friends addObject:user];
+                [updateArray addObject:user.objectId];
+                NSLog(@"running?");
+                PFObject *friendRequest = [PFObject objectWithClassName:@"FriendRequest"];
+                [friendRequest setObject:[[PFUser currentUser]objectId] forKey:@"requestFrom"];
+                [friendRequest setObject: user.objectId forKey:@"requestTo"];
+                [friendRequest setObject:[[PFUser currentUser]username] forKey:@"requestFromName"];
+                [friendRequest setObject:user.username forKey:@"requestToName"];
+                [friendRequest setObject:@"Pending" forKey:@"status"];
+                [friendRequest setObject:[PFUser currentUser] forKey:@"requestFromObject"];
+                [friendRequest setObject:user forKey:@"requestToObject"];
+                [friendRequest saveInBackground];
+                
+                PFQuery *pushQuery = [PFInstallation query];
+                [pushQuery whereKey:@"installationUser" containsString:user.objectId];
+                
+                // Send push notification to our query
+                PFPush *push = [[PFPush alloc] init];
+                [push setQuery:pushQuery];
+                [push setMessage:[NSString stringWithFormat:@"%@ sent you a friend request!", currentUser.username]];
+                
+                
+                [push sendPushInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                    if(!error)
+                    {
+                        NSLog(@"Push notification sent!");
+                    }
+                }];
+
                 
             }
             
-            NSLog(@"running?");
-            /*PFObject *friendRequest = [PFObject objectWithClassName:@"FriendRequest"];
-             [friendRequest setObject:currentUser forKey:@"requestFrom"];
-             [friendRequest setObject: user forKey:@"requestTo"];
-             [friendRequest setObject:@"Pending" forKey:@"status"];
-             [friendRequest save];*/
+            
             
             
             [friendsRelation addObject: user ];
@@ -280,7 +316,7 @@
     NSPredicate *resultPredicate = [NSPredicate predicateWithFormat:@"SELF BEGINSWITH[c] %@", searchText];
     self.searchResults = [NSMutableArray arrayWithArray: [self.allUsernames filteredArrayUsingPredicate:resultPredicate]];
     
-    NSLog(@"%@",self.searchResults);
+    NSLog(@"searches:%@",self.searchResults);
 }
 
 -(BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString

@@ -9,7 +9,11 @@
 #import <UIKit/UIKit.h>
 #import <Parse/Parse.h>
 #import "ImageViewController.h"
+@class Reachability;
+
 @interface InboxViewController : PFQueryTableViewController
+- (BOOL)connected;
+
 @property(nonatomic, strong) NSArray *messages;
 @property (nonatomic, strong) PFObject *selectedMessage;
 @property(nonatomic, strong) NSArray *bounties;

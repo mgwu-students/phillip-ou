@@ -17,6 +17,7 @@
 
 - (void)viewDidLoad
 {
+    
     [super viewDidLoad];
     PFUser *currentUser = [PFUser currentUser];
     PFFile *imageFile = [self.message objectForKey: @"file"];
@@ -78,7 +79,27 @@
 }
 -(IBAction)ButtonReleased:(id)sender
 {
+    PFUser *currentUser = [PFUser currentUser];
     self.likeButton.selected=YES;
+    // Send push notification to our query
+    
+    //send push notification that someone liked your photo if they haven't liked it already.
+    if(![self.message[@"listOfLikers"] containsObject:currentUser.username]){
+   /* PFQuery *pushQuery = [PFInstallation query];
+    [pushQuery whereKey:@"installationUser" containsString:[self.message objectForKey:@"senderId"]];
+    
+    PFPush *push = [[PFPush alloc] init];
+    [push setQuery:pushQuery];
+    [push setMessage:[NSString stringWithFormat:@"%@ liked \"%@\"", currentUser.username,[self.message objectForKey:@"caption"]]];
+    
+    
+    [push sendPushInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        if(!error)
+        {
+            NSLog(@"Push notification sent!");
+        }
+    }];*/
+    }
     /*[self.likeButton setBackgroundImage:[UIImage imageNamed:@"ImageWhenReleased.png"] forState:UIControlStateNormal];*/
 }
 

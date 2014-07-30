@@ -30,9 +30,13 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     //self.logInView.backgroundColor = [UIColor blueColor];
+    
      //[self setFields: PFLogInFieldsTwitter | PFLogInFieldsFacebook | PFLogInFieldsDismissButton];
+    
+    
     self.logInView.logo = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo"]];
-    [self.logInView.facebookButton setTitle:@"Login with Facebook" forState:UIControlStateNormal];
+    self.logInView.backgroundColor = [UIColor whiteColor];
+    [self.logInView.facebookButton setTitle:@"Login" forState:UIControlStateNormal];
      [self.logInView.facebookButton addTarget:self action:@selector(tutorialButton:) forControlEvents:UIControlEventTouchDown];
 }
 

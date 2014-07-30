@@ -7,16 +7,21 @@
 //
 
 
-
+#import "Reachability.h"
+#import <SystemConfiguration/SystemConfiguration.h>
 #import "InboxViewController.h"
 #import "ImageViewController.h"
 #import "CameraViewController.h"
+
 
 @interface InboxViewController ()
 
 @end
 
+
 @implementation InboxViewController
+
+
 
 -(id) initWithCoder:(NSCoder *)aCoder{
     self = [super initWithCoder:aCoder];
@@ -94,7 +99,15 @@
     
     //NSLog(@"%@",self.sections);
 }
+    
+    
+
    
+}
+- (BOOL)connected{
+    Reachability *reachability = [Reachability reachabilityForInternetConnection];
+    NetworkStatus networkStatus = [reachability currentReachabilityStatus];
+    return networkStatus != NotReachable;
 }
 #pragma mark - header font
 - (void)viewDidLoad
@@ -165,6 +178,15 @@
         [super viewDidLoad];
     }
 -(void) viewWillAppear:(BOOL)animated{
+    
+    if (![self connected]) {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"There is no network connection" message:@"" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [alertView show];
+    } else {
+        // connected, do some internet stuff
+    }
+    
+    
     [super viewWillAppear:animated];
      self.bountyButton.selected=NO;
     
@@ -193,8 +215,11 @@
     self.userNameLabel.text = currentUser.username;
     
     [self loadObjects];
+    [self.tableView reloadData];
 
 }
+
+
 
 - (PFObject *)objectAtIndexPath:(NSIndexPath *)indexPath {
    
@@ -444,6 +469,7 @@ static int rowNumber;
 }
 
 //allows right swiping
+#pragma mark -WILL CHANGE TO REUTN YES AFTER UPDATE
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
   
@@ -453,10 +479,11 @@ static int rowNumber;
     if(indexPath.section==0){
     if(indexPath.row==[bountyNoticeArray count]-1){
         return NO;}}
-    return YES;
+    //return YES;      // <--- change this to yes in next update
+    return NO;
 }
 
-
+#pragma mark end
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         
@@ -498,7 +525,9 @@ static int rowNumber;
         [self.selectedMessage setObject:arrayUpdate forKey:@"recipientIds"];
         [self.selectedMessage saveInBackground]; //ensures array gets updated before there is index error after delete
         
-        [self.tableView reloadData];
+      
+        
+        [tableView reloadData];
     }
     
     //animate disappearing cell
@@ -567,7 +596,7 @@ static int rowNumber;
 
         if([self.selectedMessage[@"placeholder"] isEqualToString:@"placeholder"]){
             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Bounty Set by a Higher Power"
-                                                                message:@"Go Embarass Some Peasants"
+                                                                message:@"Be Responsible"
                                                                delegate:self cancelButtonTitle:@"Yes" otherButtonTitles:nil];
             [alertView show];
 

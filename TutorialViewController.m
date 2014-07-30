@@ -37,8 +37,11 @@
    // [self.imageView setUserInteractionEnabled:YES];
     [self.view setUserInteractionEnabled:YES];
     self.imageView.contentMode=UIViewContentModeScaleAspectFit;
-    
-    
+    //prevents backswiping back to front of navigation stack.
+    if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
+        NSLog(@"backswipe!");
+        self.navigationController.interactivePopGestureRecognizer.enabled = NO;
+    }
     
     UISwipeGestureRecognizer *swipeLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(postBountyButton:)];
     
