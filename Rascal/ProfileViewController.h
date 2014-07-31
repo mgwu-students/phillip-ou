@@ -8,7 +8,7 @@
 
 #import "HomeViewController.h"
 
-@interface ProfileViewController : HomeViewController
+@interface ProfileViewController : PFQueryTableViewController
 @property (weak, nonatomic) IBOutlet UILabel *pointsLabel;
 @property (weak, nonatomic) IBOutlet UILabel *userNameLabel;
 @property (nonatomic, strong) PFUser *currentUser;

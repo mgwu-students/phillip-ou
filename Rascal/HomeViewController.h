@@ -7,12 +7,13 @@
 //
 
 #import <Parse/Parse.h>
-#import "FollowButton.h"
+
 
 @interface HomeViewController : PFQueryTableViewController
 
 
 @property (nonatomic, strong) PFObject *message;
+@property (nonatomic, strong) NSMutableArray *topPhotos;
 
 
 

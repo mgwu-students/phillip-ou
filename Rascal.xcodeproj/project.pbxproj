@@ -42,6 +42,8 @@
 		4D74505019845EF100B9032C /* tutorial2.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D74504F19845EF100B9032C /* tutorial2.png */; };
 		4D745054198461DA00B9032C /* tutorial3.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D745053198461DA00B9032C /* tutorial3.png */; };
 		4D80FF9B19840C0B0050DAC3 /* TutorialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D80FF9A19840C0B0050DAC3 /* TutorialViewController.m */; };
+		4D8250FB198AEE5700B9CE14 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D8250FA198AEE5700B9CE14 /* SettingsViewController.m */; };
+		4D8250FD198AF3DB00B9CE14 /* settings.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D8250FC198AF3DB00B9CE14 /* settings.png */; };
 		4D8B759A196CFEAD00166173 /* EditFriendsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D8B7599196CFEAD00166173 /* EditFriendsViewController.m */; };
 		4D8B759D196D075300166173 /* FriendsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D8B759C196D075300166173 /* FriendsViewController.m */; };
 		4D8C67F5197CE9EB009D675C /* database.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D8C67F4197CE9EB009D675C /* database.png */; };
@@ -145,6 +147,9 @@
 		4D745053198461DA00B9032C /* tutorial3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tutorial3.png; path = ../../tutorial3.png; sourceTree = "<group>"; };
 		4D80FF9919840C0B0050DAC3 /* TutorialViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TutorialViewController.h; path = ../TutorialViewController.h; sourceTree = "<group>"; };
 		4D80FF9A19840C0B0050DAC3 /* TutorialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TutorialViewController.m; path = ../TutorialViewController.m; sourceTree = "<group>"; };
+		4D8250F9198AEE5700B9CE14 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
+		4D8250FA198AEE5700B9CE14 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
+		4D8250FC198AF3DB00B9CE14 /* settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = settings.png; path = "../../Batch-master/PNG/32x32/settings.png"; sourceTree = "<group>"; };
 		4D8B7598196CFEAD00166173 /* EditFriendsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EditFriendsViewController.h; path = ../EditFriendsViewController.h; sourceTree = "<group>"; };
 		4D8B7599196CFEAD00166173 /* EditFriendsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EditFriendsViewController.m; path = ../EditFriendsViewController.m; sourceTree = "<group>"; };
 		4D8B759B196D075300166173 /* FriendsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendsViewController.h; sourceTree = "<group>"; };
@@ -242,6 +247,7 @@
 		4DA2A2E8197867880090F2A2 /* Art */ = {
 			isa = PBXGroup;
 			children = (
+				4D8250FC198AF3DB00B9CE14 /* settings.png */,
 				4D8D769A1989C4BF00F59E61 /* iTunesArtwork.png */,
 				4D68FC691988916700800E07 /* logo.png */,
 				4D74504F19845EF100B9032C /* tutorial2.png */,
@@ -330,6 +336,8 @@
 			children = (
 				4DF312F91987142800A015E2 /* Rascal.entitlements */,
 				4DDEAC10195FE8FD009684B8 /* MainStoryboard.storyboard */,
+				4D8250F9198AEE5700B9CE14 /* SettingsViewController.h */,
+				4D8250FA198AEE5700B9CE14 /* SettingsViewController.m */,
 				4D4A91FE198829DC00BD5BAE /* FriendRequestTableViewController.h */,
 				4D4A91FF198829DC00BD5BAE /* FriendRequestTableViewController.m */,
 				4D80FF9919840C0B0050DAC3 /* TutorialViewController.h */,
@@ -497,6 +505,7 @@
 				4D5A343B19818B2A00252814 /* user-3-big.png in Resources */,
 				4DA2A2EA197867EE0090F2A2 /* Raleway-Thin.otf in Resources */,
 				4DA2A2EC19786A830090F2A2 /* Raleway-Medium.otf in Resources */,
+				4D8250FD198AF3DB00B9CE14 /* settings.png in Resources */,
 				4DDEABEC195FE8E5009684B8 /* InfoPlist.strings in Resources */,
 				4D74505019845EF100B9032C /* tutorial2.png in Resources */,
 				4D68FC6A1988916700800E07 /* logo.png in Resources */,
@@ -546,6 +555,7 @@
 				4D9AD5D8196EF273001A896F /* PostCameraViewController.m in Sources */,
 				4D8B759A196CFEAD00166173 /* EditFriendsViewController.m in Sources */,
 				4D4A9200198829DC00BD5BAE /* FriendRequestTableViewController.m in Sources */,
+				4D8250FB198AEE5700B9CE14 /* SettingsViewController.m in Sources */,
 				4D1AAABE196472DB00F79C39 /* ProfileViewController.m in Sources */,
 				4DD8B898196287EB0074FFF4 /* CameraViewController.m in Sources */,
 				4DDEABEE195FE8E5009684B8 /* main.m in Sources */,
@@ -679,8 +689,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = Rascal/Rascal.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Phillip Ou (32W95BGL48)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Phillip Ou (32W95BGL48)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/phillipou/Downloads,
@@ -694,6 +704,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -704,8 +715,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = Rascal/Rascal.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Phillip Ou (32W95BGL48)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Phillip Ou (32W95BGL48)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/phillipou/Downloads,
@@ -719,6 +730,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

@@ -16,6 +16,8 @@
 @implementation FriendRequestTableViewController
 - (void)viewDidLoad
 {
+    [self.tabBarController.tabBar setHidden:YES];
+    
     [super viewDidLoad];
     
     self.segmentController.selectedSegmentIndex=1;
@@ -41,6 +43,10 @@
 
 -(void) viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    if ([self isViewLoaded]) {
+        self.view=nil;
+        [self viewDidLoad];
+    }
     
     
     PFUser *currentUser = [PFUser currentUser];
@@ -111,22 +117,34 @@
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    static NSString *CellIdentifier = @"Cell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    cell.accessoryType=UITableViewCellAccessoryNone;
+    
+    
    // PFUser *currentUser = [PFUser currentUser];
    // PFUser *user = [self.friendRequests objectAtIndex: indexPath.row];
     PFObject *requestObject = [self.friendRequests objectAtIndex: indexPath.row];
     [requestObject setObject:@"Denied" forKey:@"status"];
     
     [requestObject save];
+    
+   
   /*  [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
                      withRowAnimation:UITableViewRowAnimationFade];*/
     
         //3. remove from the backend
-        
     
     
-    [self.tableView reloadData];
+    [tableView reloadData];
+    
+    
+    //[self.tableView reloadData];
+    
     
 }
+
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -182,7 +200,14 @@
     PFUser *user =requestObject[@"requestFromObject"];
     if(![self.friendsList containsObject:user.objectId]){
         NSLog(@"userId:%@",user.objectId);
-        [self.friendsList addObject:user.objectId];
+        @try{
+            [self.friendsList addObject:user.objectId];}
+        @catch(NSException *exception){
+            NSLog(@"caught error");
+        }
+        @finally{
+            NSLog(@"cleaning");
+        }
         cell.accessoryView = approveImage;
         NSArray *array = [NSArray arrayWithArray:self.friendsList];
         PFUser *currentUser = [PFUser currentUser];

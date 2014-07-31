@@ -64,19 +64,19 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H72-Td-tmy">
-                                            <rect key="frame" x="20" y="29" width="187" height="21"/>
+                                            <rect key="frame" x="45" y="29" width="187" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" name="SinhalaSangamMN" family="Sinhala Sangam MN" pointSize="17"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="3" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dUN-Fy-B9T">
-                                            <rect key="frame" x="20" y="0.0" width="289" height="34"/>
+                                            <rect key="frame" x="45" y="0.0" width="260" height="34"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" name="SnellRoundhand-Bold" family="Snell Roundhand" pointSize="20"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="4" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="1000" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gjv-Dw-Emk">
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="4" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="1000" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gjv-Dw-Emk">
                                             <rect key="frame" x="273" y="29" width="42" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -91,6 +91,13 @@
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
                                         </button>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="#10" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YDg-eG-coL">
+                                            <rect key="frame" x="8" y="6" width="36" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" name="Trebuchet-BoldItalic" family="Trebuchet MS" pointSize="17"/>
+                                            <color key="textColor" red="0.20000000000000001" green="0.27450980390000002" blue="0.75294117650000003" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -131,7 +138,7 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" style="plain" id="znQ-iB-rw7">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="mER-y6-Q6q">
-                                <rect key="frame" x="233" y="5" width="71" height="33"/>
+                                <rect key="frame" x="232" y="5" width="72" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <color key="tintColor" red="0.31531735509999997" green="0.4730890385" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -213,17 +220,17 @@
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <imageView userInteractionEnabled="NO" tag="6" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eaQ-aj-8Py" customClass="PFImageView">
-                                    <rect key="frame" x="20" y="13" width="51" height="44"/>
+                                    <rect key="frame" x="8" y="13" width="41" height="44"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 </imageView>
                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Following" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xWX-hM-3Bu">
-                                    <rect key="frame" x="82" y="36" width="186" height="21"/>
+                                    <rect key="frame" x="61" y="36" width="186" height="21"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" name="TrebuchetMS" family="Trebuchet MS" pointSize="15"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fkw-d3-lwM">
-                                    <rect key="frame" x="82" y="13" width="207" height="21"/>
+                                    <rect key="frame" x="61" y="13" width="207" height="21"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" name="TrebuchetMS" family="Trebuchet MS" pointSize="15"/>
                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -270,8 +277,8 @@
                                             <fontDescription key="fontDescription" name="SnellRoundhand-Bold" family="Snell Roundhand" pointSize="20"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="4" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="1000" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g60-MT-ulK">
-                                            <rect key="frame" x="267" y="27" width="42" height="21"/>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="4" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g60-MT-ulK">
+                                            <rect key="frame" x="273" y="27" width="42" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <color key="tintColor" red="0.20000000000000001" green="0.27450980390000002" blue="0.75294117650000003" alpha="1" colorSpace="calibratedRGB"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -279,7 +286,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Xq-5b-8O7">
-                                            <rect key="frame" x="230" y="23" width="46" height="30"/>
+                                            <rect key="frame" x="241" y="23" width="46" height="30"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <color key="tintColor" red="0.20000000000000001" green="0.27450980390000002" blue="0.75294117650000003" alpha="1" colorSpace="calibratedRGB"/>
                                             <state key="normal" image="heart-full.png">
@@ -325,17 +332,17 @@
                                 </connections>
                             </button>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" style="plain" id="6gv-cQ-S4g">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="qy4-Ow-snl">
-                                <rect key="frame" x="233" y="5" width="71" height="33"/>
+                        <barButtonItem key="rightBarButtonItem" style="plain" id="nMv-nt-loq">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="mSr-M9-GDL">
+                                <rect key="frame" x="279" y="9" width="25" height="25"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="TrebuchetMS" family="Trebuchet MS" pointSize="15"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <color key="tintColor" red="0.20000000000000001" green="0.27450980390000002" blue="0.75294117650000003" alpha="1" colorSpace="calibratedRGB"/>
-                                <state key="normal" title="logout">
+                                <state key="normal" image="settings.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="logout:" destination="EwN-xl-UBG" eventType="touchUpInside" id="6Sy-fc-OBJ"/>
+                                    <segue destination="4M8-Yg-fbq" kind="push" id="IG9-K8-NzP"/>
                                 </connections>
                             </button>
                         </barButtonItem>
@@ -349,7 +356,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AMm-Ud-ifj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="172" y="858"/>
+            <point key="canvasLocation" x="-50" y="868"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="9Cj-zb-qBX">
@@ -636,14 +643,14 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="audience" id="Cea-FO-jBc">
-                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="qvM-up-cYs">
+                        <barButtonItem key="leftBarButtonItem" title="cancel" id="qvM-up-cYs">
                             <color key="tintColor" red="0.056748124630000001" green="0.61748471469999999" blue="0.45787925699999998" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="cancel:" destination="jvJ-yj-T8N" id="SYR-xX-gzQ"/>
                                 <segue destination="ZGc-Qi-isY" kind="push" identifier="backToTab" id="yO1-td-5zb"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Send" id="fOG-Hq-UUA">
+                        <barButtonItem key="rightBarButtonItem" title="share" id="fOG-Hq-UUA">
                             <color key="tintColor" red="0.056748124630000001" green="0.61748471469999999" blue="0.45787925699999998" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="send:" destination="jvJ-yj-T8N" id="jl9-63-WgO"/>
@@ -759,7 +766,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HTg-eV-TfJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="392" y="1576"/>
+            <point key="canvasLocation" x="420" y="1576"/>
         </scene>
         <!--Friend Request Table View Controller - friend requests-->
         <scene sceneID="6EA-Ah-Oow">
@@ -810,6 +817,41 @@
             </objects>
             <point key="canvasLocation" x="796" y="1576"/>
         </scene>
+        <!--Settings View Controller - settings-->
+        <scene sceneID="z8n-UA-1dq">
+            <objects>
+                <viewController id="4M8-Yg-fbq" customClass="SettingsViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="tUM-mg-fQn"/>
+                        <viewControllerLayoutGuide type="bottom" id="2Kw-8D-hda"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Ca0-XY-txs">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Terms of Use and Privacy" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qXI-YV-eoX">
+                                <rect key="frame" x="62" y="83" width="196" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mt9-PL-IId">
+                                <rect key="frame" x="18" y="103" width="294" height="465"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <mutableString key="text">By downloading, accessing, or using the mobile application Rascal, you agree to be bound by these terms. If you do not agree to these terms, do not use the services. We reserve the right to alter these terms at any time. Basic Terms1. You may not post nude, partially nude, or sexually suggestive photos.2.  You are responsible for any activity that occurs under your screen name.3. You must not abuse harass, threaten, or intimidate other users4. You may not use Rascal for any illegal or unauthorized purpose5. You are solely responsible for any data, text, information, graphics, photos, profiles that you submit, post and display to users on Rascal.6. Use common senseCollection of InformationWe collect information you provide directly to us. For example, we collect information when you create an account, use the services to send or receive message, including photos and “Bounties”. The types of information we may collect include your name, password, Facebook ID, and Facebook profile picture.When you send or receive messages, we also collect, process and store the contents of the messages (such as photos, captions, and bounty notices) on our servers. The contents of those messages are released to the users you intended until they delete it. However, photos you send to users may also appear to other users you’ve added as friends in the “Gallery.” In the case of bounties, everyone you added as a friend receives the bounty notice. We also collect information about these messages including the time, date, sender, and recipient of the message. This information will never be released to the public.ChildrenWe do not knowingly collect personal information from users with regards to their age. Push Notifications/AlertsRascal may send push notifications or alerts to your device. You may deactivate these messages any time by changing the notification settings on your device.</mutableString>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="settings" id="saH-w7-8qM"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7iO-RT-T58" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="420" y="868"/>
+        </scene>
         <!--Inbox View Controller - rascal-->
         <scene sceneID="J2Q-xC-hgY">
             <objects>
@@ -823,18 +865,18 @@
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4mS-61-e2R" customClass="PFImageView">
-                                    <rect key="frame" x="9" y="20" width="51" height="44"/>
+                                    <rect key="frame" x="9" y="20" width="41" height="44"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 </imageView>
                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YA8-lV-D4y">
-                                    <rect key="frame" x="68" y="43" width="140" height="21"/>
+                                    <rect key="frame" x="58" y="43" width="140" height="21"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" name="TrebuchetMS" family="Trebuchet MS" pointSize="15"/>
                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Flb-OG-N3F">
-                                    <rect key="frame" x="68" y="20" width="144" height="21"/>
+                                    <rect key="frame" x="58" y="20" width="132" height="21"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" name="TrebuchetMS" family="Trebuchet MS" pointSize="15"/>
                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -856,8 +898,8 @@
                                         <action selector="setBounties:" destination="bic-8Q-ySq" eventType="touchUpInside" id="SQg-J8-Sql"/>
                                     </connections>
                                 </button>
-                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O28-Vo-xXd">
-                                    <rect key="frame" x="172" y="20" width="141" height="44"/>
+                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O28-Vo-xXd">
+                                    <rect key="frame" x="172" y="20" width="128" height="44"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" name="TrebuchetMS" family="Trebuchet MS" pointSize="15"/>
                                     <color key="tintColor" red="0.20000000000000001" green="0.27450980390000002" blue="0.75294117650000003" alpha="1" colorSpace="calibratedRGB"/>
@@ -922,7 +964,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hue-Ys-HZ3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="702" y="815"/>
+            <point key="canvasLocation" x="1198" y="967"/>
         </scene>
         <!--Navigation Controller - News-->
         <scene sceneID="S9b-3o-Ohq">
@@ -1064,7 +1106,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dnj-zk-a9d">
-                                <rect key="frame" x="20" y="74" width="292" height="21"/>
+                                <rect key="frame" x="20" y="65" width="292" height="38"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="SnellRoundhand-Bold" family="Snell Roundhand" pointSize="20"/>
                                 <nil key="highlightedColor"/>
@@ -1110,7 +1152,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="v2l-fb-DkF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1288" y="739"/>
+            <point key="canvasLocation" x="1706" y="1365"/>
         </scene>
         <!--Bounties View Controller - bounties-->
         <scene sceneID="UKk-Uv-t1P">
@@ -1142,6 +1184,11 @@
                                     </connections>
                                 </button>
                             </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        </view>
+                        <view key="tableFooterView" contentMode="scaleToFill" id="78c-3y-spG">
+                            <rect key="frame" x="0.0" y="212" width="320" height="44"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         </view>
                         <prototypes>
@@ -1178,20 +1225,19 @@
                                 <action selector="back:" destination="VsJ-vs-yCg" id="UtP-4o-bB0"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" style="plain" id="aRN-Js-fRh">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="wTo-u0-qez">
-                                <rect key="frame" x="284" y="12" width="20" height="20"/>
+                        <barButtonItem key="rightBarButtonItem" style="plain" id="cqq-vK-Ewy">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="eEb-Ps-rQk">
+                                <rect key="frame" x="233" y="5" width="71" height="33"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <color key="tintColor" red="0.96078431369999995" green="0.47058823529999999" blue="0.47058823529999999" alpha="1" colorSpace="calibratedRGB"/>
-                                <state key="normal" image="user-4-addb.png">
+                                <fontDescription key="fontDescription" name="Trebuchet-BoldItalic" family="Trebuchet MS" pointSize="20"/>
+                                <state key="normal" title="?">
+                                    <color key="titleColor" red="0.96078431369999995" green="0.47058823529999999" blue="0.47058823529999999" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="ai8-vm-Le4" kind="push" id="RkG-sI-IXC"/>
+                                    <action selector="question:" destination="VsJ-vs-yCg" eventType="touchUpInside" id="uQ8-0D-VL3"/>
                                 </connections>
                             </button>
-                            <color key="tintColor" red="0.96078431369999995" green="0.47058823529999999" blue="0.47058823529999999" alpha="1" colorSpace="calibratedRGB"/>
                         </barButtonItem>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
@@ -1313,6 +1359,7 @@
         <image name="list-small.png" width="16" height="16"/>
         <image name="marquee.png" width="32" height="32"/>
         <image name="outb.png" width="32" height="32"/>
+        <image name="settings.png" width="32" height="32"/>
         <image name="star-2-smaller.png" width="16" height="16"/>
         <image name="swatches.png" width="32" height="32"/>
         <image name="user-2-smaller.png" width="16" height="16"/>
@@ -1325,9 +1372,8 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="h77-ht-YoZ"/>
-        <segue reference="p2l-gy-Zs8"/>
-        <segue reference="qOS-xp-C2S"/>
+        <segue reference="OIA-4e-jch"/>
         <segue reference="2Hz-h7-dr2"/>
+        <segue reference="p2l-gy-Zs8"/>
     </inferredMetricsTieBreakers>
 </document>

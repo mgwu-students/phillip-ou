@@ -7,18 +7,17 @@
 //
 
 #import "HomeViewController.h"
-#import "FollowButton.h"
 
 
- @interface HomeViewController ()
- @property (nonatomic, strong) NSMutableArray *followingArray; //store array of followers
+@interface HomeViewController ()
+@property (nonatomic, strong) NSMutableArray *followingArray; //store array of followers
 @property (nonatomic, strong) NSMutableArray *savedPhotosArray;
 
- @end
- 
- 
- 
- @implementation HomeViewController
+@end
+
+
+
+@implementation HomeViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -36,8 +35,8 @@
     if (self) {
         // This table displays items in the Todo class
         self.parseClassName = @"Messages";
-        self.pullToRefreshEnabled = YES;
-        self.paginationEnabled = YES; //allows scrolling down to load more pages
+        self.pullToRefreshEnabled = NO;
+        self.paginationEnabled = NO; //allows scrolling down to load more pages
         self.objectsPerPage = 10;
     }
     return self;
@@ -45,10 +44,16 @@
 
 - (void)viewDidLoad
 {
+    UIBarButtonItem *newBackButton =
+    [[UIBarButtonItem alloc] initWithTitle:@"back"
+                                     style:UIBarButtonItemStylePlain
+                                    target:nil
+                                    action:nil];
+    [[self navigationItem] setBackBarButtonItem:newBackButton];
     [super viewDidLoad];
     
-   
-      
+    
+    
 }
 
 
@@ -74,9 +79,9 @@
     //[query orderByDescending:@"listOfLikers"];
     
     
-    query.limit = 25;
+    //query.limit = 5;
     
-   
+    
     
     // Issue the query
     [query findObjectsInBackgroundWithBlock:^(NSArray *songs, NSError *error) {
@@ -103,30 +108,32 @@
     }
     static NSString *CellIdentifier = @"SectionHeaderCell";
     UITableViewCell *sectionHeaderView = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-     //UILabel *senderLabel = (UILabel *)[sectionHeaderView viewWithTag:2];
+    //UILabel *senderLabel = (UILabel *)[sectionHeaderView viewWithTag:2];
     
-   
+    
     
     self.message = [self.objects objectAtIndex:section];
     NSString *username = [self.message objectForKey:@"senderName"];
     //PFUser *user = [photo objectForKey:@"whoTook"];
     //PFFile *profilePictureFile= [user objectForKey:@"profilePicture"];
-//PFImageView *profileImageView = (PFImageView*) [sectionHeaderView viewWithTag:6];
-   // profileImageView.image = profilePictureFile;
+    //PFImageView *profileImageView = (PFImageView*) [sectionHeaderView viewWithTag:6];
+    // profileImageView.image = profilePictureFile;
     
-            // image can now be set on a UIImageView
+    // image can now be set on a UIImageView
     
     
     
     UILabel *userNameLabel = (UILabel *) [sectionHeaderView viewWithTag: 2];
     UILabel *titleLabel = (UILabel *) [sectionHeaderView viewWithTag:3];
     UILabel *numberOfLikesLabel = (UILabel *) [sectionHeaderView viewWithTag:4];
+    UILabel *rankLabel = (UILabel *) [sectionHeaderView viewWithTag:5];
     NSString *caption = [self.message objectForKey:@"caption"];
     
     //UIButton *likeButton = (UIButton *) [sectionHeaderView viewWithTag:4];;
     
     titleLabel.text=caption;
     titleLabel.textColor=[UIColor colorWithRed:179/255.0 green:135/255.0 blue:27/255.0 alpha:1.0];
+    rankLabel.text = [NSString stringWithFormat:@"#%d",section +1];
     userNameLabel.text = [NSString stringWithFormat:@"by %@",username];
     int numberOfLikes = [self.message[@"listOfLikers"] count];
     numberOfLikesLabel.text = [NSString stringWithFormat: @"%d",numberOfLikes];
@@ -134,9 +141,9 @@
     
     sectionHeaderView.backgroundColor = [UIColor whiteColor];
     
-   
     
-       return sectionHeaderView;
+    
+    return sectionHeaderView;
 }
 
 
@@ -158,8 +165,8 @@
         UITableViewCell *cell = [self tableView:tableView cellForNextPageAtIndexPath:indexPath];
         [self loadNextPage];
         return cell;
-       /* UITableViewCell *cell = [self tableView:tableView cellForNextPageAtIndexPath:indexPath]; //get that cell(LoadMoreCell)
-        return cell;*/
+        /* UITableViewCell *cell = [self tableView:tableView cellForNextPageAtIndexPath:indexPath]; //get that cell(LoadMoreCell)
+         return cell;*/
     }
     static NSString *CellIdentifier = @"PhotoCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
@@ -167,8 +174,8 @@
     
     //create border/frame around picture
     /*cell.layer.borderWidth = 3.0;
-    UIColor *frameColor =[UIColor colorWithRed:179/255.0 green:135/255.0 blue:27/255.0 alpha:1.0];
-    cell.layer.borderColor = frameColor.CGColor;*/
+     UIColor *frameColor =[UIColor colorWithRed:179/255.0 green:135/255.0 blue:27/255.0 alpha:1.0];
+     cell.layer.borderColor = frameColor.CGColor;*/
     
     
     //handles landscape
@@ -213,39 +220,40 @@
 
 
 
-        
+
 - (PFQuery *)queryForTable {
-        //if user isn't signed in, don't initialize the query;  !!!!!!!!!!
-        
-        //!!!!! we don't have fb installed yet so this method can't be used just yet
-        
-        //profile view will crash if this is not commented out
-        
-        //need if statement to sign in, but page won't load
-        
-        //when not commented out, logging out and signing works without crashing. but home and profile won't load
-        //when commented out, home and profile load but cannot sign in once logged out.
+    //if user isn't signed in, don't initialize the query;  !!!!!!!!!!
+    
+    //!!!!! we don't have fb installed yet so this method can't be used just yet
+    
+    //profile view will crash if this is not commented out
+    
+    //need if statement to sign in, but page won't load
+    
+    //when not commented out, logging out and signing works without crashing. but home and profile won't load
+    //when commented out, home and profile load but cannot sign in once logged out.
     
     
     
-   /* if (![PFUser currentUser] || ![PFFacebookUtils isLinkedWithUser:[PFUser currentUser]]) {
-         return nil;
-         }*/
+    /* if (![PFUser currentUser] || ![PFFacebookUtils isLinkedWithUser:[PFUser currentUser]]) {
+     return nil;
+     }*/
     PFUser *currentUser = [PFUser currentUser];
-        PFQuery *query = [PFQuery queryWithClassName:self.parseClassName];
-        [query whereKey:@"fileType" equalTo:@"image"];
+    PFQuery *query = [PFQuery queryWithClassName:self.parseClassName];
+    [query whereKey:@"fileType" equalTo:@"image"];
     
     //top photos only from your friends
     [query whereKey:@"senderId" containedIn:currentUser[@"friendsList"]];
     
     
-        //[query includeKey:@"whoTook"];
+    //[query includeKey:@"whoTook"];
     
     
     
-        [query orderByDescending:@"numberOfLikes"];
+    [query orderByDescending:@"numberOfLikes"];
     [query addDescendingOrder:@"createdAt"];
-        return query;
+    query.limit=10;  //this actually does something
+    return query;
 }
 
 

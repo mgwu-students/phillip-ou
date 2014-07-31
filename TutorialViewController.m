@@ -28,6 +28,7 @@
 - (void)viewDidLoad
 
 {
+    [self.tabBarController.tabBar setHidden:YES];
     self.doneButton.hidden=YES;
      [self.navigationController.navigationBar setHidden:YES];
     
@@ -138,7 +139,7 @@
     self.titleLabel.text = @"Seeing Photos";
     UIImage *tutorial3 = [UIImage imageNamed:@"tutorial3"];
     self.imageView.image = tutorial3;
-    self.label.text=@"These are funny photos people want to share with you. The best ones are in the highlights!";
+    self.label.text=@"These are funny photos people want to share with you. Your friends' funniest photos are in the highlights!";
     UISwipeGestureRecognizer *swipeRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(activeBountiesButton:)];
     [swipeRight setDirection:UISwipeGestureRecognizerDirectionRight];
     

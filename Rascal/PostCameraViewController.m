@@ -177,7 +177,7 @@
     NSString *message8 =@"In art the best is good enough.";
     NSString *author8 = @"Goethe";
     NSString *message9 = @"Creativity takes courage";
-    NSString *author9 = @"Henry Matisse";
+    NSString *author9 = @"Henri Matisse";
     NSString *message10 = @"We don't make mistakes, just happy little accidents";
     NSString *author10 = @"Bob Ross";
     NSString *message11 = @"The principles of true art is not to portray, but to evoke";

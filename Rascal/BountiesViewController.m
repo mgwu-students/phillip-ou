@@ -303,6 +303,15 @@
     
 }
 
+- (IBAction)question:(id)sender {
+    UIAlertView *answer = [[UIAlertView alloc] initWithTitle:@"Bounty"
+                                                          message:@"[boun-tee] noun - a request for a funny photo of someone sent to all friends"
+                                                         delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [answer show];
+    
+}
+
+
 - (IBAction)setBounty:(id)sender {
     PFUser *currentUser = [PFUser currentUser];
     self.bountyButton.selected=YES;

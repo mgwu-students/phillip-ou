@@ -54,6 +54,9 @@
        
     NSLog(@"call1");
         
+        //PFUser *currentUser = [PFUser currentUser];
+        
+        
         NSLog(@"%@",[currentUser objectForKey:@"friendsList"]);
         
 
@@ -114,6 +117,8 @@
 #pragma mark - header font
 - (void)viewDidLoad
 {
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadTable:) name:@"reloadTheTable" object:nil];
+
     UIBarButtonItem *newBackButton =
     [[UIBarButtonItem alloc] initWithTitle:@"back"
                                      style:UIBarButtonItemStylePlain
@@ -121,11 +126,16 @@
                                     action:nil];
     [[self navigationItem] setBackBarButtonItem:newBackButton];
     NSLog(@"viewdidload is happening");
-    //PFUser *currentUser = [PFUser currentUser];
-    /*if(![currentUser[@"newUser"] isEqualToString:@"No"]){*/
+    PFUser *currentUser = [PFUser currentUser];
+    NSLog(@"state:%@",currentUser[@"newUser"]);
+    if(![currentUser[@"newUser"] isEqualToString:@"No"]){
         [self.tabBarController setSelectedIndex:6];
+        [currentUser setObject:@"No" forKey:@"newUser"];
+        [currentUser saveInBackground];
+    }
+   
     
-    //else{
+    
     //NSLog(@"%@",self.count);
    
    
@@ -184,7 +194,14 @@
 
     
         [super viewDidLoad];
-    }
+    
+}
+
+- (void)reloadTable:(NSNotification *)notification
+{
+    [self loadObjects];
+    NSLog(@"refresh!");
+}
 -(void) viewWillAppear:(BOOL)animated{
     NSLog(@"view will appear");
     
@@ -342,7 +359,7 @@ static int rowNumber;
     UIImage *icon = [UIImage imageNamed: @"image-bigger"];
     UIImage *icon2 = [UIImage imageNamed:@"camera-2"];
     UIImage *icon3 = [UIImage imageNamed:@"database"];
-    UIImage *icon4 = [UIImage imageNamed:@"tick"];
+  
     
     UIButton *photoUnread = [[UIButton alloc] initWithFrame: CGRectMake(0, 0, 16, 16)];
     
@@ -351,7 +368,7 @@ static int rowNumber;
     
     UIButton *moneyLogo = [[UIButton alloc] initWithFrame: CGRectMake(0, 0, 16, 16)];
     
-    UIButton *checkedOff = [[UIButton alloc] initWithFrame: CGRectMake(0, 0, 16, 16)];
+   
 
 
     
@@ -365,9 +382,6 @@ static int rowNumber;
     [moneyLogo setBackgroundImage:icon3 forState:UIControlStateNormal];
     moneyLogo.backgroundColor = [UIColor clearColor];
     
-    [checkedOff setBackgroundImage:icon4 forState:UIControlStateNormal];
-    checkedOff.backgroundColor = [UIColor clearColor];
-    
     
     
     
@@ -378,10 +392,7 @@ static int rowNumber;
         return cell;
     }
     
-    //NSLog(@"%@",self.objects);
-    //NSLog(@"%@",self.sections);
-   // NSLog(@"%@",self.sectionFileType);
-    //get row number independent of section
+  
     rowNumber = 0;
   
     
@@ -408,11 +419,8 @@ static int rowNumber;
    
    
     
-        //NSLog(@"%@",message);
-    //PFObject *message = [self.objects objectForKey:[NSNumber numberWithInteger:indexPath.row ]];
-    
-    //cell.textLabel.text = [NSString stringWithFormat:@"FileType:%@",message[@"fileType"]];
-    
+        cell.accessoryType =UITableViewCellAccessoryNone;
+        cell.accessoryView = nil;
     
     [cell.textLabel setFont:[UIFont fontWithName:@"Raleway-Medium" size:14]];
      NSString *fileType = [message objectForKey:@"fileType"];
@@ -438,7 +446,7 @@ static int rowNumber;
         
          if([[message objectForKey:@"readUsers"] containsObject:currentUser.objectId]){
              UIImage *marquee =[UIImage imageNamed:@"marquee"];
-             cell.accessoryType =UITableViewCellAccessoryNone;
+             
              cell.imageView.image =marquee;
              
          }

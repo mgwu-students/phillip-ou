@@ -335,7 +335,7 @@
     //if there is a thing to send texts
     if([MFMessageComposeViewController  canSendText]){
         [textComposer setRecipients:[NSArray arrayWithObjects:nil]];
-        [textComposer setBody:@"App Link Here"];
+        [textComposer setBody:@"Get Rascal Today!"];
         //send to iMessage
         [self presentViewController:textComposer animated:YES completion:nil];
         

@@ -12,6 +12,7 @@
 #import <MobileCoreServices/UTCoreTypes.h>
 #import <Parse/Parse.h>
 #import "PostCameraViewController.h"
+
 @interface CameraViewController ()
 @property (nonatomic, strong) UIImagePickerController *imagePicker;
 @property (nonatomic, retain) UIView *cameraOverlayView;
@@ -146,7 +147,12 @@
     [super viewWillAppear:animated];
     self.imagePicker = [[UIImagePickerController alloc]init];
     self.imagePicker.delegate = self;
+    
     self.imagePicker.allowsEditing = NO;
+    if([[UIDevice currentDevice].model hasPrefix:@"iPad"]){
+        NSLog(@"IPAD!");
+        self.imagePicker.allowsEditing=YES;
+    }
     
     /*
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]){
@@ -166,9 +172,13 @@
 }
 */
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+   
     
+   
     UIImage *chosenImage = [info valueForKey:UIImagePickerControllerOriginalImage];
-    //UIImage *chosenImage = info[UIImagePickerControllerEditedImage];
+    
+        
+        NSLog(@"%@",info);
     self.chosenImageView.image = chosenImage;
     
     //handling landscape mode
@@ -179,12 +189,12 @@
     
     }
     
+        [self dismissViewControllerAnimated:YES completion:nil];
+        
+        [self.capturedImages addObject: chosenImage];
     
     
     
-    [self dismissViewControllerAnimated:YES completion:nil];
-    
-    [self.capturedImages addObject: chosenImage];
     
     
     [self finishAndUpdate];
@@ -251,6 +261,9 @@
         b.whoTook = [PFUser currentUser];
         b.file = file;
         b.caption = [self.titleTextField text];
+        if([self.titleTextField text].length==0){
+            b.caption = @"untitled";
+        }
         b.chosenImageView = self.chosenImageView;
         b.targetId = self.targetId;
         b.senderId = self.senderId;

@@ -104,6 +104,7 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
 - (void)application:(UIApplication *)application
 didReceiveRemoteNotification:(NSDictionary *)userInfo {
     [PFPush handlePush:userInfo];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadTheTable" object:nil];
 }
 
 
