@@ -46,7 +46,7 @@
     if ([PFUser currentUser]){
         NSLog(@"Segueing");
         [segue.destinationViewController setHidesBottomBarWhenPushed:YES];
-        InboxViewController *inboxViewController = (ImageViewController *)segue.destinationViewController;
+        //InboxViewController *inboxViewController = (ImageViewController *)segue.destinationViewController;
        
     }
     // Get the new view controller using [segue destinationViewController].

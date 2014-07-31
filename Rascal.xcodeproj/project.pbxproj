@@ -11,7 +11,6 @@
 		4D0C83E5197A2CCF00535637 /* heart-empty.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D0C83E4197A2CCF00535637 /* heart-empty.png */; };
 		4D0C83E7197A2CD700535637 /* heart-full.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D0C83E6197A2CD700535637 /* heart-full.png */; };
 		4D1AAABE196472DB00F79C39 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D1AAABD196472DB00F79C39 /* ProfileViewController.m */; };
-		4D1AAAC119648BA000F79C39 /* FollowButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D1AAAC019648BA000F79C39 /* FollowButton.m */; };
 		4D27AFF0195FEFB700DB8939 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D27AFEF195FEFB700DB8939 /* Parse.framework */; };
 		4D27AFFB195FEFF400DB8939 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D27AFF1195FEFF400DB8939 /* AudioToolbox.framework */; };
 		4D27AFFC195FEFF400DB8939 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D27AFF2195FEFF400DB8939 /* CFNetwork.framework */; };
@@ -53,6 +52,7 @@
 		4D8C6E3519788AF60058593D /* camera-2-smaller.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D8C6E3419788AF60058593D /* camera-2-smaller.png */; };
 		4D8C6E3719788B220058593D /* marquee-smaller.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D8C6E3619788B220058593D /* marquee-smaller.png */; };
 		4D8C6E3919788B750058593D /* users-smaller.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D8C6E3819788B750058593D /* users-smaller.png */; };
+		4D8D769B1989C4BF00F59E61 /* iTunesArtwork.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D8D769A1989C4BF00F59E61 /* iTunesArtwork.png */; };
 		4D92D4661983650700EBC560 /* betterFrame.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D92D4651983650700EBC560 /* betterFrame.png */; };
 		4D92D4681983661100EBC560 /* betterFrame2.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D92D4671983661100EBC560 /* betterFrame2.png */; };
 		4D9AD5D8196EF273001A896F /* PostCameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D9AD5D7196EF273001A896F /* PostCameraViewController.m */; };
@@ -104,8 +104,6 @@
 		4D0C83E6197A2CD700535637 /* heart-full.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "heart-full.png"; sourceTree = "<group>"; };
 		4D1AAABC196472DB00F79C39 /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
 		4D1AAABD196472DB00F79C39 /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
-		4D1AAABF19648BA000F79C39 /* FollowButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FollowButton.h; sourceTree = "<group>"; };
-		4D1AAAC019648BA000F79C39 /* FollowButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FollowButton.m; sourceTree = "<group>"; };
 		4D27AFEF195FEFB700DB8939 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
 		4D27AFF1195FEFF400DB8939 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		4D27AFF2195FEFF400DB8939 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
@@ -159,6 +157,7 @@
 		4D8C6E3419788AF60058593D /* camera-2-smaller.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "camera-2-smaller.png"; sourceTree = "<group>"; };
 		4D8C6E3619788B220058593D /* marquee-smaller.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "marquee-smaller.png"; sourceTree = "<group>"; };
 		4D8C6E3819788B750058593D /* users-smaller.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "users-smaller.png"; sourceTree = "<group>"; };
+		4D8D769A1989C4BF00F59E61 /* iTunesArtwork.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = iTunesArtwork.png; path = ../../icon/ios/iTunesArtwork.png; sourceTree = "<group>"; };
 		4D92D4651983650700EBC560 /* betterFrame.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = betterFrame.png; path = ../../betterFrame.png; sourceTree = "<group>"; };
 		4D92D4671983661100EBC560 /* betterFrame2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = betterFrame2.png; sourceTree = "<group>"; };
 		4D9AD5D6196EF273001A896F /* PostCameraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostCameraViewController.h; sourceTree = "<group>"; };
@@ -243,6 +242,7 @@
 		4DA2A2E8197867880090F2A2 /* Art */ = {
 			isa = PBXGroup;
 			children = (
+				4D8D769A1989C4BF00F59E61 /* iTunesArtwork.png */,
 				4D68FC691988916700800E07 /* logo.png */,
 				4D74504F19845EF100B9032C /* tutorial2.png */,
 				4D745053198461DA00B9032C /* tutorial3.png */,
@@ -358,8 +358,6 @@
 				4D5C0FF819606F1700770901 /* LoginViewController.m */,
 				4D5C0FFA19606F2400770901 /* SignUpViewController.h */,
 				4D5C0FFB19606F2400770901 /* SignUpViewController.m */,
-				4D1AAABF19648BA000F79C39 /* FollowButton.h */,
-				4D1AAAC019648BA000F79C39 /* FollowButton.m */,
 				4D27B008195FF21000DB8939 /* ParseTableViewController.h */,
 				4D27B009195FF21000DB8939 /* ParseTableViewController.m */,
 				4D1AAABC196472DB00F79C39 /* ProfileViewController.h */,
@@ -494,6 +492,7 @@
 				4D3E69721979F279003FEA86 /* intersect.png in Resources */,
 				4D92D4661983650700EBC560 /* betterFrame.png in Resources */,
 				4D8C6E2119787DB50058593D /* camera-2.png in Resources */,
+				4D8D769B1989C4BF00F59E61 /* iTunesArtwork.png in Resources */,
 				4D0C83E7197A2CD700535637 /* heart-full.png in Resources */,
 				4D5A343B19818B2A00252814 /* user-3-big.png in Resources */,
 				4DA2A2EA197867EE0090F2A2 /* Raleway-Thin.otf in Resources */,
@@ -548,7 +547,6 @@
 				4D8B759A196CFEAD00166173 /* EditFriendsViewController.m in Sources */,
 				4D4A9200198829DC00BD5BAE /* FriendRequestTableViewController.m in Sources */,
 				4D1AAABE196472DB00F79C39 /* ProfileViewController.m in Sources */,
-				4D1AAAC119648BA000F79C39 /* FollowButton.m in Sources */,
 				4DD8B898196287EB0074FFF4 /* CameraViewController.m in Sources */,
 				4DDEABEE195FE8E5009684B8 /* main.m in Sources */,
 				4DB5E3801988AA3200E4939F /* Reachability.m in Sources */,

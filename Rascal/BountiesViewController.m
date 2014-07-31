@@ -20,7 +20,6 @@
 {
     [self.navigationController.navigationBar setHidden:NO];
     [super viewDidLoad];
-    PFUser *currentUser = [PFUser currentUser];
     self.bountyCost = 5;
     self.bountyValue = 1;
     
@@ -192,7 +191,7 @@
     
         if ([self.recipientsOfBounties count] !=0){
             PFUser *currentUser = [PFUser currentUser];
-            PFObject *bounty = [PFObject objectWithClassName:@"Messages"];
+            //PFObject *bounty = [PFObject objectWithClassName:@"Messages"];
             PFObject *bountyNotice = [PFObject objectWithClassName:@"Messages"];
             
             //self.allFriends addObjectsFromArray:currentUser[@"]

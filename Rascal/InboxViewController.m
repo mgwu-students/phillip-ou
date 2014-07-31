@@ -114,6 +114,12 @@
 #pragma mark - header font
 - (void)viewDidLoad
 {
+    UIBarButtonItem *newBackButton =
+    [[UIBarButtonItem alloc] initWithTitle:@"back"
+                                     style:UIBarButtonItemStylePlain
+                                    target:nil
+                                    action:nil];
+    [[self navigationItem] setBackBarButtonItem:newBackButton];
     NSLog(@"viewdidload is happening");
     //PFUser *currentUser = [PFUser currentUser];
     /*if(![currentUser[@"newUser"] isEqualToString:@"No"]){*/
@@ -241,7 +247,7 @@
     NSLog(@"QUERYING!");
     PFQuery *query = [PFQuery queryWithClassName:self.parseClassName];
     PFUser *currentUser = [PFUser currentUser];
-    PFRelation *friends = [currentUser relationForKey:@"friendsRelation"];
+    //PFRelation *friends = [currentUser relationForKey:@"friendsRelation"];
         if(currentUser !=nil){
             NSArray *array = [currentUser objectForKey:@"friendsList"];
             self.friendsList=[NSMutableArray arrayWithArray:array];
@@ -410,7 +416,7 @@ static int rowNumber;
     
     [cell.textLabel setFont:[UIFont fontWithName:@"Raleway-Medium" size:14]];
      NSString *fileType = [message objectForKey:@"fileType"];
-     NSArray *listOfRecipients = [message objectForKey:@"recipientIds"];
+    // NSArray *listOfRecipients = [message objectForKey:@"recipientIds"];
     // NSString* read = [message objectForKey:@"read"];     //determine if cell is read
     if([fileType isEqualToString:@"bountyNotice"]){
         //if([listOfRecipients containsObject:currentUser.objectId]){

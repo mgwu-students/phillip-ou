@@ -22,6 +22,15 @@
 
 - (void)viewDidLoad
 {
+    UIBarButtonItem *newBackButton =
+    [[UIBarButtonItem alloc] initWithTitle:@"back"
+                                     style:UIBarButtonItemStylePlain
+                                    target:nil
+                                    action:nil];
+    
+    [[self navigationItem] setBackBarButtonItem:newBackButton];
+    self.navigationItem.backBarButtonItem.tintColor =[UIColor colorWithRed:51/255.0 green:70/255.0 blue:192/255.0 alpha:1.0];
+   // [[self.parentViewController navigationItem] setBackBarButtonItem: newBackButton];
     NSLog(@"calling viewdidload");
     [super viewDidLoad];
     
@@ -130,7 +139,7 @@
     PFUser *currentUser = [PFUser currentUser];
     PFUser *user = [self.friends objectAtIndex: indexPath.row];
     PFRelation *friendsRelation = [currentUser relationForKey: @"friendsRelation"];//adding friends
-    NSMutableArray *updateArray = self.friendsList;
+    //NSMutableArray *updateArray = self.friendsList;
     for (PFUser *friend in[self.friends copy] ){
         
         if([friend.objectId isEqualToString:user.objectId]){
@@ -151,8 +160,10 @@
                         }
                     @catch(NSException *exception){
                         NSLog(@"caught error");
+                        
+                        
                         //HE'S REMOVED FROM THE FRIEND RELATION BUT NOT THE ACTUAL LIST OF FRIENDS.
-                        //[self.friendsList removeObject: friend.objectId];
+                       
                     }
                     @finally{
                         NSLog(@"cleaning up");

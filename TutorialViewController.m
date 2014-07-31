@@ -31,12 +31,14 @@
     self.doneButton.hidden=YES;
      [self.navigationController.navigationBar setHidden:YES];
     
-    self.label.text = @"The app where you are rewarded for embarassing your loved ones";
+    self.label.text = @"Where the best way to laugh is at the expense of your loved ones";
     [self.label setFont:[UIFont fontWithName:@"Raleway-Medium" size:15.0]];
     [self.titleLabel setFont:[UIFont fontWithName:@"Raleway-Medium" size:18]];
    // [self.imageView setUserInteractionEnabled:YES];
     [self.view setUserInteractionEnabled:YES];
     self.imageView.contentMode=UIViewContentModeScaleAspectFit;
+    self.imageView.image=[UIImage imageNamed:@"iTunesArtwork"];
+    
     //prevents backswiping back to front of navigation stack.
     if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
         NSLog(@"backswipe!");
@@ -75,8 +77,8 @@
     [self.doneButton.titleLabel setFont:[UIFont fontWithName:@"Raleway-Medium" size:18]];
 }
 - (IBAction)firstPage:(id)sender {
-    self.titleLabel.text=@"welcome to rascal";
-    self.label.text = @"The app where you are rewarded for embarassing your loved ones";
+    self.titleLabel.text=@"Welcome to Rascal";
+    self.label.text = @"Where the best way to laugh is at the expense of your loved ones";
     
     [self.titleLabel setFont:[UIFont fontWithName:@"Raleway-Medium" size:18]];
     // [self.imageView setUserInteractionEnabled:YES];
@@ -90,7 +92,7 @@
     self.pageController.currentPage=0;
     
     //!!! BLANK FOR NOW
-    self.imageView.image=nil;
+    self.imageView.image=[UIImage imageNamed:@"iTunesArtwork"];
    
     
     

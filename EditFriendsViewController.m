@@ -22,6 +22,7 @@
 
 - (void)viewDidLoad
 {
+    
     self.searchResults = [NSMutableArray arrayWithCapacity:[self.allUsers count]];
     self.allUsernames = [[NSMutableArray alloc]init];
     self.userDict = [[NSMutableDictionary alloc]init];

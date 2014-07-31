@@ -26,7 +26,7 @@
 
 @property (strong, nonatomic) IBOutlet UIButton *likeButton;
 
--(IBAction) logout:(id)sender;
+
 
 
 @end

@@ -111,8 +111,8 @@
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    PFUser *currentUser = [PFUser currentUser];
-    PFUser *user = [self.friendRequests objectAtIndex: indexPath.row];
+   // PFUser *currentUser = [PFUser currentUser];
+   // PFUser *user = [self.friendRequests objectAtIndex: indexPath.row];
     PFObject *requestObject = [self.friendRequests objectAtIndex: indexPath.row];
     [requestObject setObject:@"Denied" forKey:@"status"];
     
@@ -147,7 +147,7 @@
     PFObject *requestObject = [self.friendRequests objectAtIndex:indexPath.row];
     
     NSLog(@"USER:%@",requestObject[@"requestFromObject"]);
-    PFUser *user =requestObject[@"requestFromObject"];
+  //  PFUser *user =requestObject[@"requestFromObject"];
     cell.textLabel.text = requestObject[@"requestFromName"];
     [cell.textLabel setFont:[UIFont fontWithName:@"Raleway-Medium" size:14]];
     
