@@ -29,7 +29,7 @@
 {
     [self.tabBarController.tabBar setHidden:YES];
     self.usernameLabel.text = [[PFUser currentUser]username];
-    self.policyText.hidden =YES;
+    [self.policyText setEditable:NO];
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 }

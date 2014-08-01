@@ -201,10 +201,12 @@
             
             
             PFQuery *pushQuery = [PFInstallation query];
-            NSMutableArray *friendsListMinusVictim = [NSMutableArray arrayWithArray:self.allFriends];
+            NSMutableArray *friendsListMinusVictimAndSelf = [NSMutableArray arrayWithArray:self.allFriends];
             //create this array so that the victim doesn't get two push notifications when bounty is set on him.
-            [friendsListMinusVictim removeObject: self.user.objectId];
-            [pushQuery whereKey:@"installationUser" containedIn:friendsListMinusVictim]; //allFriends is array of user ids
+            //so the sender doesn't get user id as well.
+            [friendsListMinusVictimAndSelf removeObject: self.user.objectId];
+            [friendsListMinusVictimAndSelf removeObject: currentUser.objectId];
+            [pushQuery whereKey:@"installationUser" containedIn:friendsListMinusVictimAndSelf]; //allFriends is array of user ids
             
             // Send push notification to our query
             PFPush *push = [[PFPush alloc] init];

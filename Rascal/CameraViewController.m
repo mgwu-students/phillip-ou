@@ -98,7 +98,10 @@
 
 
 - (IBAction)showImagePickerForCamera:(id)sender
+
 {
+    //but send them to photo library if they don't have a camera.
+    
     [self showImagePickerForSourceType:UIImagePickerControllerSourceTypeCamera];
 }
 
@@ -116,7 +119,13 @@
     
     UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
     imagePickerController.modalPresentationStyle = UIModalPresentationCurrentContext;
-    imagePickerController.sourceType = sourceType;
+    
+    //make sure it has camera
+    if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]){
+        imagePickerController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;}
+    else{
+        imagePickerController.sourceType = sourceType;}
+    
     imagePickerController.delegate = self;
     
     if (sourceType == UIImagePickerControllerSourceTypeCamera)
@@ -124,9 +133,12 @@
         /*
          The user wants to use the camera interface. Set up our custom overlay view for the camera.
          */
-       
+        //double check they actually have a camera
+        if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]){
+            imagePickerController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;}
         
-        imagePickerController.showsCameraControls =YES;
+        else{
+            imagePickerController.showsCameraControls =YES;}
         //imagePickerController.cameraOverlayView = self.overlayView;
         
         /*
