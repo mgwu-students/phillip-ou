@@ -132,8 +132,9 @@
     //UIButton *likeButton = (UIButton *) [sectionHeaderView viewWithTag:4];;
     
     titleLabel.text=caption;
+    titleLabel.adjustsFontSizeToFitWidth=YES;
     titleLabel.textColor=[UIColor colorWithRed:179/255.0 green:135/255.0 blue:27/255.0 alpha:1.0];
-    rankLabel.text = [NSString stringWithFormat:@"#%d",section +1];
+    rankLabel.text = [NSString stringWithFormat:@"#%ld",section +1];
     userNameLabel.text = [NSString stringWithFormat:@"by %@",username];
     int numberOfLikes = [self.message[@"listOfLikers"] count];
     numberOfLikesLabel.text = [NSString stringWithFormat: @"%d",numberOfLikes];
@@ -258,7 +259,20 @@
 
 
 - (IBAction)back:(id)sender {
-    [self.tabBarController setSelectedIndex:0];
+    UIView * fromView = self.tabBarController.selectedViewController.view;
+    UIView * toView = [[self.tabBarController.viewControllers objectAtIndex:0] view];
+    
+    // Transition using a page curl.
+    [UIView transitionFromView:fromView
+                        toView:toView
+                      duration:0.5
+                       options:UIViewAnimationOptionTransitionFlipFromLeft
+                    completion:^(BOOL finished) {
+                        if (finished) {
+                            self.tabBarController.selectedIndex = 0;
+                        }
+                    }];
+    //[self.tabBarController setSelectedIndex:0];
 }
 
 - (IBAction)like:(id)sender {
@@ -273,7 +287,7 @@
     if(![self.message[@"listOfLikers"] containsObject: currentUser.username]){
         [self.message addObject:currentUser.username forKey:@"listOfLikers"];
         NSNumber *numberOfLikes = [self.message objectForKey:@"numberOfLikes"];
-        int numlikes = [numberOfLikes integerValue];
+        int numlikes = [numberOfLikes intValue];
         numberOfLikes = [NSNumber numberWithInteger: numlikes+1];
         [self.message setObject:numberOfLikes forKey:@"numberOfLikes"];
         

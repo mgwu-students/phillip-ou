@@ -156,6 +156,7 @@
     NSString *caption = [photo objectForKey:@"caption"];
     
     titleLabel.text=caption;
+    titleLabel.adjustsFontSizeToFitWidth=YES;
     senderLabel.text = [NSString stringWithFormat: @"by %@",userName];
    
     int numberOfLikes = [[photo objectForKey:@"numberOfLikes"] intValue];
@@ -199,6 +200,7 @@
     static NSString *CellIdentifier = @"PhotoCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     PFImageView *photo = (PFImageView *)[cell viewWithTag:1];
+    NSLog(@"%@",object[@"file"]);
     photo.file = object[@"file"]; //save photo.file in key image
     //handles landscape
     int orientation = photo.image.imageOrientation;
@@ -276,7 +278,21 @@
 }
 
 - (IBAction)back:(id)sender {
-    [self.tabBarController setSelectedIndex:0];
+    UIView * fromView = self.tabBarController.selectedViewController.view;
+    UIView * toView = [[self.tabBarController.viewControllers objectAtIndex:0] view];
+    
+    // Transition using a page curl.
+    
+    [UIView transitionFromView:fromView
+                        toView:toView
+                      duration:0.5
+                       options:UIViewAnimationOptionTransitionFlipFromLeft
+                    completion:^(BOOL finished) {
+                        if (finished) {
+                            self.tabBarController.selectedIndex = 0;
+                        }
+                    }];
+    //[self.tabBarController setSelectedIndex:0];
 }
 
 

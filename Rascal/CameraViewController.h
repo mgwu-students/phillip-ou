@@ -26,6 +26,7 @@
 @property (nonatomic, strong) NSString *targetId;
 @property (nonatomic, strong) NSString *senderId;
 
+@property (strong, nonatomic) IBOutlet UILabel *prompt;
 
 @end
 

@@ -12,6 +12,7 @@
 #import "InboxViewController.h"
 #import "ImageViewController.h"
 #import "CameraViewController.h"
+#import "HomeViewController.h"
 
 
 @interface InboxViewController ()
@@ -35,7 +36,7 @@
         // Whether the built-in pagination is enabled
         self.paginationEnabled = YES;
         
-        self.objectsPerPage = 50;
+        //self.objectsPerPage = 30;
         
         // The number of objects to show per page
         
@@ -44,12 +45,13 @@
     return self;
 }
 -(void) objectsDidLoad: (NSError *)error{
+    NSLog(@"objects did load");
     [super objectsDidLoad: error];
     if(![PFUser currentUser] && ![PFFacebookUtils isLinkedWithUser:[PFUser currentUser]]){
         NSLog(@"ByPass");
     }
     else{
-        PFUser *currentUser = [PFUser currentUser];
+        
         
        
     NSLog(@"call1");
@@ -57,7 +59,7 @@
         //PFUser *currentUser = [PFUser currentUser];
         
         
-        NSLog(@"%@",[currentUser objectForKey:@"friendsList"]);
+        NSLog(@"%@",[self.currentUser objectForKey:@"friendsList"]);
         
 
         
@@ -101,6 +103,13 @@
         //{fileType:[0,1,2], fileType:[0,1]} <--row
         
     }
+        PFRelation *relation = [self.currentUser relationforKey:@"friendsRelation"];
+        self.allFriends = [[NSArray alloc]init];
+        
+        [[relation query] findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+            NSLog(@"relation query!");
+            self.allFriends = objects;
+        }];
     
     //NSLog(@"%@",self.sections);
 }
@@ -117,6 +126,47 @@
 #pragma mark - header font
 - (void)viewDidLoad
 {
+    
+    self.bountyButton.selected=NO;
+    
+    
+    self.marquee =[UIImage imageNamed:@"marquee"];
+   
+    self.unseenPhotoImage = [UIImage imageNamed:@"image-big"];
+    
+    
+    self.currentUser = [PFUser currentUser];
+    self.bountyUserLogo = [UIImage imageNamed:@"user-3-big"];
+    
+    
+   
+    
+    
+    UIImage *icon3 = [UIImage imageNamed:@"database"];
+    
+    
+    //UIButton *photoUnread = [[UIButton alloc] initWithFrame: CGRectMake(0, 0, 16, 16)];
+    
+    
+    
+    
+    self.moneyLogo= [[UIButton alloc] initWithFrame: CGRectMake(0, 0, 16, 16)];
+    
+    
+    
+    
+    
+    [UIButton buttonWithType: UIButtonTypeCustom];
+    //[photoUnread setBackgroundImage:icon forState:UIControlStateNormal];
+    //photoUnread.backgroundColor = [UIColor clearColor];
+    
+    
+    
+    [self.moneyLogo setBackgroundImage:icon3 forState:UIControlStateNormal];
+    self.moneyLogo.backgroundColor = [UIColor clearColor];
+    
+    
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadTable:) name:@"reloadTheTable" object:nil];
 
     UIBarButtonItem *newBackButton =
@@ -126,12 +176,12 @@
                                     action:nil];
     [[self navigationItem] setBackBarButtonItem:newBackButton];
     NSLog(@"viewdidload is happening");
-    PFUser *currentUser = [PFUser currentUser];
-    NSLog(@"state:%@",currentUser[@"newUser"]);
-    if(![currentUser[@"newUser"] isEqualToString:@"No"]){
+   
+    NSLog(@"state:%@",self.currentUser[@"newUser"]);
+    if(![self.currentUser[@"newUser"] isEqualToString:@"No"]){
         [self.tabBarController setSelectedIndex:6];
-        [currentUser setObject:@"No" forKey:@"newUser"];
-        [currentUser saveInBackground];
+        [self.currentUser setObject:@"No" forKey:@"newUser"];
+        [self.currentUser saveInBackground];
     }
    
     
@@ -205,27 +255,23 @@
 -(void) viewWillAppear:(BOOL)animated{
     NSLog(@"view will appear");
     
-    if (![self connected]) {
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"There is no network connection" message:@"" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-        [alertView show];
-    } else {
-        // connected, do some internet stuff
-    }
+    
+    self.icon2 = [UIImage imageNamed:@"camera-2"];
+    self.bountyLogo.backgroundColor = [UIColor clearColor];
+   
+    
+   
     
     
-    [super viewWillAppear:animated];
-     self.bountyButton.selected=NO;
     
-    PFUser *currentUser = [PFUser currentUser];
-    
-    NSString *profilePictureID = [currentUser objectForKeyedSubscript:@"facebookId"];
+    NSString *profilePictureID = [self.currentUser objectForKeyedSubscript:@"facebookId"];
     NSString *url = [[NSString alloc] initWithFormat:@"https://graph.facebook.com/%@/picture",profilePictureID];
     UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:url]]];
-   
+    
     //[self.tableView reloadData];
     //PFUser *currentUser = [PFUser currentUser];
     /*PFFile *profilePicture = [currentUser objectForKey:@"profilePicture"];*/
-     self.pointsLabel.text = [NSString stringWithFormat:@"Credits: %@", currentUser[@"Points"]];
+    
     
     self.profileImageView.layer.masksToBounds = YES;
     self.profileImageView.layer.cornerRadius = 20;
@@ -238,7 +284,19 @@
     
     self.userNameLabel.adjustsFontSizeToFitWidth=YES;
     
-    self.userNameLabel.text = currentUser.username;
+    self.userNameLabel.text = self.currentUser.username;
+    
+    self.pointsLabel.text = [NSString stringWithFormat:@"Credits: %@", self.currentUser[@"Points"]];
+    
+    if (![self connected]) {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"There is no network connection" message:@"" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [alertView show];
+    } else {
+        // connected, do some internet stuff
+    }
+    
+    
+    [super viewWillAppear:animated];
     
     [self loadObjects];
     [self.tableView reloadData];
@@ -261,21 +319,22 @@
 //load up messages sent to you
 
 - (PFQuery *)queryForTable {
-    NSLog(@"QUERYING!");
+    //NSLog(@"QUERYING!");
     PFQuery *query = [PFQuery queryWithClassName:self.parseClassName];
-    PFUser *currentUser = [PFUser currentUser];
+   
     //PFRelation *friends = [currentUser relationForKey:@"friendsRelation"];
-        if(currentUser !=nil){
-            NSArray *array = [currentUser objectForKey:@"friendsList"];
+        if(self.currentUser !=nil){
+            NSArray *array = [self.currentUser objectForKey:@"friendsList"];
             self.friendsList=[NSMutableArray arrayWithArray:array];
-            NSLog(@"%@",self.friendsList);
-        [query whereKey:@"recipientIds" containsAllObjectsInArray:@[currentUser.objectId]];
+            NSLog(@"Querying friendsList: %@",self.friendsList);
+        [query whereKey:@"recipientIds" containsAllObjectsInArray:@[self.currentUser.objectId]];
         [query whereKey:@"fileType" containedIn:@[@"image",@"bountyNotice"]];
         [query whereKey:@"senderId" containedIn:self.friendsList];
         
         
         [query orderByAscending:@"fileType"];
         [query addDescendingOrder:@"createdAt"];
+        query.limit=30;
     
     // If Pull To Refresh is enabled, query against the network by default.
     if (self.pullToRefreshEnabled) {
@@ -308,7 +367,8 @@
 {
     // Return the number of sections.
     
-    return self.sections.allKeys.count;
+    //return self.sections.allKeys.count;
+    return 2;
     
 }
 
@@ -320,7 +380,7 @@
     NSArray *rowIndecesInSection = [self.sections objectForKey:fileType];
     // Return the number of rows in the section.
     //NSLog(@"using %@:",rowIndecesInSection);
-   NSLog(@"%@",self.sections);
+   
     return rowIndecesInSection.count; //this is some times too much
     
 }
@@ -341,52 +401,24 @@ static int rowNumber;
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 
 {
-    NSLog(@"This is being called");
+    
     //[self loadObjects];
+    
     static NSString *CellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-   /* UITableViewCell *customCell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:0];
-    customCell.textLabel.text = @"test";
-    if ([self.sectionFileType[@"bountyNotice"] count] ==0){
-        return customCell;}*/
-    //NSLog(@"IndexPath %@",indexPath);
+   
+   
+    
+    
+    
+    
     cell.textLabel.adjustsFontSizeToFitWidth=YES;
     
     cell.accessoryType=UITableViewCellAccessoryNone;
     
     
     
-    UIImage *icon = [UIImage imageNamed: @"image-bigger"];
-    UIImage *icon2 = [UIImage imageNamed:@"camera-2"];
-    UIImage *icon3 = [UIImage imageNamed:@"database"];
-  
     
-    UIButton *photoUnread = [[UIButton alloc] initWithFrame: CGRectMake(0, 0, 16, 16)];
-    
-    UIButton *bountyLogo = [[UIButton alloc] initWithFrame: CGRectMake(0, 0, 16, 16)];
-    
-    
-    UIButton *moneyLogo = [[UIButton alloc] initWithFrame: CGRectMake(0, 0, 16, 16)];
-    
-   
-
-
-    
-    [UIButton buttonWithType: UIButtonTypeCustom];
-    [photoUnread setBackgroundImage:icon forState:UIControlStateNormal];
-     photoUnread.backgroundColor = [UIColor clearColor];
-    
-    [bountyLogo setBackgroundImage:icon2 forState:UIControlStateNormal];
-     bountyLogo.backgroundColor = [UIColor clearColor];
-    
-    [moneyLogo setBackgroundImage:icon3 forState:UIControlStateNormal];
-    moneyLogo.backgroundColor = [UIColor clearColor];
-    
-    
-    
-    
-    
-    PFUser *currentUser = [PFUser currentUser];
     if (indexPath.section == self.objects.count) { //if we're at the end (the last section)
         UITableViewCell *cell = [self tableView:tableView cellForNextPageAtIndexPath:indexPath]; //get that cell(LoadMoreCell)
         return cell;
@@ -399,63 +431,67 @@ static int rowNumber;
     
     for (NSInteger i = 0; i < indexPath.section; i++) {
         rowNumber += [self tableView:tableView numberOfRowsInSection:i];
-          NSLog(@"NUM %d", [self tableView:tableView numberOfRowsInSection:i] );
+        
     }
     rowNumber += indexPath.row;
-    NSLog(@"number of rows %d",rowNumber);
+    
     
     if(self.objects==nil){
-        NSLog(@"waiting");
+        NSLog(@"waiting!!!!!");
+        //[self loadObjects];
     }
+    
+    [self.bountyLogo setBackgroundImage:self.icon2 forState:UIControlStateNormal];
+    self.bountyLogo = [[UIButton alloc] initWithFrame: CGRectMake(0, 0, 16, 16)];
     
    
     @try{
-        PFObject *message = [self.objects objectAtIndex:rowNumber];    PFRelation *relation = [currentUser relationforKey:@"friendsRelation"];
-    self.allFriends = [[NSArray alloc]init];
+        PFObject *message = [self.objects objectAtIndex:rowNumber];
+        
     
-    [[relation query] findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-        self.allFriends = objects;
-    }];
-   
-   
     
         cell.accessoryType =UITableViewCellAccessoryNone;
         cell.accessoryView = nil;
     
     [cell.textLabel setFont:[UIFont fontWithName:@"Raleway-Medium" size:14]];
      NSString *fileType = [message objectForKey:@"fileType"];
-    // NSArray *listOfRecipients = [message objectForKey:@"recipientIds"];
-    // NSString* read = [message objectForKey:@"read"];     //determine if cell is read
+        NSLog(@"%@",fileType);
+    
     if([fileType isEqualToString:@"bountyNotice"]){
         //if([listOfRecipients containsObject:currentUser.objectId]){
-        cell.imageView.image = [UIImage imageNamed:@"user-3-big"];
+        cell.imageView.image =self.bountyUserLogo;
+        cell.accessoryView=self.bountyLogo;
         
-        cell.accessoryView=bountyLogo;
         cell.textLabel.text = [[NSString stringWithFormat:@"%@", [message objectForKey:@"recipientUsername"]] lowercaseString];
         }
     
      //if message is an image
      if ([fileType isEqualToString:@"image"]) {
          
-     //PUT IN IMAGE ICON HERE LATER TO SIGNIFY IT'S AN IMAGE
-         //cell.imageView.image = [UIImage imageNamed:@"image"];
+        
+         
          cell.textLabel.text= [NSString stringWithFormat:@"%@ ",[[message objectForKey:@"senderName"]lowercaseString]];
-         cell.imageView.image = [UIImage imageNamed:@"image-big"];
+         cell.accessoryView=nil;
+         //cell.imageView.image = self.unseenPhotoImage;
+         
          
          //for read messages
+
         
-         if([[message objectForKey:@"readUsers"] containsObject:currentUser.objectId]){
-             UIImage *marquee =[UIImage imageNamed:@"marquee"];
+         if([[message objectForKey:@"readUsers"] containsObject:self.currentUser.objectId]){
+             UIImage *marquee =self.marquee;
+             
+             
              
              cell.imageView.image =marquee;
              
          }
          //show this is a return of his investment
          
-         if([message[@"payForId"] isEqualToString:currentUser.objectId]){
+         if([message[@"payForId"] isEqualToString:self.currentUser.objectId]){
              if([message[@"fileType"] isEqualToString:@"image"]){
-                 if(![message[@"readUsers"] containsObject:currentUser.objectId]){
-                     cell.accessoryView = moneyLogo;
+                 if(![message[@"readUsers"] containsObject:self.currentUser.objectId]){
+                     cell.accessoryView = self.moneyLogo;
                      cell.accessoryType =UITableViewCellAccessoryNone;
                  }
              }
@@ -464,23 +500,11 @@ static int rowNumber;
     else{
         cell.accessoryType =UITableViewCellAccessoryNone;
          }
+    
      
-     
     
     
-    
-    /* if([fileType isEqualToString: @"bounty"] &&[listOfRecipients containsObject:currentUser.objectId]) {
-     cell.textLabel.text= [NSString stringWithFormat:@"%@ set a Bounty on you!",[message objectForKey:@"senderName"]];
-     
-   
-     }
-    
-                    
-            
-            cell.imageView.image = [UIImage imageNamed:@"user-3-big"];
-            cell.accessoryView=bountyLogo;
-         
-        }*/
+
         
     
    
@@ -514,9 +538,7 @@ static int rowNumber;
     if(indexPath.section==0){
     if(indexPath.row==[bountyNoticeArray count]-1){
         return NO;}}
-    return YES;      // <--- change this to yes in next update
-    //return NO;
-}
+    return YES;     }
 
 #pragma mark end
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -534,36 +556,29 @@ static int rowNumber;
     self.selectedMessage = [self.objects objectAtIndex:rowNumber];
         NSString *fileType = self.selectedMessage[@"fileType"];
         
-        NSLog(@"Old: %@", self.sections);
-         //NSLog (@"%@",self.selectedMessage);
+       
        //delete form sections
         NSArray *updateArray =[self.sections objectForKey:fileType];
         NSMutableArray *newArray = [NSMutableArray arrayWithArray:updateArray];
         [newArray removeObjectAtIndex:indexPath.row];
-        NSLog(@"New Array :%@", newArray);
+       
         [self.sections removeObjectForKey:fileType];
         [self.sections setObject:newArray forKey:fileType];
         
-              // [deleteArray removeObject:[[PFUser currentUser] objectId] ];
         
-        //updateArray = [NSArray arrayWithArray: newArray];
+        
+       
         NSLog(@"New Dict: %@", self.sections);
-        //[tableView deleteRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-        
-        
-        
-       // NSLog (@"%@",self.selectedMessage);
-   //delete from array
+       
         NSMutableArray *deleteArray = [NSMutableArray arrayWithArray:self.selectedMessage[@"recipientIds"]] ;
         
 
-        [deleteArray removeObject:[[PFUser currentUser] objectId] ];
+        [deleteArray removeObject:self.currentUser.objectId];
         //NSLog(@"RecipientIds:%@",deleteArray);
         NSArray *arrayUpdate = [NSArray arrayWithArray:deleteArray];
-       /* [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
-                              withRowAnimation:UITableViewRowAnimationFade];*/
+       
         [self.selectedMessage setObject:arrayUpdate forKey:@"recipientIds"];
-        [self.selectedMessage save]; //ensures array gets updated before there is index error after delete
+        [self.selectedMessage saveInBackground]; //ensures array gets updated before there is index error after delete
         
       
         [self queryForTable];
@@ -583,7 +598,7 @@ static int rowNumber;
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    PFUser *currentUser = [PFUser currentUser];
+    
     NSInteger rowNumber = 0;
     
    // self.count = [NSNumber numberWithInt:0];
@@ -597,23 +612,21 @@ static int rowNumber;
     //self.selectedMessage = [self.messages objectAtIndex:indexPath.row];
     
     NSString *fileType = [self.selectedMessage objectForKey:@"fileType"];
-    //NSLog(@"%@ is filetype",fileType);
-    NSLog(@"ROW NUMBER:%d",rowNumber);
-    NSLog(@"it is:%@",fileType);
+    
     if([fileType isEqualToString:@"image"]) {
         
        
         //if this photo is a reply to a bounty set by this user give him his points (give back his investment)
         
         
-    if([self.selectedMessage[@"payForId"] isEqualToString:currentUser.objectId])
-        {if(![self.selectedMessage[@"readUsers"] containsObject:currentUser.objectId]){
+    if([self.selectedMessage[@"payForId"] isEqualToString:self.currentUser.objectId])
+        {if(![self.selectedMessage[@"readUsers"] containsObject:self.currentUser.objectId]){
             int earned = [self.selectedMessage[@"payAmount"] intValue];
-            int currentPoints = [currentUser[@"Points"] intValue];
+            int currentPoints = [self.currentUser[@"Points"] intValue];
             NSNumber *points = [NSNumber numberWithInt: earned+currentPoints];
-            [currentUser setObject:points forKey:@"Points"];
+            [self.currentUser setObject:points forKey:@"Points"];
             NSLog(@"Points earned");
-            [currentUser saveInBackground];
+            [self.currentUser saveInBackground];
             [self.selectedMessage saveInBackground];
             
         }
@@ -633,7 +646,7 @@ static int rowNumber;
      
     if([fileType isEqualToString:@"bountyNotice"]){
             NSLog(@"show camera");
-        NSString *bountyMessage = [NSString stringWithFormat:@"Bounty set by %@", self.selectedMessage[@"senderName"]];
+        /*NSString *bountyMessage = [NSString stringWithFormat:@"Bounty set by %@", self.selectedMessage[@"senderName"]];*/
 
         if([self.selectedMessage[@"placeholder"] isEqualToString:@"placeholder"]){
             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Bounty Set by a Higher Power"
@@ -643,13 +656,6 @@ static int rowNumber;
 
         }
         //if(![self.selectedMessage[@"readUsers"] containsObject:currentUser.objectId]){
-        else{
-            
-            //message before taking photo
-                                     /* UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:bountyMessage
-                                                                    message:@"You Will Be Rewarded For This Photo"
-                                                                   delegate:self cancelButtonTitle:@"Yes" otherButtonTitles:nil];
-            [alertView show];*/}
         
             [self performSegueWithIdentifier:@"transferBountyData" sender:self];
         
@@ -718,20 +724,6 @@ static int rowNumber;
         [view setAlpha: 0.9];
         [view setBackgroundColor:[UIColor colorWithRed:51/255.0 green:70/255.0 blue:192/255.0 alpha:1.0]]; //your background color...
         
-        //button
-        UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-        [button setFrame:CGRectMake(0, 30.0, 330, 40.0)]; //(x,y,width,height)
-        button.tag = section;
-        [button setTitle: @"See Highlights" forState:UIControlStateNormal];
-        [button setTitleColor:[UIColor colorWithRed:225/255.0 green:150/255.0 blue:42/255.0 alpha:1.0] forState:UIControlStateNormal];
-        [button setFont:[UIFont fontWithName:@"TrebuchetMS-Bold" size:18]];
-        [[button layer] setBorderWidth:2.0f];
-        [[button layer] setBorderColor:[UIColor colorWithRed:51/255.0 green:70/255.0 blue:192/255.0 alpha:1.0].CGColor];
-        button.hidden = NO;
-        [button setBackgroundColor:[UIColor whiteColor]];
-        [button addTarget:self action:@selector(topButton:) forControlEvents:UIControlEventTouchDown];
-        [view addSubview:button];
-        
         
         
         return view;
@@ -743,23 +735,13 @@ static int rowNumber;
 //heights of section headers
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    if(section == 0){
-        return 30.f;}
-    return 70.f;
-}
-
-
-
-- (IBAction)logout:(id)sender {
    
-    [PFFacebookUtils unlinkUser:[PFUser currentUser]];
-    [PFUser logOut];
-    if([PFUser currentUser]){
-        NSLog(@"You haven't logged out");
-    }
-    //[self performSegueWithIdentifier:@"showLogin" sender:self];
-    
+    return 30.f;
 }
+
+
+
+
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
@@ -774,30 +756,64 @@ static int rowNumber;
     else {
         [segue.destinationViewController setHidesBottomBarWhenPushed:NO];
         ImageViewController *imageViewController = (ImageViewController *)segue.destinationViewController;
-        imageViewController.message = self.selectedMessage;}
+        imageViewController.message = self.selectedMessage;
+    }
     //passing variables to cameraViewController (sender & recipient of bounties)
 
-    }
+}
 
 - (IBAction)setBounties:(id)sender {
-    //self.bountyButton.selected = YES;
-   // self.view.backgroundColor = [UIColor blackColor];
-    self.bountyButton.selected =YES;
+  
     
     [self.tabBarController setSelectedIndex:5];
 }
 
 - (IBAction)profileButton:(id)sender {
-    [self.tabBarController setSelectedIndex:3];
+    UIView * fromView = self.tabBarController.selectedViewController.view;
+    UIView * toView = [[self.tabBarController.viewControllers objectAtIndex:3] view];
+    
+    // Transition using a page curl.
+    
+    [UIView transitionFromView:fromView
+                        toView:toView
+                      duration:0.5
+                       options:UIViewAnimationOptionTransitionFlipFromRight
+                    completion:^(BOOL finished) {
+                        if (finished) {
+                            self.tabBarController.selectedIndex = 3;
+                        }
+                    }];
+
+    
+    //[self.tabBarController setSelectedIndex:3];
+    
 }
 
 - (IBAction)topButton:(id)sender {
-    [self.tabBarController setSelectedIndex:1];
+    // Get views. controllerIndex is passed in as the controller we want to go to.
+    UIView * fromView = self.tabBarController.selectedViewController.view;
+    UIView * toView = [[self.tabBarController.viewControllers objectAtIndex:1] view];
+    
+    // Transition using a page curl.
+    [UIView transitionFromView:fromView
+                        toView:toView
+                      duration:0.5
+                       options:UIViewAnimationOptionTransitionFlipFromRight
+                    completion:^(BOOL finished) {
+                        if (finished) {
+                            self.tabBarController.selectedIndex = 1;
+                        }
+                    }];
+   
+    //[self.tabBarController setSelectedIndex:1];
 }
 
 
 - (IBAction)editFriends:(id)sender {
-    [self.tabBarController setSelectedIndex:4];
+    
+   
+   
+     [self.tabBarController setSelectedIndex:4];
 }
 
 

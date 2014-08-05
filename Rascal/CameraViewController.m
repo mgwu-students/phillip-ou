@@ -47,7 +47,7 @@
     self.senderId = [self.message objectForKey:@"senderId"];
     self.targetId = [self.message objectForKey:@"victimId"];
     
-   
+    self.prompt.hidden=NO;
    
         
     NSLog(@"%@ , %@", self.senderId, self.targetId);
@@ -189,8 +189,10 @@
    
     UIImage *chosenImage = [info valueForKey:UIImagePickerControllerOriginalImage];
     
+ 
+    self.prompt.hidden=YES;
         
-        NSLog(@"%@",info);
+        //NSLog(@"%@",info);
     self.chosenImageView.image = chosenImage;
     
     //handling landscape mode
@@ -265,6 +267,8 @@
         PostCameraViewController *b = segue.destinationViewController;
         
         NSData *imageData = UIImageJPEGRepresentation(self.chosenImageView.image, 0.05f); //reduce image file size
+        
+        NSLog(@"After Size: %d", imageData.length);
         
         PFFile *file = [PFFile fileWithName:@"image.png" data:imageData];
         // PFUser *currentUser = [PFUser currentUser];

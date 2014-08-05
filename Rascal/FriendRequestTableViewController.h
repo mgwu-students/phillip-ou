@@ -13,15 +13,11 @@
 @property (nonatomic, strong) PFRelation *friendsRelation;
 @property (nonatomic, strong) NSMutableArray *friendRequests;
 @property (nonatomic, strong) NSArray *friendsToDisplay;
-@property (nonatomic, strong) NSMutableArray *targettedFriends;
+
 @property (nonatomic, strong) PFUser *currentUser;
 @property (nonatomic, strong) PFUser *user;
-@property (nonatomic, strong) NSMutableArray *recipientsOfBounties;
-@property (nonatomic, strong) NSNumber *points;
 @property(nonatomic, strong) NSMutableArray *allFriends;
 @property (nonatomic, strong) NSMutableArray *friendsList;
-@property (nonatomic, assign) int clickCount;
-@property (nonatomic,assign) int bountyCost;
 @property (nonatomic, assign) int indexRow;
 
 

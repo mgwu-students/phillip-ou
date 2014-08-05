@@ -301,7 +301,7 @@
     [self.currentUser saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         {
             if(error){
-                NSLog(@"Error %@ %@, error", [error userInfo]);
+                NSLog(@"Error %@, error", [error userInfo]);
             }
         }
     }];

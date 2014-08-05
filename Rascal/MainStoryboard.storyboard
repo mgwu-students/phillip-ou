@@ -84,10 +84,10 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xbo-1I-38o">
-                                            <rect key="frame" x="240" y="25" width="46" height="30"/>
+                                            <rect key="frame" x="254" y="29" width="18" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <color key="tintColor" red="0.85220025510204078" green="0.64544251910991246" blue="0.29553130439772185" alpha="1" colorSpace="calibratedRGB"/>
-                                            <state key="normal" image="heart-full.png">
+                                            <state key="normal" image="heart-fullb.png">
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
                                         </button>
@@ -286,10 +286,10 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Xq-5b-8O7">
-                                            <rect key="frame" x="241" y="23" width="46" height="30"/>
+                                            <rect key="frame" x="257" y="27" width="18" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <color key="tintColor" red="0.20000000000000001" green="0.27450980390000002" blue="0.75294117650000003" alpha="1" colorSpace="calibratedRGB"/>
-                                            <state key="normal" image="heart-full.png">
+                                            <state key="normal" image="heart-fullb.png">
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
                                         </button>
@@ -304,7 +304,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="I3q-4b-mcC" customClass="PFImageView">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="399"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="347"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         </imageView>
                                     </subviews>
@@ -562,8 +562,9 @@
                                 </items>
                             </toolbar>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2fh-2L-BU0">
-                                <rect key="frame" x="0.0" y="111" width="320" height="413"/>
+                                <rect key="frame" x="0.0" y="111" width="320" height="392"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="tintColor" red="0.99814702749999995" green="0.99373121330000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </imageView>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Title" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8Nu-Mg-FNw">
                                 <rect key="frame" x="6" y="73" width="307" height="30"/>
@@ -571,6 +572,13 @@
                                 <fontDescription key="fontDescription" name="SnellRoundhand-Bold" family="Snell Roundhand" pointSize="20"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Insert Artwork Here" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aCR-6i-7gn">
+                                <rect key="frame" x="46" y="176" width="227" height="86"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="SnellRoundhand-Bold" family="Snell Roundhand" pointSize="20"/>
+                                <color key="textColor" red="0.056748124630000001" green="0.61748471469999999" blue="0.45787925699999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -611,6 +619,7 @@
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="chosenImageView" destination="2fh-2L-BU0" id="pr9-R9-G5g"/>
+                        <outlet property="prompt" destination="aCR-6i-7gn" id="oQT-9x-jZs"/>
                         <outlet property="titleTextField" destination="8Nu-Mg-FNw" id="Vnv-nh-DoM"/>
                         <segue destination="jvJ-yj-T8N" kind="push" identifier="transition" id="opa-ei-Rcv"/>
                     </connections>
@@ -623,16 +632,16 @@
         <scene sceneID="blk-Ol-nec">
             <objects>
                 <tableViewController id="jvJ-yj-T8N" customClass="PostCameraViewController" sceneMemberID="viewController">
-                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="3qs-UW-dJb">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="66" sectionHeaderHeight="22" sectionFooterHeight="22" id="3qs-UW-dJb">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell multipleTouchEnabled="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" id="q73-JR-LmC">
-                                <rect key="frame" x="0.0" y="86" width="320" height="44"/>
+                            <tableViewCell multipleTouchEnabled="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" rowHeight="66" id="q73-JR-LmC">
+                                <rect key="frame" x="0.0" y="22" width="320" height="66"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="q73-JR-LmC" id="lga-Vb-FBj">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="65"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -829,18 +838,33 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Terms of Use and Privacy" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qXI-YV-eoX">
-                                <rect key="frame" x="62" y="83" width="196" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mt9-PL-IId">
-                                <rect key="frame" x="18" y="103" width="294" height="465"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mt9-PL-IId">
+                                <rect key="frame" x="13" y="5" width="299" height="520"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <mutableString key="text">By downloading, accessing, or using the mobile application Rascal, you agree to be bound by these terms. If you do not agree to these terms, do not use the services. We reserve the right to alter these terms at any time. Basic Terms1. You may not post nude, partially nude, or sexually suggestive photos.2.  You are responsible for any activity that occurs under your screen name.3. You must not abuse harass, threaten, or intimidate other users4. You may not use Rascal for any illegal or unauthorized purpose5. You are solely responsible for any data, text, information, graphics, photos, profiles that you submit, post and display to users on Rascal.6. Use common senseCollection of InformationWe collect information you provide directly to us. For example, we collect information when you create an account, use the services to send or receive message, including photos and “Bounties”. The types of information we may collect include your name, password, Facebook ID, and Facebook profile picture.When you send or receive messages, we also collect, process and store the contents of the messages (such as photos, captions, and bounty notices) on our servers. The contents of those messages are released to the users you intended until they delete it. However, photos you send to users may also appear to other users you’ve added as friends in the “Gallery.” In the case of bounties, everyone you added as a friend receives the bounty notice. We also collect information about these messages including the time, date, sender, and recipient of the message. This information will never be released to the public.ChildrenWe do not knowingly collect personal information from users with regards to their age. Push Notifications/AlertsRascal may send push notifications or alerts to your device. You may deactivate these messages any time by changing the notification settings on your device.</mutableString>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <string key="text">                Terms of Use and Privacy
+
+    By downloading, accessing, or using the mobile application Rascal, you agree to be bound by these terms. If you do not agree to these terms, do not use the services. We reserve the right to alter these terms at any time. 
+
+Basic Terms
+    1. You may not post nude, partially nude, or sexually suggestive photos.
+    2. You are responsible for any activity that occurs under your screen name.
+    3. You must not abuse harass, threaten, or intimidate other users
+    4. You may not use Rascal for any illegal or unauthorized purpose
+    5. You are solely responsible for any data, text, information, graphics, photos, profiles that you submit, post and display to users on Rascal.
+    6. Use common sense. If a certain action is questionable, it probably is.
+
+Collection of Information
+    We collect information you provide directly to us. For example, we collect information when you create an account, use the services to send or receive message, including photos and “Bounties”. The types of information we may collect include your name, password, Facebook ID, and Facebook profile picture.
+     When you send or receive messages, we also collect, process and store the contents of the messages (such as photos, captions, and bounty notices) on our servers. The contents of those messages are released to the users you intended until they delete it. However, photos you send to users may also appear to other users you’ve added as friends in the “Gallery.” In the case of bounties, everyone you added as a friend receives the bounty notice. We also collect information about these messages including the time, date, sender, and recipient of the message. This information will never be released to the public.
+
+Children
+    We do not knowingly collect personal information from users with regards to their age. 
+
+Push Notifications/Alerts
+     Rascal may send push notifications or alerts to your device. You may deactivate these messages any time by changing the notification settings on your device.
+</string>
+                                <fontDescription key="fontDescription" name="Cambria-Bold" family="Cambria" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                         </subviews>
@@ -859,7 +883,7 @@
         <scene sceneID="J2Q-xC-hgY">
             <objects>
                 <tableViewController id="bic-8Q-ySq" customClass="InboxViewController" sceneMemberID="viewController">
-                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="67" sectionHeaderHeight="22" sectionFooterHeight="22" id="C5k-8K-Huv">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="84" sectionHeaderHeight="22" sectionFooterHeight="22" id="C5k-8K-Huv">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -878,12 +902,20 @@
                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Flb-OG-N3F">
-                                    <rect key="frame" x="58" y="20" width="132" height="21"/>
+                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Flb-OG-N3F">
+                                    <rect key="frame" x="58" y="20" width="242" height="21"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <fontDescription key="fontDescription" name="TrebuchetMS" family="Trebuchet MS" pointSize="15"/>
-                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    <attributedString key="attributedText">
+                                        <fragment content="Label">
+                                            <attributes>
+                                                <color key="NSColor" red="0.20000000000000001" green="0.27450980390000002" blue="0.75294117650000003" alpha="1" colorSpace="calibratedRGB"/>
+                                                <font key="NSFont" size="15" name="TrebuchetMS"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                            </attributes>
+                                        </fragment>
+                                    </attributedString>
                                     <nil key="highlightedColor"/>
+                                    <color key="shadowColor" red="0.99814702749999995" green="0.99373121330000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </label>
                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bOs-hT-8iD">
                                     <rect key="frame" x="9" y="79" width="304" height="40"/>
@@ -902,11 +934,11 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O28-Vo-xXd">
-                                    <rect key="frame" x="172" y="20" width="128" height="44"/>
+                                    <rect key="frame" x="-137" y="20" width="306" height="44"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <fontDescription key="fontDescription" name="TrebuchetMS" family="Trebuchet MS" pointSize="15"/>
+                                    <fontDescription key="fontDescription" name="TrebuchetMS-Bold" family="Trebuchet MS" pointSize="15"/>
                                     <color key="tintColor" red="0.20000000000000001" green="0.27450980390000002" blue="0.75294117650000003" alpha="1" colorSpace="calibratedRGB"/>
-                                    <state key="normal" title="Portfolio" image="intersect.png">
+                                    <state key="normal">
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
                                     <connections>
@@ -917,11 +949,11 @@
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         </view>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" rowHeight="67" id="rwr-0y-NXr">
-                                <rect key="frame" x="0.0" y="217" width="320" height="67"/>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" rowHeight="84" id="rwr-0y-NXr">
+                                <rect key="frame" x="0.0" y="217" width="320" height="84"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="rwr-0y-NXr" id="hlJ-6X-KIJ">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="66"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="83"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -931,15 +963,20 @@
                             <outlet property="delegate" destination="bic-8Q-ySq" id="1mz-vL-OYF"/>
                         </connections>
                     </tableView>
-                    <toolbarItems>
-                        <barButtonItem image="star-2-smaller.png" id="X9b-Bz-Jyi">
-                            <color key="tintColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            <connections>
-                                <action selector="topButton:" destination="bic-8Q-ySq" id="ZXR-Bd-RA7"/>
-                            </connections>
-                        </barButtonItem>
-                    </toolbarItems>
+                    <toolbarItems/>
                     <navigationItem key="navigationItem" title="rascal" id="fGQ-pb-c50">
+                        <barButtonItem key="leftBarButtonItem" image="star-2b.png" style="plain" id="336-Tj-KTP">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="eDH-5Q-uJO">
+                                <rect key="frame" x="16" y="9" width="22" height="26"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="star-2b copy.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="topButton:" destination="bic-8Q-ySq" eventType="touchUpInside" id="pZL-sl-wBP"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" style="plain" id="yVo-62-lFa">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="0Ih-fy-u3u">
                                 <rect key="frame" x="284" y="12" width="20" height="20"/>
@@ -967,7 +1004,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hue-Ys-HZ3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1198" y="967"/>
+            <point key="canvasLocation" x="818" y="937"/>
         </scene>
         <!--Navigation Controller - News-->
         <scene sceneID="S9b-3o-Ohq">
@@ -1108,8 +1145,8 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dnj-zk-a9d">
-                                <rect key="frame" x="20" y="65" width="292" height="38"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text=" Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dnj-zk-a9d">
+                                <rect key="frame" x="14" y="65" width="292" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="SnellRoundhand-Bold" family="Snell Roundhand" pointSize="20"/>
                                 <nil key="highlightedColor"/>
@@ -1117,39 +1154,29 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fcp-zW-Tei">
                                 <rect key="frame" x="0.0" y="132" width="320" height="392"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" red="0.31531735509999997" green="0.4730890385" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </imageView>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0FI-tS-uzg">
-                                <rect key="frame" x="0.0" y="524" width="320" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                                <items>
-                                    <barButtonItem style="plain" id="6ti-rU-7bC">
-                                        <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" id="ErU-Jk-DEK">
-                                            <rect key="frame" x="16" y="11" width="42" height="22"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <state key="normal" image="heart-empty.png">
-                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                            </state>
-                                            <state key="selected" title="Liked" image="heart-full.png"/>
-                                            <connections>
-                                                <action selector="Like:" destination="sXQ-PQ-ZQV" eventType="touchUpInside" id="Xm7-F4-jpz"/>
-                                            </connections>
-                                        </button>
-                                        <color key="tintColor" red="0.96078431369999995" green="0.47058823529999999" blue="0.47058823529999999" alpha="1" colorSpace="calibratedRGB"/>
-                                    </barButtonItem>
-                                </items>
-                            </toolbar>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SnU-6O-RYe">
+                                <rect key="frame" x="275" y="101" width="25" height="25"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="tintColor" red="0.96078431369999995" green="0.47058823529999999" blue="0.47058823529999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" image="heart-emptyb copy.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="selected" title="Liked" image="heart-fullb copy.png"/>
+                                <connections>
+                                    <action selector="Like:" destination="sXQ-PQ-ZQV" eventType="touchUpInside" id="63a-7w-HAf"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstAttribute="bottom" secondItem="0FI-tS-uzg" secondAttribute="bottom" id="mVy-db-fCU"/>
-                        </constraints>
                     </view>
+                    <toolbarItems/>
                     <navigationItem key="navigationItem" title="art" id="JO1-9Q-m9t"/>
+                    <size key="freeformSize" width="320" height="588"/>
                     <connections>
                         <outlet property="captionLabel" destination="Dnj-zk-a9d" id="Uwe-gm-nFT"/>
                         <outlet property="imageView" destination="fcp-zW-Tei" id="NOv-2h-vyg"/>
-                        <outlet property="likeButton" destination="ErU-Jk-DEK" id="fNn-3J-iP4"/>
+                        <outlet property="likeButton" destination="SnU-6O-RYe" id="xKh-7S-3VB"/>
                         <outlet property="senderLabel" destination="6zN-hD-s4J" id="wGE-R3-E1n"/>
                     </connections>
                 </viewController>
@@ -1356,14 +1383,16 @@
     <resources>
         <image name="address-book-smaller.png" width="16" height="16"/>
         <image name="camera-2.png" width="32" height="32"/>
-        <image name="heart-empty.png" width="16" height="16"/>
-        <image name="heart-full.png" width="16" height="16"/>
-        <image name="intersect.png" width="16" height="16"/>
+        <image name="heart-emptyb copy.png" width="32" height="32"/>
+        <image name="heart-fullb copy.png" width="32" height="32"/>
+        <image name="heart-fullb.png" width="2494" height="1670"/>
         <image name="list-small.png" width="16" height="16"/>
         <image name="marquee.png" width="32" height="32"/>
         <image name="outb.png" width="32" height="32"/>
         <image name="settings.png" width="32" height="32"/>
         <image name="star-2-smaller.png" width="16" height="16"/>
+        <image name="star-2b copy.png" width="32" height="32"/>
+        <image name="star-2b.png" width="32" height="32"/>
         <image name="swatches.png" width="32" height="32"/>
         <image name="user-2-smaller.png" width="16" height="16"/>
         <image name="user-4-addb.png" width="32" height="32"/>
@@ -1375,8 +1404,8 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="OIA-4e-jch"/>
-        <segue reference="2Hz-h7-dr2"/>
         <segue reference="p2l-gy-Zs8"/>
+        <segue reference="OIA-4e-jch"/>
+        <segue reference="yO1-td-5zb"/>
     </inferredMetricsTieBreakers>
 </document>

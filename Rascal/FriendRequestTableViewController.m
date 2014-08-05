@@ -22,16 +22,10 @@
     
     self.segmentController.selectedSegmentIndex=1;
     
-    
-
-    
-    
-    
     [self.navigationController.navigationBar setHidden:NO];
     [self.navigationItem setHidesBackButton:YES];
-    self.bountyCost = 10;
-    self.recipientsOfBounties = [[NSMutableArray alloc] init];
-    self.allFriends = [[NSMutableArray alloc] init];
+    
+       self.allFriends = [[NSMutableArray alloc] init];
     self.friendRequests = [[NSMutableArray alloc]init];
     self. friendsToDisplay = [[NSArray alloc]init];
     
@@ -50,10 +44,7 @@
     
     
     PFUser *currentUser = [PFUser currentUser];
-    self.points = currentUser[@"Points"];
-    NSLog(@"Points:%@",self.points);
-    [self.recipientsOfBounties removeAllObjects];
-    self.clickCount = 0;
+    
     self.friendsRelation = [[PFUser currentUser] objectForKey:@"friendsRelation"];
     self.friendsList = [currentUser objectForKey:@"friendsList"];
     NSLog(@"Friends:%@",self.friendsList);
@@ -228,9 +219,8 @@
     
 }
 -(void) reset{
-    PFUser *currentUser = [PFUser currentUser];
-    [self.recipientsOfBounties removeAllObjects];
-    self.points=currentUser[@"Points"];
+    
+   
     [self.allFriends removeAllObjects];
     
     

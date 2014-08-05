@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		4D0856F0197D9B18004B5451 /* LeaderBoardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D0856EF197D9B18004B5451 /* LeaderBoardViewController.m */; };
-		4D0C83E5197A2CCF00535637 /* heart-empty.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D0C83E4197A2CCF00535637 /* heart-empty.png */; };
 		4D0C83E7197A2CD700535637 /* heart-full.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D0C83E6197A2CD700535637 /* heart-full.png */; };
 		4D1AAABE196472DB00F79C39 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D1AAABD196472DB00F79C39 /* ProfileViewController.m */; };
 		4D27AFF0195FEFB700DB8939 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D27AFEF195FEFB700DB8939 /* Parse.framework */; };
@@ -55,11 +54,12 @@
 		4D8C6E3719788B220058593D /* marquee-smaller.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D8C6E3619788B220058593D /* marquee-smaller.png */; };
 		4D8C6E3919788B750058593D /* users-smaller.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D8C6E3819788B750058593D /* users-smaller.png */; };
 		4D8D769B1989C4BF00F59E61 /* iTunesArtwork.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D8D769A1989C4BF00F59E61 /* iTunesArtwork.png */; };
-		4D92D4661983650700EBC560 /* betterFrame.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D92D4651983650700EBC560 /* betterFrame.png */; };
 		4D92D4681983661100EBC560 /* betterFrame2.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D92D4671983661100EBC560 /* betterFrame2.png */; };
+		4D952590198C6EAB00EDC764 /* star-2b copy.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D95258F198C6EAB00EDC764 /* star-2b copy.png */; };
 		4D9AD5D8196EF273001A896F /* PostCameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D9AD5D7196EF273001A896F /* PostCameraViewController.m */; };
 		4DA2A2EA197867EE0090F2A2 /* Raleway-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4DA2A2E9197867AD0090F2A2 /* Raleway-Thin.otf */; };
 		4DA2A2EC19786A830090F2A2 /* Raleway-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4DA2A2EB197869800090F2A2 /* Raleway-Medium.otf */; };
+		4DA4589B198C1F24008F79DB /* splashscreenforiphone4.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DA4589A198C1F24008F79DB /* splashscreenforiphone4.png */; };
 		4DA52E9B197EE41900F0B6CB /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DA52E9A197EE41900F0B6CB /* MessageUI.framework */; };
 		4DB5E3801988AA3200E4939F /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DB5E37F1988AA3200E4939F /* Reachability.m */; };
 		4DB6BE421979D13600D3A50F /* out.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DB6BE411979D13600D3A50F /* out.png */; };
@@ -69,6 +69,8 @@
 		4DC9BFA219627E5F00A018D4 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DC9BFA019627E5F00A018D4 /* Accounts.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		4DC9BFA319627E5F00A018D4 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DC9BFA119627E5F00A018D4 /* Social.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		4DD8B898196287EB0074FFF4 /* CameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DD8B897196287EB0074FFF4 /* CameraViewController.m */; };
+		4DDE9BC5198C409C00C8675D /* heart-emptyb copy.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DDE9BC3198C409C00C8675D /* heart-emptyb copy.png */; };
+		4DDE9BC6198C409C00C8675D /* heart-fullb copy.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DDE9BC4198C409C00C8675D /* heart-fullb copy.png */; };
 		4DDEABE2195FE8E5009684B8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DDEABE1195FE8E5009684B8 /* Foundation.framework */; };
 		4DDEABE6195FE8E5009684B8 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DDEABE5195FE8E5009684B8 /* UIKit.framework */; };
 		4DDEABEC195FE8E5009684B8 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4DDEABEA195FE8E5009684B8 /* InfoPlist.strings */; };
@@ -102,7 +104,6 @@
 /* Begin PBXFileReference section */
 		4D0856EE197D9B18004B5451 /* LeaderBoardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeaderBoardViewController.h; sourceTree = "<group>"; };
 		4D0856EF197D9B18004B5451 /* LeaderBoardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeaderBoardViewController.m; sourceTree = "<group>"; };
-		4D0C83E4197A2CCF00535637 /* heart-empty.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "heart-empty.png"; sourceTree = "<group>"; };
 		4D0C83E6197A2CD700535637 /* heart-full.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "heart-full.png"; sourceTree = "<group>"; };
 		4D1AAABC196472DB00F79C39 /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
 		4D1AAABD196472DB00F79C39 /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
@@ -163,12 +164,14 @@
 		4D8C6E3619788B220058593D /* marquee-smaller.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "marquee-smaller.png"; sourceTree = "<group>"; };
 		4D8C6E3819788B750058593D /* users-smaller.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "users-smaller.png"; sourceTree = "<group>"; };
 		4D8D769A1989C4BF00F59E61 /* iTunesArtwork.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = iTunesArtwork.png; path = ../../icon/ios/iTunesArtwork.png; sourceTree = "<group>"; };
-		4D92D4651983650700EBC560 /* betterFrame.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = betterFrame.png; path = ../../betterFrame.png; sourceTree = "<group>"; };
 		4D92D4671983661100EBC560 /* betterFrame2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = betterFrame2.png; sourceTree = "<group>"; };
+		4D95258F198C6EAB00EDC764 /* star-2b copy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "star-2b copy.png"; path = "../../Batch-master/PNG/32x32/star-2b copy.png"; sourceTree = "<group>"; };
 		4D9AD5D6196EF273001A896F /* PostCameraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostCameraViewController.h; sourceTree = "<group>"; };
 		4D9AD5D7196EF273001A896F /* PostCameraViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostCameraViewController.m; sourceTree = "<group>"; };
 		4DA2A2E9197867AD0090F2A2 /* Raleway-Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Raleway-Thin.otf"; sourceTree = "<group>"; };
 		4DA2A2EB197869800090F2A2 /* Raleway-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Raleway-Medium.otf"; sourceTree = "<group>"; };
+		4DA45899198C1DFD008F79DB /* plainwhite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = plainwhite.png; path = ../../plainwhite.png; sourceTree = "<group>"; };
+		4DA4589A198C1F24008F79DB /* splashscreenforiphone4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = splashscreenforiphone4.png; path = ../../splashscreenforiphone4.png; sourceTree = "<group>"; };
 		4DA52E9A197EE41900F0B6CB /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		4DB5E37E1988AA3200E4939F /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Reachability.h; path = ../../../Downloads/Reachability/Reachability/Reachability.h; sourceTree = "<group>"; };
 		4DB5E37F1988AA3200E4939F /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Reachability.m; path = ../../../Downloads/Reachability/Reachability/Reachability.m; sourceTree = "<group>"; };
@@ -181,6 +184,8 @@
 		4DC9BFA119627E5F00A018D4 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		4DD8B896196287EB0074FFF4 /* CameraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraViewController.h; sourceTree = "<group>"; };
 		4DD8B897196287EB0074FFF4 /* CameraViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraViewController.m; sourceTree = "<group>"; };
+		4DDE9BC3198C409C00C8675D /* heart-emptyb copy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "heart-emptyb copy.png"; path = "../../Batch-master/PNG/32x32/heart-emptyb copy.png"; sourceTree = "<group>"; };
+		4DDE9BC4198C409C00C8675D /* heart-fullb copy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "heart-fullb copy.png"; path = "../../Batch-master/PNG/32x32/heart-fullb copy.png"; sourceTree = "<group>"; };
 		4DDEABDE195FE8E5009684B8 /* Rascal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Rascal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4DDEABE1195FE8E5009684B8 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		4DDEABE5195FE8E5009684B8 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -247,6 +252,11 @@
 		4DA2A2E8197867880090F2A2 /* Art */ = {
 			isa = PBXGroup;
 			children = (
+				4D95258F198C6EAB00EDC764 /* star-2b copy.png */,
+				4DDE9BC3198C409C00C8675D /* heart-emptyb copy.png */,
+				4DDE9BC4198C409C00C8675D /* heart-fullb copy.png */,
+				4DA45899198C1DFD008F79DB /* plainwhite.png */,
+				4DA4589A198C1F24008F79DB /* splashscreenforiphone4.png */,
 				4D8250FC198AF3DB00B9CE14 /* settings.png */,
 				4D8D769A1989C4BF00F59E61 /* iTunesArtwork.png */,
 				4D68FC691988916700800E07 /* logo.png */,
@@ -259,9 +269,7 @@
 				4DEAE2FB197F7C11004229DC /* star-2b.png */,
 				4D0C83E6197A2CD700535637 /* heart-full.png */,
 				4D4A92031988526E00BD5BAE /* user-4.png */,
-				4D92D4651983650700EBC560 /* betterFrame.png */,
 				4DEAE2F7197F59A1004229DC /* user-3.png */,
-				4D0C83E4197A2CCF00535637 /* heart-empty.png */,
 				4DB6BE411979D13600D3A50F /* out.png */,
 				4DEAE2FD197F7C30004229DC /* outb.png */,
 				4DA2A2E9197867AD0090F2A2 /* Raleway-Thin.otf */,
@@ -498,7 +506,6 @@
 				4D745054198461DA00B9032C /* tutorial3.png in Resources */,
 				4D5A3437198188CB00252814 /* marquee-big.png in Resources */,
 				4D3E69721979F279003FEA86 /* intersect.png in Resources */,
-				4D92D4661983650700EBC560 /* betterFrame.png in Resources */,
 				4D8C6E2119787DB50058593D /* camera-2.png in Resources */,
 				4D8D769B1989C4BF00F59E61 /* iTunesArtwork.png in Resources */,
 				4D0C83E7197A2CD700535637 /* heart-full.png in Resources */,
@@ -511,6 +518,7 @@
 				4D68FC6A1988916700800E07 /* logo.png in Resources */,
 				4D8C6E31197880480058593D /* swatches.png in Resources */,
 				4D4A92021988518500BD5BAE /* user-2-add.png in Resources */,
+				4DA4589B198C1F24008F79DB /* splashscreenforiphone4.png in Resources */,
 				4D4A92041988526E00BD5BAE /* user-4.png in Resources */,
 				4D8C6E2919787ED90058593D /* marquee.png in Resources */,
 				4D8C67F5197CE9EB009D675C /* database.png in Resources */,
@@ -520,16 +528,18 @@
 				4D92D4681983661100EBC560 /* betterFrame2.png in Resources */,
 				4D8C6E2319787E120058593D /* users.png in Resources */,
 				4D8C6E3519788AF60058593D /* camera-2-smaller.png in Resources */,
+				4DDE9BC6198C409C00C8675D /* heart-fullb copy.png in Resources */,
 				4D5A343919818AB500252814 /* image-big.png in Resources */,
 				4DDEABF4195FE8E5009684B8 /* Images.xcassets in Resources */,
-				4D0C83E5197A2CCF00535637 /* heart-empty.png in Resources */,
 				4D8C6E3919788B750058593D /* users-smaller.png in Resources */,
 				4D74504E19845EEC00B9032C /* tutorial1.png in Resources */,
+				4DDE9BC5198C409C00C8675D /* heart-emptyb copy.png in Resources */,
 				4DEAE2FA197F7BEB004229DC /* user-4-addb.png in Resources */,
 				4DEAE2FE197F7C30004229DC /* outb.png in Resources */,
 				4DEAE2F8197F59A1004229DC /* user-3.png in Resources */,
 				4DEAE2FC197F7C11004229DC /* star-2b.png in Resources */,
 				4DB6BE441979DB2E00D3A50F /* user-4-add.png in Resources */,
+				4D952590198C6EAB00EDC764 /* star-2b copy.png in Resources */,
 				4DEAE2F4197F563A004229DC /* spam.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -647,6 +657,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -679,6 +690,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 1;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -687,10 +699,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "LaunchImage-2";
 				CODE_SIGN_ENTITLEMENTS = Rascal/Rascal.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Phillip Ou (F6J9Z7FPQB)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Phillip Ou (F6J9Z7FPQB)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/phillipou/Downloads,
@@ -703,7 +715,7 @@
 				INFOPLIST_FILE = "Rascal/Rascal-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "FCA09466-B61B-4061-8FD7-5F564D0BFA81";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
@@ -713,10 +725,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "LaunchImage-2";
 				CODE_SIGN_ENTITLEMENTS = Rascal/Rascal.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Phillip Ou (F6J9Z7FPQB)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Phillip Ou (F6J9Z7FPQB)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/phillipou/Downloads,
@@ -729,7 +741,7 @@
 				INFOPLIST_FILE = "Rascal/Rascal-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "FCA09466-B61B-4061-8FD7-5F564D0BFA81";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};

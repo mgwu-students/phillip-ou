@@ -37,8 +37,11 @@
     
     //handles landscape
     int orientation = self.imageView.image.imageOrientation;
+    NSLog(@"%d",orientation);
     if(orientation ==0 || orientation ==1){
+        NSLog(@"landscape");
         self.imageView.contentMode = UIViewContentModeScaleAspectFit;}
+    
     
     
    
@@ -46,9 +49,10 @@
         NSMutableArray *readUsersArray = [NSMutableArray arrayWithArray:self.message[@"readUsers"]];
         [readUsersArray addObject:currentUser.objectId];
         [self.message  setObject:[NSArray arrayWithArray:readUsersArray]forKey:@"readUsers"];
+        [self.message saveInBackground];
        
     }
-     [self.message saveInBackground];
+    
     
 
 }
@@ -62,7 +66,7 @@
     NSString *caption = [self.message objectForKey:@"caption"];
     
     self.senderLabel.text=[NSString stringWithFormat:@"by %@",senderName];
-    self.captionLabel.text = caption;
+    self.captionLabel.text = [NSString stringWithFormat:@" %@",caption];
     self.captionLabel.numberOfLines = 1;
     self.captionLabel.minimumFontSize =10.;
     self.captionLabel.adjustsFontSizeToFitWidth = YES;

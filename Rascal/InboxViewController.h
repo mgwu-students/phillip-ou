@@ -18,7 +18,12 @@
 @property (nonatomic, strong) PFObject *selectedMessage;
 @property(nonatomic, strong) NSArray *bounties;
 @property(nonatomic, strong) NSArray *posts;
-
+@property (nonatomic, strong) UIImage *bountyUserLogo;
+@property (nonatomic, strong) UIButton *bountyLogo;
+@property (nonatomic, strong) UIButton *moneyLogo;
+@property (nonatomic, strong) UIImage *unseenPhotoImage;
+@property (nonatomic, strong) UIImage *marquee;
+@property (nonatomic, retain) UIImage *icon2;
 
 @property (nonatomic, retain) NSMutableDictionary *sections;
 @property (nonatomic, retain) NSMutableDictionary *sectionFileType;
@@ -30,8 +35,9 @@
 @property int loadcount;
 @property (strong, nonatomic) NSArray *allFriends;
 @property (strong, nonatomic) NSMutableArray* friendsList;
+@property (nonatomic, strong) PFUser *currentUser;
 
 @property (strong, nonatomic) IBOutlet UIButton *bountyButton;
 
--(IBAction) logout: (id)sender;
+
 @end

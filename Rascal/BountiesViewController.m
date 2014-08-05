@@ -22,7 +22,7 @@
     [super viewDidLoad];
     self.bountyCost = 5;
     self.bountyValue = 1;
-    
+    self.currentUser = [PFUser currentUser];
     self.recipientsOfBounties = [[NSMutableArray alloc] init];
     self.allFriends = [[NSMutableArray alloc] init];
     self.friends = [[NSArray alloc]init];
@@ -37,12 +37,12 @@
 -(void) viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     self.bountyButton.selected=NO;
-    PFUser *currentUser = [PFUser currentUser];
-    self.points = currentUser[@"Points"];
+    
+    self.points = self.currentUser[@"Points"];
     NSLog(@"Points:%@",self.points);
     [self.recipientsOfBounties removeAllObjects];
     self.clickCount = 0;
-    self.friendsRelation = [[PFUser currentUser] objectForKey:@"friendsRelation"];
+    self.friendsRelation = [self.currentUser objectForKey:@"friendsRelation"];
     
     PFQuery *query = [self.friendsRelation query]; //create query of our friends
     [query orderByAscending:@"username"];
@@ -190,7 +190,7 @@
     
     
         if ([self.recipientsOfBounties count] !=0){
-            PFUser *currentUser = [PFUser currentUser];
+            
             //PFObject *bounty = [PFObject objectWithClassName:@"Messages"];
             PFObject *bountyNotice = [PFObject objectWithClassName:@"Messages"];
             
@@ -205,13 +205,13 @@
             //create this array so that the victim doesn't get two push notifications when bounty is set on him.
             //so the sender doesn't get user id as well.
             [friendsListMinusVictimAndSelf removeObject: self.user.objectId];
-            [friendsListMinusVictimAndSelf removeObject: currentUser.objectId];
+            [friendsListMinusVictimAndSelf removeObject: self.currentUser.objectId];
             [pushQuery whereKey:@"installationUser" containedIn:friendsListMinusVictimAndSelf]; //allFriends is array of user ids
             
             // Send push notification to our query
             PFPush *push = [[PFPush alloc] init];
             [push setQuery:pushQuery];
-            [push setMessage:[NSString stringWithFormat:@"%@ set a bounty on %@!", currentUser.username,self.user.username]];
+            [push setMessage:[NSString stringWithFormat:@"%@ set a bounty on %@!", self.currentUser.username,self.user.username]];
             
             
             [push sendPushInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
@@ -228,7 +228,7 @@
             // Send push notification to our query
             PFPush *push2 = [[PFPush alloc] init];
             [push2 setQuery:pushQuery2];
-            [push2 setMessage:[NSString stringWithFormat:@"%@ set a bounty on you!", currentUser.username]];
+            [push2 setMessage:[NSString stringWithFormat:@"%@ set a bounty on you!", self.currentUser.username]];
             
             
             [push2 sendPushInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
@@ -263,15 +263,15 @@
                 }
             }];*/
             [self.allFriends removeObject:self.user.objectId]; //so guy receiving bounty won't get duplicate notification
-            [self.allFriends removeObject: currentUser.objectId]; //so current user doesn't get notifications (might have crash if current user isn't in the array but we'll see)
+            [self.allFriends removeObject: self.currentUser.objectId]; //so current user doesn't get notifications (might have crash if current user isn't in the array but we'll see)
             self.friends = [NSArray arrayWithArray: self.allFriends];
             NSLog(@"Receiving Bounty Notice: %@",self.friends);
             [bountyNotice setObject:@"bountyNotice" forKey:@"fileType"];
             //[bountyNotice setACL: readAccess2];
             [bountyNotice setObject:self.friends forKey:@"recipientIds"];//notification goes to all friends
             [bountyNotice setObject:self.user.username forKey:@"recipientUsername"];
-            [bountyNotice setObject:currentUser.username forKey:@"senderName"];
-            [bountyNotice setObject:[[PFUser currentUser] objectId] forKey:@"senderId"];
+            [bountyNotice setObject:self.currentUser.username forKey:@"senderName"];
+            [bountyNotice setObject:self.currentUser.objectId forKey:@"senderId"];
             [bountyNotice setObject: self.user.objectId forKey: @"victimId"];
             [bountyNotice setObject: [NSNumber numberWithInt:self.bountyValue] forKey:@"bountyValue"];
             
@@ -295,9 +295,9 @@
 ///PUT PUSH NOTIFICATION FOR ALL CURRENT USERS FRIENDS
 
 -(void) reset{
-    PFUser *currentUser = [PFUser currentUser];
+    
     [self.recipientsOfBounties removeAllObjects];
-    self.points=currentUser[@"Points"];
+    self.points=self.currentUser[@"Points"];
     [self.allFriends removeAllObjects];
     
     
@@ -315,7 +315,7 @@
 
 
 - (IBAction)setBounty:(id)sender {
-    PFUser *currentUser = [PFUser currentUser];
+    
     self.bountyButton.selected=YES;
     
     int points = [self.points intValue];
@@ -336,8 +336,8 @@
         if ([self.recipientsOfBounties count] !=0){
             [self uploadMessage];
             self.points = [NSNumber numberWithInt:points-self.bountyCost];
-            [currentUser setObject: self.points forKey:@"Points" ];
-            [currentUser saveInBackground];
+            [self.currentUser setObject: self.points forKey:@"Points" ];
+            [self.currentUser saveInBackground];
         [self.tabBarController setSelectedIndex:0];}
         
             else{
