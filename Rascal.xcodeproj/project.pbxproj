@@ -24,8 +24,6 @@
 		4D27B00A195FF21000DB8939 /* ParseTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D27B009195FF21000DB8939 /* ParseTableViewController.m */; };
 		4D3E69721979F279003FEA86 /* intersect.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D3E69711979F279003FEA86 /* intersect.png */; };
 		4D4A9200198829DC00BD5BAE /* FriendRequestTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D4A91FF198829DC00BD5BAE /* FriendRequestTableViewController.m */; };
-		4D4A92021988518500BD5BAE /* user-2-add.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D4A92011988518500BD5BAE /* user-2-add.png */; };
-		4D4A92041988526E00BD5BAE /* user-4.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D4A92031988526E00BD5BAE /* user-4.png */; };
 		4D5C0FF61960698C00770901 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D5C0FF51960698C00770901 /* HomeViewController.m */; };
 		4D5C0FF919606F1700770901 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D5C0FF819606F1700770901 /* LoginViewController.m */; };
 		4D5C0FFC19606F2400770901 /* SignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D5C0FFB19606F2400770901 /* SignUpViewController.m */; };
@@ -69,9 +67,6 @@
 		4DDEAC05195FE8E5009684B8 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4DDEAC03195FE8E5009684B8 /* InfoPlist.strings */; };
 		4DDEAC07195FE8E5009684B8 /* RascalTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DDEAC06195FE8E5009684B8 /* RascalTests.m */; };
 		4DDEAC11195FE8FD009684B8 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4DDEAC10195FE8FD009684B8 /* MainStoryboard.storyboard */; };
-		4DEAE2F8197F59A1004229DC /* user-3.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DEAE2F7197F59A1004229DC /* user-3.png */; };
-		4DEAE2FA197F7BEB004229DC /* user-4-addb.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DEAE2F9197F7BEB004229DC /* user-4-addb.png */; };
-		4DEAE2FC197F7C11004229DC /* star-2b.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DEAE2FB197F7C11004229DC /* star-2b.png */; };
 		4DFE0444199537AB00DC663B /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DFE0443199537AB00DC663B /* FacebookSDK.framework */; };
 		4DFE04471995397200DC663B /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DFE04461995397200DC663B /* Reachability.m */; };
 		4DFE044E1995407100DC663B /* tutorial1.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DFE044B1995407100DC663B /* tutorial1.png */; };
@@ -92,6 +87,11 @@
 		4DFE046B199542B100DC663B /* tutorial3.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DFE045D199542B100DC663B /* tutorial3.png */; };
 		4DFE046C199542B100DC663B /* user-3-big.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DFE045E199542B100DC663B /* user-3-big.png */; };
 		4DFE046E199543F700DC663B /* marquee-big.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DFE046D199543F700DC663B /* marquee-big.png */; };
+		4DFE04741995458F00DC663B /* user-2-add.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DFE046F1995458F00DC663B /* user-2-add.png */; };
+		4DFE04751995458F00DC663B /* user-3-big.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DFE04701995458F00DC663B /* user-3-big.png */; };
+		4DFE04761995458F00DC663B /* user-3.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DFE04711995458F00DC663B /* user-3.png */; };
+		4DFE04771995458F00DC663B /* user-4-addb.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DFE04721995458F00DC663B /* user-4-addb.png */; };
+		4DFE04781995458F00DC663B /* user-4.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DFE04731995458F00DC663B /* user-4.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -126,8 +126,6 @@
 		4D3E69711979F279003FEA86 /* intersect.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = intersect.png; sourceTree = "<group>"; };
 		4D4A91FE198829DC00BD5BAE /* FriendRequestTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendRequestTableViewController.h; sourceTree = "<group>"; };
 		4D4A91FF198829DC00BD5BAE /* FriendRequestTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendRequestTableViewController.m; sourceTree = "<group>"; };
-		4D4A92011988518500BD5BAE /* user-2-add.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "user-2-add.png"; path = "../../Batch-master/PNG/16x16/user-2-add.png"; sourceTree = "<group>"; };
-		4D4A92031988526E00BD5BAE /* user-4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "user-4.png"; path = "../../Batch-master/PNG/16x16/user-4.png"; sourceTree = "<group>"; };
 		4D5C0FF41960698C00770901 /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
 		4D5C0FF51960698C00770901 /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
 		4D5C0FF719606F1700770901 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
@@ -189,9 +187,6 @@
 		4DDEAC04195FE8E5009684B8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		4DDEAC06195FE8E5009684B8 /* RascalTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RascalTests.m; sourceTree = "<group>"; };
 		4DDEAC10195FE8FD009684B8 /* MainStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainStoryboard.storyboard; sourceTree = "<group>"; };
-		4DEAE2F7197F59A1004229DC /* user-3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "user-3.png"; path = "../../Batch-master/PNG/16x16/user-3.png"; sourceTree = "<group>"; };
-		4DEAE2F9197F7BEB004229DC /* user-4-addb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "user-4-addb.png"; path = "../../Batch-master/PNG/32x32/user-4-addb.png"; sourceTree = "<group>"; };
-		4DEAE2FB197F7C11004229DC /* star-2b.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "star-2b.png"; path = "../../Batch-master/PNG/32x32/star-2b.png"; sourceTree = "<group>"; };
 		4DF312F91987142800A015E2 /* Rascal.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Rascal.entitlements; sourceTree = "<group>"; };
 		4DFE0443199537AB00DC663B /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = FacebookSDK/FacebookSDK.framework; sourceTree = "<group>"; };
 		4DFE04451995397200DC663B /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Reachability.h; path = Reachability/Reachability.h; sourceTree = SOURCE_ROOT; };
@@ -214,6 +209,11 @@
 		4DFE045D199542B100DC663B /* tutorial3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tutorial3.png; sourceTree = SOURCE_ROOT; };
 		4DFE045E199542B100DC663B /* user-3-big.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "user-3-big.png"; sourceTree = SOURCE_ROOT; };
 		4DFE046D199543F700DC663B /* marquee-big.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "marquee-big.png"; sourceTree = "<group>"; };
+		4DFE046F1995458F00DC663B /* user-2-add.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "user-2-add.png"; sourceTree = SOURCE_ROOT; };
+		4DFE04701995458F00DC663B /* user-3-big.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "user-3-big.png"; sourceTree = SOURCE_ROOT; };
+		4DFE04711995458F00DC663B /* user-3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "user-3.png"; sourceTree = SOURCE_ROOT; };
+		4DFE04721995458F00DC663B /* user-4-addb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "user-4-addb.png"; sourceTree = SOURCE_ROOT; };
+		4DFE04731995458F00DC663B /* user-4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "user-4.png"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -275,11 +275,7 @@
 				4DFE044B1995407100DC663B /* tutorial1.png */,
 				4DFE044C1995407100DC663B /* tutorial2.png */,
 				4DFE044D1995407100DC663B /* tutorial3.png */,
-				4DEAE2F9197F7BEB004229DC /* user-4-addb.png */,
-				4DEAE2FB197F7C11004229DC /* star-2b.png */,
 				4D0C83E6197A2CD700535637 /* heart-full.png */,
-				4D4A92031988526E00BD5BAE /* user-4.png */,
-				4DEAE2F7197F59A1004229DC /* user-3.png */,
 				4DB6BE411979D13600D3A50F /* out.png */,
 				4DFE046D199543F700DC663B /* marquee-big.png */,
 				4DA2A2E9197867AD0090F2A2 /* Raleway-Thin.otf */,
@@ -287,7 +283,6 @@
 				4DA2A2EB197869800090F2A2 /* Raleway-Medium.otf */,
 				4D8C6E2019787DB50058593D /* camera-2.png */,
 				4D8C6E3419788AF60058593D /* camera-2-smaller.png */,
-				4D4A92011988518500BD5BAE /* user-2-add.png */,
 				4D8C6E3619788B220058593D /* marquee-smaller.png */,
 				4D8C6E2219787E120058593D /* users.png */,
 				4D3E69711979F279003FEA86 /* intersect.png */,
@@ -296,6 +291,11 @@
 				4D8C6E30197880480058593D /* swatches.png */,
 				4DB6BE431979DB2E00D3A50F /* user-4-add.png */,
 				4DB6BE451979DF5E00D3A50F /* image.png */,
+				4DFE046F1995458F00DC663B /* user-2-add.png */,
+				4DFE04701995458F00DC663B /* user-3-big.png */,
+				4DFE04711995458F00DC663B /* user-3.png */,
+				4DFE04721995458F00DC663B /* user-4-addb.png */,
+				4DFE04731995458F00DC663B /* user-4.png */,
 			);
 			name = Art;
 			path = Rascal;
@@ -523,19 +523,22 @@
 				4DFE0468199542B100DC663B /* star-2b copy.png in Resources */,
 				4DA2A2EA197867EE0090F2A2 /* Raleway-Thin.otf in Resources */,
 				4DA2A2EC19786A830090F2A2 /* Raleway-Medium.otf in Resources */,
+				4DFE04751995458F00DC663B /* user-3-big.png in Resources */,
 				4DFE046A199542B100DC663B /* tutorial2.png in Resources */,
 				4DFE044E1995407100DC663B /* tutorial1.png in Resources */,
 				4DFE0460199542B100DC663B /* heart-fullb copy.png in Resources */,
 				4DDEABEC195FE8E5009684B8 /* InfoPlist.strings in Resources */,
 				4D8C6E31197880480058593D /* swatches.png in Resources */,
-				4D4A92021988518500BD5BAE /* user-2-add.png in Resources */,
+				4DFE04761995458F00DC663B /* user-3.png in Resources */,
 				4DFE0465199542B100DC663B /* plainwhite.png in Resources */,
 				4DFE04501995407100DC663B /* tutorial3.png in Resources */,
-				4D4A92041988526E00BD5BAE /* user-4.png in Resources */,
+				4DFE04741995458F00DC663B /* user-2-add.png in Resources */,
 				4DFE0466199542B100DC663B /* spam.png in Resources */,
 				4D8C6E2919787ED90058593D /* marquee.png in Resources */,
 				4DFE046E199543F700DC663B /* marquee-big.png in Resources */,
+				4DFE04771995458F00DC663B /* user-4-addb.png in Resources */,
 				4D8C67F5197CE9EB009D675C /* database.png in Resources */,
+				4DFE04781995458F00DC663B /* user-4.png in Resources */,
 				4D8C6E3719788B220058593D /* marquee-smaller.png in Resources */,
 				4DB6BE461979DF5E00D3A50F /* image.png in Resources */,
 				4DB6BE421979D13600D3A50F /* out.png in Resources */,
@@ -545,9 +548,6 @@
 				4D8C6E3519788AF60058593D /* camera-2-smaller.png in Resources */,
 				4DDEABF4195FE8E5009684B8 /* Images.xcassets in Resources */,
 				4D8C6E3919788B750058593D /* users-smaller.png in Resources */,
-				4DEAE2FA197F7BEB004229DC /* user-4-addb.png in Resources */,
-				4DEAE2F8197F59A1004229DC /* user-3.png in Resources */,
-				4DEAE2FC197F7C11004229DC /* star-2b.png in Resources */,
 				4DFE0469199542B100DC663B /* tutorial1.png in Resources */,
 				4DB6BE441979DB2E00D3A50F /* user-4-add.png in Resources */,
 				4DFE0464199542B100DC663B /* outb.png in Resources */,
