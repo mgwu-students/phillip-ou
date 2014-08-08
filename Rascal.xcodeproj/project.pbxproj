@@ -87,7 +87,7 @@
 		4DEAE2FA197F7BEB004229DC /* user-4-addb.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DEAE2F9197F7BEB004229DC /* user-4-addb.png */; };
 		4DEAE2FC197F7C11004229DC /* star-2b.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DEAE2FB197F7C11004229DC /* star-2b.png */; };
 		4DEAE2FE197F7C30004229DC /* outb.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DEAE2FD197F7C30004229DC /* outb.png */; };
-		4DEDADC81962797B0072DEFC /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DEDADC71962797B0072DEFC /* FacebookSDK.framework */; };
+		4DFE0444199537AB00DC663B /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DFE0443199537AB00DC663B /* FacebookSDK.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -205,8 +205,8 @@
 		4DEAE2F9197F7BEB004229DC /* user-4-addb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "user-4-addb.png"; path = "../../Batch-master/PNG/32x32/user-4-addb.png"; sourceTree = "<group>"; };
 		4DEAE2FB197F7C11004229DC /* star-2b.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "star-2b.png"; path = "../../Batch-master/PNG/32x32/star-2b.png"; sourceTree = "<group>"; };
 		4DEAE2FD197F7C30004229DC /* outb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = outb.png; path = "../../Batch-master/PNG/32x32/outb.png"; sourceTree = "<group>"; };
-		4DEDADC71962797B0072DEFC /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = ../../Documents/FacebookSDK/FacebookSDK.framework; sourceTree = "<group>"; };
 		4DF312F91987142800A015E2 /* Rascal.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Rascal.entitlements; sourceTree = "<group>"; };
+		4DFE0443199537AB00DC663B /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = FacebookSDK/FacebookSDK.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -224,13 +224,13 @@
 				4D27AFFF195FEFF400DB8939 /* libz.dylib in Frameworks */,
 				4D27B000195FEFF400DB8939 /* MobileCoreServices.framework in Frameworks */,
 				4D27B001195FEFF400DB8939 /* QuartzCore.framework in Frameworks */,
+				4DFE0444199537AB00DC663B /* FacebookSDK.framework in Frameworks */,
 				4D27B002195FEFF400DB8939 /* Security.framework in Frameworks */,
 				4D27B003195FEFF400DB8939 /* StoreKit.framework in Frameworks */,
 				4D27B004195FEFF400DB8939 /* SystemConfiguration.framework in Frameworks */,
 				4DDEABE6195FE8E5009684B8 /* UIKit.framework in Frameworks */,
 				4D27AFF0195FEFB700DB8939 /* Parse.framework in Frameworks */,
 				4DDEABE2195FE8E5009684B8 /* Foundation.framework in Frameworks */,
-				4DEDADC81962797B0072DEFC /* FacebookSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -314,10 +314,10 @@
 		4DDEABE0195FE8E5009684B8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4DFE0443199537AB00DC663B /* FacebookSDK.framework */,
 				4DA52E9A197EE41900F0B6CB /* MessageUI.framework */,
 				4DC9BFA019627E5F00A018D4 /* Accounts.framework */,
 				4DC9BFA119627E5F00A018D4 /* Social.framework */,
-				4DEDADC71962797B0072DEFC /* FacebookSDK.framework */,
 				4D27AFF1195FEFF400DB8939 /* AudioToolbox.framework */,
 				4D27AFF2195FEFF400DB8939 /* CFNetwork.framework */,
 				4D27AFF3195FEFF400DB8939 /* CoreGraphics.framework */,
@@ -707,6 +707,7 @@
 					"$(PROJECT_DIR)/Rascal",
 					"$(PROJECT_DIR)",
 					/Users/phillipou/Documents/FacebookSDK,
+					"$(PROJECT_DIR)/FacebookSDK",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Rascal/Rascal-Prefix.pch";
@@ -733,6 +734,7 @@
 					"$(PROJECT_DIR)/Rascal",
 					"$(PROJECT_DIR)",
 					/Users/phillipou/Documents/FacebookSDK,
+					"$(PROJECT_DIR)/FacebookSDK",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Rascal/Rascal-Prefix.pch";
