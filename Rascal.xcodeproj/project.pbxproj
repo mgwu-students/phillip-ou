@@ -60,7 +60,6 @@
 		4DA2A2EC19786A830090F2A2 /* Raleway-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4DA2A2EB197869800090F2A2 /* Raleway-Medium.otf */; };
 		4DA4589B198C1F24008F79DB /* splashscreenforiphone4.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DA4589A198C1F24008F79DB /* splashscreenforiphone4.png */; };
 		4DA52E9B197EE41900F0B6CB /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DA52E9A197EE41900F0B6CB /* MessageUI.framework */; };
-		4DB5E3801988AA3200E4939F /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DB5E37F1988AA3200E4939F /* Reachability.m */; };
 		4DB6BE421979D13600D3A50F /* out.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DB6BE411979D13600D3A50F /* out.png */; };
 		4DB6BE441979DB2E00D3A50F /* user-4-add.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DB6BE431979DB2E00D3A50F /* user-4-add.png */; };
 		4DB6BE461979DF5E00D3A50F /* image.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DB6BE451979DF5E00D3A50F /* image.png */; };
@@ -88,6 +87,7 @@
 		4DEAE2FC197F7C11004229DC /* star-2b.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DEAE2FB197F7C11004229DC /* star-2b.png */; };
 		4DEAE2FE197F7C30004229DC /* outb.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DEAE2FD197F7C30004229DC /* outb.png */; };
 		4DFE0444199537AB00DC663B /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DFE0443199537AB00DC663B /* FacebookSDK.framework */; };
+		4DFE04471995397200DC663B /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DFE04461995397200DC663B /* Reachability.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -171,8 +171,6 @@
 		4DA45899198C1DFD008F79DB /* plainwhite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = plainwhite.png; path = ../../plainwhite.png; sourceTree = "<group>"; };
 		4DA4589A198C1F24008F79DB /* splashscreenforiphone4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = splashscreenforiphone4.png; path = ../../splashscreenforiphone4.png; sourceTree = "<group>"; };
 		4DA52E9A197EE41900F0B6CB /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
-		4DB5E37E1988AA3200E4939F /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Reachability.h; path = ../../../Downloads/Reachability/Reachability/Reachability.h; sourceTree = "<group>"; };
-		4DB5E37F1988AA3200E4939F /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Reachability.m; path = ../../../Downloads/Reachability/Reachability/Reachability.m; sourceTree = "<group>"; };
 		4DB6BE411979D13600D3A50F /* out.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = out.png; sourceTree = "<group>"; };
 		4DB6BE431979DB2E00D3A50F /* user-4-add.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "user-4-add.png"; sourceTree = "<group>"; };
 		4DB6BE451979DF5E00D3A50F /* image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = image.png; sourceTree = "<group>"; };
@@ -207,6 +205,8 @@
 		4DEAE2FD197F7C30004229DC /* outb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = outb.png; path = "../../Batch-master/PNG/32x32/outb.png"; sourceTree = "<group>"; };
 		4DF312F91987142800A015E2 /* Rascal.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Rascal.entitlements; sourceTree = "<group>"; };
 		4DFE0443199537AB00DC663B /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = FacebookSDK/FacebookSDK.framework; sourceTree = "<group>"; };
+		4DFE04451995397200DC663B /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Reachability.h; path = Reachability/Reachability.h; sourceTree = SOURCE_ROOT; };
+		4DFE04461995397200DC663B /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Reachability.m; path = Reachability/Reachability.m; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -357,8 +357,8 @@
 				4DD8B897196287EB0074FFF4 /* CameraViewController.m */,
 				4D68A3EF196DEC32009ED6F9 /* ImageViewController.h */,
 				4D68A3F0196DEC32009ED6F9 /* ImageViewController.m */,
-				4DB5E37E1988AA3200E4939F /* Reachability.h */,
-				4DB5E37F1988AA3200E4939F /* Reachability.m */,
+				4DFE04451995397200DC663B /* Reachability.h */,
+				4DFE04461995397200DC663B /* Reachability.m */,
 				4D68A3EC196DE478009ED6F9 /* InboxViewController.h */,
 				4D68A3ED196DE478009ED6F9 /* InboxViewController.m */,
 				4D5EFB77197C3D3B00422F09 /* BountiesViewController.h */,
@@ -565,7 +565,7 @@
 				4D1AAABE196472DB00F79C39 /* ProfileViewController.m in Sources */,
 				4DD8B898196287EB0074FFF4 /* CameraViewController.m in Sources */,
 				4DDEABEE195FE8E5009684B8 /* main.m in Sources */,
-				4DB5E3801988AA3200E4939F /* Reachability.m in Sources */,
+				4DFE04471995397200DC663B /* Reachability.m in Sources */,
 				4D5C0FFC19606F2400770901 /* SignUpViewController.m in Sources */,
 				4D68A3EE196DE478009ED6F9 /* InboxViewController.m in Sources */,
 				4D5EFB79197C3D3B00422F09 /* BountiesViewController.m in Sources */,
