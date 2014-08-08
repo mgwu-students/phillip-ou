@@ -26,7 +26,6 @@
 		4D4A9200198829DC00BD5BAE /* FriendRequestTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D4A91FF198829DC00BD5BAE /* FriendRequestTableViewController.m */; };
 		4D4A92021988518500BD5BAE /* user-2-add.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D4A92011988518500BD5BAE /* user-2-add.png */; };
 		4D4A92041988526E00BD5BAE /* user-4.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D4A92031988526E00BD5BAE /* user-4.png */; };
-		4D5A3437198188CB00252814 /* marquee-big.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D5A3436198188CB00252814 /* marquee-big.png */; };
 		4D5C0FF61960698C00770901 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D5C0FF51960698C00770901 /* HomeViewController.m */; };
 		4D5C0FF919606F1700770901 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D5C0FF819606F1700770901 /* LoginViewController.m */; };
 		4D5C0FFC19606F2400770901 /* SignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D5C0FFB19606F2400770901 /* SignUpViewController.m */; };
@@ -92,6 +91,7 @@
 		4DFE046A199542B100DC663B /* tutorial2.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DFE045C199542B100DC663B /* tutorial2.png */; };
 		4DFE046B199542B100DC663B /* tutorial3.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DFE045D199542B100DC663B /* tutorial3.png */; };
 		4DFE046C199542B100DC663B /* user-3-big.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DFE045E199542B100DC663B /* user-3-big.png */; };
+		4DFE046E199543F700DC663B /* marquee-big.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DFE046D199543F700DC663B /* marquee-big.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -128,7 +128,6 @@
 		4D4A91FF198829DC00BD5BAE /* FriendRequestTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendRequestTableViewController.m; sourceTree = "<group>"; };
 		4D4A92011988518500BD5BAE /* user-2-add.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "user-2-add.png"; path = "../../Batch-master/PNG/16x16/user-2-add.png"; sourceTree = "<group>"; };
 		4D4A92031988526E00BD5BAE /* user-4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "user-4.png"; path = "../../Batch-master/PNG/16x16/user-4.png"; sourceTree = "<group>"; };
-		4D5A3436198188CB00252814 /* marquee-big.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "marquee-big.png"; path = "../../Batch-master/PNG/64x64/marquee-big.png"; sourceTree = "<group>"; };
 		4D5C0FF41960698C00770901 /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
 		4D5C0FF51960698C00770901 /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
 		4D5C0FF719606F1700770901 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
@@ -214,6 +213,7 @@
 		4DFE045C199542B100DC663B /* tutorial2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tutorial2.png; sourceTree = SOURCE_ROOT; };
 		4DFE045D199542B100DC663B /* tutorial3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tutorial3.png; sourceTree = SOURCE_ROOT; };
 		4DFE045E199542B100DC663B /* user-3-big.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "user-3-big.png"; sourceTree = SOURCE_ROOT; };
+		4DFE046D199543F700DC663B /* marquee-big.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "marquee-big.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -281,12 +281,12 @@
 				4D4A92031988526E00BD5BAE /* user-4.png */,
 				4DEAE2F7197F59A1004229DC /* user-3.png */,
 				4DB6BE411979D13600D3A50F /* out.png */,
+				4DFE046D199543F700DC663B /* marquee-big.png */,
 				4DA2A2E9197867AD0090F2A2 /* Raleway-Thin.otf */,
 				4D8C67F4197CE9EB009D675C /* database.png */,
 				4DA2A2EB197869800090F2A2 /* Raleway-Medium.otf */,
 				4D8C6E2019787DB50058593D /* camera-2.png */,
 				4D8C6E3419788AF60058593D /* camera-2-smaller.png */,
-				4D5A3436198188CB00252814 /* marquee-big.png */,
 				4D4A92011988518500BD5BAE /* user-2-add.png */,
 				4D8C6E3619788B220058593D /* marquee-smaller.png */,
 				4D8C6E2219787E120058593D /* users.png */,
@@ -511,7 +511,6 @@
 			files = (
 				4DDEAC11195FE8FD009684B8 /* MainStoryboard.storyboard in Resources */,
 				4DFE0467199542B100DC663B /* splashscreenforiphone4.png in Resources */,
-				4D5A3437198188CB00252814 /* marquee-big.png in Resources */,
 				4DFE0463199542B100DC663B /* logo.png in Resources */,
 				4DFE0461199542B100DC663B /* image-big.png in Resources */,
 				4DFE046C199542B100DC663B /* user-3-big.png in Resources */,
@@ -535,6 +534,7 @@
 				4D4A92041988526E00BD5BAE /* user-4.png in Resources */,
 				4DFE0466199542B100DC663B /* spam.png in Resources */,
 				4D8C6E2919787ED90058593D /* marquee.png in Resources */,
+				4DFE046E199543F700DC663B /* marquee-big.png in Resources */,
 				4D8C67F5197CE9EB009D675C /* database.png in Resources */,
 				4D8C6E3719788B220058593D /* marquee-smaller.png in Resources */,
 				4DB6BE461979DF5E00D3A50F /* image.png in Resources */,
