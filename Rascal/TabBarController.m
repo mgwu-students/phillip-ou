@@ -44,7 +44,7 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([PFUser currentUser]){
-        NSLog(@"Segueing");
+       // NSLog(@"Segueing");
         [segue.destinationViewController setHidesBottomBarWhenPushed:YES];
         //InboxViewController *inboxViewController = (ImageViewController *)segue.destinationViewController;
        

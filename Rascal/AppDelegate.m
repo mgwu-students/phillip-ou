@@ -27,6 +27,8 @@
      UIRemoteNotificationTypeAlert |
      UIRemoteNotificationTypeSound];
     
+  
+    
     
     self.window.autoresizesSubviews=YES;
     //self.window.backgroundColor=[UIColor blueColor];
@@ -59,11 +61,18 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
+    
+    PFInstallation *currentInstallation = [PFInstallation currentInstallation];
+    if (currentInstallation.badge != 0) {
+        currentInstallation.badge = 0;
+        [currentInstallation saveEventually];
+    }
+    
     [FBAppCall handleDidBecomeActiveWithSession:[PFFacebookUtils session]];
     PFUser *currentUser = [PFUser currentUser];
     if (currentUser) {
         //save the installation
-        NSLog(@"calling this now!!");
+        //(@"calling this now!!");
         PFInstallation *currentInstallation = [PFInstallation currentInstallation];
         //get current user id
         currentInstallation[@"installationUser"] = [[PFUser currentUser]objectId];
@@ -82,7 +91,7 @@
                 else {
                     // only update locally if the remote update succeeded so they always match
                     [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
-                    NSLog(@"updated badge");
+                    //(@"updated badge");
                 }
             }];
         }
@@ -105,6 +114,7 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
 didReceiveRemoteNotification:(NSDictionary *)userInfo {
     [PFPush handlePush:userInfo];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadTheTable" object:nil];
+    [UIApplication sharedApplication].applicationIconBadgeNumber = [[[userInfo objectForKey:@"aps"] objectForKey: @"badgecount"] intValue];
 }
 
 
@@ -164,11 +174,11 @@ didReceiveRemoteNotification:(NSDictionary *)userInfo {
             PFUser *currentUser = [PFUser currentUser];
             // handle result
             if(![currentUser[@"newUser"] isEqualToString:@"No"]){
-                NSLog(@"New User");
+                //(@"New User");
                 [currentUser setObject:@"No" forKey:@"newUser"];
                 
                 [currentUser setObject:[NSNumber numberWithInt:20] forKey:@"Points"];
-            NSLog(@"calling this from app delegate!!");
+            //(@"calling this from app delegate!!");
             PFObject *bountyNotice = [PFObject objectWithClassName:@"Messages"];
             [bountyNotice setObject:@"bountyNotice" forKey:@"fileType"];
             //[bountyNotice setACL: readAccess2];
@@ -184,7 +194,7 @@ didReceiveRemoteNotification:(NSDictionary *)userInfo {
             
             [bountyNotice saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
                 if(!error){
-                    NSLog(@"saving array");
+                    //(@"saving array");
                     [currentUser setObject:@[currentUser.objectId] forKey:@"friendsList"]; //add yourself to frends list so you can see yourself as victim Id. also for innocent bystander
                     [currentUser saveInBackground];
                     
@@ -226,7 +236,7 @@ didReceiveRemoteNotification:(NSDictionary *)userInfo {
     PFUser *user = [PFUser currentUser];
     if (user) {
         // update current user with facebook name and id
-        //NSLog(@"YOLO");
+        ////(@"YOLO");
         NSString *facebookName = result[@"name"];
         user.username = facebookName;
         NSString *facebookId = result[@"id"];

@@ -30,7 +30,7 @@
     
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (error){
-            NSLog(@"Error %@ %@", error,[error userInfo]);
+            //NSLog(@"Error %@ %@", error,[error userInfo]);
         }
         else{
             self.friends=objects;   //self.friends array = objects array returned in findObjectsinBackgroundwithblock

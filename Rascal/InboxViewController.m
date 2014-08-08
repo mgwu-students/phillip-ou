@@ -41,25 +41,25 @@
         // The number of objects to show per page
         
     }
-    //NSLog(@"%@",self.objects);
+    ////(@"%@",self.objects);
     return self;
 }
 -(void) objectsDidLoad: (NSError *)error{
-    NSLog(@"objects did load");
+    //(@"objects did load");
     [super objectsDidLoad: error];
     if(![PFUser currentUser] && ![PFFacebookUtils isLinkedWithUser:[PFUser currentUser]]){
-        NSLog(@"ByPass");
+        //(@"ByPass");
     }
     else{
         
         
        
-    NSLog(@"call1");
+    //(@"call1");
         
         //PFUser *currentUser = [PFUser currentUser];
         
         
-        NSLog(@"%@",[self.currentUser objectForKey:@"friendsList"]);
+        //(@"%@",[self.currentUser objectForKey:@"friendsList"]);
         
 
         
@@ -71,12 +71,12 @@
     NSInteger rowIndex = 0;
     
     for (PFObject *object in self.objects){
-        // NSLog(@"%@",self.sections);
+        // //(@"%@",self.sections);
         NSString *fileType = [object objectForKey:@"fileType"];
         
         NSMutableArray *objectsInSection = [self.sections objectForKey: fileType];
         
-        NSLog(@"sections:%@",self.sections);
+        //(@"sections:%@",self.sections);
         
         
         
@@ -89,17 +89,17 @@
             //increment section index
             [self.sectionFileType setObject:fileType forKey: [NSNumber numberWithInt: section++]]; //{0 : fileType, 1: fileType}
             
-            // NSLog(@"%@", [self.sectionFileType objectForKey:0]);
+            // //(@"%@", [self.sectionFileType objectForKey:0]);
             //check which sports type belongs to section 0
             //use section number to get
         }
         
         
         [objectsInSection addObject: [NSNumber numberWithInt: rowIndex++]]; //[0,1,2];
-        //NSLog(@"filetypeeee:%@",objectsInSection);
+        ////(@"filetypeeee:%@",objectsInSection);
         [self.sections setObject: objectsInSection forKey:fileType];
         
-        //NSLog(@"%@",self.sections);
+        ////(@"%@",self.sections);
         //{fileType:[0,1,2], fileType:[0,1]} <--row
         
     }
@@ -107,11 +107,11 @@
         self.allFriends = [[NSArray alloc]init];
         
         [[relation query] findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-            NSLog(@"relation query!");
+            //(@"relation query!");
             self.allFriends = objects;
         }];
     
-    //NSLog(@"%@",self.sections);
+    ////(@"%@",self.sections);
 }
     
     
@@ -175,9 +175,9 @@
                                     target:nil
                                     action:nil];
     [[self navigationItem] setBackBarButtonItem:newBackButton];
-    NSLog(@"viewdidload is happening");
+    //(@"viewdidload is happening");
    
-    NSLog(@"state:%@",self.currentUser[@"newUser"]);
+    //(@"state:%@",self.currentUser[@"newUser"]);
     if(![self.currentUser[@"newUser"] isEqualToString:@"No"]){
         [self.tabBarController setSelectedIndex:6];
         [self.currentUser setObject:@"No" forKey:@"newUser"];
@@ -186,13 +186,13 @@
    
     
     
-    //NSLog(@"%@",self.count);
+    ////(@"%@",self.count);
    
    
     
     
     /*if([self.count intValue]!=1){
-        NSLog(@"calling this!!");
+        //(@"calling this!!");
         PFUser *currentUser = [PFUser currentUser];
         PFObject *bountyNotice = [PFObject objectWithClassName:@"Messages"];
         [bountyNotice setObject:@"bountyNotice" forKey:@"fileType"];
@@ -250,18 +250,16 @@
 - (void)reloadTable:(NSNotification *)notification
 {
     [self loadObjects];
-    NSLog(@"refresh!");
+    //(@"refresh!");
 }
 -(void) viewWillAppear:(BOOL)animated{
-    NSLog(@"view will appear");
+    //(@"view will appear");
     
-    
-    self.icon2 = [UIImage imageNamed:@"camera-2"];
-    self.bountyLogo.backgroundColor = [UIColor clearColor];
-   
+
     
    
     
+
     
     
     NSString *profilePictureID = [self.currentUser objectForKeyedSubscript:@"facebookId"];
@@ -309,7 +307,7 @@
    
     
     NSString *fileType = [self fileTypeForSection:indexPath.section];
-    //NSLog(@"files:%@",fileType);
+    ////(@"files:%@",fileType);
     
     NSArray *rowIndecesInSection = [self.sections objectForKey:fileType];
     
@@ -319,14 +317,14 @@
 //load up messages sent to you
 
 - (PFQuery *)queryForTable {
-    //NSLog(@"QUERYING!");
+    ////(@"QUERYING!");
     PFQuery *query = [PFQuery queryWithClassName:self.parseClassName];
    
     //PFRelation *friends = [currentUser relationForKey:@"friendsRelation"];
         if(self.currentUser !=nil){
             NSArray *array = [self.currentUser objectForKey:@"friendsList"];
             self.friendsList=[NSMutableArray arrayWithArray:array];
-            NSLog(@"Querying friendsList: %@",self.friendsList);
+            //(@"Querying friendsList: %@",self.friendsList);
         [query whereKey:@"recipientIds" containsAllObjectsInArray:@[self.currentUser.objectId]];
         [query whereKey:@"fileType" containedIn:@[@"image",@"bountyNotice"]];
         [query whereKey:@"senderId" containedIn:self.friendsList];
@@ -376,10 +374,10 @@
 {
     
     NSString *fileType = [self fileTypeForSection:section];
-    //NSLog(@"section:%d",section);
+    ////(@"section:%d",section);
     NSArray *rowIndecesInSection = [self.sections objectForKey:fileType];
     // Return the number of rows in the section.
-    //NSLog(@"using %@:",rowIndecesInSection);
+    ////(@"using %@:",rowIndecesInSection);
    
     return rowIndecesInSection.count; //this is some times too much
     
@@ -406,8 +404,14 @@ static int rowNumber;
     
     static NSString *CellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-   
-   
+  
+    
+    self.bountyLogo = [[UIButton alloc] initWithFrame: CGRectMake(0, 0, 16, 16)];
+    
+    self.icon2 = [UIImage imageNamed:@"camera-2"];
+    self.bountyLogo.backgroundColor = [UIColor clearColor];
+    [self.bountyLogo setBackgroundImage:self.icon2 forState:UIControlStateNormal];
+    
     
     
     
@@ -437,12 +441,11 @@ static int rowNumber;
     
     
     if(self.objects==nil){
-        NSLog(@"waiting!!!!!");
+        //(@"waiting!!!!!");
         //[self loadObjects];
     }
     
-    [self.bountyLogo setBackgroundImage:self.icon2 forState:UIControlStateNormal];
-    self.bountyLogo = [[UIButton alloc] initWithFrame: CGRectMake(0, 0, 16, 16)];
+    
     
    
     @try{
@@ -455,7 +458,7 @@ static int rowNumber;
     
     [cell.textLabel setFont:[UIFont fontWithName:@"Raleway-Medium" size:14]];
      NSString *fileType = [message objectForKey:@"fileType"];
-        NSLog(@"%@",fileType);
+        //(@"%@",fileType);
     
     if([fileType isEqualToString:@"bountyNotice"]){
         //if([listOfRecipients containsObject:currentUser.objectId]){
@@ -472,7 +475,7 @@ static int rowNumber;
          
          cell.textLabel.text= [NSString stringWithFormat:@"%@ ",[[message objectForKey:@"senderName"]lowercaseString]];
          cell.accessoryView=nil;
-         //cell.imageView.image = self.unseenPhotoImage;
+         cell.imageView.image = self.unseenPhotoImage;
          
          
          //for read messages
@@ -511,11 +514,11 @@ static int rowNumber;
     }
     
     @catch(NSException *exception){
-        NSLog(@"caught error");
+        //(@"caught error");
         [self loadObjects];
     }
     @finally {
-        NSLog(@"Cleaning up");
+        //(@"Cleaning up");
         
     }
     
@@ -545,7 +548,7 @@ static int rowNumber;
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         
     //add code here for when you hit delete
-    NSLog(@"Delete");
+    //(@"Delete");
         NSInteger rowNumber = 0;
         
         for (NSInteger i = 0; i < indexPath.section; i++) {
@@ -568,13 +571,13 @@ static int rowNumber;
         
         
        
-        NSLog(@"New Dict: %@", self.sections);
+        //(@"New Dict: %@", self.sections);
        
         NSMutableArray *deleteArray = [NSMutableArray arrayWithArray:self.selectedMessage[@"recipientIds"]] ;
         
 
         [deleteArray removeObject:self.currentUser.objectId];
-        //NSLog(@"RecipientIds:%@",deleteArray);
+        ////(@"RecipientIds:%@",deleteArray);
         NSArray *arrayUpdate = [NSArray arrayWithArray:deleteArray];
        
         [self.selectedMessage setObject:arrayUpdate forKey:@"recipientIds"];
@@ -625,7 +628,7 @@ static int rowNumber;
             int currentPoints = [self.currentUser[@"Points"] intValue];
             NSNumber *points = [NSNumber numberWithInt: earned+currentPoints];
             [self.currentUser setObject:points forKey:@"Points"];
-            NSLog(@"Points earned");
+            //(@"Points earned");
             [self.currentUser saveInBackground];
             [self.selectedMessage saveInBackground];
             
@@ -645,7 +648,7 @@ static int rowNumber;
   
      
     if([fileType isEqualToString:@"bountyNotice"]){
-            NSLog(@"show camera");
+            //(@"show camera");
         /*NSString *bountyMessage = [NSString stringWithFormat:@"Bounty set by %@", self.selectedMessage[@"senderName"]];*/
 
         if([self.selectedMessage[@"placeholder"] isEqualToString:@"placeholder"]){
@@ -661,7 +664,7 @@ static int rowNumber;
         
        // }
        // else{
-      //      NSLog(@"You've done this bounty already");
+      //      //(@"You've done this bounty already");
       //  }
     
         
@@ -679,7 +682,7 @@ static int rowNumber;
  
     // Delete it!
     /*NSMutableArray *recipientIds = [NSMutableArray arrayWithArray:[self.selectedMessage objectForKey:@"recipientIds"]];
-    NSLog(@"Recipients: %@", recipientIds);
+    //(@"Recipients: %@", recipientIds);
     
     if ([recipientIds count] == 1) {
         // Last recipient - delete!
@@ -746,7 +749,7 @@ static int rowNumber;
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
     if([segue.identifier isEqualToString:@"transferBountyData"]){
-            NSLog(@"Passing to Camera");
+            //(@"Passing to Camera");
             [segue.destinationViewController setHidesBottomBarWhenPushed:NO];
             CameraViewController *cameraViewController = (CameraViewController *)segue.destinationViewController;
             cameraViewController.message = self.selectedMessage;

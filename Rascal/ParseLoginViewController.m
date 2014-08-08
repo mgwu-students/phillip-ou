@@ -42,7 +42,7 @@
 
 
 -(IBAction)tutorialButton:(id)sender{
-    NSLog(@"CLICKED THISSS!!");
+    //NSLog(@"CLICKED THISSS!!");
    
     
 }

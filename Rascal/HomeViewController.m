@@ -276,7 +276,7 @@
 }
 
 - (IBAction)like:(id)sender {
-    NSLog(@"Like Button Pressed");
+    //(@"Like Button Pressed");
     PFUser *currentUser  =[PFUser currentUser];
     //[self ButtonReleased:self];
     //NSMutableArray *listOfLikers = [NSMutableArray array];
@@ -303,7 +303,7 @@
     
     [self.message saveEventually:^(BOOL succeeded, NSError *error) {
         if(error){
-            NSLog(@"fuck");
+            //(@"fuck");
         }
     }];
     

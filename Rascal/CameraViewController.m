@@ -50,7 +50,7 @@
     self.prompt.hidden=NO;
    
         
-    NSLog(@"%@ , %@", self.senderId, self.targetId);
+    //(@"%@ , %@", self.senderId, self.targetId);
    
     self.tabBarController.tabBar.hidden = YES;
    /* if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
@@ -162,7 +162,7 @@
     
     self.imagePicker.allowsEditing = NO;
     if([[UIDevice currentDevice].model hasPrefix:@"iPad"]){
-        NSLog(@"IPAD!");
+        //(@"IPAD!");
         self.imagePicker.allowsEditing=YES;
     }
     
@@ -192,7 +192,7 @@
  
     self.prompt.hidden=YES;
         
-        //NSLog(@"%@",info);
+        ////(@"%@",info);
     self.chosenImageView.image = chosenImage;
     
     //handling landscape mode
@@ -240,12 +240,12 @@
 }
 
 - (IBAction)share:(id)sender {
-    NSLog(@"Next");
+    //(@"Next");
     //self.testObject = @"boo";
    
     if (self.chosenImageView.image) {
         [self performSegueWithIdentifier: @"transition" sender: self];
-        NSLog(@"segueperformed");
+        //(@"segueperformed");
         
     }
     else{
@@ -253,7 +253,7 @@
         [alert show];
         
     }
-    NSLog(@"%@",[self.titleTextField text]);
+    //(@"%@",[self.titleTextField text]);
     
     
     
@@ -268,7 +268,7 @@
         
         NSData *imageData = UIImageJPEGRepresentation(self.chosenImageView.image, 0.05f); //reduce image file size
         
-        NSLog(@"After Size: %d", imageData.length);
+        //(@"After Size: %d", imageData.length);
         
         PFFile *file = [PFFile fileWithName:@"image.png" data:imageData];
         // PFUser *currentUser = [PFUser currentUser];

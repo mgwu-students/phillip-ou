@@ -42,7 +42,7 @@
     
     //prevents backswiping back to front of navigation stack.
     if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
-        NSLog(@"backswipe!");
+        //NSLog(@"backswipe!");
         self.navigationController.interactivePopGestureRecognizer.enabled = NO;
     }
     

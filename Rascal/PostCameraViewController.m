@@ -27,7 +27,7 @@
     self.friendsRelation = [[PFUser currentUser] objectForKey:@"friendsRelation"];
     self.recipients = [[NSMutableArray alloc] init];
     if (self.senderId !=nil){
-        NSLog(@"not empty");
+        ////(@"not empty");
     //have sender of bounty and victim of bounty be checked automatically
         if (![self.senderId isEqualToString: [PFUser currentUser].objectId]){
             [self.recipients addObjectsFromArray:@[self.senderId,self.targetId]];}}
@@ -39,7 +39,7 @@
     [query orderByAscending:@"username"];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (error) {
-            NSLog(@"Error %@ %@", error, [error userInfo]);
+           // //(@"Error %@ %@", error, [error userInfo]);
         }
         else {
             self.friends = objects;
@@ -116,7 +116,7 @@
     
     
     if (cell.accessoryType == UITableViewCellAccessoryNone) {
-        NSLog(@"Add");
+        //(@"Add");
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
         cell.highlighted=NO;
         if(![user.objectId isEqualToString:currentUser.objectId]){
@@ -128,12 +128,12 @@
         
     }
     else {
-        NSLog(@"Remove");
+        //(@"Remove");
         cell.accessoryType = UITableViewCellAccessoryNone;
         [self.recipients removeObject:user.objectId];
     }
     
-    NSLog(@"%@", self.recipients); //log list of recipients
+    //(@"%@", self.recipients); //log list of recipients
 }
 
 
@@ -207,7 +207,7 @@
 #pragma mark - Helper methods
 
 - (void)uploadMessage {
-    //NSLog(@"final list %@",self.recipients);
+    ////(@"final list %@",self.recipients);
     if([self.recipients count]!=0) {
     PFUser *currentUser = [PFUser currentUser];
     
@@ -270,7 +270,7 @@
 
         [deleteArray removeObject:[[PFUser currentUser] objectId] ];
         [deleteArray removeObject:[[PFUser currentUser] objectId] ];
-        NSLog(@"RecipientIds:%@",deleteArray);
+        //(@"RecipientIds:%@",deleteArray);
         NSArray *arrayUpdate = [NSArray arrayWithArray:deleteArray];
         [self.selectedMessage setObject:arrayUpdate forKey:@"recipientIds"];
             [self.selectedMessage saveInBackground];
@@ -284,6 +284,8 @@
             if(!error){
                 
                 //PUSH NOTIFICATION FOR PHOTO
+               
+               
                 
                 PFQuery *pushQuery = [PFInstallation query];
                 [pushQuery whereKey:@"installationUser" containedIn:recipients];
@@ -291,13 +293,20 @@
                 // Send push notification to our query
                 PFPush *push = [[PFPush alloc] init];
                 [push setQuery:pushQuery];
+                NSDictionary *data = [NSDictionary dictionaryWithObjectsAndKeys:
+                                      message, @"alert",
+                                      @"Increment", @"badge",
+                                      nil];
+                
+                
+                [push setData:data];
                 [push setMessage:[NSString stringWithFormat:@"%@ sent you a photo!", currentUser.username]];
                 
                 
                 [push sendPushInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
                     if(!error)
                     {
-                        NSLog(@"Push notification sent!");
+                        //(@"Push notification sent!");
                     }
                 }];
             
@@ -305,7 +314,7 @@
                 
                 [self reset];
                 
-                //NSLog(@"god this work");
+                ////(@"god this work");
             }
     
             
@@ -345,7 +354,7 @@
 }
 -(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     if ([segue.identifier isEqualToString:@"backToTab"]) {
-        NSLog(@"Being Called");
+        ////(@"Being Called");
         //[self.tabBarController setSelectedIndex:0];
         
         [segue.destinationViewController setHidesBottomBarWhenPushed:YES];

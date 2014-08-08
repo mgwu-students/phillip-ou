@@ -37,9 +37,9 @@
     
     //handles landscape
     int orientation = self.imageView.image.imageOrientation;
-    NSLog(@"%d",orientation);
+    //(@"%d",orientation);
     if(orientation ==0 || orientation ==1){
-        NSLog(@"landscape");
+        //(@"landscape");
         self.imageView.contentMode = UIViewContentModeScaleAspectFit;}
     
     
@@ -100,7 +100,7 @@
     [push sendPushInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if(!error)
         {
-            NSLog(@"Push notification sent!");
+            //(@"Push notification sent!");
         }
     }];*/
     }
@@ -108,7 +108,7 @@
 }
 
 - (IBAction)Like:(id)sender {
-    NSLog(@"Like Button Pressed");
+    //(@"Like Button Pressed");
     
     PFUser *currentUser  =[PFUser currentUser];
     [self ButtonReleased:self];
@@ -117,8 +117,8 @@
    
     //ask benji whyit keeps adding users of hte same username
     //also ask why label doesn't update instantaneously
-    if(![self.message[@"listOfLikers"] containsObject: currentUser.username]){
-        [self.message addObject:currentUser.username forKey:@"listOfLikers"];
+    if(![self.message[@"listOfLikers"] containsObject: currentUser.objectId]){
+        [self.message addObject:currentUser.objectId forKey:@"listOfLikers"];
         NSNumber *numberOfLikes = [self.message objectForKey:@"numberOfLikes"];
         int numlikes = [numberOfLikes intValue];
         numberOfLikes = [NSNumber numberWithInteger: numlikes+1];
@@ -134,7 +134,7 @@
     
     [self.message saveEventually:^(BOOL succeeded, NSError *error) {
         if(error){
-            NSLog(@"fuck");
+            //(@"fuck");
         }
         else{
            

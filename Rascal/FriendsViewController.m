@@ -31,7 +31,7 @@
     [[self navigationItem] setBackBarButtonItem:newBackButton];
     self.navigationItem.backBarButtonItem.tintColor =[UIColor colorWithRed:51/255.0 green:70/255.0 blue:192/255.0 alpha:1.0];
    // [[self.parentViewController navigationItem] setBackBarButtonItem: newBackButton];
-    NSLog(@"calling viewdidload");
+    //(@"calling viewdidload");
     [super viewDidLoad];
     
     
@@ -66,12 +66,12 @@
    
     PFUser *currentUser = [PFUser currentUser];
     self.points = currentUser[@"Points"];
-    NSLog(@"Points:%@",self.points);
+    //(@"Points:%@",self.points);
     [self.recipientsOfBounties removeAllObjects];
     self.clickCount = 0;
     self.friendsRelation = [[PFUser currentUser] objectForKey:@"friendsRelation"];
     self.friendsList = [currentUser objectForKey:@"friendsList"];
-    NSLog(@"Friends:%@",self.friendsList);
+    //(@"Friends:%@",self.friendsList);
     
     PFQuery *requestsQuery = [PFQuery queryWithClassName:@"FriendRequest"];
     [requestsQuery whereKey:@"status" containsString:@"Pending"];
@@ -91,7 +91,7 @@
     [query orderByAscending:@"username"];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (error){
-            NSLog(@"Error %@ %@", error,[error userInfo]);
+            //(@"Error %@ %@", error,[error userInfo]);
         }
         else{
             self.friends=objects;   //self.friends array = objects array returned in findObjectsinBackgroundwithblock
@@ -143,30 +143,30 @@
     for (PFUser *friend in[self.friends copy] ){
         
         if([friend.objectId isEqualToString:user.objectId]){
-            NSLog(@"friendID:%@",friend.objectId);
+            //(@"friendID:%@",friend.objectId);
             [friendsRelation removeObject:friend];
             [self.friends removeObject:friend];
             [currentUser setObject:self.friends forKey:@"friendsList"];
             if(![friend.objectId isEqualToString: currentUser.objectId]){
-                NSLog(@"deleting:%@",friend.objectId);
+                //(@"deleting:%@",friend.objectId);
                 if([self.friendsList containsObject:friend.objectId]){
                     
                         NSUInteger index = [self.friendsList indexOfObject: friend.objectId];
                                     
-                        NSLog(@"contains it: %@",self.friendsList);
-                        NSLog(@"at index: %d",index);
+                        //(@"contains it: %@",self.friendsList);
+                        //(@"at index: %d",index);
                     @try{
                         [self.friendsList removeObjectAtIndex:index];
                         }
                     @catch(NSException *exception){
-                        NSLog(@"caught error");
+                        //(@"caught error");
                         
                         
                         //HE'S REMOVED FROM THE FRIEND RELATION BUT NOT THE ACTUAL LIST OF FRIENDS.
                        
                     }
                     @finally{
-                        NSLog(@"cleaning up");
+                        //(@"cleaning up");
                     }
                 }
             }
@@ -174,7 +174,7 @@
         
             NSArray *array = [NSArray arrayWithArray:self.friendsList];
             [currentUser setObject:array forKey:@"friendsList" ];
-            NSLog(@"Remove %@",user.username);
+            //(@"Remove %@",user.username);
             
             [currentUser saveInBackground];
            
@@ -245,7 +245,7 @@
         self.section=0;
     }
     else{
-        NSLog(@"calling this!!!!");
+        //(@"calling this!!!!");
         self.segmentController.selectedSegmentIndex=0;
         
        

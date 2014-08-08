@@ -76,7 +76,7 @@
     
     self.profileImageView.file = profilePicture;
     [self.profileImageView loadInBackground];
-    NSLog(@"Current User is %@", currentUser.username);
+    //(@"Current User is %@", currentUser.username);
     
     
     
@@ -105,7 +105,7 @@
     
     [query findObjectsInBackgroundWithBlock:^(NSArray *songs, NSError *error) {
         if (error){
-            NSLog (@"can't retrieve....");
+            // (@"can't retrieve....");
         };
         
     }];}
@@ -200,7 +200,7 @@
     static NSString *CellIdentifier = @"PhotoCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     PFImageView *photo = (PFImageView *)[cell viewWithTag:1];
-    NSLog(@"%@",object[@"file"]);
+    //(@"%@",object[@"file"]);
     photo.file = object[@"file"]; //save photo.file in key image
     //handles landscape
     int orientation = photo.image.imageOrientation;

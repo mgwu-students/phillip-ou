@@ -33,7 +33,7 @@
     [query orderByAscending: @"username"]; //alphabetize list
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (error){
-            NSLog(@"Error:%@ %@", error, [error userInfo]);
+            //(@"Error:%@ %@", error, [error userInfo]);
         }
         else{
             self.allUsers = objects;
@@ -48,7 +48,7 @@
             }
             [self.tableView reloadData];
         }
-        NSLog(@"%@", self.userDict);
+        //(@"%@", self.userDict);
     }];
     self.currentUser = [PFUser currentUser];
     
@@ -152,7 +152,7 @@
         
         
         
-        NSLog(@"Id:%@",trimmedReplacement);
+        //(@"Id:%@",trimmedReplacement);
         
         if([self.friends containsObject:user.username]){
             
@@ -179,10 +179,10 @@
         
         
         else{
-            NSLog(@"Here's this list: %@",self.friendsList);
+            //(@"Here's this list: %@",self.friendsList);
             NSMutableArray *updateArray = [NSMutableArray arrayWithArray:self.friendsList];
-            NSLog(@"above:%@",user);
-            NSLog(@"Testing this: %@", user.objectId);
+            //(@"above:%@",user);
+            //(@"Testing this: %@", user.objectId);
             PFUser *currentUser = [PFUser currentUser];
             
             cell.accessoryType = UITableViewCellAccessoryCheckmark; //add checkmark
@@ -190,10 +190,10 @@
             
            self.friendsList=updateArray;
             if(![self.friendsList containsObject:user.objectId]){
-                NSLog(@"adding");
+                //(@"adding");
                 [self.friends addObject:user];
                 [updateArray addObject:user.objectId];
-                NSLog(@"running?");
+                //(@"running?");
                 PFObject *friendRequest = [PFObject objectWithClassName:@"FriendRequest"];
                 [friendRequest setObject:[[PFUser currentUser]objectId] forKey:@"requestFrom"];
                 [friendRequest setObject: user.objectId forKey:@"requestTo"];
@@ -211,13 +211,21 @@
                 // Send push notification to our query
                 PFPush *push = [[PFPush alloc] init];
                 [push setQuery:pushQuery];
+                NSDictionary *data = [NSDictionary dictionaryWithObjectsAndKeys:
+                                      friendRequest, @"alert",
+                                      @"Increment", @"badge",
+                                      nil];
+                
+                
+                [push setData:data];
+
                 [push setMessage:[NSString stringWithFormat:@"%@ sent you a friend request!", currentUser.username]];
                 
                 
                 [push sendPushInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
                     if(!error)
                     {
-                        NSLog(@"Push notification sent!");
+                        //(@"Push notification sent!");
                     }
                 }];
 
@@ -233,7 +241,7 @@
             
         }
         NSArray *arrayUpdate = [NSArray arrayWithArray:self.friendsList];
-        NSLog(@"saving this list:%@",arrayUpdate);
+        //(@"saving this list:%@",arrayUpdate);
         [self.currentUser setObject:arrayUpdate forKey:@"friendsList"];
         
         [self.currentUser saveInBackground];
@@ -271,7 +279,7 @@
         else{
             cell.accessoryType = UITableViewCellAccessoryCheckmark; //add checkmark
             [self.friends addObject:user];
-            NSLog(@"running?");
+            //(@"running?");
             
             /*PFObject *friendRequest = [PFObject objectWithClassName:@"FriendRequest"];
              [friendRequest setObject:currentUser forKey:@"requestFrom"];
@@ -290,7 +298,7 @@
     /*[self.currentUser saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
      {
      if(error){
-     NSLog(@"Error %@ %@, error", [error userInfo]);
+     //(@"Error %@ %@, error", [error userInfo]);
      }
      }
      }];
@@ -301,7 +309,7 @@
     [self.currentUser saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         {
             if(error){
-                NSLog(@"Error %@, error", [error userInfo]);
+                //(@"Error %@, error", [error userInfo]);
             }
         }
     }];
@@ -318,7 +326,7 @@
     NSPredicate *resultPredicate = [NSPredicate predicateWithFormat:@"SELF BEGINSWITH[c] %@", searchText];
     self.searchResults = [NSMutableArray arrayWithArray: [self.allUsernames filteredArrayUsingPredicate:resultPredicate]];
     
-    NSLog(@"searches:%@",self.searchResults);
+    //(@"searches:%@",self.searchResults);
 }
 
 -(BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString
@@ -341,7 +349,7 @@
         
     }
     else{
-        NSLog(@"unable to load iMessage");
+        //(@"unable to load iMessage");
     }
 }
 //dismiss sms view controller when we're done with it.

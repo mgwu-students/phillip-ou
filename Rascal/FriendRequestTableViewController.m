@@ -47,7 +47,7 @@
     
     self.friendsRelation = [[PFUser currentUser] objectForKey:@"friendsRelation"];
     self.friendsList = [currentUser objectForKey:@"friendsList"];
-    NSLog(@"Friends:%@",self.friendsList);
+    //@"Friends:%@",self.friendsList);
     
    /* PFQuery *requestsQuery = [PFQuery queryWithClassName:@"FriendRequest"];
     [requestsQuery whereKey:@"status" containsString:@"Pending"];
@@ -58,7 +58,7 @@
    // PFQuery *friendsQuery = [PFUser query];
    // [friendsQuery whereKey:@"objectId" containedIn: currentUser[@"friendsList"]];
     //PFQuery *query = [PFQuery orQueryWithSubqueries:@[requestsQuery,friendsQuery]];
-    NSLog(@"List:%@",self.friendsList);
+    //@"List:%@",self.friendsList);
     PFQuery *query = [PFQuery queryWithClassName:@"FriendRequest"];
     [query whereKey:@"status" containsString:@"Pending"];
     [query whereKey:@"requestTo" containedIn:@[currentUser.objectId]];
@@ -70,7 +70,7 @@
     [query orderByAscending:@"username"];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (error){
-            NSLog(@"Error %@ %@", error,[error userInfo]);
+            //@"Error %@ %@", error,[error userInfo]);
         }
         else{
             self.friendRequests=objects;   //self.friendRequests = array of friendRequest objects
@@ -155,14 +155,14 @@
     
     PFObject *requestObject = [self.friendRequests objectAtIndex:indexPath.row];
     
-    NSLog(@"USER:%@",requestObject[@"requestFromObject"]);
+  
   //  PFUser *user =requestObject[@"requestFromObject"];
     cell.textLabel.text = requestObject[@"requestFromName"];
     [cell.textLabel setFont:[UIFont fontWithName:@"Raleway-Medium" size:14]];
     
     
     //PFUser *user = [self.friendsToDisplay objectAtIndex:indexPath.row];
-    //NSLog(@"username:%@",user.username);
+    ////@"username:%@",user.username);
     
     //profile picture..might slow down game.
     
@@ -178,7 +178,7 @@
     return cell;
 }
 -(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    NSLog(@"called?");
+    
     UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
     
     UIImage *icon = [UIImage imageNamed: @"user-4-addb"];
@@ -190,14 +190,14 @@
     PFObject *requestObject = [self.friendRequests objectAtIndex:indexPath.row];
     PFUser *user =requestObject[@"requestFromObject"];
     if(![self.friendsList containsObject:user.objectId]){
-        NSLog(@"userId:%@",user.objectId);
+        //@"userId:%@",user.objectId);
         @try{
             [self.friendsList addObject:user.objectId];}
         @catch(NSException *exception){
-            NSLog(@"caught error");
+            //@"caught error");
         }
         @finally{
-            NSLog(@"cleaning");
+            //@"cleaning");
         }
         cell.accessoryView = approveImage;
         NSArray *array = [NSArray arrayWithArray:self.friendsList];
@@ -215,7 +215,7 @@
     
     }
     
-    NSLog(@"updated: %@",self.friendsList);
+    //@"updated: %@",self.friendsList);
     
 }
 -(void) reset{
@@ -236,7 +236,7 @@
   self.points = [NSNumber numberWithInt:points-self.bountyCost];
   [currentUser setObject: self.points forKey:@"Points" ];
   [currentUser saveInBackground];}
-  NSLog(@"%@",self.points);
+  //@"%@",self.points);
   [self.tabBarController setSelectedIndex:0];
   
   }

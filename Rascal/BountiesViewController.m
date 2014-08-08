@@ -39,7 +39,7 @@
     self.bountyButton.selected=NO;
     
     self.points = self.currentUser[@"Points"];
-    NSLog(@"Points:%@",self.points);
+    //(@"Points:%@",self.points);
     [self.recipientsOfBounties removeAllObjects];
     self.clickCount = 0;
     self.friendsRelation = [self.currentUser objectForKey:@"friendsRelation"];
@@ -48,7 +48,7 @@
     [query orderByAscending:@"username"];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (error){
-            NSLog(@"Error %@ %@", error,[error userInfo]);
+            //(@"Error %@ %@", error,[error userInfo]);
         }
         else{
             self.friends=objects;   //self.friends array = objects array returned in findObjectsinBackgroundwithblock
@@ -114,7 +114,7 @@
         if(cell.accessoryType==UITableViewCellAccessoryNone){
             cell.accessoryType = UITableViewCellAccessoryCheckmark; //put check mark
             self.user = [self.friends objectAtIndex: indexPath.row];
-            NSLog(@"bounty on %@",self.user.objectId);
+            //(@"bounty on %@",self.user.objectId);
             
             [self.recipientsOfBounties addObject:self.user.objectId];
             [self.allFriends addObject:self.user.objectId];
@@ -145,9 +145,9 @@
         
         
     }
-    NSLog(@"Click Count:%d",self.clickCount);
-    NSLog(@"RecipientsofBounties:%@",self.recipientsOfBounties);
-    NSLog(@"%@",self.user.username);
+    //(@"Click Count:%d",self.clickCount);
+    //(@"RecipientsofBounties:%@",self.recipientsOfBounties);
+    //(@"%@",self.user.username);
 }*/
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath   *)indexPath
@@ -158,13 +158,13 @@
     [tableView cellForRowAtIndexPath:indexPath].accessoryType = UITableViewCellAccessoryCheckmark;
     [tableView cellForRowAtIndexPath:indexPath].selected=NO;
     self.user = [self.friends objectAtIndex: indexPath.row];
-    NSLog(@"bounty on %@",self.user.objectId);
+    //(@"bounty on %@",self.user.objectId);
     
     
     [self.recipientsOfBounties addObject:self.user.objectId];
     [self.allFriends addObject:self.user.objectId];
-    NSLog(@"RecipientsofBounties:%@",self.recipientsOfBounties);
-    NSLog(@"%@",self.user.username);
+    //(@"RecipientsofBounties:%@",self.recipientsOfBounties);
+    //(@"%@",self.user.username);
     
     
 }
@@ -211,13 +211,21 @@
             // Send push notification to our query
             PFPush *push = [[PFPush alloc] init];
             [push setQuery:pushQuery];
+            NSDictionary *data = [NSDictionary dictionaryWithObjectsAndKeys:
+                                  bountyNotice, @"alert",
+                                  @"Increment", @"badge",
+                                  nil];
+            
+            
+            [push setData:data];
+
             [push setMessage:[NSString stringWithFormat:@"%@ set a bounty on %@!", self.currentUser.username,self.user.username]];
             
             
             [push sendPushInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
                 if(!error)
                 {
-                    NSLog(@"Push notification sent!");
+                    //(@"Push notification sent!");
                 }
             }];
             
@@ -234,7 +242,7 @@
             [push2 sendPushInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
                 if(!error)
                 {
-                    NSLog(@"Push2 notification sent!");
+                    //(@"Push2 notification sent!");
                 }
             }];
 
@@ -265,7 +273,7 @@
             [self.allFriends removeObject:self.user.objectId]; //so guy receiving bounty won't get duplicate notification
             [self.allFriends removeObject: self.currentUser.objectId]; //so current user doesn't get notifications (might have crash if current user isn't in the array but we'll see)
             self.friends = [NSArray arrayWithArray: self.allFriends];
-            NSLog(@"Receiving Bounty Notice: %@",self.friends);
+            //(@"Receiving Bounty Notice: %@",self.friends);
             [bountyNotice setObject:@"bountyNotice" forKey:@"fileType"];
             //[bountyNotice setACL: readAccess2];
             [bountyNotice setObject:self.friends forKey:@"recipientIds"];//notification goes to all friends
@@ -288,7 +296,7 @@
             [self reset];}
         
     
-    NSLog (@"No Bounties Set");
+    // (@"No Bounties Set");
 }
 
 
@@ -326,7 +334,7 @@
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"You Don't Have Enough Points"
                                                             message:@"Send More Photos!"
                                                            delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
-        NSLog(@"you actually have %@",self.points);
+        //(@"you actually have %@",self.points);
         [alertView show];
         [self reset];
         [self.tabBarController setSelectedIndex:0];
@@ -350,7 +358,7 @@
     
     
     
-    NSLog(@"%@",self.points);
+    //(@"%@",self.points);
     
     
 }
