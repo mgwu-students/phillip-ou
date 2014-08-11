@@ -32,6 +32,7 @@
 		4D68A3F1196DEC32009ED6F9 /* ImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D68A3F0196DEC32009ED6F9 /* ImageViewController.m */; };
 		4D6F21CB1975911E009A4EFB /* TabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D6F21CA1975911E009A4EFB /* TabBarController.m */; };
 		4D80FF9B19840C0B0050DAC3 /* TutorialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D80FF9A19840C0B0050DAC3 /* TutorialViewController.m */; };
+		4D81B6D919996BB5004DA867 /* settings.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D81B6D819996BB5004DA867 /* settings.png */; };
 		4D8250FB198AEE5700B9CE14 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D8250FA198AEE5700B9CE14 /* SettingsViewController.m */; };
 		4D8B759A196CFEAD00166173 /* EditFriendsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D8B7599196CFEAD00166173 /* EditFriendsViewController.m */; };
 		4D8B759D196D075300166173 /* FriendsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D8B759C196D075300166173 /* FriendsViewController.m */; };
@@ -67,7 +68,6 @@
 		4DDEAC05195FE8E5009684B8 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4DDEAC03195FE8E5009684B8 /* InfoPlist.strings */; };
 		4DDEAC07195FE8E5009684B8 /* RascalTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DDEAC06195FE8E5009684B8 /* RascalTests.m */; };
 		4DDEAC11195FE8FD009684B8 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4DDEAC10195FE8FD009684B8 /* MainStoryboard.storyboard */; };
-		4DE6D5B61996D036003BFDD7 /* settings.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DE6D5B51996D036003BFDD7 /* settings.png */; };
 		4DE6D5B81996D054003BFDD7 /* heart-full.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DE6D5B71996D054003BFDD7 /* heart-full.png */; };
 		4DFE0444199537AB00DC663B /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DFE0443199537AB00DC663B /* FacebookSDK.framework */; };
 		4DFE04471995397200DC663B /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DFE04461995397200DC663B /* Reachability.m */; };
@@ -144,6 +144,7 @@
 		4D6F21CA1975911E009A4EFB /* TabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabBarController.m; sourceTree = "<group>"; };
 		4D80FF9919840C0B0050DAC3 /* TutorialViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TutorialViewController.h; path = ../TutorialViewController.h; sourceTree = "<group>"; };
 		4D80FF9A19840C0B0050DAC3 /* TutorialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TutorialViewController.m; path = ../TutorialViewController.m; sourceTree = "<group>"; };
+		4D81B6D819996BB5004DA867 /* settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = settings.png; sourceTree = SOURCE_ROOT; };
 		4D8250F9198AEE5700B9CE14 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
 		4D8250FA198AEE5700B9CE14 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
 		4D8B7598196CFEAD00166173 /* EditFriendsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EditFriendsViewController.h; path = ../EditFriendsViewController.h; sourceTree = "<group>"; };
@@ -189,7 +190,6 @@
 		4DDEAC04195FE8E5009684B8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		4DDEAC06195FE8E5009684B8 /* RascalTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RascalTests.m; sourceTree = "<group>"; };
 		4DDEAC10195FE8FD009684B8 /* MainStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainStoryboard.storyboard; sourceTree = "<group>"; };
-		4DE6D5B51996D036003BFDD7 /* settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = settings.png; path = "../../Batch-master/PNG/64x64/settings.png"; sourceTree = "<group>"; };
 		4DE6D5B71996D054003BFDD7 /* heart-full.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "heart-full.png"; sourceTree = "<group>"; };
 		4DF312F91987142800A015E2 /* Rascal.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Rascal.entitlements; sourceTree = "<group>"; };
 		4DFE0443199537AB00DC663B /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = FacebookSDK/FacebookSDK.framework; sourceTree = "<group>"; };
@@ -272,13 +272,13 @@
 				4DFE0459199542B100DC663B /* splashscreenforiphone4.png */,
 				4DFE045A199542B100DC663B /* star-2b copy.png */,
 				4DE6D5B71996D054003BFDD7 /* heart-full.png */,
-				4DE6D5B51996D036003BFDD7 /* settings.png */,
 				4DFE045B199542B100DC663B /* tutorial1.png */,
 				4DFE045C199542B100DC663B /* tutorial2.png */,
 				4DFE045D199542B100DC663B /* tutorial3.png */,
 				4DFE045E199542B100DC663B /* user-3-big.png */,
 				4D92D4671983661100EBC560 /* betterFrame2.png */,
 				4DFE044B1995407100DC663B /* tutorial1.png */,
+				4D81B6D819996BB5004DA867 /* settings.png */,
 				4DFE044C1995407100DC663B /* tutorial2.png */,
 				4DFE044D1995407100DC663B /* tutorial3.png */,
 				4D0C83E6197A2CD700535637 /* heart-full.png */,
@@ -551,9 +551,9 @@
 				4DB6BE421979D13600D3A50F /* out.png in Resources */,
 				4D92D4681983661100EBC560 /* betterFrame2.png in Resources */,
 				4DFE046B199542B100DC663B /* tutorial3.png in Resources */,
+				4D81B6D919996BB5004DA867 /* settings.png in Resources */,
 				4D8C6E2319787E120058593D /* users.png in Resources */,
 				4D8C6E3519788AF60058593D /* camera-2-smaller.png in Resources */,
-				4DE6D5B61996D036003BFDD7 /* settings.png in Resources */,
 				4DDEABF4195FE8E5009684B8 /* Images.xcassets in Resources */,
 				4D8C6E3919788B750058593D /* users-smaller.png in Resources */,
 				4DFE0469199542B100DC663B /* tutorial1.png in Resources */,
