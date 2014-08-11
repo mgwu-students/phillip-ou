@@ -67,6 +67,8 @@
 		4DDEAC05195FE8E5009684B8 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4DDEAC03195FE8E5009684B8 /* InfoPlist.strings */; };
 		4DDEAC07195FE8E5009684B8 /* RascalTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DDEAC06195FE8E5009684B8 /* RascalTests.m */; };
 		4DDEAC11195FE8FD009684B8 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4DDEAC10195FE8FD009684B8 /* MainStoryboard.storyboard */; };
+		4DE6D5B61996D036003BFDD7 /* settings.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DE6D5B51996D036003BFDD7 /* settings.png */; };
+		4DE6D5B81996D054003BFDD7 /* heart-full.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DE6D5B71996D054003BFDD7 /* heart-full.png */; };
 		4DFE0444199537AB00DC663B /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DFE0443199537AB00DC663B /* FacebookSDK.framework */; };
 		4DFE04471995397200DC663B /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DFE04461995397200DC663B /* Reachability.m */; };
 		4DFE044E1995407100DC663B /* tutorial1.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DFE044B1995407100DC663B /* tutorial1.png */; };
@@ -187,6 +189,8 @@
 		4DDEAC04195FE8E5009684B8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		4DDEAC06195FE8E5009684B8 /* RascalTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RascalTests.m; sourceTree = "<group>"; };
 		4DDEAC10195FE8FD009684B8 /* MainStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainStoryboard.storyboard; sourceTree = "<group>"; };
+		4DE6D5B51996D036003BFDD7 /* settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = settings.png; path = "../../Batch-master/PNG/64x64/settings.png"; sourceTree = "<group>"; };
+		4DE6D5B71996D054003BFDD7 /* heart-full.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "heart-full.png"; sourceTree = "<group>"; };
 		4DF312F91987142800A015E2 /* Rascal.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Rascal.entitlements; sourceTree = "<group>"; };
 		4DFE0443199537AB00DC663B /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = FacebookSDK/FacebookSDK.framework; sourceTree = "<group>"; };
 		4DFE04451995397200DC663B /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Reachability.h; path = Reachability/Reachability.h; sourceTree = SOURCE_ROOT; };
@@ -267,6 +271,8 @@
 				4DFE0458199542B100DC663B /* spam.png */,
 				4DFE0459199542B100DC663B /* splashscreenforiphone4.png */,
 				4DFE045A199542B100DC663B /* star-2b copy.png */,
+				4DE6D5B71996D054003BFDD7 /* heart-full.png */,
+				4DE6D5B51996D036003BFDD7 /* settings.png */,
 				4DFE045B199542B100DC663B /* tutorial1.png */,
 				4DFE045C199542B100DC663B /* tutorial2.png */,
 				4DFE045D199542B100DC663B /* tutorial3.png */,
@@ -526,6 +532,7 @@
 				4DFE04751995458F00DC663B /* user-3-big.png in Resources */,
 				4DFE046A199542B100DC663B /* tutorial2.png in Resources */,
 				4DFE044E1995407100DC663B /* tutorial1.png in Resources */,
+				4DE6D5B81996D054003BFDD7 /* heart-full.png in Resources */,
 				4DFE0460199542B100DC663B /* heart-fullb copy.png in Resources */,
 				4DDEABEC195FE8E5009684B8 /* InfoPlist.strings in Resources */,
 				4D8C6E31197880480058593D /* swatches.png in Resources */,
@@ -546,6 +553,7 @@
 				4DFE046B199542B100DC663B /* tutorial3.png in Resources */,
 				4D8C6E2319787E120058593D /* users.png in Resources */,
 				4D8C6E3519788AF60058593D /* camera-2-smaller.png in Resources */,
+				4DE6D5B61996D036003BFDD7 /* settings.png in Resources */,
 				4DDEABF4195FE8E5009684B8 /* Images.xcassets in Resources */,
 				4D8C6E3919788B750058593D /* users-smaller.png in Resources */,
 				4DFE0469199542B100DC663B /* tutorial1.png in Resources */,
@@ -728,7 +736,7 @@
 				INFOPLIST_FILE = "Rascal/Rascal-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "FCA09466-B61B-4061-8FD7-5F564D0BFA81";
+				PROVISIONING_PROFILE = "68C7C278-7831-48EC-86D0-08528A9564A9";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
@@ -755,7 +763,7 @@
 				INFOPLIST_FILE = "Rascal/Rascal-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "FCA09466-B61B-4061-8FD7-5F564D0BFA81";
+				PROVISIONING_PROFILE = "68C7C278-7831-48EC-86D0-08528A9564A9";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
