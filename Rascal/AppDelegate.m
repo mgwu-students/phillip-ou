@@ -171,6 +171,9 @@ didReceiveRemoteNotification:(NSDictionary *)userInfo {
     
     [FBRequestConnection startForMeWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error){
         if (!error) {
+            UIAlertView *EULA = [[UIAlertView alloc] initWithTitle:@"By Using This App You Agree to:" message:@"1. Not posting nude partially nude, or sexually suggestive photos. \n 2. Be responsible for any activity that occurs under your screen name. \n 3. Not abuse harass, threaten, or intimidate other users. \n 4. Not use Rascal for any illegal or unauthorized purpose \n 5. Be responsible for any data, text, information, graphics, photos, profiles that you submit, post and display to users on Rascal. \n Photos that violate these terms will be banned from the app along with the users who post them."
+                                                          delegate:nil cancelButtonTitle:@"Accept" otherButtonTitles:nil];
+            [EULA show];
             PFUser *currentUser = [PFUser currentUser];
             // handle result
             if(![currentUser[@"newUser"] isEqualToString:@"No"]){

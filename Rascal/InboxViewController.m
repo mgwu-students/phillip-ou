@@ -126,8 +126,31 @@
 #pragma mark - header font
 - (void)viewDidLoad
 {
-    
+    NSLog(@"%@",self.currentUser.username);
     self.bountyButton.selected=NO;
+    
+    self.currentUser=[PFUser currentUser];
+    NSString *profilePictureID = [self.currentUser objectForKeyedSubscript:@"facebookId"];
+    NSString *url = [[NSString alloc] initWithFormat:@"https://graph.facebook.com/%@/picture",profilePictureID];
+    UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:url]]];
+    
+    //[self.tableView reloadData];
+    //PFUser *currentUser = [PFUser currentUser];
+    /*PFFile *profilePicture = [currentUser objectForKey:@"profilePicture"];*/
+    
+    
+    self.profileImageView.layer.masksToBounds = YES;
+    self.profileImageView.layer.cornerRadius = 20;
+    
+    //self.profileImageView.file = profilePicture;
+    //[self.profileImageView loadInBackground];
+    
+    self.profileImageView.image= image;
+    
+    
+    self.userNameLabel.adjustsFontSizeToFitWidth=YES;
+    
+    self.userNameLabel.text = self.currentUser.username;
     
     
     self.marquee =[UIImage imageNamed:@"marquee"];
@@ -179,7 +202,7 @@
    
     //(@"state:%@",self.currentUser[@"newUser"]);
     if(![self.currentUser[@"newUser"] isEqualToString:@"No"]){
-        [self.tabBarController setSelectedIndex:6];
+               [self.tabBarController setSelectedIndex:6];
         [self.currentUser setObject:@"No" forKey:@"newUser"];
         [self.currentUser saveInBackground];
     }
@@ -253,29 +276,23 @@
     //(@"refresh!");
 }
 -(void) viewWillAppear:(BOOL)animated{
-    //(@"view will appear");
+    NSLog(@"view will appear");
     
-
+    self.currentUser = [PFUser currentUser];
+  
     
-   
-    
-
-    
+    self.bountyButton.selected=NO;
     
     NSString *profilePictureID = [self.currentUser objectForKeyedSubscript:@"facebookId"];
     NSString *url = [[NSString alloc] initWithFormat:@"https://graph.facebook.com/%@/picture",profilePictureID];
     UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:url]]];
     
-    //[self.tableView reloadData];
-    //PFUser *currentUser = [PFUser currentUser];
-    /*PFFile *profilePicture = [currentUser objectForKey:@"profilePicture"];*/
+   
     
     
     self.profileImageView.layer.masksToBounds = YES;
     self.profileImageView.layer.cornerRadius = 20;
-    
-    //self.profileImageView.file = profilePicture;
-    //[self.profileImageView loadInBackground];
+   
     
     self.profileImageView.image= image;
     
@@ -283,6 +300,14 @@
     self.userNameLabel.adjustsFontSizeToFitWidth=YES;
     
     self.userNameLabel.text = self.currentUser.username;
+
+
+    
+   
+    
+
+    
+    
     
     self.pointsLabel.text = [NSString stringWithFormat:@"Credits: %@", self.currentUser[@"Points"]];
     
@@ -317,14 +342,13 @@
 //load up messages sent to you
 
 - (PFQuery *)queryForTable {
-    ////(@"QUERYING!");
+  
     PFQuery *query = [PFQuery queryWithClassName:self.parseClassName];
    
-    //PFRelation *friends = [currentUser relationForKey:@"friendsRelation"];
+  
         if(self.currentUser !=nil){
             NSArray *array = [self.currentUser objectForKey:@"friendsList"];
             self.friendsList=[NSMutableArray arrayWithArray:array];
-            //(@"Querying friendsList: %@",self.friendsList);
         [query whereKey:@"recipientIds" containsAllObjectsInArray:@[self.currentUser.objectId]];
         [query whereKey:@"fileType" containedIn:@[@"image",@"bountyNotice"]];
         [query whereKey:@"senderId" containedIn:self.friendsList];
@@ -349,6 +373,9 @@
    
   
     }
+        else{
+            [query whereKey:@"fileType" containedIn:@[@"AAAAA"]];
+        }
     
     return query;
 }
